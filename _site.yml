@@ -1,0 +1,11 @@
+name: "ciakovx"
+output_dir: "."
+navbar:
+  title: "AM4 - Working with Scholarly Literature in R: Pulling, Wrangling, Cleaning, and Analyzing Structured Bibliographic Metadata "
+  left:
+    - text: "Home"
+      href: index.html
+output:
+  html_document:
+    theme: paper
+    css: 'styles.css'
