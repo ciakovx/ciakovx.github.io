@@ -1,11 +1,15 @@
 name: "ciakovx"
 output_dir: "."
 navbar:
-  title: "AM4 - Working with Scholarly Literature in R: Pulling, Wrangling, Cleaning, and Analyzing Structured Bibliographic Metadata "
+  title: "Clarke Iakovakis"
   left:
     - text: "Home"
       href: index.html
+    - text: "rorcid walkthrough"
+      href: rorcid.html
+    - text: "rcrossref walkthrough"
+      href: rcrossref.html
 output:
   html_document:
-    theme: paper
+    theme: thinkspace
     css: 'styles.css'
