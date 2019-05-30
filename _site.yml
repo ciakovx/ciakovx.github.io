@@ -11,5 +11,4 @@ navbar:
       href: rcrossref.html
 output:
   html_document:
-    theme: thinkspace
     css: 'styles.css'
