@@ -9,7 +9,6 @@ navbar:
       href: rcrossref.html
 output:
   prettydoc::html_pretty:
-        theme: cayman
         number_sections: TRUE
         df_print: paged
         toc: true
