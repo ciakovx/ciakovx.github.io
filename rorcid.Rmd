@@ -5,11 +5,11 @@ date: "May 21, 2019"
 output:
   prettydoc::html_pretty:
         number_sections: TRUE
+        theme: leonids
+        highlight: vignette
         df_print: paged
         toc: true
         toc_depth: 3
-    
-  
 ---
 
 ```{r setup, include=FALSE}

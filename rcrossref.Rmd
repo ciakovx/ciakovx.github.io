@@ -84,7 +84,7 @@ A new window will open in R Studio. Type `crossref_email=name@example.com`, repl
 
 ## Getting journal details
 
-Crossref is entirely dependant on publishers to supply the metadata. Some fields are required, while others are optional. You may therefore first be interested in what metadata publishers have submitted to Crossref for a given journal. By using `cr_journals` with `works = FALSE`, you can determine who publishes the journal, the total number of articles for the journal in Crossref, whether abstracts are included, if the full text of articles is deposited, if author ORCIDs are provided, and if the publisher supplies author affiliations, author ORCID iDs, article licensing data, funders for the article, article references, and a few other items. 
+Crossref is entirely dependent on publishers to supply the metadata. Some fields are required, while others are optional. You may therefore first be interested in what metadata publishers have submitted to Crossref for a given journal. By using `cr_journals` with `works = FALSE`, you can determine who publishes the journal, the total number of articles for the journal in Crossref, whether abstracts are included, if the full text of articles is deposited, if author ORCIDs are provided, and if the publisher supplies author affiliations, author ORCID iDs, article licensing data, funders for the article, article references, and a few other items. 
 
 First we will create a new vector `plosone_issn` with the ISSN for the journal *PLoS ONE*. We will then run `cr_journals()`, setting the ISSN equal to the `plosone_issn` we just created.
 
