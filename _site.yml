@@ -8,5 +8,11 @@ navbar:
     - text: "rcrossref walkthrough"
       href: rcrossref.html
 output:
-  html_document:
-    css: 'styles.css'
+  prettydoc::html_pretty:
+        theme: cayman
+        number_sections: TRUE
+        df_print: paged
+        toc: true
+        toc_depth: 3
+        css: 'styles.css'
+        

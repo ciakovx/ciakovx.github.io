@@ -1,17 +1,10 @@
 ---
-title: "Using rcrossref"
+title: "rcrossref walkthrough"
 author: "Clarke Iakovakis"
-date: "May 21, 2019"
-output:
-  prettydoc::html_pretty:
-        number_sections: TRUE
-        df_print: paged
-        toc: true
-        toc_depth: 3
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE,tidy.opts=list(width.cutoff=5000),tidy=FALSE)
+knitr::opts_chunk$set(echo = TRUE,tidy.opts=list(width.cutoff=5000),tidy=FALSE, cache = TRUE)
 library(kableExtra)
 library(knitr)
 library(tidyverse)
