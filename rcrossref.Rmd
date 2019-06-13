@@ -1,11 +1,10 @@
 ---
-title: "Untitled"
+title: "Using rcrossref"
 author: "Clarke Iakovakis"
 date: "May 21, 2019"
 output:
   prettydoc::html_pretty:
         number_sections: TRUE
-        theme: architect
         df_print: paged
         toc: true
         toc_depth: 3
@@ -38,7 +37,7 @@ There are other IDEs such as [Microsoft R Open](https://mran.microsoft.com/open)
 
 # `rcrossref`
 
-`crossref` is a package developed by [Scott Chamberlain](https://scottchamberlain.info/), Hao Zhu, Najko Jahn, Carl Boettiger, and Karthik Ram, part of the  [rOpenSci](http://ropensci.org/) set of packages. It serves as an interface to the Crossref API.
+`crossref` is a package developed by [Scott Chamberlain](https://scottchamberlain.info/), Hao Zhu, Najko Jahn, Carl Boettiger, and Karthik Ram, part of the  [rOpenSci](https://ropensci.org/) set of packages. It serves as an interface to the Crossref API.
 
 **Key links**
 
@@ -93,6 +92,12 @@ First we will create a new vector `plosone_issn` with the ISSN for the journal *
 plosone_issn <- '1932-6203'
 plosone_details <- rcrossref::cr_journals(issn = plosone_issn, works = FALSE) %>%
   purrr::pluck("data")
+```
+
+```{r crjournals1table, eval=TRUE,cache=TRUE}
+plosone_details %>%
+  kable() %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), full_width = F, fixed_thead = T, position = "center")
 plosone_details
 ```
 
@@ -100,7 +105,7 @@ It actually comes back as a list of three items, two of which are unnecessary, a
 
 The `purrr::pluck()` function is connected to `plosone_details` with something called a [Pipe Operator](https://www.datacamp.com/community/tutorials/pipe-r-tutorial) `%>%`, which We will also be using throughout the tutorial. A pipe takes the output of one statement and immediately makes it the input of the next statement. It helps so that you don't have to write every intermediate, processing data to your R environment. You can think of it as "then" in natural language. So the above script first makes the API call with `cr_journals()`, then it applies `pluck()` to extract only the list element called "data", and returns it to the `plosone_details` value.
 
-Looking at the data itsel by clicking on it in the R environment or calling `View(plosone_details)`, we see it includes one observation of 53 different variables, some of which I described above. I could not find the documentation for what these variables are anywhere on Crossref's webpage. We can either click on the data frame and browse it, or print any of these to the console, such as the publisher:
+Looking at the data itself by clicking on it in the R environment or calling `View(plosone_details)`, we see it includes one observation of 53 different variables, some of which I described above. I could not find the documentation for what these variables are anywhere on Crossref's webpage. We can either click on the data frame and browse it, or print any of these to the console, such as the publisher:
 
 ```{r journalsview, eval=TRUE,cache=TRUE}
 plosone_details$publisher
