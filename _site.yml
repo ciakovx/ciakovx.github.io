@@ -3,8 +3,6 @@ output_dir: "."
 navbar:
   title: "Clarke Iakovakis"
   left:
-    - text: "Home"
-      href: index.html
     - text: "rorcid walkthrough"
       href: rorcid.html
     - text: "rcrossref walkthrough"
