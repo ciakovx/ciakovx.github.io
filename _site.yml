@@ -4,14 +4,9 @@ navbar:
   title: "Clarke Iakovakis"
   left:
     - text: "rorcid walkthrough"
-      href: rorcid.html
+      href: rorcid/doc/rorcid.html
     - text: "rcrossref walkthrough"
-      href: rcrossref.html
+      href: rcrossref/doc/rcrossref.html
 output:
-  prettydoc::html_pretty:
-        number_sections: TRUE
-        df_print: paged
-        toc: true
-        toc_depth: 3
-        css: 'styles.css'
-        
+  html_document:
+    css: styles.css
