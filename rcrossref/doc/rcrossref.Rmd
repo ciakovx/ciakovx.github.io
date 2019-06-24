@@ -39,7 +39,7 @@ There are other IDEs such as [Microsoft R Open](https://mran.microsoft.com/open)
 
 # `rcrossref`
 
-`crossref` is a package developed by [Scott Chamberlain](https://scottchamberlain.info/), Hao Zhu, Najko Jahn, Carl Boettiger, and Karthik Ram, part of the  [rOpenSci](https://ropensci.org/) set of packages. It serves as an interface to the Crossref API.
+`rcrossref` is a package developed by [Scott Chamberlain](https://scottchamberlain.info/), Hao Zhu, Najko Jahn, Carl Boettiger, and Karthik Ram, part of the  [rOpenSci](https://ropensci.org/) set of packages. It serves as an interface to the Crossref API.
 
 **Key links**
 
