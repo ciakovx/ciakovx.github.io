@@ -1,0 +1,60 @@
+---
+title: "Work"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, tidy=TRUE, cache = TRUE)
+library(kableExtra)
+library(knitr)
+library(tidyverse)
+library(tibble)
+library(prettydoc)
+library(listviewer)
+library(janitor)
+library(rorcid)
+```
+
+```{r myorcid, eval=TRUE, echo=FALSE}
+my_orcid_id <- "0000-0002-9260-8456"
+my_works <- rorcid::works(my_orcid_id) %>%
+  janitor::clean_names() %>%
+  dplyr::mutate(created_date_value = anytime::anydate(created_date_value/1000))
+my_works_ex <- my_works %>% 
+  dplyr::filter(!purrr::map_lgl(external_ids_external_id, purrr::is_empty)) %>% 
+  tidyr::unnest(external_ids_external_id, .drop = TRUE) %>% 
+  dplyr::bind_rows(my_works %>% 
+                     dplyr::filter(map_lgl(external_ids_external_id,
+                                           is_empty)) %>%
+                     dplyr::select(-external_ids_external_id))
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+## [Building your Research Profile](https://doi.org/10.17605/osf.io/2w6pj)
+Slides and recording on building your research profile, including a review of academic social networks, harvesting your publications, copyright, and sharing scholarship.
+
+
+
+
+## [Open Access Outreach Materials: Slides & Handout](https://doi.org/10.6084/m9.figshare.7849160)
+
+A set of resources for open access outreach. Includes 5 slideshows and a handout on the following: 
+
+- Copyright in Higher Education
+- Open Access: Increase the Visibility of your Scholarship
+- Open Access: Identifying Quality Journals & Avoiding Predatory Publishers
+- Open Educational Resources: An Introduction
+- Open Data: Enhancing Preservation, Reproducibility, and Innovation
+- Strategies for Accessing Research After Graduation
+
