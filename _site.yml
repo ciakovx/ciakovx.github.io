@@ -10,5 +10,3 @@ navbar:
 output:
   html_document:
     theme: spacelab
-    include:
-      after_body: footer.html
