@@ -2,11 +2,22 @@ name: "ciakovx"
 output_dir: "."
 navbar:
   title: "Clarke Iakovakis"
-  left:
-    - text: "rorcid walkthrough"
-      href: rorcid/doc/rorcid.html
-    - text: "rcrossref walkthrough"
-      href: rcrossref/doc/rcrossref.html
+  menu:
+        - text: "R programming"
+        - text: "rorcid walkthrough"
+          href: rorcid/doc/rorcid.html
+        - text: "rcrossref walkthrough"
+          href: rcrossref/doc/rcrossref.html
+        - text: "Introduction to R for Libraries"
+          href: https://figshare.com/articles/Introduction_to_R_for_Libraries/8029301
+        - text: "---------"
+        - text: "Heading 2"
+        - text: "Page C"
+          href: page-c.html
+        - text: "Page D"
+          href: page-d.html
 output:
   html_document:
     css: styles.css
+    include:
+      after_body: footer.html

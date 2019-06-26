@@ -1,0 +1,8 @@
+---
+---
+
+I used the following resources to help me build this page:
+
+- Strayer, Nick & Lucy D’Agostino McGowan. "How to make an RMarkdown Website." http://nickstrayer.me/RMarkdown_Sites_tutorial/
+- Xie, Yihui, Joseph J. Allaire, and Garrett Grolemund. *R markdown: The definitive guide*. CRC Press, 2018. https://bookdown.org/yihui/rmarkdown/rmarkdown-site.html
+- Zabore, Emily C. "Creating websites in R." https://www.emilyzabor.com/tutorials/rmarkdown_websites_tutorial.html
