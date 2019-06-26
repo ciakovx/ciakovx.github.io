@@ -1,0 +1,17 @@
+---
+title: "R projects"
+output: html_document
+---
+
+## [rorcid walkthrough](https://ciakovx.github.io/rorcid/doc/rorcid.html)
+Step-by-step instructions with code for using the rorcid package in R. `rorcid` is a package developed by [Scott Chamberlain](https://scottchamberlain.info/), co-founder of [rOpenSci](https://ropensci.org/), to serve as an interface to the ORCID API.
+
+## [rcrossref walkthrough](https://ciakovx.github.io/rcrossref/doc/rcrossref.html)
+Step-by-step instructions with code for using the rcrossref and roadoi packages in R. `rcrossref` is a package developed by [Scott Chamberlain](https://scottchamberlain.info/), Hao Zhu, Najko Jahn, Carl Boettiger, and Karthik Ram, part of the  [rOpenSci](https://ropensci.org/) set of packages. It serves as an interface to the Crossref API. `roadoi` was developed by Najko Jahn, with reviews from Tuija Sonkkila and Ross Mounce. It interfaces with [Unpaywall](https://unpaywall.org) (which used to be called oaDOI), an important tool developed by [ImpactStory](http://unpaywall.org/team) (Heather Piwowar and Jason Priem) for locating open access versions of scholarship.
+
+## [Gathering Multiple Subject Queries with Large Numbers of Authors](https://johnmuschelli.com/rscopus/articles/multi_author.html)
+Vignette for the `rscopus` package developed by John Muschelli. Creating and running queries for gathering data on OA publishing by institutional affiliation.
+
+## [Introduction to R for Libraries](https://doi.org/10.6084/m9.figshare.8029301)
+
+These are the files associated with a webinar on "R for Libraries," delivered in May 2018 & sponsored by the Association for Library Collections & Technical Services. It includes step-by-step instructions in PDF for getting started using R, including sample datasets of print and e-books to allow users to follow along and practice the functions introduced in the sessions. Session information is available at http://www.ala.org/alcts/confevents/upcoming/webinar/050918.
