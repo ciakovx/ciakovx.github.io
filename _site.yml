@@ -10,3 +10,4 @@ navbar:
 output:
   html_document:
     theme: spacelab
+    css: 'styles.css'
