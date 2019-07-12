@@ -13,4 +13,4 @@ RnwWeave: Sweave
 LaTeX: pdfLaTeX
 
 BuildType: Website
-WebsitePath: W:/Scholarly Communications/ciakovx/ciakovx.github.io
+WebsitePath: ~/Desktop/Work/ciakovx.github.io
