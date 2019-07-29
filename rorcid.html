@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Clarke Iakovakis" />
+
+
+<title>rorcid walkthrough</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+<script src="site_libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<link href="site_libs/jsoneditor-5.25.6/jsoneditor.min.css" rel="stylesheet" />
+<script src="site_libs/jsoneditor-5.25.6/jsoneditor.min.js"></script>
+<script src="site_libs/jsonedit-binding-2.1.0/jsonedit.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 64px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h2 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h3 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h4 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h5 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h6 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Clarke Iakovakis</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    FSCI 2019 AM4 Session
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="fsci_syllabus.html">Course syllabus</a>
+    </li>
+    <li>
+      <a href="setup_instructions.html">Setting Up</a>
+    </li>
+    <li>
+      <a href="RBasics.html">Introduction to R</a>
+    </li>
+    <li>
+      <a href="rorcid.html">rorcid</a>
+    </li>
+    <li>
+      <a href="rcrossref.html">rcrossref</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">rorcid walkthrough</h1>
+<h4 class="author">Clarke Iakovakis</h4>
+
+</div>
+
+
+<div id="downloading-r-r-studio" class="section level1">
+<h1>Downloading R &amp; R Studio</h1>
+<p>To download R, go to <a href="https://www.r-project.org/" class="uri">https://www.r-project.org/</a>. Click on CRAN (Comprehensive R Archive Network) under Download, and scroll down to your country. Select the download link corresponding to the city that is geographically closest to you.</p>
+<p>RStudio is a user interface for working with R. It is called an Integrated Development Environment (IDE) and acts as a sort of wrapper around the R language. You can use R without RStudio, but it’s much more limiting. RStudio makes it easier to import datasets, create and write scripts, and has an autocomplete activated for functions and variables you’ve already assigned. RStudio makes using R much more effective, and is also free and open source.</p>
+<p>Go to <a href="https://www.rstudio.com/products/RStudio/#Desktop" class="uri">https://www.rstudio.com/products/RStudio/#Desktop</a> to download the RStudio desktop software.</p>
+<p>There are other IDEs such as <a href="https://mran.microsoft.com/open">Microsoft R Open</a> and <a href="https://notepad-plus-plus.org/">Notepad ++</a>. Experiment with one that is right for you.</p>
+</div>
+<div id="rorcid" class="section level1">
+<h1><code>rorcid</code></h1>
+<p><code>rorcid</code> is a package developed by <a href="https://scottchamberlain.info/">Scott Chamberlain</a>, co-founder of <a href="https://ropensci.org/">rOpenSci</a>, to serve as an interface to the ORCID API. You can find more information about the API <a href="http://members.orcid.org/api/about-public-api">on the ORCID site</a>.</p>
+<p>Credit to Paul Oldham at <a href="https://www.pauloldham.net/introduction-to-orcid-with-rorcid/" class="uri">https://www.pauloldham.net/introduction-to-orcid-with-rorcid/</a> for inspiring some of the structure and ideas throughout this document. I highly recommend reading it.</p>
+<div id="setting-up-rorcid" class="section level2">
+<h2>Setting up rorcid</h2>
+<p>If you haven’t done so already, create an ORCID account at <a href="https://orcid.org/signin" class="uri">https://orcid.org/signin</a>. If you have an ORCID but can’t remember it, search for your name at <a href="https://orcid.org" class="uri">https://orcid.org</a>. If you try to sign in with an email address already associated with an ORCID, you’ll be prompted to sign into the existing record. If you try to register with a different address, when you enter your name you’ll be asked to review existing records with that name and verify that none of them belong to you–<a href="https://support.orcid.org/hc/en-us/articles/360006972593-How-do-you-check-for-duplicate-ORCID-records-">see more on duplicate ORCID records</a>. Make sure you have verified your email address.</p>
+<p>Next, install and load the <code>rorcid</code> package in R. Also install <code>usethis</code> in order to set the API key, as well as <code>tidyverse</code>, which is a package that contains many packages we’ll use throughout.</p>
+<pre class="r"><code>install.packages(&quot;rorcid&quot;)
+install.packages(&quot;usethis&quot;)
+install.packages(&quot;tidyverse&quot;)
+install.packages(&quot;anytime&quot;)
+install.packages(&quot;httpuv&quot;)
+install.packages(&quot;janitor&quot;)
+library(rorcid)
+library(usethis)
+library(tidyverse)
+library(anytime)
+library(lubridate)
+library(janitor)</code></pre>
+<p>Next, you need to authenticate with an ORCID API Key. According to the <a href="https://members.orcid.org/api/tutorial/read-orcid-records">ORCID API tutorial</a>, anyone can receive a key to access the public API.</p>
+<p>In R Studio, call:</p>
+<pre class="r"><code>orcid_auth()</code></pre>
+<p>You should see a message stating: <code>no ORCID token found; attempting OAuth authentication</code> and a window will open in your default internet browser. Log-in to your orcid account. You will be asked to give <code>rorcid</code> authorization to access your ORCID Record for the purposes of getting your ORCID iD. Click “Authorize.”</p>
+<p>If successful, the browser window will state: “Authentication complete. Please close this page and return to R.” Return to R Studio and you should see in your R console the word <strong>Bearer</strong>, followed by a long string of letters and numbers. These letters and numbers are your API key. At this point, this should be cached locally in your working directory.</p>
+<p>Highlight and copy the API key (the letters and numbers only–exclude the word “Bearer” and the space). Now you can use the <code>edit_r_environ()</code> function from the <code>usethis</code> package to store the token in your R environment.</p>
+<pre class="r"><code>usethis::edit_r_environ()</code></pre>
+<p>A new window will open in R Studio. Type <code>ORCID_TOKEN="my-token"</code>, replacing <code>my-token</code> with the API key. <strong>Then press enter to create a new line, and leave it blank.</strong> It will look like something like this (below is a fake token):</p>
+<pre class="r"><code>ORCID_TOKEN = &quot;4bed1e13-7792-4129-9f07-aaf7b88ba88f&quot;</code></pre>
+<p>Press Ctrl/Cmd + S to save the API key to your R environment and close the window. In R Studio, click Session &gt; Restart R. Your token should now be saved to your R environment. You can confirm this by calling <code>orcid_auth()</code>, and it will print the token.</p>
+</div>
+</div>
+<div id="finding-oricid-ids-with-rorcidorcid" class="section level1">
+<h1>Finding ORICID iDs with <code>rorcid::orcid()</code></h1>
+<p>The <code>rorcid::orcid()</code> function takes a query and returns a data frame of identifiers. As stated in the documentation for this function, the results are the identifiers only–in other words, no works or biographical information. There are other functions in the <code>rorcid</code> package that retrieve that data.</p>
+<div id="searching-by" class="section level2">
+<h2>Searching by:</h2>
+<div id="name" class="section level3">
+<h3>Name</h3>
+<p>We start with a simple open search by name:</p>
+<pre class="r"><code>carberry &lt;- rorcid::orcid(query = &quot;josiah carberry&quot;)
+head(carberry)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["orcid-identifier.uri"],"name":[1],"type":["chr"],"align":["left"]},{"label":["orcid-identifier.path"],"name":[2],"type":["chr"],"align":["left"]},{"label":["orcid-identifier.host"],"name":[3],"type":["chr"],"align":["left"]}],"data":[{"1":"https://orcid.org/0000-0002-1028-6941","2":"0000-0002-1028-6941","3":"orcid.org"},{"1":"https://orcid.org/0000-0002-1825-0097","2":"0000-0002-1825-0097","3":"orcid.org"},{"1":"https://orcid.org/0000-0002-7419-5328","2":"0000-0002-7419-5328","3":"orcid.org"},{"1":"https://orcid.org/0000-0001-8162-1359","2":"0000-0001-8162-1359","3":"orcid.org"},{"1":"https://orcid.org/0000-0001-7710-0796","2":"0000-0001-7710-0796","3":"orcid.org"},{"1":"https://orcid.org/0000-0003-3138-875X","2":"0000-0003-3138-875X","3":"orcid.org"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>ORCID returns a data frame of 100 results with three fields:</p>
+<ul>
+<li><strong>orcid-identifier.uri</strong>: the URL to the ORCID</li>
+<li><strong>orcid-identifier.path</strong>: the ORCID itself</li>
+<li><strong>orcid-identifier.host</strong>: the host</li>
+</ul>
+<p>Are there actually 100 people named Josiah Carberry in ORCID? No. It returns this many results for two reasons. First, because the default search is for “josiah OR carberry,” and second, because the <code>query</code> argument looks in several fields including name and institution. ORCID returns 100 results by default, so this is telling us that at least 100 items have the word josiah or the word carberry in one of the searchable fields. This is not very useful to find a specific person.</p>
+<p>There are two ways of addressing this.</p>
+<ol style="list-style-type: decimal">
+<li>We can connect the terms with an AND to narrow the set of results. Note that this will look in all search fields, not just name.</li>
+</ol>
+<pre class="r"><code>carberry &lt;- rorcid::orcid(query = &quot;josiah AND carberry&quot;)
+carberry</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["orcid-identifier.uri"],"name":[1],"type":["chr"],"align":["left"]},{"label":["orcid-identifier.path"],"name":[2],"type":["chr"],"align":["left"]},{"label":["orcid-identifier.host"],"name":[3],"type":["chr"],"align":["left"]}],"data":[{"1":"https://orcid.org/0000-0002-1028-6941","2":"0000-0002-1028-6941","3":"orcid.org","_rn_":"1"},{"1":"https://orcid.org/0000-0002-1825-0097","2":"0000-0002-1825-0097","3":"orcid.org","_rn_":"2"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>It looks like there are two profiles that meet this criteria. We can look at the ORCID profiles in our browser by using <code>rorcid::browse()</code> in combination with <code>as.orcid()</code>. In other words, we are wrapping the <code>orcid-identifier.path</code> in <code>as.orcid()</code> and using the <code>browse()</code> function to view the ORCID profile on the web.</p>
+<pre class="r"><code>rorcid::browse(rorcid::as.orcid(carberry$`orcid-identifier.path`[1]))
+rorcid::browse(rorcid::as.orcid(carberry$`orcid-identifier.path`[2]))</code></pre>
+<p>We see here that the first (0000-0002-1028-6941) is more recent and less complete, and the second (0000-0002-1825-0097) has much more data.</p>
+<p>We can add more terms with AND. For example, his university:</p>
+<pre class="r"><code>carberry &lt;- rorcid::orcid(query = &quot;josiah AND wesleyan&quot;)
+carberry</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["orcid-identifier.uri"],"name":[1],"type":["chr"],"align":["left"]},{"label":["orcid-identifier.path"],"name":[2],"type":["chr"],"align":["left"]},{"label":["orcid-identifier.host"],"name":[3],"type":["chr"],"align":["left"]}],"data":[{"1":"https://orcid.org/0000-0002-1825-0097","2":"0000-0002-1825-0097","3":"orcid.org","_rn_":"1"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>We could also use one of Dr. Carberry’s keywords, “psychoceramics” (the study of cracked pots):</p>
+<pre class="r"><code>carberry &lt;- rorcid::orcid(query = &quot;josiah AND psychoceramics&quot;)
+carberry</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["orcid-identifier.uri"],"name":[1],"type":["chr"],"align":["left"]},{"label":["orcid-identifier.path"],"name":[2],"type":["chr"],"align":["left"]},{"label":["orcid-identifier.host"],"name":[3],"type":["chr"],"align":["left"]}],"data":[{"1":"https://orcid.org/0000-0002-1028-6941","2":"0000-0002-1028-6941","3":"orcid.org","_rn_":"1"},{"1":"https://orcid.org/0000-0002-1825-0097","2":"0000-0002-1825-0097","3":"orcid.org","_rn_":"2"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>We can also use nested searches with <code>AND()</code>. Note the parentheses and no spaces. “Dr.” Carberry is a “professor” at Wesleyan and Brown:</p>
+<pre class="r"><code>carberry &lt;- rorcid::orcid(query = &quot;carberry AND(wesleyan OR brown)&quot;)</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>We can make our search more accurate and precise using fields. A list of fields is provided at <a href="https://members.orcid.org/api/tutorial/search-orcid-registry" class="uri">https://members.orcid.org/api/tutorial/search-orcid-registry</a>.</li>
+</ol>
+<p>Referring to that page, we can use <code>given-names</code> and <code>family-name</code> to find all ORCID results with that combination:</p>
+<pre class="r"><code>carberry &lt;- rorcid::orcid(query = &quot;given-names:josiah AND family-name:carberry&quot;) %&gt;% 
+    janitor::clean_names()
+carberry</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["orcid_identifier_uri"],"name":[1],"type":["chr"],"align":["left"]},{"label":["orcid_identifier_path"],"name":[2],"type":["chr"],"align":["left"]},{"label":["orcid_identifier_host"],"name":[3],"type":["chr"],"align":["left"]}],"data":[{"1":"https://orcid.org/0000-0002-1028-6941","2":"0000-0002-1028-6941","3":"orcid.org","_rn_":"1"},{"1":"https://orcid.org/0000-0002-1825-0097","2":"0000-0002-1825-0097","3":"orcid.org","_rn_":"2"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>It looks like there are two people in the public ORCID registry with the first name Josiah and the last name Carberry.</p>
+<p>The <code>clean_names()</code> function from the <code>janitor</code> package is optional and used only to simplify the column names of the data. It converts all punctuation to underscores, so the field <code>orcid-identifier.uri</code> becomes <code>orcid_identifier_uri</code>.</p>
+<p>The <code>janitor::clean_names()</code> function is connected to the <code>orcid()</code> function with something called a <a href="https://www.datacamp.com/community/tutorials/pipe-r-tutorial">Pipe Operator</a> <code>%&gt;%</code>. A pipe takes the output of one statement and makes it the input of the next statement. You can think of it as “then” in natural language. So the above script first runs the <code>orcid()</code> API call, then it clean the column names of the data that was pulled into R as a result of that call.</p>
+<p>What other fields can we search?</p>
+</div>
+<div id="oricid-id---orcid" class="section level3">
+<h3>ORICID iD - <code>orcid:</code></h3>
+<p>Of course, we can search by ORCID itself:</p>
+<pre class="r"><code>carberry &lt;- rorcid::orcid(query = &quot;orcid:0000-0002-1825-0097&quot;) %&gt;% janitor::clean_names()</code></pre>
+</div>
+<div id="email-address---email" class="section level3">
+<h3>Email address - <code>email:</code></h3>
+<p>We can search by email address. Since Josiah doesn’t have email, we’ll use mine. <a href="https://members.orcid.org/api/tutorial/search-orcid-registry">According to ORCID</a>, as of February 2017, fewer than 2% of the 3+ million email addresses on ORCID records are public, so this one may not be incredibly helpful.</p>
+<pre class="r"><code>iakovakis &lt;- rorcid::orcid(query = &quot;email:clarke.iakovakis@okstate.edu&quot;) %&gt;% 
+    janitor::clean_names()</code></pre>
+</div>
+<div id="name-and-email-address-domain---okstate.edu" class="section level3">
+<h3>Name and email address domain - <code>*@okstate.edu</code></h3>
+<p>We can search by name and email address domain by using an asterisk followed by the domain name:</p>
+<pre class="r"><code>iakovakis &lt;- rorcid::orcid(query = &quot;family-name:iakovakis AND email:*@okstate.edu&quot;) %&gt;% 
+    janitor::clean_names()</code></pre>
+</div>
+<div id="affiliation" class="section level3">
+<h3>Affiliation</h3>
+<div id="affiliation-organization-name---affiliation-org-name" class="section level4">
+<h4>Affiliation organization name - <code>affiliation-org-name:</code></h4>
+<p>We can search by affiliation organization name:</p>
+<pre class="r"><code>carberry &lt;- rorcid::orcid(query = &quot;family-name:carberry AND affiliation-org-name:Wesleyan&quot;) %&gt;% 
+    janitor::clean_names()</code></pre>
+</div>
+<div id="institutional-id-ringgold-isni-grid---ringgold-org-id" class="section level4">
+<h4>Institutional ID (Ringgold, ISNI, GRID) - <code>ringgold-org-id:</code></h4>
+<p>When filling out an ORCID profile, users are encouraged to select their institutions from the drop-down menu, which will ensure it includes the Ringgold ID and any other unique identifiers, such as ISNI and GRID, that ORCID has for that institution. Read the ORCID report, <a href="https://orcid.org/sites/default/files/ckfinder/userfiles/files/20161031%20OrgIDProviderSurvey.pdf">“Organization identifiers: current provider survey”</a> to learn more.</p>
+<pre class="r"><code>carberry &lt;- rorcid::orcid(query = &quot;family-name:carberry AND ringgold-org-id:6752&quot;) %&gt;% 
+    janitor::clean_names()</code></pre>
+<p>Note that most institutions in ORCID have Ringgold IDs, but you have to <a href="https://www.ringgold.com/identify-online-guests/">register with Ringgold</a> to search in their registry. <a href="https://www.grid.ac/institutes/grid.268117.b">GRID is open for searching</a>, but not all institutions have a GRID in ORCID.</p>
+</div>
+<div id="combining-affiliation-name-ringgold-and-email-address-domain" class="section level4">
+<h4>Combining affiliation name, Ringgold, and email address domain</h4>
+<p>We can combine affiliation names, Ringgold IDs, and email addresses using the <code>OR</code> operator to cover all our bases, in case the person or people we are looking for did not on of those values:</p>
+<pre class="r"><code>iakovakis &lt;- rorcid::orcid(query = &quot;family-name:iakovakis AND(ringgold-org-id:7618 OR
+                           email:*@okstate.edu OR 
+                           affiliation-org-name:\&quot;Oklahoma State\&quot;)&quot;) %&gt;% 
+    janitor::clean_names()
+iakovakis</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["orcid_identifier_uri"],"name":[1],"type":["chr"],"align":["left"]},{"label":["orcid_identifier_path"],"name":[2],"type":["chr"],"align":["left"]},{"label":["orcid_identifier_host"],"name":[3],"type":["chr"],"align":["left"]}],"data":[{"1":"https://orcid.org/0000-0002-9260-8456","2":"0000-0002-9260-8456","3":"orcid.org","_rn_":"1"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>This can also be helpful if you want to cast a very wide net and capture everyone at your institution with an ORICID iD.</p>
+<p>I am going to add a <code>rows</code> argument to limit my results to 10 here, otherwise it will be a huge dataset:</p>
+<pre class="r"><code>my_osu_orcids &lt;- rorcid::orcid(query = &quot;ringgold-org-id:7618 OR email:*@okstate.edu OR
+                               affiliation-org-name:\&quot;Oklahoma State\&quot;&quot;, 
+    rows = 10) %&gt;% janitor::clean_names()
+head(my_osu_orcids)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["orcid_identifier_uri"],"name":[1],"type":["chr"],"align":["left"]},{"label":["orcid_identifier_path"],"name":[2],"type":["chr"],"align":["left"]},{"label":["orcid_identifier_host"],"name":[3],"type":["chr"],"align":["left"]}],"data":[{"1":"https://orcid.org/0000-0001-9667-6520","2":"0000-0001-9667-6520","3":"orcid.org"},{"1":"https://orcid.org/0000-0002-2606-5027","2":"0000-0002-2606-5027","3":"orcid.org"},{"1":"https://orcid.org/0000-0002-2590-2241","2":"0000-0002-2590-2241","3":"orcid.org"},{"1":"https://orcid.org/0000-0002-2569-3048","2":"0000-0002-2569-3048","3":"orcid.org"},{"1":"https://orcid.org/0000-0001-8330-8251","2":"0000-0001-8330-8251","3":"orcid.org"},{"1":"https://orcid.org/0000-0001-5548-0265","2":"0000-0001-5548-0265","3":"orcid.org"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>If you wanted to retrieve a complete set, you would want to remove the <code>rows</code> argument and add <code>recursive=TRUE</code>. This will keep drilling down until all records are retrieved for your query, so it may take a while if you are looking at a large institution.</p>
+<pre class="r"><code>my_osu_orcids &lt;- rorcid::orcid(query = &quot;ringgold-org-id:7618 OR 
+                               email:*@okstate.edu OR affiliation-org-name:\&quot;Oklahoma State\&quot;&quot;, 
+    recursive = TRUE) %&gt;% janitor::clean_names()</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div id="finding-biographical-information-with-rorcidorcid_person" class="section level1">
+<h1>Finding biographical information with <code>rorcid::orcid_person()</code></h1>
+<p>The <code>orcid()</code> function gets the IDs, but no information about the person. For that, you will need to use <code>orcid_person()</code>.</p>
+<p>Unlike <code>orcid()</code>, <code>orcid_person()</code> does not take a query; it accepts only ORICID iDs in the form XXXX-XXXX-XXXX-XXXX. So we can get the ORICID iD itself into it’s own vector. We can then pass that argument on to <code>orcid_person()</code>.</p>
+<pre class="r"><code>carberry_orcid &lt;- &quot;0000-0002-1825-0097&quot;
+carberry_person &lt;- rorcid::orcid_person(carberry_orcid)</code></pre>
+<p>If you look at the result for carberry_person in R Studio, you will see it returned a List of 1. You can click on that list to view it in the R Studio viewer. Another way of viewing the list is to use the <code>jsonedit()</code> function from the <code>listviewer</code> package:</p>
+<pre class="r"><code>install.packages(&quot;listviewer&quot;)
+library(listviewer)
+listviewer::jsonedit(carberry_person)</code></pre>
+<p>Click the drop-down arrow next to the ORICID iD. This is a list containing lists of lists! Click the drop-down menu next to name and you will see 6 lists and two vectors.</p>
+<div id="getting-the-data-into-a-data-frame" class="section level2">
+<h2>Getting the data into a data frame</h2>
+<p>It’s not easy to get this into a nice, neat data frame. Here is one strategy to get some of the relevant data, using <code>map</code> functions from the <code>purrr</code> package and building a <code>tibble</code> (the tidyverse’s more efficient data frame) piece by piece.</p>
+<pre class="r"><code>carberry_data &lt;- carberry_person %&gt;% {
+    tibble(created_date = purrr::map_dbl(., purrr::pluck, &quot;name&quot;, &quot;created-date&quot;, 
+        &quot;value&quot;, .default = NA_character_), given_name = purrr::map_chr(., purrr::pluck, 
+        &quot;name&quot;, &quot;given-names&quot;, &quot;value&quot;, .default = NA_character_), family_name = purrr::map_chr(., 
+        purrr::pluck, &quot;name&quot;, &quot;family-name&quot;, &quot;value&quot;, .default = NA_character_), 
+        credit_name = purrr::map_chr(., purrr::pluck, &quot;name&quot;, &quot;credit-name&quot;, 
+            &quot;value&quot;, .default = NA_character_), other_names = purrr::map(., 
+            purrr::pluck, &quot;other-names&quot;, &quot;other-name&quot;, &quot;content&quot;, .default = NA_character_), 
+        orcid_identifier_path = purrr::map_chr(., purrr::pluck, &quot;name&quot;, &quot;path&quot;, 
+            .default = NA_character_), biography = purrr::map_chr(., purrr::pluck, 
+            &quot;biography&quot;, &quot;content&quot;, .default = NA_character_), researcher_urls = purrr::map(., 
+            purrr::pluck, &quot;researcher-urls&quot;, &quot;researcher-url&quot;, .default = NA_character_), 
+        emails = purrr::map(., purrr::pluck, &quot;emails&quot;, &quot;email&quot;, &quot;email&quot;, .default = NA_character_), 
+        keywords = purrr::map(., purrr::pluck, &quot;keywords&quot;, &quot;keyword&quot;, &quot;content&quot;, 
+            .default = NA_character_), external_ids = purrr::map(., purrr::pluck, 
+            &quot;external-identifiers&quot;, &quot;external-identifier&quot;, .default = NA_character_))
+}
+carberry_data</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["created_date"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["given_name"],"name":[2],"type":["chr"],"align":["left"]},{"label":["family_name"],"name":[3],"type":["chr"],"align":["left"]},{"label":["credit_name"],"name":[4],"type":["chr"],"align":["left"]},{"label":["other_names"],"name":[5],"type":["list"],"align":["right"]},{"label":["orcid_identifier_path"],"name":[6],"type":["chr"],"align":["left"]},{"label":["biography"],"name":[7],"type":["chr"],"align":["left"]},{"label":["researcher_urls"],"name":[8],"type":["list"],"align":["right"]},{"label":["emails"],"name":[9],"type":["list"],"align":["right"]},{"label":["keywords"],"name":[10],"type":["list"],"align":["right"]},{"label":["external_ids"],"name":[11],"type":["list"],"align":["right"]}],"data":[{"1":"1.460758e+12","2":"Josiah","3":"Carberry","4":"NA","5":"<chr [3]>","6":"0000-0002-1825-0097","7":"Josiah Carberry is a fictitious person. This account is used as a demonstration account by ORCID, CrossRef and others who wish to demonstrate the interaction of ORCID with other scholarly communication systems without having to use a real-person's account.\\r\\n\\r\\nJosiah Stinkney Carberry is a fictional professor, created as a joke in 1929. He is said to still teach at Brown University, and to be known for his work in \"psychoceramics\", the supposed study of \"cracked pots\". See his Wikipedia entry for more details.","8":"<data.frame [2 × 16]>","9":"<chr [1]>","10":"<chr [2]>","11":"<data.frame [1 × 18]>"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>We have some issues with the date formatting, which we’ll go into in the next section. Each of these functions includes a <code>.default = NA_character_</code> argument because if the value is NULL (if the ORCID author didn’t input the information) then it will convert that NULL to NA.</p>
+<ul>
+<li>The <strong>created_date</strong> comes from the name list, so technically it is the date the name was created, not the date the ORCID account was created, which is not available in this data. This is plucked with <code>map_dbl()</code> because it is in <code>double</code> format (a numeric data type in R) .</li>
+<li>The <strong>given_name</strong>, <strong>family_name</strong>, <strong>credit_name</strong>, <strong>orcid_identifier_path</strong>, and <strong>biography</strong> are plucked with <code>map_chr()</code> because they are both <code>character</code> types.</li>
+<li>The <strong>other_names</strong>, <strong>keywords</strong>, <strong>researcher_urls</strong>, and <strong>external_ids</strong> are plucked with <code>map()</code> because there may be multiple values (unlike the other names, in which you can only have one). So this will return a nested list to the tibble; we will discuss below how to unnest it.</li>
+</ul>
+<p>Now what is going on with those dates?</p>
+</div>
+<div id="fixing-dates" class="section level2">
+<h2>Fixing dates</h2>
+<pre><code>## [1] 1.460758e+12</code></pre>
+<p>The dates are in <a href="https://en.wikipedia.org/wiki/Unix_time">Unix time</a>, which is the number of seconds that have elapsed since January 1, 1970. In ORCID, this is in milliseconds. We can use the <code>anytime()</code> function from the <code>anytime</code> package created by Dirk Eddelbuettel to convert it and return a POSIXct object. You have to divide it by 1000 because it’s in milliseconds. Below we use the <code>mutate()</code> function from <code>dplyr</code> to overwrite the <code>created_date</code> and <code>last_modified_date</code> UNIX time with the human readable POSIXct dates.</p>
+<pre class="r"><code>carberry_datesAndTimes &lt;- carberry_data %&gt;% dplyr::mutate(created_date = anytime::anytime(created_date/1000))
+carberry_datesAndTimes$created_date</code></pre>
+<pre><code>## [1] &quot;2016-04-15 17:00:17 CDT&quot;</code></pre>
+<p>That looks much better.</p>
+<p>If you’d prefer to do away with the time altogether (and keep only the date), you can use <code>anydate()</code> instead of <code>anytime()</code>.</p>
+<pre class="r"><code>carberry_datesOnly &lt;- carberry_data %&gt;% dplyr::mutate(created_date = anytime::anydate(created_date/1000))
+carberry_datesOnly$created_date</code></pre>
+<pre><code>## [1] &quot;2016-04-15&quot;</code></pre>
+<p>Check out the <code>lubridate</code> package for more you can do with dates. It is installed with <code>tidyverse</code>, but not loaded, so you have to load it with its own call to <code>library()</code> (we did this at the beginning of the session). For example, you may be more interested in year of creation than month. So after you run the conversion with <code>anytime</code>, you can create year variables:</p>
+<pre class="r"><code>carberry_years &lt;- carberry_datesOnly %&gt;% dplyr::mutate(created_year = lubridate::year(created_date))
+carberry_years$created_year</code></pre>
+<pre><code>## [1] 2016</code></pre>
+</div>
+<div id="unnesting-nested-lists" class="section level2">
+<h2>Unnesting nested lists</h2>
+<p>There are nested lists in this data frame that can be unnested. The <strong>other_names</strong> and <strong>keywords</strong> values are character vectors, while the <strong>researcher_urls</strong> and <strong>external_ids</strong> values are data frames themselves. We can use the <code>unnest()</code> function from the <code>tidyr</code> package to unnest both types. In other words, this will make each element of the list its own row. For instance, since there are two keywords for carberry (“psychoceramics” and “ionian philology”), there will now be two rows that are otherwise identical except for the keywords column:</p>
+<pre class="r"><code>carberry_keywords &lt;- carberry_data %&gt;% tidyr::unnest(keywords)
+carberry_keywords</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["created_date"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["given_name"],"name":[2],"type":["chr"],"align":["left"]},{"label":["family_name"],"name":[3],"type":["chr"],"align":["left"]},{"label":["credit_name"],"name":[4],"type":["chr"],"align":["left"]},{"label":["orcid_identifier_path"],"name":[5],"type":["chr"],"align":["left"]},{"label":["biography"],"name":[6],"type":["chr"],"align":["left"]},{"label":["keywords"],"name":[7],"type":["chr"],"align":["left"]}],"data":[{"1":"1.460758e+12","2":"Josiah","3":"Carberry","4":"NA","5":"0000-0002-1825-0097","6":"Josiah Carberry is a fictitious person. This account is used as a demonstration account by ORCID, CrossRef and others who wish to demonstrate the interaction of ORCID with other scholarly communication systems without having to use a real-person's account.\\r\\n\\r\\nJosiah Stinkney Carberry is a fictional professor, created as a joke in 1929. He is said to still teach at Brown University, and to be known for his work in \"psychoceramics\", the supposed study of \"cracked pots\". See his Wikipedia entry for more details.","7":"psychoceramics"},{"1":"1.460758e+12","2":"Josiah","3":"Carberry","4":"NA","5":"0000-0002-1825-0097","6":"Josiah Carberry is a fictitious person. This account is used as a demonstration account by ORCID, CrossRef and others who wish to demonstrate the interaction of ORCID with other scholarly communication systems without having to use a real-person's account.\\r\\n\\r\\nJosiah Stinkney Carberry is a fictional professor, created as a joke in 1929. He is said to still teach at Brown University, and to be known for his work in \"psychoceramics\", the supposed study of \"cracked pots\". See his Wikipedia entry for more details.","7":"ionian philology"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>Rather than having 1 observation of 11 variables, the data frame now has 2 observations of 7 variables. We know why there are two observations (because there are 2 keywords), but why are there fewer variables? Because there is an argument to <code>unnest()</code> called <code>.drop</code>, which is set to <code>TRUE</code> by default, meaning all additional list columns will be dropped. If you want to keep them, just set it to <code>FALSE</code> Note, however, that it will not unnest them.</p>
+<pre class="r"><code>carberry_keywords &lt;- carberry_data %&gt;% tidyr::unnest(keywords, .drop = FALSE)
+carberry_keywords</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["created_date"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["given_name"],"name":[2],"type":["chr"],"align":["left"]},{"label":["family_name"],"name":[3],"type":["chr"],"align":["left"]},{"label":["credit_name"],"name":[4],"type":["chr"],"align":["left"]},{"label":["other_names"],"name":[5],"type":["list"],"align":["right"]},{"label":["orcid_identifier_path"],"name":[6],"type":["chr"],"align":["left"]},{"label":["biography"],"name":[7],"type":["chr"],"align":["left"]},{"label":["researcher_urls"],"name":[8],"type":["list"],"align":["right"]},{"label":["emails"],"name":[9],"type":["list"],"align":["right"]},{"label":["external_ids"],"name":[10],"type":["list"],"align":["right"]},{"label":["keywords"],"name":[11],"type":["chr"],"align":["left"]}],"data":[{"1":"1.460758e+12","2":"Josiah","3":"Carberry","4":"NA","5":"<chr [3]>","6":"0000-0002-1825-0097","7":"Josiah Carberry is a fictitious person. This account is used as a demonstration account by ORCID, CrossRef and others who wish to demonstrate the interaction of ORCID with other scholarly communication systems without having to use a real-person's account.\\r\\n\\r\\nJosiah Stinkney Carberry is a fictional professor, created as a joke in 1929. He is said to still teach at Brown University, and to be known for his work in \"psychoceramics\", the supposed study of \"cracked pots\". See his Wikipedia entry for more details.","8":"<data.frame [2 × 16]>","9":"<chr [1]>","10":"<data.frame [1 × 18]>","11":"psychoceramics"},{"1":"1.460758e+12","2":"Josiah","3":"Carberry","4":"NA","5":"<chr [3]>","6":"0000-0002-1825-0097","7":"Josiah Carberry is a fictitious person. This account is used as a demonstration account by ORCID, CrossRef and others who wish to demonstrate the interaction of ORCID with other scholarly communication systems without having to use a real-person's account.\\r\\n\\r\\nJosiah Stinkney Carberry is a fictional professor, created as a joke in 1929. He is said to still teach at Brown University, and to be known for his work in \"psychoceramics\", the supposed study of \"cracked pots\". See his Wikipedia entry for more details.","8":"<data.frame [2 × 16]>","9":"<chr [1]>","10":"<data.frame [1 × 18]>","11":"ionian philology"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>You can unnest multiple nested columns, but keep in mind that this will multiply the duplicated columns in your data frame, because there will be it is spreading the key-value pairs across multiple columns. For more on wide and long data, read Hadley Wickham’s paper <a href="https://vita.had.co.nz/papers/tidy-data.html">“Tidy data,”</a> published in <em>The Journal of Statistical Software.</em></p>
+<pre class="r"><code>carberry_keywords_otherNames &lt;- carberry_data %&gt;% tidyr::unnest(keywords, .drop = FALSE) %&gt;% 
+    tidyr::unnest(other_names, .drop = FALSE)
+carberry_keywords_otherNames</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["created_date"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["given_name"],"name":[2],"type":["chr"],"align":["left"]},{"label":["family_name"],"name":[3],"type":["chr"],"align":["left"]},{"label":["credit_name"],"name":[4],"type":["chr"],"align":["left"]},{"label":["orcid_identifier_path"],"name":[5],"type":["chr"],"align":["left"]},{"label":["biography"],"name":[6],"type":["chr"],"align":["left"]},{"label":["researcher_urls"],"name":[7],"type":["list"],"align":["right"]},{"label":["emails"],"name":[8],"type":["list"],"align":["right"]},{"label":["external_ids"],"name":[9],"type":["list"],"align":["right"]},{"label":["keywords"],"name":[10],"type":["chr"],"align":["left"]},{"label":["other_names"],"name":[11],"type":["chr"],"align":["left"]}],"data":[{"1":"1.460758e+12","2":"Josiah","3":"Carberry","4":"NA","5":"0000-0002-1825-0097","6":"Josiah Carberry is a fictitious person. This account is used as a demonstration account by ORCID, CrossRef and others who wish to demonstrate the interaction of ORCID with other scholarly communication systems without having to use a real-person's account.\\r\\n\\r\\nJosiah Stinkney Carberry is a fictional professor, created as a joke in 1929. He is said to still teach at Brown University, and to be known for his work in \"psychoceramics\", the supposed study of \"cracked pots\". See his Wikipedia entry for more details.","7":"<data.frame [2 × 16]>","8":"<chr [1]>","9":"<data.frame [1 × 18]>","10":"psychoceramics","11":"Josiah Stinkney Carberry"},{"1":"1.460758e+12","2":"Josiah","3":"Carberry","4":"NA","5":"0000-0002-1825-0097","6":"Josiah Carberry is a fictitious person. This account is used as a demonstration account by ORCID, CrossRef and others who wish to demonstrate the interaction of ORCID with other scholarly communication systems without having to use a real-person's account.\\r\\n\\r\\nJosiah Stinkney Carberry is a fictional professor, created as a joke in 1929. He is said to still teach at Brown University, and to be known for his work in \"psychoceramics\", the supposed study of \"cracked pots\". See his Wikipedia entry for more details.","7":"<data.frame [2 × 16]>","8":"<chr [1]>","9":"<data.frame [1 × 18]>","10":"psychoceramics","11":"J. Carberry"},{"1":"1.460758e+12","2":"Josiah","3":"Carberry","4":"NA","5":"0000-0002-1825-0097","6":"Josiah Carberry is a fictitious person. This account is used as a demonstration account by ORCID, CrossRef and others who wish to demonstrate the interaction of ORCID with other scholarly communication systems without having to use a real-person's account.\\r\\n\\r\\nJosiah Stinkney Carberry is a fictional professor, created as a joke in 1929. He is said to still teach at Brown University, and to be known for his work in \"psychoceramics\", the supposed study of \"cracked pots\". See his Wikipedia entry for more details.","7":"<data.frame [2 × 16]>","8":"<chr [1]>","9":"<data.frame [1 × 18]>","10":"psychoceramics","11":"J. S. Carberry"},{"1":"1.460758e+12","2":"Josiah","3":"Carberry","4":"NA","5":"0000-0002-1825-0097","6":"Josiah Carberry is a fictitious person. This account is used as a demonstration account by ORCID, CrossRef and others who wish to demonstrate the interaction of ORCID with other scholarly communication systems without having to use a real-person's account.\\r\\n\\r\\nJosiah Stinkney Carberry is a fictional professor, created as a joke in 1929. He is said to still teach at Brown University, and to be known for his work in \"psychoceramics\", the supposed study of \"cracked pots\". See his Wikipedia entry for more details.","7":"<data.frame [2 × 16]>","8":"<chr [1]>","9":"<data.frame [1 × 18]>","10":"ionian philology","11":"Josiah Stinkney Carberry"},{"1":"1.460758e+12","2":"Josiah","3":"Carberry","4":"NA","5":"0000-0002-1825-0097","6":"Josiah Carberry is a fictitious person. This account is used as a demonstration account by ORCID, CrossRef and others who wish to demonstrate the interaction of ORCID with other scholarly communication systems without having to use a real-person's account.\\r\\n\\r\\nJosiah Stinkney Carberry is a fictional professor, created as a joke in 1929. He is said to still teach at Brown University, and to be known for his work in \"psychoceramics\", the supposed study of \"cracked pots\". See his Wikipedia entry for more details.","7":"<data.frame [2 × 16]>","8":"<chr [1]>","9":"<data.frame [1 × 18]>","10":"ionian philology","11":"J. Carberry"},{"1":"1.460758e+12","2":"Josiah","3":"Carberry","4":"NA","5":"0000-0002-1825-0097","6":"Josiah Carberry is a fictitious person. This account is used as a demonstration account by ORCID, CrossRef and others who wish to demonstrate the interaction of ORCID with other scholarly communication systems without having to use a real-person's account.\\r\\n\\r\\nJosiah Stinkney Carberry is a fictional professor, created as a joke in 1929. He is said to still teach at Brown University, and to be known for his work in \"psychoceramics\", the supposed study of \"cracked pots\". See his Wikipedia entry for more details.","7":"<data.frame [2 × 16]>","8":"<chr [1]>","9":"<data.frame [1 × 18]>","10":"ionian philology","11":"J. S. Carberry"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>When we unnest <em>researcher_urls</em> or <em>external_ids</em>, we will see many more columns added. That is because each of these nested lists contains multiple variables:</p>
+<pre class="r"><code>carberry_researcherURLs &lt;- carberry_data %&gt;% tidyr::unnest(researcher_urls, 
+    .drop = FALSE)
+carberry_researcherURLs</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["created_date"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["given_name"],"name":[2],"type":["chr"],"align":["left"]},{"label":["family_name"],"name":[3],"type":["chr"],"align":["left"]},{"label":["credit_name"],"name":[4],"type":["chr"],"align":["left"]},{"label":["other_names"],"name":[5],"type":["list"],"align":["right"]},{"label":["orcid_identifier_path"],"name":[6],"type":["chr"],"align":["left"]},{"label":["biography"],"name":[7],"type":["chr"],"align":["left"]},{"label":["emails"],"name":[8],"type":["list"],"align":["right"]},{"label":["keywords"],"name":[9],"type":["list"],"align":["right"]},{"label":["external_ids"],"name":[10],"type":["list"],"align":["right"]},{"label":["url-name"],"name":[11],"type":["chr"],"align":["left"]},{"label":["visibility"],"name":[12],"type":["chr"],"align":["left"]},{"label":["path"],"name":[13],"type":["chr"],"align":["left"]},{"label":["put-code"],"name":[14],"type":["int"],"align":["right"]},{"label":["display-index"],"name":[15],"type":["int"],"align":["right"]},{"label":["created-date.value"],"name":[16],"type":["dbl"],"align":["right"]},{"label":["last-modified-date.value"],"name":[17],"type":["dbl"],"align":["right"]},{"label":["source.source-client-id"],"name":[18],"type":["lgl"],"align":["right"]},{"label":["source.assertion-origin-orcid"],"name":[19],"type":["lgl"],"align":["right"]},{"label":["source.assertion-origin-client-id"],"name":[20],"type":["lgl"],"align":["right"]},{"label":["source.assertion-origin-name"],"name":[21],"type":["lgl"],"align":["right"]},{"label":["source.source-orcid.uri"],"name":[22],"type":["chr"],"align":["left"]},{"label":["source.source-orcid.path"],"name":[23],"type":["chr"],"align":["left"]},{"label":["source.source-orcid.host"],"name":[24],"type":["chr"],"align":["left"]},{"label":["source.source-name.value"],"name":[25],"type":["chr"],"align":["left"]},{"label":["url.value"],"name":[26],"type":["chr"],"align":["left"]}],"data":[{"1":"1.460758e+12","2":"Josiah","3":"Carberry","4":"NA","5":"<chr [3]>","6":"0000-0002-1825-0097","7":"Josiah Carberry is a fictitious person. This account is used as a demonstration account by ORCID, CrossRef and others who wish to demonstrate the interaction of ORCID with other scholarly communication systems without having to use a real-person's account.\\r\\n\\r\\nJosiah Stinkney Carberry is a fictional professor, created as a joke in 1929. He is said to still teach at Brown University, and to be known for his work in \"psychoceramics\", the supposed study of \"cracked pots\". See his Wikipedia entry for more details.","8":"<chr [1]>","9":"<chr [2]>","10":"<data.frame [1 × 18]>","11":"Brown University Page","12":"public","13":"/0000-0002-1825-0097/researcher-urls/568395","14":"568395","15":"2","16":"1.446663e+12","17":"1.462158e+12","18":"NA","19":"NA","20":"NA","21":"NA","22":"https://orcid.org/0000-0002-1825-0097","23":"0000-0002-1825-0097","24":"orcid.org","25":"Josiah Carberry","26":"http://library.brown.edu/about/hay/carberry.php"},{"1":"1.460758e+12","2":"Josiah","3":"Carberry","4":"NA","5":"<chr [3]>","6":"0000-0002-1825-0097","7":"Josiah Carberry is a fictitious person. This account is used as a demonstration account by ORCID, CrossRef and others who wish to demonstrate the interaction of ORCID with other scholarly communication systems without having to use a real-person's account.\\r\\n\\r\\nJosiah Stinkney Carberry is a fictional professor, created as a joke in 1929. He is said to still teach at Brown University, and to be known for his work in \"psychoceramics\", the supposed study of \"cracked pots\". See his Wikipedia entry for more details.","8":"<chr [1]>","9":"<chr [2]>","10":"<data.frame [1 × 18]>","11":"Wikipedia Entry","12":"public","13":"/0000-0002-1825-0097/researcher-urls/568394","14":"568394","15":"1","16":"1.446663e+12","17":"1.462158e+12","18":"NA","19":"NA","20":"NA","21":"NA","22":"https://orcid.org/0000-0002-1825-0097","23":"0000-0002-1825-0097","24":"orcid.org","25":"Josiah Carberry","26":"http://en.wikipedia.org/wiki/Josiah_Carberry"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>Carberry has two URLs: his Wikipedia page and a page about him on the Brown University Library. So a row is created for each of these URLs, and multiple columns are added such as the last modified date, the url value, and so on. You can keep or remove columns you don’t want using <code>select()</code> from the <code>dplyr</code> package.</p>
+</div>
+</div>
+<div id="writing-to-csv" class="section level1">
+<h1>Writing to CSV</h1>
+<p>We will use the <code>write_csv()</code> function from the <code>readr</code> package to write our data to disk. This package was loaded when you called <code>library(tidyverse)</code> at the beginning of the session.</p>
+<p>Unfortunately, you cannot simply write the <code>carberry_data</code> data frame to a CSV, due to the nested lists. It will throw an error: <code>"Error in stream_delim_(df, path, ...) : Don't know how to handle vector of type list."</code></p>
+<p>You have a few choices:</p>
+<ol style="list-style-type: decimal">
+<li>You can unnest one of the columns and leave <code>.drop</code> set to <code>TRUE</code>. This will add rows for all the values in the nested lists, and drop the additional nested lists. Replace “MyUserName” below with your actual user name to write this file to your desktop. You can get your username by calling <code>Sys.getenv("USERNAME")</code>.</li>
+</ol>
+<pre class="r"><code>carberry_keywords &lt;- carberry_data %&gt;% tidyr::unnest(keywords)
+write_csv(carberry_keywords, &quot;C:/Users/MyUserName/Desktop/carberry_data1.csv&quot;)</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>You can drop the nested lists altogether using a combination of <code>select_if()</code> from <code>dplyr</code> and <code>negate()</code> from <code>purrr</code> to drop all lists in the data frame.</li>
+</ol>
+<pre class="r"><code>carberry_data_short &lt;- carberry_data %&gt;% dplyr::select_if(purrr::negate(is.list))</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>You can use <code>mutate()</code> from <code>dplyr</code> to coerce the list columns into character vectors:</li>
+</ol>
+<pre class="r"><code>carberry_data_mutated &lt;- carberry_data %&gt;% dplyr::mutate(keywords = as.character(keywords)) %&gt;% 
+    dplyr::mutate(other_names = as.character(other_names)) %&gt;% dplyr::mutate(researcher_urls = as.character(map(carberry_data$researcher_urls, 
+    purrr::pluck, &quot;url.value&quot;, .default = NA_character_))) %&gt;% dplyr::mutate(external_ids = as.character(map(carberry_data$external_ids, 
+    purrr::pluck, &quot;external-id-url.value&quot;, .default = NA_character_)))
+write_csv(carberry_data_mutated, &quot;C:/Users/MyUserName/Desktop/carberry_data2.csv&quot;)</code></pre>
+</div>
+<div id="getting-data-on-multiple-people-with-orcid_person" class="section level1">
+<h1>Getting data on multiple people with <code>orcid_person()</code></h1>
+<div id="searching-by-oricid-ids" class="section level2">
+<h2>Searching by ORICID iDs</h2>
+<p><code>orcid_person()</code> is vectorized, so you can pass in multiple ORICID iDs and it will return a list of results for each ID, with each element named by the ORICID iD.</p>
+<pre class="r"><code>my_orcids &lt;- c(&quot;0000-0002-1825-0097&quot;, &quot;0000-0002-9260-8456&quot;)
+my_orcid_person &lt;- rorcid::orcid_person(my_orcids)
+listviewer::jsonedit(my_orcid_person)</code></pre>
+<div id="htmlwidget-9f759973fdec42515bf9" style="width:672px;height:480px;" class="jsonedit html-widget"></div>
+<script type="application/json" data-for="htmlwidget-9f759973fdec42515bf9">{"x":{"data":{"0000-0002-1825-0097":{"last-modified-date":{"value":1494016313820},"name":{"created-date":{"value":1460757617078},"last-modified-date":{"value":1504850007188},"given-names":{"value":"Josiah"},"family-name":{"value":"Carberry"},"credit-name":[],"source":[],"visibility":"public","path":"0000-0002-1825-0097"},"other-names":{"last-modified-date":{"value":1462157547720},"other-name":{"content":["Josiah Stinkney Carberry","J. Carberry","J. S. Carberry"],"visibility":["public","public","public"],"path":["/0000-0002-1825-0097/other-names/732317","/0000-0002-1825-0097/other-names/565981","/0000-0002-1825-0097/other-names/732318"],"put-code":[732317,565981,732318],"display-index":[3,2,1],"created-date.value":[1462157351411,1446663146889,1462157351418],"last-modified-date.value":[1462157547720,1462157547720,1462157547720],"source.source-client-id":[null,null,null],"source.assertion-origin-orcid":[null,null,null],"source.assertion-origin-client-id":[null,null,null],"source.assertion-origin-name":[null,null,null],"source.source-orcid.uri":["https://orcid.org/0000-0002-1825-0097","https://orcid.org/0000-0002-1825-0097","https://orcid.org/0000-0002-1825-0097"],"source.source-orcid.path":["0000-0002-1825-0097","0000-0002-1825-0097","0000-0002-1825-0097"],"source.source-orcid.host":["orcid.org","orcid.org","orcid.org"],"source.source-name.value":["Josiah Carberry","Josiah Carberry","Josiah Carberry"]},"path":"/0000-0002-1825-0097/other-names"},"biography":{"created-date":{"value":1460757617080},"last-modified-date":{"value":1460757617080},"content":"Josiah Carberry is a fictitious person. This account is used as a demonstration account by ORCID, CrossRef and others who wish to demonstrate the interaction of ORCID with other scholarly communication systems without having to use a real-person's account.\r\n\r\nJosiah Stinkney Carberry is a fictional professor, created as a joke in 1929. He is said to still teach at Brown University, and to be known for his work in \"psychoceramics\", the supposed study of \"cracked pots\". See his Wikipedia entry for more details.","visibility":"public","path":"/0000-0002-1825-0097/biography"},"researcher-urls":{"last-modified-date":{"value":1462157645967},"researcher-url":{"url-name":["Brown University Page","Wikipedia Entry"],"visibility":["public","public"],"path":["/0000-0002-1825-0097/researcher-urls/568395","/0000-0002-1825-0097/researcher-urls/568394"],"put-code":[568395,568394],"display-index":[2,1],"created-date.value":[1446663146890,1446663146889],"last-modified-date.value":[1462157645967,1462157645967],"source.source-client-id":[null,null],"source.assertion-origin-orcid":[null,null],"source.assertion-origin-client-id":[null,null],"source.assertion-origin-name":[null,null],"source.source-orcid.uri":["https://orcid.org/0000-0002-1825-0097","https://orcid.org/0000-0002-1825-0097"],"source.source-orcid.path":["0000-0002-1825-0097","0000-0002-1825-0097"],"source.source-orcid.host":["orcid.org","orcid.org"],"source.source-name.value":["Josiah Carberry","Josiah Carberry"],"url.value":["http://library.brown.edu/about/hay/carberry.php","http://en.wikipedia.org/wiki/Josiah_Carberry"]},"path":"/0000-0002-1825-0097/researcher-urls"},"emails":{"last-modified-date":[],"email":[],"path":"/0000-0002-1825-0097/email"},"addresses":{"last-modified-date":[],"address":[],"path":"/0000-0002-1825-0097/address"},"keywords":{"last-modified-date":{"value":1462157635636},"keyword":{"content":["psychoceramics","ionian philology"],"visibility":["public","public"],"path":["/0000-0002-1825-0097/keywords/434187","/0000-0002-1825-0097/keywords/434184"],"put-code":[434187,434184],"display-index":[3,2],"created-date.value":[1462157617244,1462157414545],"last-modified-date.value":[1462157635636,1462157635636],"source.source-client-id":[null,null],"source.assertion-origin-orcid":[null,null],"source.assertion-origin-client-id":[null,null],"source.assertion-origin-name":[null,null],"source.source-orcid.uri":["https://orcid.org/0000-0002-1825-0097","https://orcid.org/0000-0002-1825-0097"],"source.source-orcid.path":["0000-0002-1825-0097","0000-0002-1825-0097"],"source.source-orcid.host":["orcid.org","orcid.org"],"source.source-name.value":["Josiah Carberry","Josiah Carberry"]},"path":"/0000-0002-1825-0097/keywords"},"external-identifiers":{"last-modified-date":{"value":1494016313820},"external-identifier":{"external-id-type":"Scopus Author ID","external-id-value":"7007156898","external-id-relationship":"self","visibility":"public","path":"/0000-0002-1825-0097/external-identifiers/698979","put-code":698979,"display-index":0,"created-date.value":1494016313820,"last-modified-date.value":1494016313820,"source.source-orcid":null,"source.assertion-origin-orcid":null,"source.assertion-origin-client-id":null,"source.assertion-origin-name":null,"source.source-client-id.uri":"https://orcid.org/client/0000-0002-5982-8983","source.source-client-id.path":"0000-0002-5982-8983","source.source-client-id.host":"orcid.org","source.source-name.value":"Scopus - Elsevier","external-id-url.value":"http://www.scopus.com/inward/authorDetails.url?authorID=7007156898&partnerID=MN8TOARS"},"path":"/0000-0002-1825-0097/external-identifiers"},"path":"/0000-0002-1825-0097/person"},"0000-0002-9260-8456":{"last-modified-date":{"value":1556299008683},"name":{"created-date":{"value":1460762361127},"last-modified-date":{"value":1460762361127},"given-names":{"value":"Clarke"},"family-name":{"value":"Iakovakis"},"credit-name":[],"source":[],"visibility":"public","path":"0000-0002-9260-8456"},"other-names":{"last-modified-date":{"value":1556299008683},"other-name":{"content":["Clarke L. Iakovakis","C. Iakovakis","C.L. Iakovakis"],"visibility":["public","public","public"],"path":["/0000-0002-9260-8456/other-names/1237117","/0000-0002-9260-8456/other-names/1237118","/0000-0002-9260-8456/other-names/1237151"],"put-code":[1237117,1237118,1237151],"display-index":[3,2,1],"created-date.value":[1556293709558,1556293709561,1556299008681],"last-modified-date.value":[1556299008683,1556299008683,1556299008681],"source.source-client-id":[null,null,null],"source.assertion-origin-orcid":[null,null,null],"source.assertion-origin-client-id":[null,null,null],"source.assertion-origin-name":[null,null,null],"source.source-orcid.uri":["https://orcid.org/0000-0002-9260-8456","https://orcid.org/0000-0002-9260-8456","https://orcid.org/0000-0002-9260-8456"],"source.source-orcid.path":["0000-0002-9260-8456","0000-0002-9260-8456","0000-0002-9260-8456"],"source.source-orcid.host":["orcid.org","orcid.org","orcid.org"],"source.source-name.value":["Clarke Iakovakis","Clarke Iakovakis","Clarke Iakovakis"]},"path":"/0000-0002-9260-8456/other-names"},"biography":{"created-date":{"value":1556226971959},"last-modified-date":{"value":1556226971959},"content":"I am the Scholarly Services Librarian at Oklahoma State University. I received my MS in Information Studies from the University of Texas at Austin, and my BA in History from Texas State University.","visibility":"public","path":"/0000-0002-9260-8456/biography"},"researcher-urls":{"last-modified-date":{"value":1556293746865},"researcher-url":{"url-name":["figshare page","Oklahoma State University profile","Google Scholar Profile"],"visibility":["public","public","public"],"path":["/0000-0002-9260-8456/researcher-urls/1719866","/0000-0002-9260-8456/researcher-urls/1719867","/0000-0002-9260-8456/researcher-urls/1719868"],"put-code":[1719866,1719867,1719868],"display-index":[3,2,1],"created-date.value":[1556293653296,1556293680922,1556293746863],"last-modified-date.value":[1556293746865,1556293746865,1556293746863],"source.source-client-id":[null,null,null],"source.assertion-origin-orcid":[null,null,null],"source.assertion-origin-client-id":[null,null,null],"source.assertion-origin-name":[null,null,null],"source.source-orcid.uri":["https://orcid.org/0000-0002-9260-8456","https://orcid.org/0000-0002-9260-8456","https://orcid.org/0000-0002-9260-8456"],"source.source-orcid.path":["0000-0002-9260-8456","0000-0002-9260-8456","0000-0002-9260-8456"],"source.source-orcid.host":["orcid.org","orcid.org","orcid.org"],"source.source-name.value":["Clarke Iakovakis","Clarke Iakovakis","Clarke Iakovakis"],"url.value":["https://figshare.com/authors/Clarke_Iakovakis/3990140","https://info.library.okstate.edu/clarke-iakovakis","https://scholar.google.com/citations?user=V9m2_IAAAAAJ&hl=en&oi=sra"]},"path":"/0000-0002-9260-8456/researcher-urls"},"emails":{"last-modified-date":[],"email":[],"path":"/0000-0002-9260-8456/email"},"addresses":{"last-modified-date":{"value":1465226976952},"address":{"visibility":"public","path":"/0000-0002-9260-8456/address/338203","put-code":338203,"display-index":0,"created-date.value":1453660378174,"last-modified-date.value":1465226976952,"source.source-client-id":null,"source.assertion-origin-orcid":null,"source.assertion-origin-client-id":null,"source.assertion-origin-name":null,"source.source-orcid.uri":"https://orcid.org/0000-0002-9260-8456","source.source-orcid.path":"0000-0002-9260-8456","source.source-orcid.host":"orcid.org","source.source-name.value":"Clarke Iakovakis","country.value":"US"},"path":"/0000-0002-9260-8456/address"},"keywords":{"last-modified-date":{"value":1556293631997},"keyword":{"content":["open access","scholarly communications","librarianship"],"visibility":["public","public","public"],"path":["/0000-0002-9260-8456/keywords/1249281","/0000-0002-9260-8456/keywords/1249282","/0000-0002-9260-8456/keywords/1249283"],"put-code":[1249281,1249282,1249283],"display-index":[4,3,2],"created-date.value":[1556293631992,1556293631996,1556293631997],"last-modified-date.value":[1556293631992,1556293631996,1556293631997],"source.source-client-id":[null,null,null],"source.assertion-origin-orcid":[null,null,null],"source.assertion-origin-client-id":[null,null,null],"source.assertion-origin-name":[null,null,null],"source.source-orcid.uri":["https://orcid.org/0000-0002-9260-8456","https://orcid.org/0000-0002-9260-8456","https://orcid.org/0000-0002-9260-8456"],"source.source-orcid.path":["0000-0002-9260-8456","0000-0002-9260-8456","0000-0002-9260-8456"],"source.source-orcid.host":["orcid.org","orcid.org","orcid.org"],"source.source-name.value":["Clarke Iakovakis","Clarke Iakovakis","Clarke Iakovakis"]},"path":"/0000-0002-9260-8456/keywords"},"external-identifiers":{"last-modified-date":[],"external-identifier":[],"path":"/0000-0002-9260-8456/external-identifiers"},"path":"/0000-0002-9260-8456/person"}},"options":{"mode":"tree","modes":["code","form","text","tree","view"]}},"evals":[],"jsHooks":[]}</script>
+<p>We see that we are given a list of 2, each containing the person data. We can put this into a data frame using the same code as above.</p>
+<pre class="r"><code>my_orcid_person_data &lt;- my_orcid_person %&gt;% {
+    tibble(created_date = purrr::map_dbl(., purrr::pluck, &quot;name&quot;, &quot;created-date&quot;, 
+        &quot;value&quot;, .default = NA_character_), given_name = purrr::map_chr(., purrr::pluck, 
+        &quot;name&quot;, &quot;given-names&quot;, &quot;value&quot;, .default = NA_character_), family_name = purrr::map_chr(., 
+        purrr::pluck, &quot;name&quot;, &quot;family-name&quot;, &quot;value&quot;, .default = NA_character_), 
+        credit_name = purrr::map_chr(., purrr::pluck, &quot;name&quot;, &quot;credit-name&quot;, 
+            &quot;value&quot;, .default = NA_character_), other_names = purrr::map(., 
+            purrr::pluck, &quot;other-names&quot;, &quot;other-name&quot;, &quot;content&quot;, .default = NA_character_), 
+        orcid_identifier_path = purrr::map_chr(., purrr::pluck, &quot;name&quot;, &quot;path&quot;, 
+            .default = NA_character_), biography = purrr::map_chr(., purrr::pluck, 
+            &quot;biography&quot;, &quot;content&quot;, .default = NA_character_), researcher_urls = purrr::map(., 
+            purrr::pluck, &quot;researcher-urls&quot;, &quot;researcher-url&quot;, .default = NA_character_), 
+        emails = purrr::map(., purrr::pluck, &quot;emails&quot;, &quot;email&quot;, &quot;email&quot;, .default = NA_character_), 
+        keywords = purrr::map(., purrr::pluck, &quot;keywords&quot;, &quot;keyword&quot;, &quot;content&quot;, 
+            .default = NA_character_), external_ids = purrr::map(., purrr::pluck, 
+            &quot;external-identifiers&quot;, &quot;external-identifier&quot;, .default = NA_character_))
+} %&gt;% dplyr::mutate(created_date = anytime::anydate(created_date/1000))
+my_orcid_person_data</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["created_date"],"name":[1],"type":["date"],"align":["right"]},{"label":["given_name"],"name":[2],"type":["chr"],"align":["left"]},{"label":["family_name"],"name":[3],"type":["chr"],"align":["left"]},{"label":["credit_name"],"name":[4],"type":["chr"],"align":["left"]},{"label":["other_names"],"name":[5],"type":["list"],"align":["right"]},{"label":["orcid_identifier_path"],"name":[6],"type":["chr"],"align":["left"]},{"label":["biography"],"name":[7],"type":["chr"],"align":["left"]},{"label":["researcher_urls"],"name":[8],"type":["list"],"align":["right"]},{"label":["emails"],"name":[9],"type":["list"],"align":["right"]},{"label":["keywords"],"name":[10],"type":["list"],"align":["right"]},{"label":["external_ids"],"name":[11],"type":["list"],"align":["right"]}],"data":[{"1":"2016-04-15","2":"Josiah","3":"Carberry","4":"NA","5":"<chr [3]>","6":"0000-0002-1825-0097","7":"Josiah Carberry is a fictitious person. This account is used as a demonstration account by ORCID, CrossRef and others who wish to demonstrate the interaction of ORCID with other scholarly communication systems without having to use a real-person's account.\\r\\n\\r\\nJosiah Stinkney Carberry is a fictional professor, created as a joke in 1929. He is said to still teach at Brown University, and to be known for his work in \"psychoceramics\", the supposed study of \"cracked pots\". See his Wikipedia entry for more details.","8":"<data.frame [2 × 16]>","9":"<chr [1]>","10":"<chr [2]>","11":"<data.frame [1 × 18]>"},{"1":"2016-04-15","2":"Clarke","3":"Iakovakis","4":"NA","5":"<chr [3]>","6":"0000-0002-9260-8456","7":"I am the Scholarly Services Librarian at Oklahoma State University. I received my MS in Information Studies from the University of Texas at Austin, and my BA in History from Texas State University.","8":"<data.frame [3 × 16]>","9":"<chr [1]>","10":"<chr [3]>","11":"<chr [1]>"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>We now have a nice, neat dataframe of both people’s ORCID name data.</p>
+</div>
+<div id="searching-by-names" class="section level2">
+<h2>Searching by names</h2>
+<p>When we want data on multiple people and have only their names, we can build a query. Let’s first do this if the names are not already separated into first and last name variables. If you already have a spreadsheet of names, then you can skip this step.</p>
+<p>First, create a tibble using the <code>tibble()</code> function from the <code>dplyr</code> package. This is preferable to the <code>data.frame</code> function in base R. Then, use the <code>extract()</code> function from <code>tidyr</code>, along with some regular expressions, to create a first and last name variable:</p>
+<pre class="r"><code>my_names &lt;- tibble(name = c(&quot;Josiah Carberry&quot;, &quot;Clarke Iakovakis&quot;))
+profs &lt;- my_names %&gt;% tidyr::extract(name, c(&quot;FirstName&quot;, &quot;LastName&quot;), &quot;([^ ]+) (.*)&quot;)
+profs</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["FirstName"],"name":[1],"type":["chr"],"align":["left"]},{"label":["LastName"],"name":[2],"type":["chr"],"align":["left"]}],"data":[{"1":"Josiah","2":"Carberry"},{"1":"Clarke","2":"Iakovakis"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>Now we can build a query that will work with the <code>given-names:</code> and <code>family-name:</code> arguments to <code>query</code> in <code>orcid</code> in order to get the ORICID iDs:</p>
+<pre class="r"><code>orcid_query &lt;- paste0(&quot;given-names:&quot;, profs$FirstName, &quot; AND family-name:&quot;, 
+    profs$LastName)
+orcid_query</code></pre>
+<pre><code>## [1] &quot;given-names:Josiah AND family-name:Carberry&quot; 
+## [2] &quot;given-names:Clarke AND family-name:Iakovakis&quot;</code></pre>
+<p>This returns a vector with two queries formatted for nice insertion into <code>rorcid::orcid()</code>. We can use <code>purr::map()</code> to create a loop. What this is saying is, take each element of <code>orcid_query</code> and run a function with it that prints it to the console and runs <code>rorcid::orcid()</code> on it, then return each result to <code>my_orcids_list().</code> This returns a list of two items. We can then wrap <code>bind_rows()</code> in <code>map_dfr</code> to create a data frame from those list elements.</p>
+<pre class="r"><code>my_orcids_list &lt;- purrr::map(orcid_query, function(x) {
+    print(x)
+    orc &lt;- rorcid::orcid(x)
+}) %&gt;% purrr::map_dfr(dplyr::bind_rows) %&gt;% janitor::clean_names()</code></pre>
+<pre><code>## [1] &quot;given-names:Josiah AND family-name:Carberry&quot;
+## [1] &quot;given-names:Clarke AND family-name:Iakovakis&quot;</code></pre>
+<pre class="r"><code>my_orcids_list</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["orcid_identifier_uri"],"name":[1],"type":["chr"],"align":["left"]},{"label":["orcid_identifier_path"],"name":[2],"type":["chr"],"align":["left"]},{"label":["orcid_identifier_host"],"name":[3],"type":["chr"],"align":["left"]}],"data":[{"1":"https://orcid.org/0000-0002-1028-6941","2":"0000-0002-1028-6941","3":"orcid.org"},{"1":"https://orcid.org/0000-0002-1825-0097","2":"0000-0002-1825-0097","3":"orcid.org"},{"1":"https://orcid.org/0000-0002-9260-8456","2":"0000-0002-9260-8456","3":"orcid.org"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>First we want to remove the Carberry row that we don’t want. We can do this using the <code>filter()</code> function from <code>dplyr</code> and the <code>!=</code> symbol, which is equivalent to “is not equal to.”</p>
+<pre class="r"><code>my_orcids_list &lt;- my_orcids_list %&gt;% dplyr::filter(orcid_identifier_path != 
+    &quot;0000-0002-1028-6941&quot;)</code></pre>
+<p>This is a list of two items. , grab the ORICID iDs, and run the same function we ran above in order to get the name data and the IDs into a single data frame.</p>
+<pre class="r"><code>my_orcids &lt;- my_orcids_list$orcid_identifier_path
+my_orcid_person &lt;- rorcid::orcid_person(my_orcids)
+my_orcid_person_data &lt;- my_orcid_person %&gt;% {
+    tibble(created_date = purrr::map_dbl(., purrr::pluck, &quot;name&quot;, &quot;created-date&quot;, 
+        &quot;value&quot;, .default = NA_character_), given_name = purrr::map_chr(., purrr::pluck, 
+        &quot;name&quot;, &quot;given-names&quot;, &quot;value&quot;, .default = NA_character_), family_name = purrr::map_chr(., 
+        purrr::pluck, &quot;name&quot;, &quot;family-name&quot;, &quot;value&quot;, .default = NA_character_), 
+        credit_name = purrr::map_chr(., purrr::pluck, &quot;name&quot;, &quot;credit-name&quot;, 
+            &quot;value&quot;, .default = NA_character_), other_names = purrr::map(., 
+            purrr::pluck, &quot;other-names&quot;, &quot;other-name&quot;, &quot;content&quot;, .default = NA_character_), 
+        orcid_identifier_path = purrr::map_chr(., purrr::pluck, &quot;name&quot;, &quot;path&quot;, 
+            .default = NA_character_), biography = purrr::map_chr(., purrr::pluck, 
+            &quot;biography&quot;, &quot;content&quot;, .default = NA_character_), researcher_urls = purrr::map(., 
+            purrr::pluck, &quot;researcher-urls&quot;, &quot;researcher-url&quot;, .default = NA_character_), 
+        emails = purrr::map(., purrr::pluck, &quot;emails&quot;, &quot;email&quot;, &quot;email&quot;, .default = NA_character_), 
+        keywords = purrr::map(., purrr::pluck, &quot;keywords&quot;, &quot;keyword&quot;, &quot;content&quot;, 
+            .default = NA_character_), external_ids = purrr::map(., purrr::pluck, 
+            &quot;external-identifiers&quot;, &quot;external-identifier&quot;, .default = NA_character_))
+} %&gt;% dplyr::mutate(created_date = anytime::anydate(created_date/1000))
+my_orcid_person_data</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["created_date"],"name":[1],"type":["date"],"align":["right"]},{"label":["given_name"],"name":[2],"type":["chr"],"align":["left"]},{"label":["family_name"],"name":[3],"type":["chr"],"align":["left"]},{"label":["credit_name"],"name":[4],"type":["chr"],"align":["left"]},{"label":["other_names"],"name":[5],"type":["list"],"align":["right"]},{"label":["orcid_identifier_path"],"name":[6],"type":["chr"],"align":["left"]},{"label":["biography"],"name":[7],"type":["chr"],"align":["left"]},{"label":["researcher_urls"],"name":[8],"type":["list"],"align":["right"]},{"label":["emails"],"name":[9],"type":["list"],"align":["right"]},{"label":["keywords"],"name":[10],"type":["list"],"align":["right"]},{"label":["external_ids"],"name":[11],"type":["list"],"align":["right"]}],"data":[{"1":"2016-04-15","2":"Josiah","3":"Carberry","4":"NA","5":"<chr [3]>","6":"0000-0002-1825-0097","7":"Josiah Carberry is a fictitious person. This account is used as a demonstration account by ORCID, CrossRef and others who wish to demonstrate the interaction of ORCID with other scholarly communication systems without having to use a real-person's account.\\r\\n\\r\\nJosiah Stinkney Carberry is a fictional professor, created as a joke in 1929. He is said to still teach at Brown University, and to be known for his work in \"psychoceramics\", the supposed study of \"cracked pots\". See his Wikipedia entry for more details.","8":"<data.frame [2 × 16]>","9":"<chr [1]>","10":"<chr [2]>","11":"<data.frame [1 × 18]>"},{"1":"2016-04-15","2":"Clarke","3":"Iakovakis","4":"NA","5":"<chr [3]>","6":"0000-0002-9260-8456","7":"I am the Scholarly Services Librarian at Oklahoma State University. I received my MS in Information Studies from the University of Texas at Austin, and my BA in History from Texas State University.","8":"<data.frame [3 × 16]>","9":"<chr [1]>","10":"<chr [3]>","11":"<chr [1]>"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>This will be exactly the same thing as we saw above, however we got it from a simple vector of names.</p>
+</div>
+<div id="unnesting" class="section level2">
+<h2>Unnesting</h2>
+<p>Again, we can unnest if we wish, knowing we’ll multiply the number of rows even more now, because we have more values. For instance, if we unnest keywords, we’ll now have 5 columns (2 keywords for carberry, and 3 keywords for iakovakis):</p>
+<pre class="r"><code>my_orcid_person_keywords &lt;- my_orcid_person_data %&gt;% tidyr::unnest(keywords)
+my_orcid_person_keywords</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["created_date"],"name":[1],"type":["date"],"align":["right"]},{"label":["given_name"],"name":[2],"type":["chr"],"align":["left"]},{"label":["family_name"],"name":[3],"type":["chr"],"align":["left"]},{"label":["credit_name"],"name":[4],"type":["chr"],"align":["left"]},{"label":["orcid_identifier_path"],"name":[5],"type":["chr"],"align":["left"]},{"label":["biography"],"name":[6],"type":["chr"],"align":["left"]},{"label":["keywords"],"name":[7],"type":["chr"],"align":["left"]}],"data":[{"1":"2016-04-15","2":"Josiah","3":"Carberry","4":"NA","5":"0000-0002-1825-0097","6":"Josiah Carberry is a fictitious person. This account is used as a demonstration account by ORCID, CrossRef and others who wish to demonstrate the interaction of ORCID with other scholarly communication systems without having to use a real-person's account.\\r\\n\\r\\nJosiah Stinkney Carberry is a fictional professor, created as a joke in 1929. He is said to still teach at Brown University, and to be known for his work in \"psychoceramics\", the supposed study of \"cracked pots\". See his Wikipedia entry for more details.","7":"psychoceramics"},{"1":"2016-04-15","2":"Josiah","3":"Carberry","4":"NA","5":"0000-0002-1825-0097","6":"Josiah Carberry is a fictitious person. This account is used as a demonstration account by ORCID, CrossRef and others who wish to demonstrate the interaction of ORCID with other scholarly communication systems without having to use a real-person's account.\\r\\n\\r\\nJosiah Stinkney Carberry is a fictional professor, created as a joke in 1929. He is said to still teach at Brown University, and to be known for his work in \"psychoceramics\", the supposed study of \"cracked pots\". See his Wikipedia entry for more details.","7":"ionian philology"},{"1":"2016-04-15","2":"Clarke","3":"Iakovakis","4":"NA","5":"0000-0002-9260-8456","6":"I am the Scholarly Services Librarian at Oklahoma State University. I received my MS in Information Studies from the University of Texas at Austin, and my BA in History from Texas State University.","7":"open access"},{"1":"2016-04-15","2":"Clarke","3":"Iakovakis","4":"NA","5":"0000-0002-9260-8456","6":"I am the Scholarly Services Librarian at Oklahoma State University. I received my MS in Information Studies from the University of Texas at Austin, and my BA in History from Texas State University.","7":"scholarly communications"},{"1":"2016-04-15","2":"Clarke","3":"Iakovakis","4":"NA","5":"0000-0002-9260-8456","6":"I am the Scholarly Services Librarian at Oklahoma State University. I received my MS in Information Studies from the University of Texas at Austin, and my BA in History from Texas State University.","7":"librarianship"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>We can write this data to CSV using one of the three strategies outlined above. I’ll use #3 and coerce all list columns to character.</p>
+<pre class="r"><code>my_orcid_person_data_mutated &lt;- my_orcid_person_data %&gt;% dplyr::mutate(keywords = as.character(keywords)) %&gt;% 
+    dplyr::mutate(other_names = as.character(other_names)) %&gt;% dplyr::mutate(researcher_urls = map(my_orcid_person_data$researcher_urls, 
+    purrr::pluck, &quot;url.value&quot;, .default = NA_character_)) %&gt;% dplyr::mutate(external_ids = as.character(map(my_orcid_person_data$external_ids, 
+    purrr::pluck, &quot;external-id-url.value&quot;, .default = NA_character_)))
+write_csv(carberry_data_mutated, &quot;C:/Users/MyUserName/Desktop/carberry_data3.csv&quot;)</code></pre>
+</div>
+</div>
+<div id="getting-works-with-rorcidworks-and-rorcidorcid_works" class="section level1">
+<h1>Getting Works with <code>rorcid::works()</code> and <code>rorcid::orcid_works()</code></h1>
+<div id="getting-works-for-an-individual" class="section level2">
+<h2>Getting works for an individual</h2>
+<p>There are two functions in <code>rorcid</code> to get all of the works associated with an ORICID iD: <code>orcid_works()</code> and <code>works()</code>. The main difference between these is <code>orcid_works()</code> returns a list, with each work as a list item, and each external identifier (e.g. ISSN, DOI) also as a list item. On the other hand, <code>works()</code> returns a nice, neat data frame that can be easily exported to a CSV.</p>
+<p>Like <code>orcid_person()</code>, these functions require an ORICID iD, and do not use the query fields we saw with the <code>orcid()</code> function.</p>
+<pre class="r"><code>carberry_orcid &lt;- c(&quot;0000-0002-1825-0097&quot;)
+carberry_works &lt;- rorcid::works(carberry_orcid) %&gt;% janitor::clean_names() %&gt;% 
+    dplyr::mutate(created_date_value = anytime::anydate(created_date_value/1000))
+carberry_works</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["put_code"],"name":[1],"type":["int"],"align":["right"]},{"label":["url"],"name":[2],"type":["lgl"],"align":["right"]},{"label":["type"],"name":[3],"type":["chr"],"align":["left"]},{"label":["journal_title"],"name":[4],"type":["lgl"],"align":["right"]},{"label":["visibility"],"name":[5],"type":["chr"],"align":["left"]},{"label":["path"],"name":[6],"type":["chr"],"align":["left"]},{"label":["display_index"],"name":[7],"type":["chr"],"align":["left"]},{"label":["created_date_value"],"name":[8],"type":["date"],"align":["right"]},{"label":["last_modified_date_value"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["source_assertion_origin_orcid"],"name":[10],"type":["lgl"],"align":["right"]},{"label":["source_assertion_origin_client_id"],"name":[11],"type":["lgl"],"align":["right"]},{"label":["source_assertion_origin_name"],"name":[12],"type":["lgl"],"align":["right"]},{"label":["source_source_orcid_uri"],"name":[13],"type":["chr"],"align":["left"]},{"label":["source_source_orcid_path"],"name":[14],"type":["chr"],"align":["left"]},{"label":["source_source_orcid_host"],"name":[15],"type":["chr"],"align":["left"]},{"label":["source_source_client_id_uri"],"name":[16],"type":["chr"],"align":["left"]},{"label":["source_source_client_id_path"],"name":[17],"type":["chr"],"align":["left"]},{"label":["source_source_client_id_host"],"name":[18],"type":["chr"],"align":["left"]},{"label":["source_source_name_value"],"name":[19],"type":["chr"],"align":["left"]},{"label":["title_subtitle"],"name":[20],"type":["lgl"],"align":["right"]},{"label":["title_translated_title"],"name":[21],"type":["lgl"],"align":["right"]},{"label":["title_title_value"],"name":[22],"type":["chr"],"align":["left"]},{"label":["external_ids_external_id"],"name":[23],"type":["list"],"align":["right"]},{"label":["publication_date_month"],"name":[24],"type":["lgl"],"align":["right"]},{"label":["publication_date_day"],"name":[25],"type":["lgl"],"align":["right"]},{"label":["publication_date_year_value"],"name":[26],"type":["chr"],"align":["left"]},{"label":["source_source_client_id"],"name":[27],"type":["lgl"],"align":["right"]},{"label":["url_value"],"name":[28],"type":["chr"],"align":["left"]},{"label":["journal_title_value"],"name":[29],"type":["chr"],"align":["left"]}],"data":[{"1":"9543020","2":"NA","3":"journal-article","4":"NA","5":"public","6":"/0000-0002-1825-0097/work/9543020","7":"2","8":"2013-08-03","9":"1.494016e+12","10":"NA","11":"NA","12":"NA","13":"NA","14":"NA","15":"NA","16":"https://orcid.org/client/0000-0002-3054-1567","17":"0000-0002-3054-1567","18":"orcid.org","19":"Crossref Metadata Search","20":"NA","21":"NA","22":"A Methodology for the Emulation of Architecture","23":"<data.frame [2 × 7]>","24":"NA","25":"NA","26":"2012","27":"NA","28":"NA","29":"NA"},{"1":"18777963","2":"NA","3":"journal-article","4":"NA","5":"public","6":"/0000-0002-1825-0097/work/18777963","7":"1","8":"2013-08-02","9":"1.494016e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-1825-0097","14":"0000-0002-1825-0097","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Josiah Carberry","20":"NA","21":"NA","22":"A Methodology for the Emulation of Architecture","23":"<data.frame [1 × 7]>","24":"NA","25":"NA","26":"2012","27":"NA","28":"NA","29":"NA"},{"1":"4562455","2":"NA","3":"journal-article","4":"NA","5":"public","6":"/0000-0002-1825-0097/work/4562455","7":"0","8":"2013-02-17","9":"1.494016e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-1825-0097","14":"0000-0002-1825-0097","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Josiah Carberry","20":"NA","21":"NA","22":"The Memory Bus Considered Harmful","23":"<data.frame [2 × 7]>","24":"NA","25":"NA","26":"2012","27":"NA","28":"NA","29":"NA"},{"1":"4562454","2":"NA","3":"journal-article","4":"NA","5":"public","6":"/0000-0002-1825-0097/work/4562454","7":"0","8":"2013-02-17","9":"1.494016e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-1825-0097","14":"0000-0002-1825-0097","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Josiah Carberry","20":"NA","21":"NA","22":"The Impact of Interactive Epistemologies on Cryptography","23":"<data.frame [2 × 7]>","24":"NA","25":"NA","26":"2011","27":"NA","28":"NA","29":"NA"},{"1":"4562453","2":"NA","3":"journal-article","4":"NA","5":"public","6":"/0000-0002-1825-0097/work/4562453","7":"0","8":"2013-02-17","9":"1.494016e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-1825-0097","14":"0000-0002-1825-0097","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Josiah Carberry","20":"NA","21":"NA","22":"Developing Thin Clients Using Amphibious Epistemologies","23":"<data.frame [2 × 7]>","24":"NA","25":"NA","26":"2008","27":"NA","28":"NA","29":"NA"},{"1":"4562456","2":"NA","3":"journal-article","4":"NA","5":"public","6":"/0000-0002-1825-0097/work/4562456","7":"0","8":"2013-02-17","9":"1.494016e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-1825-0097","14":"0000-0002-1825-0097","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Josiah Carberry","20":"NA","21":"NA","22":"Toward a Unified Theory of High-Energy Metaphysics: Silly String Theory","23":"<data.frame [2 × 7]>","24":"NA","25":"NA","26":"2008","27":"NA","28":"NA","29":"NA"},{"1":"19980729","2":"NA","3":"journal-article","4":"NA","5":"public","6":"/0000-0002-1825-0097/work/19980729","7":"0","8":"2015-11-04","9":"1.494016e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-5982-8983","14":"0000-0002-5982-8983","15":"orcid.org","16":"https://orcid.org/client/0000-0002-5982-8983","17":"0000-0002-5982-8983","18":"orcid.org","19":"Scopus - Elsevier","20":"NA","21":"NA","22":"Bulk and surface plasmons in artificially structured materials","23":"<data.frame [2 × 7]>","24":"NA","25":"NA","26":"1987","27":"NA","28":"http://www.scopus.com/inward/record.url?eid=2-s2.0-0023398608&partnerID=MN8TOARS","29":"IEEE Transactions on Plasma Science"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>Dr. Carberry has seven works. Because ORCID data can be manually entered, the integrity, completeness, and consistency of this data will sometimes vary.</p>
+<p>You can see the <strong>external_ids_external_id</strong> column is actually a nested list, a concept we discussed above. This can be unnested with the <code>tidyr::unnest()</code> function. Just as a single researcher can have multiple identifiers, a single work may also have multiple identifiers (e.g., DOI, ISSN, EID). If that is the case, when this column is unnested, there will be repeating rows for those items.</p>
+<pre class="r"><code>carberry_works_ids &lt;- carberry_works %&gt;% tidyr::unnest(external_ids_external_id) %&gt;% 
+    janitor::clean_names()
+carberry_works_ids</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["put_code"],"name":[1],"type":["int"],"align":["right"]},{"label":["url"],"name":[2],"type":["lgl"],"align":["right"]},{"label":["type"],"name":[3],"type":["chr"],"align":["left"]},{"label":["journal_title"],"name":[4],"type":["lgl"],"align":["right"]},{"label":["visibility"],"name":[5],"type":["chr"],"align":["left"]},{"label":["path"],"name":[6],"type":["chr"],"align":["left"]},{"label":["display_index"],"name":[7],"type":["chr"],"align":["left"]},{"label":["created_date_value"],"name":[8],"type":["date"],"align":["right"]},{"label":["last_modified_date_value"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["source_assertion_origin_orcid"],"name":[10],"type":["lgl"],"align":["right"]},{"label":["source_assertion_origin_client_id"],"name":[11],"type":["lgl"],"align":["right"]},{"label":["source_assertion_origin_name"],"name":[12],"type":["lgl"],"align":["right"]},{"label":["source_source_orcid_uri"],"name":[13],"type":["chr"],"align":["left"]},{"label":["source_source_orcid_path"],"name":[14],"type":["chr"],"align":["left"]},{"label":["source_source_orcid_host"],"name":[15],"type":["chr"],"align":["left"]},{"label":["source_source_client_id_uri"],"name":[16],"type":["chr"],"align":["left"]},{"label":["source_source_client_id_path"],"name":[17],"type":["chr"],"align":["left"]},{"label":["source_source_client_id_host"],"name":[18],"type":["chr"],"align":["left"]},{"label":["source_source_name_value"],"name":[19],"type":["chr"],"align":["left"]},{"label":["title_subtitle"],"name":[20],"type":["lgl"],"align":["right"]},{"label":["title_translated_title"],"name":[21],"type":["lgl"],"align":["right"]},{"label":["title_title_value"],"name":[22],"type":["chr"],"align":["left"]},{"label":["publication_date_month"],"name":[23],"type":["lgl"],"align":["right"]},{"label":["publication_date_day"],"name":[24],"type":["lgl"],"align":["right"]},{"label":["publication_date_year_value"],"name":[25],"type":["chr"],"align":["left"]},{"label":["source_source_client_id"],"name":[26],"type":["lgl"],"align":["right"]},{"label":["url_value"],"name":[27],"type":["chr"],"align":["left"]},{"label":["journal_title_value"],"name":[28],"type":["chr"],"align":["left"]},{"label":["external_id_type"],"name":[29],"type":["chr"],"align":["left"]},{"label":["external_id_value"],"name":[30],"type":["chr"],"align":["left"]},{"label":["external_id_normalized_error"],"name":[31],"type":["lgl"],"align":["right"]},{"label":["external_id_url"],"name":[32],"type":["lgl"],"align":["right"]},{"label":["external_id_relationship"],"name":[33],"type":["chr"],"align":["left"]},{"label":["external_id_normalized_value"],"name":[34],"type":["chr"],"align":["left"]},{"label":["external_id_normalized_transient"],"name":[35],"type":["lgl"],"align":["right"]}],"data":[{"1":"9543020","2":"NA","3":"journal-article","4":"NA","5":"public","6":"/0000-0002-1825-0097/work/9543020","7":"2","8":"2013-08-03","9":"1.494016e+12","10":"NA","11":"NA","12":"NA","13":"NA","14":"NA","15":"NA","16":"https://orcid.org/client/0000-0002-3054-1567","17":"0000-0002-3054-1567","18":"orcid.org","19":"Crossref Metadata Search","20":"NA","21":"NA","22":"A Methodology for the Emulation of Architecture","23":"NA","24":"NA","25":"2012","26":"NA","27":"NA","28":"NA","29":"issn","30":"0264-3561","31":"NA","32":"NA","33":"part-of","34":"0264-3561","35":"TRUE"},{"1":"9543020","2":"NA","3":"journal-article","4":"NA","5":"public","6":"/0000-0002-1825-0097/work/9543020","7":"2","8":"2013-08-03","9":"1.494016e+12","10":"NA","11":"NA","12":"NA","13":"NA","14":"NA","15":"NA","16":"https://orcid.org/client/0000-0002-3054-1567","17":"0000-0002-3054-1567","18":"orcid.org","19":"Crossref Metadata Search","20":"NA","21":"NA","22":"A Methodology for the Emulation of Architecture","23":"NA","24":"NA","25":"2012","26":"NA","27":"NA","28":"NA","29":"doi","30":"10.5555/12345680","31":"NA","32":"NA","33":"self","34":"10.5555/12345680","35":"TRUE"},{"1":"18777963","2":"NA","3":"journal-article","4":"NA","5":"public","6":"/0000-0002-1825-0097/work/18777963","7":"1","8":"2013-08-02","9":"1.494016e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-1825-0097","14":"0000-0002-1825-0097","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Josiah Carberry","20":"NA","21":"NA","22":"A Methodology for the Emulation of Architecture","23":"NA","24":"NA","25":"2012","26":"NA","27":"NA","28":"NA","29":"doi","30":"10.5555/12345680","31":"NA","32":"NA","33":"self","34":"10.5555/12345680","35":"TRUE"},{"1":"4562455","2":"NA","3":"journal-article","4":"NA","5":"public","6":"/0000-0002-1825-0097/work/4562455","7":"0","8":"2013-02-17","9":"1.494016e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-1825-0097","14":"0000-0002-1825-0097","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Josiah Carberry","20":"NA","21":"NA","22":"The Memory Bus Considered Harmful","23":"NA","24":"NA","25":"2012","26":"NA","27":"NA","28":"NA","29":"issn","30":"0264-3561","31":"NA","32":"NA","33":"part-of","34":"0264-3561","35":"TRUE"},{"1":"4562455","2":"NA","3":"journal-article","4":"NA","5":"public","6":"/0000-0002-1825-0097/work/4562455","7":"0","8":"2013-02-17","9":"1.494016e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-1825-0097","14":"0000-0002-1825-0097","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Josiah Carberry","20":"NA","21":"NA","22":"The Memory Bus Considered Harmful","23":"NA","24":"NA","25":"2012","26":"NA","27":"NA","28":"NA","29":"doi","30":"10.5555/666655554444","31":"NA","32":"NA","33":"self","34":"10.5555/666655554444","35":"TRUE"},{"1":"4562454","2":"NA","3":"journal-article","4":"NA","5":"public","6":"/0000-0002-1825-0097/work/4562454","7":"0","8":"2013-02-17","9":"1.494016e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-1825-0097","14":"0000-0002-1825-0097","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Josiah Carberry","20":"NA","21":"NA","22":"The Impact of Interactive Epistemologies on Cryptography","23":"NA","24":"NA","25":"2011","26":"NA","27":"NA","28":"NA","29":"issn","30":"0264-3561","31":"NA","32":"NA","33":"part-of","34":"0264-3561","35":"TRUE"},{"1":"4562454","2":"NA","3":"journal-article","4":"NA","5":"public","6":"/0000-0002-1825-0097/work/4562454","7":"0","8":"2013-02-17","9":"1.494016e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-1825-0097","14":"0000-0002-1825-0097","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Josiah Carberry","20":"NA","21":"NA","22":"The Impact of Interactive Epistemologies on Cryptography","23":"NA","24":"NA","25":"2011","26":"NA","27":"NA","28":"NA","29":"doi","30":"10.5555/987654321","31":"NA","32":"NA","33":"self","34":"10.5555/987654321","35":"TRUE"},{"1":"4562453","2":"NA","3":"journal-article","4":"NA","5":"public","6":"/0000-0002-1825-0097/work/4562453","7":"0","8":"2013-02-17","9":"1.494016e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-1825-0097","14":"0000-0002-1825-0097","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Josiah Carberry","20":"NA","21":"NA","22":"Developing Thin Clients Using Amphibious Epistemologies","23":"NA","24":"NA","25":"2008","26":"NA","27":"NA","28":"NA","29":"issn","30":"0264-3561","31":"NA","32":"NA","33":"part-of","34":"0264-3561","35":"TRUE"},{"1":"4562453","2":"NA","3":"journal-article","4":"NA","5":"public","6":"/0000-0002-1825-0097/work/4562453","7":"0","8":"2013-02-17","9":"1.494016e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-1825-0097","14":"0000-0002-1825-0097","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Josiah Carberry","20":"NA","21":"NA","22":"Developing Thin Clients Using Amphibious Epistemologies","23":"NA","24":"NA","25":"2008","26":"NA","27":"NA","28":"NA","29":"doi","30":"10.5555/12345679","31":"NA","32":"NA","33":"self","34":"10.5555/12345679","35":"TRUE"},{"1":"4562456","2":"NA","3":"journal-article","4":"NA","5":"public","6":"/0000-0002-1825-0097/work/4562456","7":"0","8":"2013-02-17","9":"1.494016e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-1825-0097","14":"0000-0002-1825-0097","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Josiah Carberry","20":"NA","21":"NA","22":"Toward a Unified Theory of High-Energy Metaphysics: Silly String Theory","23":"NA","24":"NA","25":"2008","26":"NA","27":"NA","28":"NA","29":"issn","30":"0264-3561","31":"NA","32":"NA","33":"part-of","34":"0264-3561","35":"TRUE"},{"1":"4562456","2":"NA","3":"journal-article","4":"NA","5":"public","6":"/0000-0002-1825-0097/work/4562456","7":"0","8":"2013-02-17","9":"1.494016e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-1825-0097","14":"0000-0002-1825-0097","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Josiah Carberry","20":"NA","21":"NA","22":"Toward a Unified Theory of High-Energy Metaphysics: Silly String Theory","23":"NA","24":"NA","25":"2008","26":"NA","27":"NA","28":"NA","29":"doi","30":"10.5555/12345678","31":"NA","32":"NA","33":"self","34":"10.5555/12345678","35":"TRUE"},{"1":"19980729","2":"NA","3":"journal-article","4":"NA","5":"public","6":"/0000-0002-1825-0097/work/19980729","7":"0","8":"2015-11-04","9":"1.494016e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-5982-8983","14":"0000-0002-5982-8983","15":"orcid.org","16":"https://orcid.org/client/0000-0002-5982-8983","17":"0000-0002-5982-8983","18":"orcid.org","19":"Scopus - Elsevier","20":"NA","21":"NA","22":"Bulk and surface plasmons in artificially structured materials","23":"NA","24":"NA","25":"1987","26":"NA","27":"http://www.scopus.com/inward/record.url?eid=2-s2.0-0023398608&partnerID=MN8TOARS","28":"IEEE Transactions on Plasma Science","29":"doi","30":"10.1109/TPS.1987.4316723","31":"NA","32":"NA","33":"self","34":"10.1109/tps.1987.4316723","35":"TRUE"},{"1":"19980729","2":"NA","3":"journal-article","4":"NA","5":"public","6":"/0000-0002-1825-0097/work/19980729","7":"0","8":"2015-11-04","9":"1.494016e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-5982-8983","14":"0000-0002-5982-8983","15":"orcid.org","16":"https://orcid.org/client/0000-0002-5982-8983","17":"0000-0002-5982-8983","18":"orcid.org","19":"Scopus - Elsevier","20":"NA","21":"NA","22":"Bulk and surface plasmons in artificially structured materials","23":"NA","24":"NA","25":"1987","26":"NA","27":"http://www.scopus.com/inward/record.url?eid=2-s2.0-0023398608&partnerID=MN8TOARS","28":"IEEE Transactions on Plasma Science","29":"eid","30":"2-s2.0-0023398608","31":"NA","32":"NA","33":"self","34":"2-s2.0-0023398608","35":"TRUE"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>In this case, we now have 13 observations of 27 variables rather than 7 observations of 24 variables. The extra rows are there because all but one of the works has two external identifiers. The extra columns are there because four new columns were added with the unnest (that’s why we had to clean the names again):</p>
+<ul>
+<li><strong>external_id_type</strong> identifies the type of external identifier–see a list of <a href="https://pub.orcid.org/v2.0/identifiers">supported identifiers in ORCID</a>. (required)</li>
+<li><strong>external_id_value</strong>: contains the identifier itself (required)</li>
+<li><strong>external_id_url:</strong> contains a link the identifier will resolve to (optional)</li>
+<li><strong>external_id_relationship</strong>: indicates if the identifier refers to the item itself (<code>SELF</code>), such as a DOI or a person identifier, or a whole that the item is part of (<code>PART_OF</code>), such as an ISSN for a journal article.</li>
+</ul>
+<p>So we can follow one of the three strategies outlined above if we want to write this to a CSV file: 1) unnest the column (as above), 2) drop the nested lists, or 3) mutate them into character vectors.</p>
+</div>
+<div id="getting-works-for-multiple-people" class="section level2">
+<h2>Getting works for multiple people</h2>
+<p><code>orcid::works()</code> is not vectorized, meaning, if you have multiple ORICID iDs, you can’t use it. Instead, you have to pass them to the <code>orcid::orcid_works()</code> function.</p>
+<pre class="r"><code>my_orcids &lt;- c(&quot;0000-0002-1825-0097&quot;, &quot;0000-0002-9260-8456&quot;, &quot;0000-0002-2771-9344&quot;)
+my_works &lt;- rorcid::orcid_works(my_orcids)</code></pre>
+<p>This returns a list of 3 elements, with the works nested in <strong>group</strong> &gt; <strong>work-summary</strong>. They can be plucked and flattened into a data frame:</p>
+<pre class="r"><code>my_works_data &lt;- my_works %&gt;% purrr::map_dfr(pluck, &quot;works&quot;) %&gt;% janitor::clean_names() %&gt;% 
+    dplyr::mutate(created_date_value = anytime::anydate(created_date_value/1000))
+my_works_data</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["put_code"],"name":[1],"type":["int"],"align":["right"]},{"label":["url"],"name":[2],"type":["lgl"],"align":["right"]},{"label":["type"],"name":[3],"type":["chr"],"align":["left"]},{"label":["journal_title"],"name":[4],"type":["lgl"],"align":["right"]},{"label":["visibility"],"name":[5],"type":["chr"],"align":["left"]},{"label":["path"],"name":[6],"type":["chr"],"align":["left"]},{"label":["display_index"],"name":[7],"type":["chr"],"align":["left"]},{"label":["created_date_value"],"name":[8],"type":["date"],"align":["right"]},{"label":["last_modified_date_value"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["source_assertion_origin_orcid"],"name":[10],"type":["lgl"],"align":["right"]},{"label":["source_assertion_origin_client_id"],"name":[11],"type":["lgl"],"align":["right"]},{"label":["source_assertion_origin_name"],"name":[12],"type":["lgl"],"align":["right"]},{"label":["source_source_orcid_uri"],"name":[13],"type":["chr"],"align":["left"]},{"label":["source_source_orcid_path"],"name":[14],"type":["chr"],"align":["left"]},{"label":["source_source_orcid_host"],"name":[15],"type":["chr"],"align":["left"]},{"label":["source_source_client_id_uri"],"name":[16],"type":["chr"],"align":["left"]},{"label":["source_source_client_id_path"],"name":[17],"type":["chr"],"align":["left"]},{"label":["source_source_client_id_host"],"name":[18],"type":["chr"],"align":["left"]},{"label":["source_source_name_value"],"name":[19],"type":["chr"],"align":["left"]},{"label":["title_subtitle"],"name":[20],"type":["lgl"],"align":["right"]},{"label":["title_translated_title"],"name":[21],"type":["lgl"],"align":["right"]},{"label":["title_title_value"],"name":[22],"type":["chr"],"align":["left"]},{"label":["external_ids_external_id"],"name":[23],"type":["list"],"align":["right"]},{"label":["publication_date_month"],"name":[24],"type":["lgl"],"align":["right"]},{"label":["publication_date_day"],"name":[25],"type":["lgl"],"align":["right"]},{"label":["publication_date_year_value"],"name":[26],"type":["chr"],"align":["left"]},{"label":["source_source_client_id"],"name":[27],"type":["lgl"],"align":["right"]},{"label":["url_value"],"name":[28],"type":["chr"],"align":["left"]},{"label":["journal_title_value"],"name":[29],"type":["chr"],"align":["left"]},{"label":["publication_date_month_value"],"name":[30],"type":["chr"],"align":["left"]},{"label":["publication_date_day_value"],"name":[31],"type":["chr"],"align":["left"]},{"label":["source_source_orcid"],"name":[32],"type":["lgl"],"align":["right"]}],"data":[{"1":"9543020","2":"NA","3":"journal-article","4":"NA","5":"public","6":"/0000-0002-1825-0097/work/9543020","7":"2","8":"2013-08-03","9":"1.494016e+12","10":"NA","11":"NA","12":"NA","13":"NA","14":"NA","15":"NA","16":"https://orcid.org/client/0000-0002-3054-1567","17":"0000-0002-3054-1567","18":"orcid.org","19":"Crossref Metadata Search","20":"NA","21":"NA","22":"A Methodology for the Emulation of Architecture","23":"<data.frame [2 × 7]>","24":"NA","25":"NA","26":"2012","27":"NA","28":"NA","29":"NA","30":"NA","31":"NA","32":"NA"},{"1":"18777963","2":"NA","3":"journal-article","4":"NA","5":"public","6":"/0000-0002-1825-0097/work/18777963","7":"1","8":"2013-08-02","9":"1.494016e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-1825-0097","14":"0000-0002-1825-0097","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Josiah Carberry","20":"NA","21":"NA","22":"A Methodology for the Emulation of Architecture","23":"<data.frame [1 × 7]>","24":"NA","25":"NA","26":"2012","27":"NA","28":"NA","29":"NA","30":"NA","31":"NA","32":"NA"},{"1":"4562455","2":"NA","3":"journal-article","4":"NA","5":"public","6":"/0000-0002-1825-0097/work/4562455","7":"0","8":"2013-02-17","9":"1.494016e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-1825-0097","14":"0000-0002-1825-0097","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Josiah Carberry","20":"NA","21":"NA","22":"The Memory Bus Considered Harmful","23":"<data.frame [2 × 7]>","24":"NA","25":"NA","26":"2012","27":"NA","28":"NA","29":"NA","30":"NA","31":"NA","32":"NA"},{"1":"4562454","2":"NA","3":"journal-article","4":"NA","5":"public","6":"/0000-0002-1825-0097/work/4562454","7":"0","8":"2013-02-17","9":"1.494016e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-1825-0097","14":"0000-0002-1825-0097","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Josiah Carberry","20":"NA","21":"NA","22":"The Impact of Interactive Epistemologies on Cryptography","23":"<data.frame [2 × 7]>","24":"NA","25":"NA","26":"2011","27":"NA","28":"NA","29":"NA","30":"NA","31":"NA","32":"NA"},{"1":"4562453","2":"NA","3":"journal-article","4":"NA","5":"public","6":"/0000-0002-1825-0097/work/4562453","7":"0","8":"2013-02-17","9":"1.494016e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-1825-0097","14":"0000-0002-1825-0097","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Josiah Carberry","20":"NA","21":"NA","22":"Developing Thin Clients Using Amphibious Epistemologies","23":"<data.frame [2 × 7]>","24":"NA","25":"NA","26":"2008","27":"NA","28":"NA","29":"NA","30":"NA","31":"NA","32":"NA"},{"1":"4562456","2":"NA","3":"journal-article","4":"NA","5":"public","6":"/0000-0002-1825-0097/work/4562456","7":"0","8":"2013-02-17","9":"1.494016e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-1825-0097","14":"0000-0002-1825-0097","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Josiah Carberry","20":"NA","21":"NA","22":"Toward a Unified Theory of High-Energy Metaphysics: Silly String Theory","23":"<data.frame [2 × 7]>","24":"NA","25":"NA","26":"2008","27":"NA","28":"NA","29":"NA","30":"NA","31":"NA","32":"NA"},{"1":"19980729","2":"NA","3":"journal-article","4":"NA","5":"public","6":"/0000-0002-1825-0097/work/19980729","7":"0","8":"2015-11-04","9":"1.494016e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-5982-8983","14":"0000-0002-5982-8983","15":"orcid.org","16":"https://orcid.org/client/0000-0002-5982-8983","17":"0000-0002-5982-8983","18":"orcid.org","19":"Scopus - Elsevier","20":"NA","21":"NA","22":"Bulk and surface plasmons in artificially structured materials","23":"<data.frame [2 × 7]>","24":"NA","25":"NA","26":"1987","27":"NA","28":"http://www.scopus.com/inward/record.url?eid=2-s2.0-0023398608&partnerID=MN8TOARS","29":"IEEE Transactions on Plasma Science","30":"NA","31":"NA","32":"NA"},{"1":"58463405","2":"NA","3":"conference-paper","4":"NA","5":"public","6":"/0000-0002-9260-8456/work/58463405","7":"1","8":"2019-06-13","9":"1.560446e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-9260-8456","14":"0000-0002-9260-8456","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Clarke Iakovakis","20":"NA","21":"NA","22":"Querying & Accessing Scholarly Literature metadata: Using rcrossref, rorcid, and roadoi","23":"<list [0]>","24":"NA","25":"NA","26":"2019","27":"NA","28":"https://github.com/ciakovx/rorcid.workshop","29":"NA","30":"05","31":"21","32":"NA"},{"1":"58457660","2":"NA","3":"conference-poster","4":"NA","5":"public","6":"/0000-0002-9260-8456/work/58457660","7":"1","8":"2019-06-13","9":"1.560436e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-9260-8456","14":"0000-0002-9260-8456","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Clarke Iakovakis","20":"NA","21":"NA","22":"Data as a Core Competency: Wrangling Library Data and Building Campus Connections","23":"<list [0]>","24":"NA","25":"NA","26":"2019","27":"NA","28":"https://acrl2019-acrl.ipostersessions.com/default.aspx?s=04-FE-E6-99-F3-96-80-C4-1A-16-1C-00-A7-39-6F-2A","29":"Association of College & Research Libraries 2019","30":"04","31":"10","32":"NA"},{"1":"56791858","2":"NA","3":"research-tool","4":"NA","5":"public","6":"/0000-0002-9260-8456/work/56791858","7":"1","8":"2019-04-25","9":"1.556228e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-9260-8456","14":"0000-0002-9260-8456","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Clarke Iakovakis","20":"NA","21":"NA","22":"Building Your Research Profile (without breaking copyright)","23":"<data.frame [1 × 7]>","24":"NA","25":"NA","26":"2019","27":"NA","28":"https://osf.io/2w6pj/","29":"Oklahoma State University","30":"03","31":"07","32":"NA"},{"1":"55186833","2":"NA","3":"conference-paper","4":"NA","5":"public","6":"/0000-0002-9260-8456/work/55186833","7":"1","8":"2019-03-12","9":"1.553542e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-9260-8456","14":"0000-0002-9260-8456","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Clarke Iakovakis","20":"NA","21":"NA","22":"Confronting the Elephant in the Room: Cleaning & Wrangling Data for Collections & Scholarly Services","23":"<data.frame [1 × 7]>","24":"NA","25":"NA","26":"2019","27":"NA","28":"https://osf.io/a5p3r/","29":"Electronic Resources & Libraries","30":"03","31":"05","32":"NA"},{"1":"54623728","2":"NA","3":"research-technique","4":"NA","5":"public","6":"/0000-0002-9260-8456/work/54623728","7":"1","8":"2019-02-26","9":"1.552408e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-9260-8456","14":"0000-0002-9260-8456","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Clarke Iakovakis","20":"NA","21":"NA","22":"Gathering Multiple Subject Queries with Large Numbers of Authors","23":"<list [0]>","24":"NA","25":"NA","26":"2018","27":"NA","28":"http://johnmuschelli.com/rscopus/articles/multi_author.html","29":"NA","30":"12","31":"18","32":"NA"},{"1":"55521281","2":"NA","3":"conference-paper","4":"NA","5":"public","6":"/0000-0002-9260-8456/work/55521281","7":"1","8":"2019-03-20","9":"1.553112e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-9260-8456","14":"0000-0002-9260-8456","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Clarke Iakovakis","20":"NA","21":"NA","22":"Open Access Publishing: Identifying quality journals & avoiding predatory publishers","23":"<data.frame [1 × 7]>","24":"NA","25":"NA","26":"2018","27":"NA","28":"NA","29":"NA","30":"10","31":"NA","32":"NA"},{"1":"55183878","2":"NA","3":"conference-paper","4":"NA","5":"public","6":"/0000-0002-9260-8456/work/55183878","7":"1","8":"2019-03-12","9":"1.552415e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-9260-8456","14":"0000-0002-9260-8456","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Clarke Iakovakis","20":"NA","21":"NA","22":"Centralizing ETD Processing in the Library: Owning the Roles of ETD Administration, Research Librarianship, and Scholarly Communications","23":"<list [0]>","24":"NA","25":"NA","26":"2018","27":"NA","28":"http://www.ocs.usetda.org/index.php/USETDA/USETDA2018/index","29":"US Electronic Thesis & Dissertation Association 2019 Conference (USETDA 2019)","30":"09","31":"14","32":"NA"},{"1":"55184197","2":"NA","3":"lecture-speech","4":"NA","5":"public","6":"/0000-0002-9260-8456/work/55184197","7":"1","8":"2019-03-12","9":"1.556058e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-9260-8456","14":"0000-0002-9260-8456","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Clarke Iakovakis","20":"NA","21":"NA","22":"Introduction to R for Libraries","23":"<data.frame [1 × 7]>","24":"NA","25":"NA","26":"2018","27":"NA","28":"http://www.ala.org/alcts/confevents/upcoming/webinar/050918","29":"Association for Library Collections & Technical Services (ALCTS)","30":"05","31":"NA","32":"NA"},{"1":"50220229","2":"NA","3":"book-review","4":"NA","5":"public","6":"/0000-0002-9260-8456/work/50220229","7":"1","8":"2018-11-05","9":"1.541443e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-9260-8456","14":"0000-0002-9260-8456","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Clarke Iakovakis","20":"NA","21":"NA","22":"Review of The Orange Trees of Marrakesh: Ibn Khaldun and the Science of Man, by Stephen Dale","23":"<list [0]>","24":"NA","25":"NA","26":"2018","27":"NA","28":"https://www.themaydan.com/2018/04/book-review-stephen-f-dale-orange-trees-marrakesh-ibn-khaldun-science-man-harvard-university-press-2015-justin-kerns-clarke-iakovakis/","29":"Maydan","30":"04","31":"10","32":"NA"},{"1":"31428683","2":"NA","3":"conference-paper","4":"NA","5":"public","6":"/0000-0002-9260-8456/work/31428683","7":"1","8":"2017-03-28","9":"1.490734e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-9260-8456","14":"0000-0002-9260-8456","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Clarke Iakovakis","20":"NA","21":"NA","22":"“I Don’t Know What I’m Looking at”: Understanding Student LibGuide Use with Eye-Tracking Software","23":"<list [0]>","24":"NA","25":"NA","26":"2017","27":"NA","28":"http://www.ala.org/acrl/sites/ala.org.acrl/files/content/conferences/confsandpreconfs/2017/IDontKnowWhatImLookingat.pdf","29":"Association of College & Research Libraries 2017 Conference","30":"03","31":"24","32":"NA"},{"1":"14140662","2":"NA","3":"dissertation-thesis","4":"NA","5":"public","6":"/0000-0002-9260-8456/work/14140662","7":"0","8":"2014-10-20","9":"1.553111e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-9260-8456","14":"0000-0002-9260-8456","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Clarke Iakovakis","20":"NA","21":"NA","22":"An interdisciplinary inquiry into the ethics codes of the helping professions","23":"<data.frame [1 × 7]>","24":"NA","25":"NA","26":"2011","27":"NA","28":"NA","29":"NA","30":"05","31":"NA","32":"NA"},{"1":"37069489","2":"NA","3":"other","4":"NA","5":"public","6":"/0000-0002-2771-9344/work/37069489","7":"0","8":"2017-09-24","9":"1.506242e+12","10":"NA","11":"NA","12":"NA","13":"NA","14":"NA","15":"NA","16":"https://orcid.org/client/0000-0001-8099-6984","17":"0000-0001-8099-6984","18":"orcid.org","19":"DataCite","20":"NA","21":"NA","22":"Introducing Orcid","23":"<data.frame [1 × 7]>","24":"NA","25":"NA","26":"2017","27":"NA","28":"NA","29":"Zenodo","30":"03","31":"28","32":"NA"},{"1":"43318438","2":"NA","3":"other","4":"NA","5":"public","6":"/0000-0002-2771-9344/work/43318438","7":"0","8":"2018-04-05","9":"1.522962e+12","10":"NA","11":"NA","12":"NA","13":"NA","14":"NA","15":"NA","16":"https://orcid.org/client/0000-0001-8099-6984","17":"0000-0001-8099-6984","18":"orcid.org","19":"DataCite","20":"NA","21":"NA","22":"ORCID Public Data File 2017","23":"<data.frame [1 × 7]>","24":"NA","25":"NA","26":"2017","27":"NA","28":"NA","29":"Figshare","30":"NA","31":"NA","32":"NA"},{"1":"37069490","2":"NA","3":"other","4":"NA","5":"public","6":"/0000-0002-2771-9344/work/37069490","7":"0","8":"2017-09-24","9":"1.506242e+12","10":"NA","11":"NA","12":"NA","13":"NA","14":"NA","15":"NA","16":"https://orcid.org/client/0000-0001-8099-6984","17":"0000-0001-8099-6984","18":"orcid.org","19":"DataCite","20":"NA","21":"NA","22":"Introducing Orcid: What, Why And How","23":"<data.frame [1 × 7]>","24":"NA","25":"NA","26":"2016","27":"NA","28":"NA","29":"Zenodo","30":"11","31":"23","32":"NA"},{"1":"37069241","2":"NA","3":"data-set","4":"NA","5":"public","6":"/0000-0002-2771-9344/work/37069241","7":"0","8":"2017-09-24","9":"1.506241e+12","10":"NA","11":"NA","12":"NA","13":"NA","14":"NA","15":"NA","16":"https://orcid.org/client/0000-0001-8099-6984","17":"0000-0001-8099-6984","18":"orcid.org","19":"DataCite","20":"NA","21":"NA","22":"ORCID Public Data File 2016","23":"<data.frame [1 × 7]>","24":"NA","25":"NA","26":"2016","27":"NA","28":"NA","29":"Figshare","30":"NA","31":"NA","32":"NA"},{"1":"37069473","2":"NA","3":"journal-article","4":"NA","5":"public","6":"/0000-0002-2771-9344/work/37069473","7":"0","8":"2017-09-24","9":"1.506242e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-3054-1567","14":"0000-0002-3054-1567","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Crossref Metadata Search","20":"NA","21":"NA","22":"Your Lifelong Digital Name","23":"<data.frame [1 × 7]>","24":"NA","25":"NA","26":"2016","27":"NA","28":"NA","29":"ChemViews","30":"NA","31":"NA","32":"NA"},{"1":"37069249","2":"NA","3":"data-set","4":"NA","5":"public","6":"/0000-0002-2771-9344/work/37069249","7":"0","8":"2017-09-24","9":"1.506241e+12","10":"NA","11":"NA","12":"NA","13":"NA","14":"NA","15":"NA","16":"https://orcid.org/client/0000-0001-8099-6984","17":"0000-0001-8099-6984","18":"orcid.org","19":"DataCite","20":"NA","21":"NA","22":"ORCID Public Data File 2015","23":"<data.frame [1 × 7]>","24":"NA","25":"NA","26":"2015","27":"NA","28":"NA","29":"Figshare","30":"NA","31":"NA","32":"NA"},{"1":"37069240","2":"NA","3":"data-set","4":"NA","5":"public","6":"/0000-0002-2771-9344/work/37069240","7":"0","8":"2017-09-24","9":"1.506241e+12","10":"NA","11":"NA","12":"NA","13":"NA","14":"NA","15":"NA","16":"https://orcid.org/client/0000-0001-8099-6984","17":"0000-0001-8099-6984","18":"orcid.org","19":"DataCite","20":"NA","21":"NA","22":"ORCID Annual Public Data File, 2014","23":"<data.frame [1 × 7]>","24":"NA","25":"NA","26":"2014","27":"NA","28":"NA","29":"ORCID","30":"NA","31":"NA","32":"NA"},{"1":"37069239","2":"NA","3":"data-set","4":"NA","5":"public","6":"/0000-0002-2771-9344/work/37069239","7":"0","8":"2017-09-24","9":"1.506241e+12","10":"NA","11":"NA","12":"NA","13":"NA","14":"NA","15":"NA","16":"https://orcid.org/client/0000-0001-8099-6984","17":"0000-0001-8099-6984","18":"orcid.org","19":"DataCite","20":"NA","21":"NA","22":"ORCID Annual Public Data File, 2013","23":"<data.frame [1 × 7]>","24":"NA","25":"NA","26":"2013","27":"NA","28":"NA","29":"ORCID","30":"NA","31":"NA","32":"NA"},{"1":"37069475","2":"NA","3":"other","4":"NA","5":"public","6":"/0000-0002-2771-9344/work/37069475","7":"0","8":"2017-09-24","9":"1.506242e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-3054-1567","14":"0000-0002-3054-1567","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Crossref Metadata Search","20":"NA","21":"NA","22":"ORCID","23":"<data.frame [1 × 7]>","24":"NA","25":"NA","26":"2009","27":"NA","28":"NA","29":"Encyclopedia of Library and Information Sciences, Third Edition","30":"NA","31":"NA","32":"NA"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div id="unnesting-external-ids" class="section level2">
+<h2>Unnesting external IDs</h2>
+<p>Now you may want to run some analysis using the external identifiers; for instance, you can use the <code>roadoi</code> package to look at which DOIs are open access.</p>
+<p>We run into a problem here when we try to unnest the external IDs:</p>
+<pre class="r"><code>my_works_externalIDs &lt;- my_works_data %&gt;% unnest(external_ids_external_id)</code></pre>
+<p>The error message reads: <code>"Error: Each column must either be a list of vectors or a list of data frames [external_ids_external_id]".</code> This is because some of the list columns are empty. We can just filter them out before unnesting:</p>
+<pre class="r"><code>my_works_externalIDs &lt;- my_works_data %&gt;% dplyr::filter(!purrr::map_lgl(external_ids_external_id, 
+    purrr::is_empty)) %&gt;% tidyr::unnest(external_ids_external_id)
+my_works_externalIDs</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["put_code"],"name":[1],"type":["int"],"align":["right"]},{"label":["url"],"name":[2],"type":["lgl"],"align":["right"]},{"label":["type"],"name":[3],"type":["chr"],"align":["left"]},{"label":["journal_title"],"name":[4],"type":["lgl"],"align":["right"]},{"label":["visibility"],"name":[5],"type":["chr"],"align":["left"]},{"label":["path"],"name":[6],"type":["chr"],"align":["left"]},{"label":["display_index"],"name":[7],"type":["chr"],"align":["left"]},{"label":["created_date_value"],"name":[8],"type":["date"],"align":["right"]},{"label":["last_modified_date_value"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["source_assertion_origin_orcid"],"name":[10],"type":["lgl"],"align":["right"]},{"label":["source_assertion_origin_client_id"],"name":[11],"type":["lgl"],"align":["right"]},{"label":["source_assertion_origin_name"],"name":[12],"type":["lgl"],"align":["right"]},{"label":["source_source_orcid_uri"],"name":[13],"type":["chr"],"align":["left"]},{"label":["source_source_orcid_path"],"name":[14],"type":["chr"],"align":["left"]},{"label":["source_source_orcid_host"],"name":[15],"type":["chr"],"align":["left"]},{"label":["source_source_client_id_uri"],"name":[16],"type":["chr"],"align":["left"]},{"label":["source_source_client_id_path"],"name":[17],"type":["chr"],"align":["left"]},{"label":["source_source_client_id_host"],"name":[18],"type":["chr"],"align":["left"]},{"label":["source_source_name_value"],"name":[19],"type":["chr"],"align":["left"]},{"label":["title_subtitle"],"name":[20],"type":["lgl"],"align":["right"]},{"label":["title_translated_title"],"name":[21],"type":["lgl"],"align":["right"]},{"label":["title_title_value"],"name":[22],"type":["chr"],"align":["left"]},{"label":["publication_date_month"],"name":[23],"type":["lgl"],"align":["right"]},{"label":["publication_date_day"],"name":[24],"type":["lgl"],"align":["right"]},{"label":["publication_date_year_value"],"name":[25],"type":["chr"],"align":["left"]},{"label":["source_source_client_id"],"name":[26],"type":["lgl"],"align":["right"]},{"label":["url_value"],"name":[27],"type":["chr"],"align":["left"]},{"label":["journal_title_value"],"name":[28],"type":["chr"],"align":["left"]},{"label":["publication_date_month_value"],"name":[29],"type":["chr"],"align":["left"]},{"label":["publication_date_day_value"],"name":[30],"type":["chr"],"align":["left"]},{"label":["source_source_orcid"],"name":[31],"type":["lgl"],"align":["right"]},{"label":["external-id-type"],"name":[32],"type":["chr"],"align":["left"]},{"label":["external-id-value"],"name":[33],"type":["chr"],"align":["left"]},{"label":["external-id-normalized-error"],"name":[34],"type":["lgl"],"align":["right"]},{"label":["external-id-url"],"name":[35],"type":["lgl"],"align":["right"]},{"label":["external-id-relationship"],"name":[36],"type":["chr"],"align":["left"]},{"label":["external-id-normalized.value"],"name":[37],"type":["chr"],"align":["left"]},{"label":["external-id-normalized.transient"],"name":[38],"type":["lgl"],"align":["right"]},{"label":["external-id-url.value"],"name":[39],"type":["chr"],"align":["left"]}],"data":[{"1":"9543020","2":"NA","3":"journal-article","4":"NA","5":"public","6":"/0000-0002-1825-0097/work/9543020","7":"2","8":"2013-08-03","9":"1.494016e+12","10":"NA","11":"NA","12":"NA","13":"NA","14":"NA","15":"NA","16":"https://orcid.org/client/0000-0002-3054-1567","17":"0000-0002-3054-1567","18":"orcid.org","19":"Crossref Metadata Search","20":"NA","21":"NA","22":"A Methodology for the Emulation of Architecture","23":"NA","24":"NA","25":"2012","26":"NA","27":"NA","28":"NA","29":"NA","30":"NA","31":"NA","32":"issn","33":"0264-3561","34":"NA","35":"NA","36":"part-of","37":"0264-3561","38":"TRUE","39":"NA"},{"1":"9543020","2":"NA","3":"journal-article","4":"NA","5":"public","6":"/0000-0002-1825-0097/work/9543020","7":"2","8":"2013-08-03","9":"1.494016e+12","10":"NA","11":"NA","12":"NA","13":"NA","14":"NA","15":"NA","16":"https://orcid.org/client/0000-0002-3054-1567","17":"0000-0002-3054-1567","18":"orcid.org","19":"Crossref Metadata Search","20":"NA","21":"NA","22":"A Methodology for the Emulation of Architecture","23":"NA","24":"NA","25":"2012","26":"NA","27":"NA","28":"NA","29":"NA","30":"NA","31":"NA","32":"doi","33":"10.5555/12345680","34":"NA","35":"NA","36":"self","37":"10.5555/12345680","38":"TRUE","39":"NA"},{"1":"18777963","2":"NA","3":"journal-article","4":"NA","5":"public","6":"/0000-0002-1825-0097/work/18777963","7":"1","8":"2013-08-02","9":"1.494016e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-1825-0097","14":"0000-0002-1825-0097","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Josiah Carberry","20":"NA","21":"NA","22":"A Methodology for the Emulation of Architecture","23":"NA","24":"NA","25":"2012","26":"NA","27":"NA","28":"NA","29":"NA","30":"NA","31":"NA","32":"doi","33":"10.5555/12345680","34":"NA","35":"NA","36":"self","37":"10.5555/12345680","38":"TRUE","39":"NA"},{"1":"4562455","2":"NA","3":"journal-article","4":"NA","5":"public","6":"/0000-0002-1825-0097/work/4562455","7":"0","8":"2013-02-17","9":"1.494016e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-1825-0097","14":"0000-0002-1825-0097","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Josiah Carberry","20":"NA","21":"NA","22":"The Memory Bus Considered Harmful","23":"NA","24":"NA","25":"2012","26":"NA","27":"NA","28":"NA","29":"NA","30":"NA","31":"NA","32":"issn","33":"0264-3561","34":"NA","35":"NA","36":"part-of","37":"0264-3561","38":"TRUE","39":"NA"},{"1":"4562455","2":"NA","3":"journal-article","4":"NA","5":"public","6":"/0000-0002-1825-0097/work/4562455","7":"0","8":"2013-02-17","9":"1.494016e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-1825-0097","14":"0000-0002-1825-0097","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Josiah Carberry","20":"NA","21":"NA","22":"The Memory Bus Considered Harmful","23":"NA","24":"NA","25":"2012","26":"NA","27":"NA","28":"NA","29":"NA","30":"NA","31":"NA","32":"doi","33":"10.5555/666655554444","34":"NA","35":"NA","36":"self","37":"10.5555/666655554444","38":"TRUE","39":"NA"},{"1":"4562454","2":"NA","3":"journal-article","4":"NA","5":"public","6":"/0000-0002-1825-0097/work/4562454","7":"0","8":"2013-02-17","9":"1.494016e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-1825-0097","14":"0000-0002-1825-0097","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Josiah Carberry","20":"NA","21":"NA","22":"The Impact of Interactive Epistemologies on Cryptography","23":"NA","24":"NA","25":"2011","26":"NA","27":"NA","28":"NA","29":"NA","30":"NA","31":"NA","32":"issn","33":"0264-3561","34":"NA","35":"NA","36":"part-of","37":"0264-3561","38":"TRUE","39":"NA"},{"1":"4562454","2":"NA","3":"journal-article","4":"NA","5":"public","6":"/0000-0002-1825-0097/work/4562454","7":"0","8":"2013-02-17","9":"1.494016e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-1825-0097","14":"0000-0002-1825-0097","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Josiah Carberry","20":"NA","21":"NA","22":"The Impact of Interactive Epistemologies on Cryptography","23":"NA","24":"NA","25":"2011","26":"NA","27":"NA","28":"NA","29":"NA","30":"NA","31":"NA","32":"doi","33":"10.5555/987654321","34":"NA","35":"NA","36":"self","37":"10.5555/987654321","38":"TRUE","39":"NA"},{"1":"4562453","2":"NA","3":"journal-article","4":"NA","5":"public","6":"/0000-0002-1825-0097/work/4562453","7":"0","8":"2013-02-17","9":"1.494016e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-1825-0097","14":"0000-0002-1825-0097","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Josiah Carberry","20":"NA","21":"NA","22":"Developing Thin Clients Using Amphibious Epistemologies","23":"NA","24":"NA","25":"2008","26":"NA","27":"NA","28":"NA","29":"NA","30":"NA","31":"NA","32":"issn","33":"0264-3561","34":"NA","35":"NA","36":"part-of","37":"0264-3561","38":"TRUE","39":"NA"},{"1":"4562453","2":"NA","3":"journal-article","4":"NA","5":"public","6":"/0000-0002-1825-0097/work/4562453","7":"0","8":"2013-02-17","9":"1.494016e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-1825-0097","14":"0000-0002-1825-0097","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Josiah Carberry","20":"NA","21":"NA","22":"Developing Thin Clients Using Amphibious Epistemologies","23":"NA","24":"NA","25":"2008","26":"NA","27":"NA","28":"NA","29":"NA","30":"NA","31":"NA","32":"doi","33":"10.5555/12345679","34":"NA","35":"NA","36":"self","37":"10.5555/12345679","38":"TRUE","39":"NA"},{"1":"4562456","2":"NA","3":"journal-article","4":"NA","5":"public","6":"/0000-0002-1825-0097/work/4562456","7":"0","8":"2013-02-17","9":"1.494016e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-1825-0097","14":"0000-0002-1825-0097","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Josiah Carberry","20":"NA","21":"NA","22":"Toward a Unified Theory of High-Energy Metaphysics: Silly String Theory","23":"NA","24":"NA","25":"2008","26":"NA","27":"NA","28":"NA","29":"NA","30":"NA","31":"NA","32":"issn","33":"0264-3561","34":"NA","35":"NA","36":"part-of","37":"0264-3561","38":"TRUE","39":"NA"},{"1":"4562456","2":"NA","3":"journal-article","4":"NA","5":"public","6":"/0000-0002-1825-0097/work/4562456","7":"0","8":"2013-02-17","9":"1.494016e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-1825-0097","14":"0000-0002-1825-0097","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Josiah Carberry","20":"NA","21":"NA","22":"Toward a Unified Theory of High-Energy Metaphysics: Silly String Theory","23":"NA","24":"NA","25":"2008","26":"NA","27":"NA","28":"NA","29":"NA","30":"NA","31":"NA","32":"doi","33":"10.5555/12345678","34":"NA","35":"NA","36":"self","37":"10.5555/12345678","38":"TRUE","39":"NA"},{"1":"19980729","2":"NA","3":"journal-article","4":"NA","5":"public","6":"/0000-0002-1825-0097/work/19980729","7":"0","8":"2015-11-04","9":"1.494016e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-5982-8983","14":"0000-0002-5982-8983","15":"orcid.org","16":"https://orcid.org/client/0000-0002-5982-8983","17":"0000-0002-5982-8983","18":"orcid.org","19":"Scopus - Elsevier","20":"NA","21":"NA","22":"Bulk and surface plasmons in artificially structured materials","23":"NA","24":"NA","25":"1987","26":"NA","27":"http://www.scopus.com/inward/record.url?eid=2-s2.0-0023398608&partnerID=MN8TOARS","28":"IEEE Transactions on Plasma Science","29":"NA","30":"NA","31":"NA","32":"doi","33":"10.1109/TPS.1987.4316723","34":"NA","35":"NA","36":"self","37":"10.1109/tps.1987.4316723","38":"TRUE","39":"NA"},{"1":"19980729","2":"NA","3":"journal-article","4":"NA","5":"public","6":"/0000-0002-1825-0097/work/19980729","7":"0","8":"2015-11-04","9":"1.494016e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-5982-8983","14":"0000-0002-5982-8983","15":"orcid.org","16":"https://orcid.org/client/0000-0002-5982-8983","17":"0000-0002-5982-8983","18":"orcid.org","19":"Scopus - Elsevier","20":"NA","21":"NA","22":"Bulk and surface plasmons in artificially structured materials","23":"NA","24":"NA","25":"1987","26":"NA","27":"http://www.scopus.com/inward/record.url?eid=2-s2.0-0023398608&partnerID=MN8TOARS","28":"IEEE Transactions on Plasma Science","29":"NA","30":"NA","31":"NA","32":"eid","33":"2-s2.0-0023398608","34":"NA","35":"NA","36":"self","37":"2-s2.0-0023398608","38":"TRUE","39":"NA"},{"1":"56791858","2":"NA","3":"research-tool","4":"NA","5":"public","6":"/0000-0002-9260-8456/work/56791858","7":"1","8":"2019-04-25","9":"1.556228e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-9260-8456","14":"0000-0002-9260-8456","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Clarke Iakovakis","20":"NA","21":"NA","22":"Building Your Research Profile (without breaking copyright)","23":"NA","24":"NA","25":"2019","26":"NA","27":"https://osf.io/2w6pj/","28":"Oklahoma State University","29":"03","30":"07","31":"NA","32":"doi","33":"10.17605/osf.io/2w6pj","34":"NA","35":"NA","36":"self","37":"10.17605/osf.io/2w6pj","38":"TRUE","39":"https://doi.org/10.17605/osf.io/2w6pj"},{"1":"55186833","2":"NA","3":"conference-paper","4":"NA","5":"public","6":"/0000-0002-9260-8456/work/55186833","7":"1","8":"2019-03-12","9":"1.553542e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-9260-8456","14":"0000-0002-9260-8456","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Clarke Iakovakis","20":"NA","21":"NA","22":"Confronting the Elephant in the Room: Cleaning & Wrangling Data for Collections & Scholarly Services","23":"NA","24":"NA","25":"2019","26":"NA","27":"https://osf.io/a5p3r/","28":"Electronic Resources & Libraries","29":"03","30":"05","31":"NA","32":"doi","33":"10.17605/OSF.IO/A5P3R","34":"NA","35":"NA","36":"self","37":"10.17605/osf.io/a5p3r","38":"TRUE","39":"https://doi.org/10.17605%2Fosf.io%2Fa5p3r"},{"1":"55521281","2":"NA","3":"conference-paper","4":"NA","5":"public","6":"/0000-0002-9260-8456/work/55521281","7":"1","8":"2019-03-20","9":"1.553112e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-9260-8456","14":"0000-0002-9260-8456","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Clarke Iakovakis","20":"NA","21":"NA","22":"Open Access Publishing: Identifying quality journals & avoiding predatory publishers","23":"NA","24":"NA","25":"2018","26":"NA","27":"NA","28":"NA","29":"10","30":"NA","31":"NA","32":"handle","33":"11244/317599","34":"NA","35":"NA","36":"self","37":"11244/317599","38":"TRUE","39":"https://hdl.handle.net/11244/317599"},{"1":"55184197","2":"NA","3":"lecture-speech","4":"NA","5":"public","6":"/0000-0002-9260-8456/work/55184197","7":"1","8":"2019-03-12","9":"1.556058e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-9260-8456","14":"0000-0002-9260-8456","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Clarke Iakovakis","20":"NA","21":"NA","22":"Introduction to R for Libraries","23":"NA","24":"NA","25":"2018","26":"NA","27":"http://www.ala.org/alcts/confevents/upcoming/webinar/050918","28":"Association for Library Collections & Technical Services (ALCTS)","29":"05","30":"NA","31":"NA","32":"doi","33":"10.6084/m9.figshare.8029301","34":"NA","35":"NA","36":"self","37":"10.6084/m9.figshare.8029301","38":"TRUE","39":"https://doi.org/10.6084/m9.figshare.8029301"},{"1":"14140662","2":"NA","3":"dissertation-thesis","4":"NA","5":"public","6":"/0000-0002-9260-8456/work/14140662","7":"0","8":"2014-10-20","9":"1.553111e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-9260-8456","14":"0000-0002-9260-8456","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Clarke Iakovakis","20":"NA","21":"NA","22":"An interdisciplinary inquiry into the ethics codes of the helping professions","23":"NA","24":"NA","25":"2011","26":"NA","27":"NA","28":"NA","29":"05","30":"NA","31":"NA","32":"handle","33":"ETD-UT-2011-05-3522","34":"NA","35":"NA","36":"self","37":"etd-ut-2011-05-3522","38":"TRUE","39":"http://hdl.handle.net/2152/ETD-UT-2011-05-3522"},{"1":"37069489","2":"NA","3":"other","4":"NA","5":"public","6":"/0000-0002-2771-9344/work/37069489","7":"0","8":"2017-09-24","9":"1.506242e+12","10":"NA","11":"NA","12":"NA","13":"NA","14":"NA","15":"NA","16":"https://orcid.org/client/0000-0001-8099-6984","17":"0000-0001-8099-6984","18":"orcid.org","19":"DataCite","20":"NA","21":"NA","22":"Introducing Orcid","23":"NA","24":"NA","25":"2017","26":"NA","27":"NA","28":"Zenodo","29":"03","30":"28","31":"NA","32":"doi","33":"10.5281/zenodo.495149","34":"NA","35":"NA","36":"self","37":"10.5281/zenodo.495149","38":"TRUE","39":"NA"},{"1":"43318438","2":"NA","3":"other","4":"NA","5":"public","6":"/0000-0002-2771-9344/work/43318438","7":"0","8":"2018-04-05","9":"1.522962e+12","10":"NA","11":"NA","12":"NA","13":"NA","14":"NA","15":"NA","16":"https://orcid.org/client/0000-0001-8099-6984","17":"0000-0001-8099-6984","18":"orcid.org","19":"DataCite","20":"NA","21":"NA","22":"ORCID Public Data File 2017","23":"NA","24":"NA","25":"2017","26":"NA","27":"NA","28":"Figshare","29":"NA","30":"NA","31":"NA","32":"doi","33":"10.6084/m9.figshare.5479792.v1","34":"NA","35":"NA","36":"self","37":"10.6084/m9.figshare.5479792.v1","38":"TRUE","39":"NA"},{"1":"37069490","2":"NA","3":"other","4":"NA","5":"public","6":"/0000-0002-2771-9344/work/37069490","7":"0","8":"2017-09-24","9":"1.506242e+12","10":"NA","11":"NA","12":"NA","13":"NA","14":"NA","15":"NA","16":"https://orcid.org/client/0000-0001-8099-6984","17":"0000-0001-8099-6984","18":"orcid.org","19":"DataCite","20":"NA","21":"NA","22":"Introducing Orcid: What, Why And How","23":"NA","24":"NA","25":"2016","26":"NA","27":"NA","28":"Zenodo","29":"11","30":"23","31":"NA","32":"doi","33":"10.5281/zenodo.168190","34":"NA","35":"NA","36":"self","37":"10.5281/zenodo.168190","38":"TRUE","39":"NA"},{"1":"37069241","2":"NA","3":"data-set","4":"NA","5":"public","6":"/0000-0002-2771-9344/work/37069241","7":"0","8":"2017-09-24","9":"1.506241e+12","10":"NA","11":"NA","12":"NA","13":"NA","14":"NA","15":"NA","16":"https://orcid.org/client/0000-0001-8099-6984","17":"0000-0001-8099-6984","18":"orcid.org","19":"DataCite","20":"NA","21":"NA","22":"ORCID Public Data File 2016","23":"NA","24":"NA","25":"2016","26":"NA","27":"NA","28":"Figshare","29":"NA","30":"NA","31":"NA","32":"doi","33":"10.6084/m9.figshare.4134027.v1","34":"NA","35":"NA","36":"self","37":"10.6084/m9.figshare.4134027.v1","38":"TRUE","39":"NA"},{"1":"37069473","2":"NA","3":"journal-article","4":"NA","5":"public","6":"/0000-0002-2771-9344/work/37069473","7":"0","8":"2017-09-24","9":"1.506242e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-3054-1567","14":"0000-0002-3054-1567","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Crossref Metadata Search","20":"NA","21":"NA","22":"Your Lifelong Digital Name","23":"NA","24":"NA","25":"2016","26":"NA","27":"NA","28":"ChemViews","29":"NA","30":"NA","31":"NA","32":"doi","33":"10.1002/chemv.201600091","34":"NA","35":"NA","36":"self","37":"10.1002/chemv.201600091","38":"TRUE","39":"NA"},{"1":"37069249","2":"NA","3":"data-set","4":"NA","5":"public","6":"/0000-0002-2771-9344/work/37069249","7":"0","8":"2017-09-24","9":"1.506241e+12","10":"NA","11":"NA","12":"NA","13":"NA","14":"NA","15":"NA","16":"https://orcid.org/client/0000-0001-8099-6984","17":"0000-0001-8099-6984","18":"orcid.org","19":"DataCite","20":"NA","21":"NA","22":"ORCID Public Data File 2015","23":"NA","24":"NA","25":"2015","26":"NA","27":"NA","28":"Figshare","29":"NA","30":"NA","31":"NA","32":"doi","33":"10.6084/m9.figshare.1582705","34":"NA","35":"NA","36":"self","37":"10.6084/m9.figshare.1582705","38":"TRUE","39":"NA"},{"1":"37069240","2":"NA","3":"data-set","4":"NA","5":"public","6":"/0000-0002-2771-9344/work/37069240","7":"0","8":"2017-09-24","9":"1.506241e+12","10":"NA","11":"NA","12":"NA","13":"NA","14":"NA","15":"NA","16":"https://orcid.org/client/0000-0001-8099-6984","17":"0000-0001-8099-6984","18":"orcid.org","19":"DataCite","20":"NA","21":"NA","22":"ORCID Annual Public Data File, 2014","23":"NA","24":"NA","25":"2014","26":"NA","27":"NA","28":"ORCID","29":"NA","30":"NA","31":"NA","32":"doi","33":"10.14454/07243.2014.001","34":"NA","35":"NA","36":"self","37":"10.14454/07243.2014.001","38":"TRUE","39":"NA"},{"1":"37069239","2":"NA","3":"data-set","4":"NA","5":"public","6":"/0000-0002-2771-9344/work/37069239","7":"0","8":"2017-09-24","9":"1.506241e+12","10":"NA","11":"NA","12":"NA","13":"NA","14":"NA","15":"NA","16":"https://orcid.org/client/0000-0001-8099-6984","17":"0000-0001-8099-6984","18":"orcid.org","19":"DataCite","20":"NA","21":"NA","22":"ORCID Annual Public Data File, 2013","23":"NA","24":"NA","25":"2013","26":"NA","27":"NA","28":"ORCID","29":"NA","30":"NA","31":"NA","32":"doi","33":"10.14454/07243.2013.001","34":"NA","35":"NA","36":"self","37":"10.14454/07243.2013.001","38":"TRUE","39":"NA"},{"1":"37069475","2":"NA","3":"other","4":"NA","5":"public","6":"/0000-0002-2771-9344/work/37069475","7":"0","8":"2017-09-24","9":"1.506242e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-3054-1567","14":"0000-0002-3054-1567","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Crossref Metadata Search","20":"NA","21":"NA","22":"ORCID","23":"NA","24":"NA","25":"2009","26":"NA","27":"NA","28":"Encyclopedia of Library and Information Sciences, Third Edition","29":"NA","30":"NA","31":"NA","32":"doi","33":"10.1081/e-elis3-120050534","34":"NA","35":"NA","36":"self","37":"10.1081/e-elis3-120050534","38":"TRUE","39":"NA"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>If we want to keep them, there’s a workaround: use <code>map_lgl</code> to first remove (<code>filter()</code> out) the <code>NULL</code> <code>external_id</code> columns, then <code>unnest</code> the ids, then bind back the <code>NULL</code> author columns, and finally deselecting the extra <code>author</code> and <code>link</code> columns as these are no longer in the transformed, unnested data.</p>
+<pre class="r"><code>my_works_externalIDs_keep &lt;- my_works_data %&gt;% dplyr::filter(!purrr::map_lgl(external_ids_external_id, 
+    purrr::is_empty)) %&gt;% tidyr::unnest(external_ids_external_id, .drop = TRUE) %&gt;% 
+    dplyr::bind_rows(my_works_data %&gt;% dplyr::filter(map_lgl(external_ids_external_id, 
+        is.null)) %&gt;% dplyr::select(-external_ids_external_id))
+my_works_externalIDs_keep</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["put_code"],"name":[1],"type":["int"],"align":["right"]},{"label":["url"],"name":[2],"type":["lgl"],"align":["right"]},{"label":["type"],"name":[3],"type":["chr"],"align":["left"]},{"label":["journal_title"],"name":[4],"type":["lgl"],"align":["right"]},{"label":["visibility"],"name":[5],"type":["chr"],"align":["left"]},{"label":["path"],"name":[6],"type":["chr"],"align":["left"]},{"label":["display_index"],"name":[7],"type":["chr"],"align":["left"]},{"label":["created_date_value"],"name":[8],"type":["date"],"align":["right"]},{"label":["last_modified_date_value"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["source_assertion_origin_orcid"],"name":[10],"type":["lgl"],"align":["right"]},{"label":["source_assertion_origin_client_id"],"name":[11],"type":["lgl"],"align":["right"]},{"label":["source_assertion_origin_name"],"name":[12],"type":["lgl"],"align":["right"]},{"label":["source_source_orcid_uri"],"name":[13],"type":["chr"],"align":["left"]},{"label":["source_source_orcid_path"],"name":[14],"type":["chr"],"align":["left"]},{"label":["source_source_orcid_host"],"name":[15],"type":["chr"],"align":["left"]},{"label":["source_source_client_id_uri"],"name":[16],"type":["chr"],"align":["left"]},{"label":["source_source_client_id_path"],"name":[17],"type":["chr"],"align":["left"]},{"label":["source_source_client_id_host"],"name":[18],"type":["chr"],"align":["left"]},{"label":["source_source_name_value"],"name":[19],"type":["chr"],"align":["left"]},{"label":["title_subtitle"],"name":[20],"type":["lgl"],"align":["right"]},{"label":["title_translated_title"],"name":[21],"type":["lgl"],"align":["right"]},{"label":["title_title_value"],"name":[22],"type":["chr"],"align":["left"]},{"label":["publication_date_month"],"name":[23],"type":["lgl"],"align":["right"]},{"label":["publication_date_day"],"name":[24],"type":["lgl"],"align":["right"]},{"label":["publication_date_year_value"],"name":[25],"type":["chr"],"align":["left"]},{"label":["source_source_client_id"],"name":[26],"type":["lgl"],"align":["right"]},{"label":["url_value"],"name":[27],"type":["chr"],"align":["left"]},{"label":["journal_title_value"],"name":[28],"type":["chr"],"align":["left"]},{"label":["publication_date_month_value"],"name":[29],"type":["chr"],"align":["left"]},{"label":["publication_date_day_value"],"name":[30],"type":["chr"],"align":["left"]},{"label":["source_source_orcid"],"name":[31],"type":["lgl"],"align":["right"]},{"label":["external-id-type"],"name":[32],"type":["chr"],"align":["left"]},{"label":["external-id-value"],"name":[33],"type":["chr"],"align":["left"]},{"label":["external-id-normalized-error"],"name":[34],"type":["lgl"],"align":["right"]},{"label":["external-id-url"],"name":[35],"type":["lgl"],"align":["right"]},{"label":["external-id-relationship"],"name":[36],"type":["chr"],"align":["left"]},{"label":["external-id-normalized.value"],"name":[37],"type":["chr"],"align":["left"]},{"label":["external-id-normalized.transient"],"name":[38],"type":["lgl"],"align":["right"]},{"label":["external-id-url.value"],"name":[39],"type":["chr"],"align":["left"]}],"data":[{"1":"9543020","2":"NA","3":"journal-article","4":"NA","5":"public","6":"/0000-0002-1825-0097/work/9543020","7":"2","8":"2013-08-03","9":"1.494016e+12","10":"NA","11":"NA","12":"NA","13":"NA","14":"NA","15":"NA","16":"https://orcid.org/client/0000-0002-3054-1567","17":"0000-0002-3054-1567","18":"orcid.org","19":"Crossref Metadata Search","20":"NA","21":"NA","22":"A Methodology for the Emulation of Architecture","23":"NA","24":"NA","25":"2012","26":"NA","27":"NA","28":"NA","29":"NA","30":"NA","31":"NA","32":"issn","33":"0264-3561","34":"NA","35":"NA","36":"part-of","37":"0264-3561","38":"TRUE","39":"NA"},{"1":"9543020","2":"NA","3":"journal-article","4":"NA","5":"public","6":"/0000-0002-1825-0097/work/9543020","7":"2","8":"2013-08-03","9":"1.494016e+12","10":"NA","11":"NA","12":"NA","13":"NA","14":"NA","15":"NA","16":"https://orcid.org/client/0000-0002-3054-1567","17":"0000-0002-3054-1567","18":"orcid.org","19":"Crossref Metadata Search","20":"NA","21":"NA","22":"A Methodology for the Emulation of Architecture","23":"NA","24":"NA","25":"2012","26":"NA","27":"NA","28":"NA","29":"NA","30":"NA","31":"NA","32":"doi","33":"10.5555/12345680","34":"NA","35":"NA","36":"self","37":"10.5555/12345680","38":"TRUE","39":"NA"},{"1":"18777963","2":"NA","3":"journal-article","4":"NA","5":"public","6":"/0000-0002-1825-0097/work/18777963","7":"1","8":"2013-08-02","9":"1.494016e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-1825-0097","14":"0000-0002-1825-0097","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Josiah Carberry","20":"NA","21":"NA","22":"A Methodology for the Emulation of Architecture","23":"NA","24":"NA","25":"2012","26":"NA","27":"NA","28":"NA","29":"NA","30":"NA","31":"NA","32":"doi","33":"10.5555/12345680","34":"NA","35":"NA","36":"self","37":"10.5555/12345680","38":"TRUE","39":"NA"},{"1":"4562455","2":"NA","3":"journal-article","4":"NA","5":"public","6":"/0000-0002-1825-0097/work/4562455","7":"0","8":"2013-02-17","9":"1.494016e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-1825-0097","14":"0000-0002-1825-0097","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Josiah Carberry","20":"NA","21":"NA","22":"The Memory Bus Considered Harmful","23":"NA","24":"NA","25":"2012","26":"NA","27":"NA","28":"NA","29":"NA","30":"NA","31":"NA","32":"issn","33":"0264-3561","34":"NA","35":"NA","36":"part-of","37":"0264-3561","38":"TRUE","39":"NA"},{"1":"4562455","2":"NA","3":"journal-article","4":"NA","5":"public","6":"/0000-0002-1825-0097/work/4562455","7":"0","8":"2013-02-17","9":"1.494016e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-1825-0097","14":"0000-0002-1825-0097","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Josiah Carberry","20":"NA","21":"NA","22":"The Memory Bus Considered Harmful","23":"NA","24":"NA","25":"2012","26":"NA","27":"NA","28":"NA","29":"NA","30":"NA","31":"NA","32":"doi","33":"10.5555/666655554444","34":"NA","35":"NA","36":"self","37":"10.5555/666655554444","38":"TRUE","39":"NA"},{"1":"4562454","2":"NA","3":"journal-article","4":"NA","5":"public","6":"/0000-0002-1825-0097/work/4562454","7":"0","8":"2013-02-17","9":"1.494016e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-1825-0097","14":"0000-0002-1825-0097","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Josiah Carberry","20":"NA","21":"NA","22":"The Impact of Interactive Epistemologies on Cryptography","23":"NA","24":"NA","25":"2011","26":"NA","27":"NA","28":"NA","29":"NA","30":"NA","31":"NA","32":"issn","33":"0264-3561","34":"NA","35":"NA","36":"part-of","37":"0264-3561","38":"TRUE","39":"NA"},{"1":"4562454","2":"NA","3":"journal-article","4":"NA","5":"public","6":"/0000-0002-1825-0097/work/4562454","7":"0","8":"2013-02-17","9":"1.494016e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-1825-0097","14":"0000-0002-1825-0097","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Josiah Carberry","20":"NA","21":"NA","22":"The Impact of Interactive Epistemologies on Cryptography","23":"NA","24":"NA","25":"2011","26":"NA","27":"NA","28":"NA","29":"NA","30":"NA","31":"NA","32":"doi","33":"10.5555/987654321","34":"NA","35":"NA","36":"self","37":"10.5555/987654321","38":"TRUE","39":"NA"},{"1":"4562453","2":"NA","3":"journal-article","4":"NA","5":"public","6":"/0000-0002-1825-0097/work/4562453","7":"0","8":"2013-02-17","9":"1.494016e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-1825-0097","14":"0000-0002-1825-0097","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Josiah Carberry","20":"NA","21":"NA","22":"Developing Thin Clients Using Amphibious Epistemologies","23":"NA","24":"NA","25":"2008","26":"NA","27":"NA","28":"NA","29":"NA","30":"NA","31":"NA","32":"issn","33":"0264-3561","34":"NA","35":"NA","36":"part-of","37":"0264-3561","38":"TRUE","39":"NA"},{"1":"4562453","2":"NA","3":"journal-article","4":"NA","5":"public","6":"/0000-0002-1825-0097/work/4562453","7":"0","8":"2013-02-17","9":"1.494016e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-1825-0097","14":"0000-0002-1825-0097","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Josiah Carberry","20":"NA","21":"NA","22":"Developing Thin Clients Using Amphibious Epistemologies","23":"NA","24":"NA","25":"2008","26":"NA","27":"NA","28":"NA","29":"NA","30":"NA","31":"NA","32":"doi","33":"10.5555/12345679","34":"NA","35":"NA","36":"self","37":"10.5555/12345679","38":"TRUE","39":"NA"},{"1":"4562456","2":"NA","3":"journal-article","4":"NA","5":"public","6":"/0000-0002-1825-0097/work/4562456","7":"0","8":"2013-02-17","9":"1.494016e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-1825-0097","14":"0000-0002-1825-0097","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Josiah Carberry","20":"NA","21":"NA","22":"Toward a Unified Theory of High-Energy Metaphysics: Silly String Theory","23":"NA","24":"NA","25":"2008","26":"NA","27":"NA","28":"NA","29":"NA","30":"NA","31":"NA","32":"issn","33":"0264-3561","34":"NA","35":"NA","36":"part-of","37":"0264-3561","38":"TRUE","39":"NA"},{"1":"4562456","2":"NA","3":"journal-article","4":"NA","5":"public","6":"/0000-0002-1825-0097/work/4562456","7":"0","8":"2013-02-17","9":"1.494016e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-1825-0097","14":"0000-0002-1825-0097","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Josiah Carberry","20":"NA","21":"NA","22":"Toward a Unified Theory of High-Energy Metaphysics: Silly String Theory","23":"NA","24":"NA","25":"2008","26":"NA","27":"NA","28":"NA","29":"NA","30":"NA","31":"NA","32":"doi","33":"10.5555/12345678","34":"NA","35":"NA","36":"self","37":"10.5555/12345678","38":"TRUE","39":"NA"},{"1":"19980729","2":"NA","3":"journal-article","4":"NA","5":"public","6":"/0000-0002-1825-0097/work/19980729","7":"0","8":"2015-11-04","9":"1.494016e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-5982-8983","14":"0000-0002-5982-8983","15":"orcid.org","16":"https://orcid.org/client/0000-0002-5982-8983","17":"0000-0002-5982-8983","18":"orcid.org","19":"Scopus - Elsevier","20":"NA","21":"NA","22":"Bulk and surface plasmons in artificially structured materials","23":"NA","24":"NA","25":"1987","26":"NA","27":"http://www.scopus.com/inward/record.url?eid=2-s2.0-0023398608&partnerID=MN8TOARS","28":"IEEE Transactions on Plasma Science","29":"NA","30":"NA","31":"NA","32":"doi","33":"10.1109/TPS.1987.4316723","34":"NA","35":"NA","36":"self","37":"10.1109/tps.1987.4316723","38":"TRUE","39":"NA"},{"1":"19980729","2":"NA","3":"journal-article","4":"NA","5":"public","6":"/0000-0002-1825-0097/work/19980729","7":"0","8":"2015-11-04","9":"1.494016e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-5982-8983","14":"0000-0002-5982-8983","15":"orcid.org","16":"https://orcid.org/client/0000-0002-5982-8983","17":"0000-0002-5982-8983","18":"orcid.org","19":"Scopus - Elsevier","20":"NA","21":"NA","22":"Bulk and surface plasmons in artificially structured materials","23":"NA","24":"NA","25":"1987","26":"NA","27":"http://www.scopus.com/inward/record.url?eid=2-s2.0-0023398608&partnerID=MN8TOARS","28":"IEEE Transactions on Plasma Science","29":"NA","30":"NA","31":"NA","32":"eid","33":"2-s2.0-0023398608","34":"NA","35":"NA","36":"self","37":"2-s2.0-0023398608","38":"TRUE","39":"NA"},{"1":"56791858","2":"NA","3":"research-tool","4":"NA","5":"public","6":"/0000-0002-9260-8456/work/56791858","7":"1","8":"2019-04-25","9":"1.556228e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-9260-8456","14":"0000-0002-9260-8456","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Clarke Iakovakis","20":"NA","21":"NA","22":"Building Your Research Profile (without breaking copyright)","23":"NA","24":"NA","25":"2019","26":"NA","27":"https://osf.io/2w6pj/","28":"Oklahoma State University","29":"03","30":"07","31":"NA","32":"doi","33":"10.17605/osf.io/2w6pj","34":"NA","35":"NA","36":"self","37":"10.17605/osf.io/2w6pj","38":"TRUE","39":"https://doi.org/10.17605/osf.io/2w6pj"},{"1":"55186833","2":"NA","3":"conference-paper","4":"NA","5":"public","6":"/0000-0002-9260-8456/work/55186833","7":"1","8":"2019-03-12","9":"1.553542e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-9260-8456","14":"0000-0002-9260-8456","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Clarke Iakovakis","20":"NA","21":"NA","22":"Confronting the Elephant in the Room: Cleaning & Wrangling Data for Collections & Scholarly Services","23":"NA","24":"NA","25":"2019","26":"NA","27":"https://osf.io/a5p3r/","28":"Electronic Resources & Libraries","29":"03","30":"05","31":"NA","32":"doi","33":"10.17605/OSF.IO/A5P3R","34":"NA","35":"NA","36":"self","37":"10.17605/osf.io/a5p3r","38":"TRUE","39":"https://doi.org/10.17605%2Fosf.io%2Fa5p3r"},{"1":"55521281","2":"NA","3":"conference-paper","4":"NA","5":"public","6":"/0000-0002-9260-8456/work/55521281","7":"1","8":"2019-03-20","9":"1.553112e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-9260-8456","14":"0000-0002-9260-8456","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Clarke Iakovakis","20":"NA","21":"NA","22":"Open Access Publishing: Identifying quality journals & avoiding predatory publishers","23":"NA","24":"NA","25":"2018","26":"NA","27":"NA","28":"NA","29":"10","30":"NA","31":"NA","32":"handle","33":"11244/317599","34":"NA","35":"NA","36":"self","37":"11244/317599","38":"TRUE","39":"https://hdl.handle.net/11244/317599"},{"1":"55184197","2":"NA","3":"lecture-speech","4":"NA","5":"public","6":"/0000-0002-9260-8456/work/55184197","7":"1","8":"2019-03-12","9":"1.556058e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-9260-8456","14":"0000-0002-9260-8456","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Clarke Iakovakis","20":"NA","21":"NA","22":"Introduction to R for Libraries","23":"NA","24":"NA","25":"2018","26":"NA","27":"http://www.ala.org/alcts/confevents/upcoming/webinar/050918","28":"Association for Library Collections & Technical Services (ALCTS)","29":"05","30":"NA","31":"NA","32":"doi","33":"10.6084/m9.figshare.8029301","34":"NA","35":"NA","36":"self","37":"10.6084/m9.figshare.8029301","38":"TRUE","39":"https://doi.org/10.6084/m9.figshare.8029301"},{"1":"14140662","2":"NA","3":"dissertation-thesis","4":"NA","5":"public","6":"/0000-0002-9260-8456/work/14140662","7":"0","8":"2014-10-20","9":"1.553111e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-9260-8456","14":"0000-0002-9260-8456","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Clarke Iakovakis","20":"NA","21":"NA","22":"An interdisciplinary inquiry into the ethics codes of the helping professions","23":"NA","24":"NA","25":"2011","26":"NA","27":"NA","28":"NA","29":"05","30":"NA","31":"NA","32":"handle","33":"ETD-UT-2011-05-3522","34":"NA","35":"NA","36":"self","37":"etd-ut-2011-05-3522","38":"TRUE","39":"http://hdl.handle.net/2152/ETD-UT-2011-05-3522"},{"1":"37069489","2":"NA","3":"other","4":"NA","5":"public","6":"/0000-0002-2771-9344/work/37069489","7":"0","8":"2017-09-24","9":"1.506242e+12","10":"NA","11":"NA","12":"NA","13":"NA","14":"NA","15":"NA","16":"https://orcid.org/client/0000-0001-8099-6984","17":"0000-0001-8099-6984","18":"orcid.org","19":"DataCite","20":"NA","21":"NA","22":"Introducing Orcid","23":"NA","24":"NA","25":"2017","26":"NA","27":"NA","28":"Zenodo","29":"03","30":"28","31":"NA","32":"doi","33":"10.5281/zenodo.495149","34":"NA","35":"NA","36":"self","37":"10.5281/zenodo.495149","38":"TRUE","39":"NA"},{"1":"43318438","2":"NA","3":"other","4":"NA","5":"public","6":"/0000-0002-2771-9344/work/43318438","7":"0","8":"2018-04-05","9":"1.522962e+12","10":"NA","11":"NA","12":"NA","13":"NA","14":"NA","15":"NA","16":"https://orcid.org/client/0000-0001-8099-6984","17":"0000-0001-8099-6984","18":"orcid.org","19":"DataCite","20":"NA","21":"NA","22":"ORCID Public Data File 2017","23":"NA","24":"NA","25":"2017","26":"NA","27":"NA","28":"Figshare","29":"NA","30":"NA","31":"NA","32":"doi","33":"10.6084/m9.figshare.5479792.v1","34":"NA","35":"NA","36":"self","37":"10.6084/m9.figshare.5479792.v1","38":"TRUE","39":"NA"},{"1":"37069490","2":"NA","3":"other","4":"NA","5":"public","6":"/0000-0002-2771-9344/work/37069490","7":"0","8":"2017-09-24","9":"1.506242e+12","10":"NA","11":"NA","12":"NA","13":"NA","14":"NA","15":"NA","16":"https://orcid.org/client/0000-0001-8099-6984","17":"0000-0001-8099-6984","18":"orcid.org","19":"DataCite","20":"NA","21":"NA","22":"Introducing Orcid: What, Why And How","23":"NA","24":"NA","25":"2016","26":"NA","27":"NA","28":"Zenodo","29":"11","30":"23","31":"NA","32":"doi","33":"10.5281/zenodo.168190","34":"NA","35":"NA","36":"self","37":"10.5281/zenodo.168190","38":"TRUE","39":"NA"},{"1":"37069241","2":"NA","3":"data-set","4":"NA","5":"public","6":"/0000-0002-2771-9344/work/37069241","7":"0","8":"2017-09-24","9":"1.506241e+12","10":"NA","11":"NA","12":"NA","13":"NA","14":"NA","15":"NA","16":"https://orcid.org/client/0000-0001-8099-6984","17":"0000-0001-8099-6984","18":"orcid.org","19":"DataCite","20":"NA","21":"NA","22":"ORCID Public Data File 2016","23":"NA","24":"NA","25":"2016","26":"NA","27":"NA","28":"Figshare","29":"NA","30":"NA","31":"NA","32":"doi","33":"10.6084/m9.figshare.4134027.v1","34":"NA","35":"NA","36":"self","37":"10.6084/m9.figshare.4134027.v1","38":"TRUE","39":"NA"},{"1":"37069473","2":"NA","3":"journal-article","4":"NA","5":"public","6":"/0000-0002-2771-9344/work/37069473","7":"0","8":"2017-09-24","9":"1.506242e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-3054-1567","14":"0000-0002-3054-1567","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Crossref Metadata Search","20":"NA","21":"NA","22":"Your Lifelong Digital Name","23":"NA","24":"NA","25":"2016","26":"NA","27":"NA","28":"ChemViews","29":"NA","30":"NA","31":"NA","32":"doi","33":"10.1002/chemv.201600091","34":"NA","35":"NA","36":"self","37":"10.1002/chemv.201600091","38":"TRUE","39":"NA"},{"1":"37069249","2":"NA","3":"data-set","4":"NA","5":"public","6":"/0000-0002-2771-9344/work/37069249","7":"0","8":"2017-09-24","9":"1.506241e+12","10":"NA","11":"NA","12":"NA","13":"NA","14":"NA","15":"NA","16":"https://orcid.org/client/0000-0001-8099-6984","17":"0000-0001-8099-6984","18":"orcid.org","19":"DataCite","20":"NA","21":"NA","22":"ORCID Public Data File 2015","23":"NA","24":"NA","25":"2015","26":"NA","27":"NA","28":"Figshare","29":"NA","30":"NA","31":"NA","32":"doi","33":"10.6084/m9.figshare.1582705","34":"NA","35":"NA","36":"self","37":"10.6084/m9.figshare.1582705","38":"TRUE","39":"NA"},{"1":"37069240","2":"NA","3":"data-set","4":"NA","5":"public","6":"/0000-0002-2771-9344/work/37069240","7":"0","8":"2017-09-24","9":"1.506241e+12","10":"NA","11":"NA","12":"NA","13":"NA","14":"NA","15":"NA","16":"https://orcid.org/client/0000-0001-8099-6984","17":"0000-0001-8099-6984","18":"orcid.org","19":"DataCite","20":"NA","21":"NA","22":"ORCID Annual Public Data File, 2014","23":"NA","24":"NA","25":"2014","26":"NA","27":"NA","28":"ORCID","29":"NA","30":"NA","31":"NA","32":"doi","33":"10.14454/07243.2014.001","34":"NA","35":"NA","36":"self","37":"10.14454/07243.2014.001","38":"TRUE","39":"NA"},{"1":"37069239","2":"NA","3":"data-set","4":"NA","5":"public","6":"/0000-0002-2771-9344/work/37069239","7":"0","8":"2017-09-24","9":"1.506241e+12","10":"NA","11":"NA","12":"NA","13":"NA","14":"NA","15":"NA","16":"https://orcid.org/client/0000-0001-8099-6984","17":"0000-0001-8099-6984","18":"orcid.org","19":"DataCite","20":"NA","21":"NA","22":"ORCID Annual Public Data File, 2013","23":"NA","24":"NA","25":"2013","26":"NA","27":"NA","28":"ORCID","29":"NA","30":"NA","31":"NA","32":"doi","33":"10.14454/07243.2013.001","34":"NA","35":"NA","36":"self","37":"10.14454/07243.2013.001","38":"TRUE","39":"NA"},{"1":"37069475","2":"NA","3":"other","4":"NA","5":"public","6":"/0000-0002-2771-9344/work/37069475","7":"0","8":"2017-09-24","9":"1.506242e+12","10":"NA","11":"NA","12":"NA","13":"https://orcid.org/0000-0002-3054-1567","14":"0000-0002-3054-1567","15":"orcid.org","16":"NA","17":"NA","18":"NA","19":"Crossref Metadata Search","20":"NA","21":"NA","22":"ORCID","23":"NA","24":"NA","25":"2009","26":"NA","27":"NA","28":"Encyclopedia of Library and Information Sciences, Third Edition","29":"NA","30":"NA","31":"NA","32":"doi","33":"10.1081/e-elis3-120050534","34":"NA","35":"NA","36":"self","37":"10.1081/e-elis3-120050534","38":"TRUE","39":"NA"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<div id="conclusion" class="section level1">
+<h1>Conclusion</h1>
+<p>The ORCID API is an excellent tool for analyzing research activity on multiple levels. <code>rorcid</code> makes gathering and cleaning the data easier. Thanks to both ORCID and Scott Chamberlain for their contributions to the community. Again, read Paul Oldham’s excellent post at <a href="https://www.pauloldham.net/introduction-to-orcid-with-rorcid/" class="uri">https://www.pauloldham.net/introduction-to-orcid-with-rorcid/</a> for more you can do. I hope this walkthrough helps. If you need to get in touch with me, find my contact info at <a href="https://info.library.okstate.edu/clarke-iakovakis" class="uri">https://info.library.okstate.edu/clarke-iakovakis</a>.</p>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = false;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

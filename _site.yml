@@ -11,10 +11,10 @@ navbar:
           href: setup_instructions.html
         - text: "Introduction to R"
           href: RBasics.html
+        - text: "rorcid"
+          href: rorcid.html
         - text: "rcrossref"
           href: rcrossref.html
-        - text: "rorcid"
-          href: rorcid/doc/rorcid.html
 output:
   html_document:
     theme: paper
