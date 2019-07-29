@@ -5,7 +5,25 @@ navbar:
   left:
     - text: "R projects"
       href: r_projects.html
+    - text: "FSCI 2019 AM4 Session"
+      href: fsci/fsci2019.html
+      menu:
+        - text: "Course syllabus"
+          href: fsci/fsci_syllabus.html
+        - text: "Setting Up"
+          href: fsci/setup_instructions.html
+        - text: "Introduction to R"
+          href: fsci/RBasics.html
+        - text: "rorcid"
+          href: rorcid/doc/rorcid.html
+        - text: "rcrossref"
+          href: rcrossref/doc/rcrossref.html
 output:
   html_document:
     theme: paper
     css: 'styles.css'
+    df_print: paged
+    toc: true
+    toc_depth: 3
+    output:
+    number_sections: TRUE

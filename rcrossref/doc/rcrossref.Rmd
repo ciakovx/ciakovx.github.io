@@ -2,14 +2,7 @@
 title: "rcrossref walkthrough"
 author: "Clarke Iakovakis"
 output:
-    prettydoc::html_pretty:
-      theme: cayman
-      highlight: github
-      df_print: paged
-      toc: true
-      toc_depth: 3
-      output:
-      number_sections: TRUE
+   html_document
 ---
 
 ```{r setup, include=FALSE}
