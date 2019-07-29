@@ -3239,7 +3239,12 @@ summary(ebooks$checkouts)
 <p><strong>TRY IT YOURSELF</strong></p>
 <ol style="list-style-type: decimal">
 <li>Look at the help file for <code>state.name</code></li>
-<li>Manually construct three vectors: <code>stateName</code>, <code>division</code>, and <code>area</code>. stateName division area 1 Alaska Pacific 590000 2 Arizona Mountain 120000 3 California Pacific 160000 4 Colorado Mountain 110000 5 Montana Mountain 150000</li>
+<li>Manually construct three vectors: <code>stateName</code>, <code>division</code>, and <code>area</code>.
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["stateName"],"name":[1],"type":["chr"],"align":["left"]},{"label":["division"],"name":[2],"type":["fctr"],"align":["left"]},{"label":["area"],"name":[3],"type":["int"],"align":["right"]}],"data":[{"1":"Alaska","2":"Pacific","3":"590000"},{"1":"Arizona","2":"Mountain","3":"120000"},{"1":"California","2":"Pacific","3":"160000"},{"1":"Colorado","2":"Mountain","3":"110000"},{"1":"Montana","2":"Mountain","3":"150000"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div></li>
 <li>Use <code>data.frame()</code> to create a data frame of these three vectors. Assign it to <code>myStates</code>. Remember to set <code>stringsAsFactors</code> to <code>FALSE</code></li>
 <li>What is the <code>class()</code> of each vector?</li>
 <li>Using the <code>$</code> character, run <code>sum()</code> on the <code>area</code> variable. What is the sum area of these five states? What is the median?</li>
