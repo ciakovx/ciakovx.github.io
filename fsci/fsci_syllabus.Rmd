@@ -1,0 +1,51 @@
+---
+title: "FSCI AM4: Working with Scholarly Literature in R: Pulling, Wrangling, Cleaning, and Analyzing Structured Bibliographic Metadata"
+output: 
+  html_document:
+    df_print: paged
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+    toc_depth: 3
+---
+
+# Learning Objectives
+
+A participant in this course will at the end of the course be able to:
+
+* Use R to complete a range of data tasks, including navigating the RStudio environment, understanding R syntax and data types, installing and loading packages, reading data from files and APIs, and executing functions for tidying and  analyzing data,
+* Use the rorcid package in R to extract data from ORCID profiles, including authenticating with the ORCID API, finding ORCID iDs by name/affiliation, getting author biographical information, and getting works associated with individuals.
+* Use the rcrossref and roadoi packages in R to extract data from the Crossref and Unpaywall database, including authenticating with the Crossref API, forming queries, getting publication information, getting data on articles, converting articles to BibTeX/RIS, getting citation data, and checking for open access versions.
+
+
+# Schedule
+
+## [Monday: Introduction to R and R Studio]()
+
+* Installation & introduction to R/RStudio and its advantages over other data tools. Setting up R and RStudio and getting to know the interface.
+* Nuts and bolts of R syntax: writing and evaluating expressions, assigning values, calling functions, understanding data types, reading data into R, working with data frames.
+* Using dplyr functions for data manipulation: renaming/recoding/selecting/creating variables, recoding values, ordering data.
+
+## [Tuesday: Introduction to `rorcid`](rorcid.html)
+
+* Continue [Introduction to R and R Studio](). 
+* Introduction to ORCID, the ORCID API, and `rorcid`. Authenticating `rorcid` in your R environment.
+* Finding ORCID iDs by name, iD, email, and affiliation. Constructing queries.
+* Getting biographical metadata (date created, last modified, name, biography, email, keywords) and works metadata (type, title, publication date).
+
+## [Thursday: Introduction to `rcrossref` and `roadoi`
+
+* Introduction to Crossref, the Crossref API, and `rcrossref`. Authenticating `rcrossref` in your R environment.
+* Getting publication and article data by journal, keyword, and author. Constructing and filtering queries. Writing to CSV, BibTeX, and RIS.
+* Introduction to Unpaywall, the Unpaywall API, and `roadoi`. Getting data on open access availability. Getting URLs and downloading full text.
+
+
+## [Friday: Recap, review, & next steps]()
+
+
+
+
+
+
+The workshop materials are available on the Google Drive folder for our course at http://tiny.cc/fsci19_am4. You can also find them [on my GitHub](https://github.com/ciakovx/rorcid.workshop). 

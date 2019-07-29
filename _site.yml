@@ -6,13 +6,15 @@ navbar:
     - text: "FSCI 2019 AM4 Session"
       menu:
         - text: "Course syllabus"
-          href: fsci/fsci_syllabus.html
+          href: fsci_syllabus.html
         - text: "Setting Up"
-          href: fsci/setup_instructions.html
+          href: setup_instructions.html
         - text: "Introduction to R"
-          href: fsci/RBasics.html
+          href: RBasics.html
         - text: "rcrossref"
-          href: rcrossref/doc/rcrossref.html
+          href: rcrossref.html
+        - text: "rorcid"
+          href: rorcid/doc/rorcid.html
 output:
   html_document:
     theme: paper

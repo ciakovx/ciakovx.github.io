@@ -11,7 +11,7 @@
 
 
 
-<title>index.utf8.md</title>
+<title>FSCI AM4: Working with Scholarly Literature in R: Pulling, Wrangling, Cleaning, and Analyzing Structured Bibliographic Metadata</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -19,9 +19,14 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -265,6 +270,107 @@ $(document).ready(function () {
 
 
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = false;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
 
 
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
@@ -287,16 +393,16 @@ $(document).ready(function () {
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="fsci/fsci_syllabus.html">Course syllabus</a>
+      <a href="fsci_syllabus.html">Course syllabus</a>
     </li>
     <li>
-      <a href="fsci/setup_instructions.html">Setting Up</a>
+      <a href="setup_instructions.html">Setting Up</a>
     </li>
     <li>
-      <a href="fsci/RBasics.html">Introduction to R</a>
+      <a href="RBasics.html">Introduction to R</a>
     </li>
     <li>
-      <a href="rcrossref/doc/rcrossref.html">rcrossref</a>
+      <a href="rcrossref.html">rcrossref</a>
     </li>
   </ul>
 </li>
@@ -312,28 +418,57 @@ $(document).ready(function () {
 
 
 
+<h1 class="title toc-ignore">FSCI AM4: Working with Scholarly Literature in R: Pulling, Wrangling, Cleaning, and Analyzing Structured Bibliographic Metadata</h1>
 
 </div>
 
 
-<p><img src="images/Iakovakis__Clarke.jpg" style="width:25%; border-radius: 15px; margin-right: 20px" align="left"></p>
-<p>I am currently the Scholarly Services Librarian at Oklahoma State University. I graduated from the School of Information at the University of Texas in 2011 with an MS in Information Studies, and from Texas State University in 2006 with a BA in History. I previously worked at the University of Houston-Clear Lake and the University of Texas at Arlington.</p>
-<p>I am interested in:</p>
+<div id="learning-objectives" class="section level1">
+<h1>Learning Objectives</h1>
+<p>A participant in this course will at the end of the course be able to:</p>
 <ul>
-<li>the history, economics, and sociology of scholarly publishing; open access, open education, &amp; open data; copyright &amp; fair use; research evaluation; citation analysis; peer review</li>
-<li>The evolution of American presidential &amp; congressional power from 1945-the present; Cold War geopolitics, imperialism/anti-imperialism</li>
-<li>Autofiction; the I Ching; <a href="my-big-toe.com">My Big TOE</a></li>
+<li>Use R to complete a range of data tasks, including navigating the RStudio environment, understanding R syntax and data types, installing and loading packages, reading data from files and APIs, and executing functions for tidying and analyzing data,</li>
+<li>Use the rorcid package in R to extract data from ORCID profiles, including authenticating with the ORCID API, finding ORCID iDs by name/affiliation, getting author biographical information, and getting works associated with individuals.</li>
+<li>Use the rcrossref and roadoi packages in R to extract data from the Crossref and Unpaywall database, including authenticating with the Crossref API, forming queries, getting publication information, getting data on articles, converting articles to BibTeX/RIS, getting citation data, and checking for open access versions.</li>
 </ul>
-<p><a href="files/Iakovakis.Resume.pdf">View my resume here.</a></p>
-<p>I used the following resources to help me build this page:</p>
+</div>
+<div id="schedule" class="section level1">
+<h1>Schedule</h1>
+<div id="monday-introduction-to-r-and-r-studio" class="section level2">
+<h2><a href="">Monday: Introduction to R and R Studio</a></h2>
 <ul>
-<li>Strayer, Nick &amp; Lucy D’Agostino McGowan. “How to make an RMarkdown Website.” <a href="http://nickstrayer.me/RMarkdown_Sites_tutorial/" class="uri">http://nickstrayer.me/RMarkdown_Sites_tutorial/</a></li>
-<li>Xie, Yihui, Joseph J. Allaire, and Garrett Grolemund. <em>R markdown: The definitive guide</em>. CRC Press, 2018. <a href="https://bookdown.org/yihui/rmarkdown/rmarkdown-site.html" class="uri">https://bookdown.org/yihui/rmarkdown/rmarkdown-site.html</a></li>
-<li>Zabore, Emily C. “Creating websites in R.” <a href="https://www.emilyzabor.com/tutorials/rmarkdown_websites_tutorial.html" class="uri">https://www.emilyzabor.com/tutorials/rmarkdown_websites_tutorial.html</a></li>
+<li>Installation &amp; introduction to R/RStudio and its advantages over other data tools. Setting up R and RStudio and getting to know the interface.</li>
+<li>Nuts and bolts of R syntax: writing and evaluating expressions, assigning values, calling functions, understanding data types, reading data into R, working with data frames.</li>
+<li>Using dplyr functions for data manipulation: renaming/recoding/selecting/creating variables, recoding values, ordering data.</li>
 </ul>
+</div>
+<div id="tuesday-introduction-to-rorcid" class="section level2">
+<h2><a href="rorcid.html">Tuesday: Introduction to <code>rorcid</code></a></h2>
+<ul>
+<li>Continue <a href="">Introduction to R and R Studio</a>.</li>
+<li>Introduction to ORCID, the ORCID API, and <code>rorcid</code>. Authenticating <code>rorcid</code> in your R environment.</li>
+<li>Finding ORCID iDs by name, iD, email, and affiliation. Constructing queries.</li>
+<li>Getting biographical metadata (date created, last modified, name, biography, email, keywords) and works metadata (type, title, publication date).</li>
+</ul>
+</div>
+<div id="thursday-introduction-to-rcrossref-and-roadoi" class="section level2">
+<h2>[Thursday: Introduction to <code>rcrossref</code> and <code>roadoi</code></h2>
+<ul>
+<li>Introduction to Crossref, the Crossref API, and <code>rcrossref</code>. Authenticating <code>rcrossref</code> in your R environment.</li>
+<li>Getting publication and article data by journal, keyword, and author. Constructing and filtering queries. Writing to CSV, BibTeX, and RIS.</li>
+<li>Introduction to Unpaywall, the Unpaywall API, and <code>roadoi</code>. Getting data on open access availability. Getting URLs and downloading full text.</li>
+</ul>
+</div>
+<div id="friday-recap-review-next-steps" class="section level2">
+<h2><a href="">Friday: Recap, review, &amp; next steps</a></h2>
+<p>The workshop materials are available on the Google Drive folder for our course at <a href="http://tiny.cc/fsci19_am4" class="uri">http://tiny.cc/fsci19_am4</a>. You can also find them <a href="https://github.com/ciakovx/rorcid.workshop">on my GitHub</a>.</p>
+</div>
+</div>
 
 
 
+</div>
+</div>
 
 </div>
 
