@@ -1,8 +1,14 @@
 ---
 title: "rcrossref walkthrough"
 author: "Clarke Iakovakis"
-output:
-   html_document
+output: 
+  html_document:
+    df_print: paged
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+    toc_depth: 3
 ---
 
 ```{r setup, include=FALSE}
