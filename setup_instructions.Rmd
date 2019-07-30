@@ -10,6 +10,7 @@ output:
     toc_depth: 3
 ---
 
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(png)
@@ -25,18 +26,21 @@ Go to <https://www.rstudio.com/products/RStudio/#Desktop> to download the RStudi
 
 # Install R packages
 
-You may [download an R script with this code](fsci/setup_code.R) and simply copy-paste from below into your R console, or you can type the code out manually. Open R Studio and go to **File > Open File**. Navigate to the directory for the folder this document was in, and open **setup_code**. Or, simply copy and paste from the text below.
+Open R Studio and go to **File > New File > R Script**. 
 
-Click on the first line, `install.packages("rorcid")`. Then click the **Run** button in the upper right corner of that window.
-
-It will print some lines of code and make take a few seconds. If successful, it will tell you the packaged was successfully unpacked. Now run the next line, `library(rorcid)`. As long as it doesn't say "there is no package called 'rorcid', you should be good.
-
-Do the same thing with the remaining packages.
+Copy the first line of code below and paste it into the blank R script. Then click the **Run** button in the upper right corner of that window.
 
 ```{r install, eval=FALSE,cache=TRUE}
 install.packages("rorcid")
 library(rorcid)
+```
 
+It will print some lines of code and make take a few seconds. If successful, it will tell you the packaged was successfully unpacked. Now run the next line, `library(rorcid)`. As long as it doesn't say "there is no package called 'rorcid', you should be good.
+
+
+Do the same thing with the remaining packages:
+
+```{r install2, eval=FALSE,cache=TRUE}
 install.packages("tidyverse")
 library(tidyverse)
 

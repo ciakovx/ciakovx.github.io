@@ -400,14 +400,13 @@ div.tocify {
 </div>
 <div id="install-r-packages" class="section level1">
 <h1>Install R packages</h1>
-<p>You may <a href="fsci/setup_code.R">download an R script with this code</a> and simply copy-paste from below into your R console, or you can type the code out manually. Open R Studio and go to <strong>File &gt; Open File</strong>. Navigate to the directory for the folder this document was in, and open <strong>setup_code</strong>. Or, simply copy and paste from the text below.</p>
-<p>Click on the first line, <code>install.packages("rorcid")</code>. Then click the <strong>Run</strong> button in the upper right corner of that window.</p>
-<p>It will print some lines of code and make take a few seconds. If successful, it will tell you the packaged was successfully unpacked. Now run the next line, <code>library(rorcid)</code>. As long as it doesn’t say "there is no package called ‘rorcid’, you should be good.</p>
-<p>Do the same thing with the remaining packages.</p>
+<p>Open R Studio and go to <strong>File &gt; New File &gt; R Script</strong>.</p>
+<p>Copy the first line of code below and paste it into the blank R script. Then click the <strong>Run</strong> button in the upper right corner of that window.</p>
 <pre class="r"><code>install.packages(&quot;rorcid&quot;)
-library(rorcid)
-
-install.packages(&quot;tidyverse&quot;)
+library(rorcid)</code></pre>
+<p>It will print some lines of code and make take a few seconds. If successful, it will tell you the packaged was successfully unpacked. Now run the next line, <code>library(rorcid)</code>. As long as it doesn’t say "there is no package called ‘rorcid’, you should be good.</p>
+<p>Do the same thing with the remaining packages:</p>
+<pre class="r"><code>install.packages(&quot;tidyverse&quot;)
 library(tidyverse)
 
 install.packages(&quot;anytime&quot;)
