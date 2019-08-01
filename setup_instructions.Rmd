@@ -16,7 +16,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(png)
 ```
 
-I ask that you please complete the following before our session. Please [contact me](https://info.library.okstate.edu/clarke-iakovakis) if you have problems with any of this.
+I ask that you please complete at least the R and R Studio installation before our session. If you feel comfortable, you can go through the installation of packages and setting up the packages, but we will probably discuss this in class. Please [contact me](https://info.library.okstate.edu/clarke-iakovakis) if you have questions or problems with any of this.
 
 # Download R & R Studio
 
@@ -36,7 +36,6 @@ library(rorcid)
 ```
 
 It will print some lines of code and make take a few seconds. If successful, it will tell you the packaged was successfully unpacked. Now run the next line, `library(rorcid)`. As long as it doesn't say "there is no package called 'rorcid', you should be good.
-
 
 Do the same thing with the remaining packages:
 
