@@ -426,36 +426,32 @@ library(janitor)
 
 install.packages(&quot;roadoi&quot;)
 library(roadoi)</code></pre>
+<p>Now in R Studio, click <strong>Session &gt; Restart R.</strong></p>
 </div>
 <div id="set-up-rorcid" class="section level1">
 <h1>Set up <code>rorcid</code></h1>
 <p>Next, you need to authenticate with an ORCID API Key. According to the <a href="https://members.orcid.org/api/tutorial/read-orcid-records">ORCID API tutorial</a>, anyone can receive a key to access the public API.</p>
-<p>Run the line <code>orcid_auth()</code> from the <strong>setup_code</strong> script or copy/paste from below. You should see a message stating: <code>no ORCID token found; attempting OAuth authentication</code> and a window will open in your default internet browser. Log-in to your orcid account. You will be asked to give <code>rorcid</code> authorization to access your ORCID Record for the purposes of getting your ORCID iD. Click “Authorize.”</p>
-<p>If successful, the browser window will state: “Authentication complete. Please close this page and return to R.” Return to R Studio and you should see in your R console the word <strong>Bearer</strong>, followed by a long string of letters and numbers. These letters and numbers are your API key. At this point, this should be cached locally in your working directory.</p>
-<p>Highlight and copy the API key (the letters and numbers only–exclude the word “Bearer” and the space). Paste it into the quotation marks on the <strong>setup_code</strong> script in the line <code>ORCID_TOKEN="copy and paste your token here"</code>. Copy this line to the clipboard.</p>
-<p>Click on the line that says <code>usethis::edit_r_environ()</code> and click the Run button. A new window will open in R Studio. Paste the line into that window. Leave the tab open.</p>
-<p>Navigate back to the <strong>setup_code</strong> and run the next <code>orcid_auth()</code> line. It should print the token to your R console.</p>
-<pre class="r"><code>orcid_auth()
-
-ORCID_TOKEN=&quot;copy and paste your token here&quot;
-
-usethis::edit_r_environ()
-
-library(rorcid)
-
+<p>Make sure your R script is still open. If it’s not, click <strong>File &gt; New File &gt; R Script.</strong></p>
+<p>Copy the below two lines of code and paste them in your new R Script. Execute them by clicking the Run button in the top right hand corner.</p>
+<pre class="r"><code>library(rorcid)
 orcid_auth()</code></pre>
+<p>You should see a message stating: <code>no ORCID token found; attempting OAuth authentication</code> and a window will open in your default internet browser. Log-in to your orcid account. You will be asked to give <code>rorcid</code> authorization to access your ORCID Record for the purposes of getting your ORCID iD. Click “Authorize.”</p>
+<p>If successful, the browser window will state: “Authentication complete. Please close this page and return to R.” Return to R Studio and you should see in your R console the word <strong>Bearer</strong>, followed by a long string of letters and numbers. These letters and numbers are your API key. At this point, this should be cached locally in your working directory.</p>
+<p>Highlight and copy the API key (the letters and numbers only–exclude the word “Bearer” and the space). Paste it into the quotation marks for the code below. Be sure to keep the quotation marks there. Don’t run this line of code. Instead, just copy it to the clipboard.</p>
+<pre class="r"><code>ORCID_TOKEN=&quot;copy and paste your token here&quot;</code></pre>
+<p>Now paste the below text to your R Script and run it:</p>
+<pre class="r"><code>library(usethis)
+usethis::edit_r_environ()</code></pre>
+<p>A new window will open in R Studio. Type <code>ORCID_TOKEN="my-token"</code>, replacing <code>my-token</code> with the API key. <strong>Then press enter to create a new line, and leave it blank.</strong> It will look like something like this (below is a fake token):</p>
+<pre class="r"><code>ORCID_TOKEN=&quot;4bed1e13-7792-4129-9f07-aaf7b88ba88f&quot;</code></pre>
+<p>Press <kbd>Ctrl</kbd> + <kbd>S</kbd> (Mac: <kbd>Cmd</kbd> + <kbd>S</kbd> to save the API key to your R environment and close the tab In R Studio, click Session &gt; Restart R. Your token should now be saved to your R environment. You can confirm this by calling <code>orcid_auth()</code>, and it will print the token.</p>
 </div>
 <div id="set-up-rcrossref" class="section level1">
 <h1>Set up <code>rcrossref</code></h1>
-<p>In the <strong>setup_code</strong> script, replace your email in <code>crossref_email=name@example.com</code>. Copy this line to the clipboard.</p>
-<p>Go back to the window that opened when you ran <code>edit_r_environ()</code> and paste in the <code>crossref_email</code>.</p>
-<p><strong>Then press enter to create a new line below <code>crossref_email=name@example.com</code>, and leave it blank.</strong></p>
-<p>Your R environment should look like this</p>
-<p><img src="setup_instructions_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
-<p>Click <strong>File &gt; Save</strong>. Then in the R Studio navigation menu, click Session &gt; Restart R.</p>
-<pre class="r"><code>crossref_email=name@example.com
-
+<p>As described in the documentation, the Crossref team encourages requests with appropriate contact information, and will forward you to a dedicated API cluster for improved performance when you share your email with them. Learn more <a href="https://github.com/CrossRef/rest-api-doc#good-manners--more-reliable-service">here</a>. To do so, first open your R environment using the <code>edit_r_environ()</code> function from the <code>usethis</code> package.</p>
+<pre class="r"><code>library(usethis)
 usethis::edit_r_environ()</code></pre>
+<p>A new window will open in R Studio. Type <code>crossref_email=name@example.com</code>, replacing the example with your own email address. Then press enter to create a new line, and leave it blank. Press <kbd>Ctrl</kbd> + <kbd>S</kbd> (Mac: <kbd>Cmd</kbd> + <kbd>S</kbd> to save the API key to your R environment and close the tab Your email address will now be shared with Crossref.</p>
 </div>
 <div id="set-up-roadoi" class="section level1">
 <h1>Set up <code>roadoi</code></h1>

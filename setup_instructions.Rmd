@@ -63,55 +63,59 @@ install.packages("roadoi")
 library(roadoi)
 ```
 
+Now in R Studio, click **Session > Restart R.**
+
 # Set up `rorcid`
 
 Next, you need to authenticate with an ORCID API Key. According to the [ORCID API tutorial](https://members.orcid.org/api/tutorial/read-orcid-records), anyone can receive a key to access the public API. 
 
-Run the line `orcid_auth()` from the **setup_code** script or copy/paste from below. You should see a message stating: `no ORCID token found; attempting OAuth authentication` and a window will open in your default internet browser. Log-in to your orcid account. You will be asked to give `rorcid` authorization to access your ORCID Record for the purposes of getting your ORCID iD. Click "Authorize."
+Make sure your R script is still open. If it's not, click **File > New File > R Script.**
+
+Copy the below two lines of code and paste them in your new R Script. Execute them by clicking the Run button in the top right hand corner.
+
+```{r install2x, eval=FALSE,cache=TRUE}
+library(rorcid)
+orcid_auth()
+```
+
+You should see a message stating: `no ORCID token found; attempting OAuth authentication` and a window will open in your default internet browser. Log-in to your orcid account. You will be asked to give `rorcid` authorization to access your ORCID Record for the purposes of getting your ORCID iD. Click "Authorize."
 
 If successful, the browser window will state: "Authentication complete. Please close this page and return to R." Return to R Studio and you should see in your R console the word **Bearer**, followed by a long string of letters and numbers. These letters and numbers are your API key. At this point, this should be cached locally in your working directory. 
 
-Highlight and copy the API key (the letters and numbers only--exclude the word "Bearer" and the space). Paste it into the quotation marks on the **setup_code** script in the line `ORCID_TOKEN="copy and paste your token here"`. Copy this line to the clipboard.
+Highlight and copy the API key (the letters and numbers only--exclude the word "Bearer" and the space). Paste it into the quotation marks for the code below. Be sure to keep the quotation marks there. Don't run this line of code. Instead, just copy it to the clipboard.
 
-Click on the line that says `usethis::edit_r_environ()` and click the Run button. A new window will open in R Studio. Paste the line into that window. Leave the tab open. 
-
-Navigate back to the **setup_code** and run the next `orcid_auth()` line. It should print the token to your R console.
-
-```{r orcidauth, eval=FALSE,cache=TRUE}
-orcid_auth()
-
+```{r install2x1, eval=FALSE,cache=TRUE}
 ORCID_TOKEN="copy and paste your token here"
-
-usethis::edit_r_environ()
-
-library(rorcid)
-
-orcid_auth()
 ```
+
+Now paste the below text to your R Script and run it:
+
+```{r install2x2, eval=FALSE,cache=TRUE}
+library(usethis)
+usethis::edit_r_environ()
+```
+
+A new window will open in R Studio. Type `ORCID_TOKEN="my-token"`, replacing `my-token` with the API key. **Then press enter to create a new line, and leave it blank.** It will look like something like this (below is a fake token):
+
+```{r addkey, eval=FALSE}
+ORCID_TOKEN="4bed1e13-7792-4129-9f07-aaf7b88ba88f"
+```
+
+Press <kbd>Ctrl</kbd> + <kbd>S</kbd> (Mac: <kbd>Cmd</kbd> + <kbd>S</kbd> to save the API key to your R environment and close the tab In R Studio, click Session > Restart R. Your token should now be saved to your R environment. You can confirm this by calling `orcid_auth()`, and it will print the token.
+
+
 
 # Set up `rcrossref`
 
-In the **setup_code** script, replace your email in `crossref_email=name@example.com`. Copy this line to the clipboard.
+As described in the documentation, the Crossref team encourages requests with appropriate contact information, and will forward you to a dedicated API cluster for improved performance when you share your email with them. Learn more [here](https://github.com/CrossRef/rest-api-doc#good-manners--more-reliable-service). To do so, first open your R environment using the `edit_r_environ()` function from the `usethis` package.
 
-Go back to the window that opened when you ran `edit_r_environ()` and paste in the `crossref_email`.
-
-**Then press enter to create a new line below `crossref_email=name@example.com`, and leave it blank.** 
-
-Your R environment should look like this
-
-```{r,fig.height=1,echo=FALSE}
-renviron <- readPNG("./images/r_environ.png")
-grid::grid.raster(renviron)
-```
-
-Click **File > Save**. Then in the R Studio navigation menu, click Session > Restart R.
-
-```{r crossrefauth, eval=FALSE,cache=TRUE}
-
-crossref_email=name@example.com
-
+```{r editenviron, eval=FALSE}
+library(usethis)
 usethis::edit_r_environ()
 ```
+
+A new window will open in R Studio. Type `crossref_email=name@example.com`, replacing the example with your own email address. Then press enter to create a new line, and leave it blank. Press <kbd>Ctrl</kbd> + <kbd>S</kbd> (Mac: <kbd>Cmd</kbd> + <kbd>S</kbd> to save the API key to your R environment and close the tab Your email address will now be shared with Crossref. 
+
 
 # Set up `roadoi`
 
