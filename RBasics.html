@@ -12,7 +12,7 @@
 
 
 
-<title>FSCI AM4: Working with Scholarly Literature in R: Pulling, Wrangling, Cleaning, and Analyzing Structured Bibliographic Metadata</title>
+<title>R Basics</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -365,7 +365,7 @@ div.tocify {
       <a href="setup_instructions.html">Setting Up</a>
     </li>
     <li>
-      <a href="RBasics.html">Introduction to R</a>
+      <a href="RBasics.html">R Basics</a>
     </li>
     <li>
       <a href="rorcid.html">rorcid</a>
@@ -387,8 +387,7 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">FSCI AM4: Working with Scholarly Literature in R: Pulling, Wrangling, Cleaning, and Analyzing Structured Bibliographic Metadata</h1>
-<h3 class="subtitle">Day 1: Getting to Know R</h3>
+<h1 class="title toc-ignore">R Basics</h1>
 
 </div>
 
@@ -396,7 +395,9 @@ div.tocify {
 
 <div id="introduction" class="section level1">
 <h1>Introduction</h1>
-<p>This guide accompanies Part 1 the <em>Introduction to R for Libraries</em> webinar, hosted by ALCTS, Association for Library Collections &amp; Technical Services. It covers Section B: Nuts &amp; Bolts of R. See Section A: Introduction to R &amp; R Studio, included with the course materials, for installation and preparatory remarks. It is distributed under a <a href="Creative%20Commons%20Attribution%204.0%20International%20(CC%20BY%204.0)%20License">https://creativecommons.org/licenses/by/4.0/</a>.</p>
+<p>This guide accompanies the first day of instruction for our course at the 2019 FORCE11 Scholarly Communications Institute: <a href="https://www.force11.org/fsci/2019/course-abstracts#AM4">“AM4 - Working with Scholarly Literature in R: Pulling, Wrangling, Cleaning, and Analyzing Structured Bibliographic Metadata.”</a> It covers basic nuts and bolts of using R.</p>
+<p>You can copy/paste the code we’ll be using for this session <a href="RBasics_files\code">from this page</a>, or download it from the <a href="">Workshop Materials folder LINK WILL BE ADDED SOON</a></p>
+<p>It is distributed under a <a href="Creative%20Commons%20Attribution%204.0%20International%20(CC%20BY%204.0)%20License">https://creativecommons.org/licenses/by/4.0/</a>.</p>
 <p><img src="RBasics_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
 </div>
 <div id="writing-evaluating-expressions" class="section level1">
@@ -563,7 +564,7 @@ length(my_characters)
 <ul>
 <li>Logical (binary <code>TRUE/FALSE</code>)</li>
 </ul>
-<pre class="r"><code># create a vector of book titles. Even though 1984 is composed of numbers, putting it in quotation marks makes it a character string
+<pre class="r"><code># create a logical vector
 my_logical &lt;- c(TRUE, FALSE, FALSE, TRUE)
 
 # you can also use the is.logical (or is.character, is.numeric) to verify an object&#39;s class
@@ -763,6 +764,7 @@ ten_character_state.names
 title &lt;- c(&quot;Macbeth&quot;,&quot;Dracula&quot;,&quot;1984&quot;)
 author &lt;- c(&quot;Shakespeare&quot;,&quot;Stoker&quot;,&quot;Orwell&quot;)
 checkouts &lt;- c(25, 15, 18)
+available &lt;- c(TRUE, FALSE, FALSE)
 
 # create a data frame using the data.frame() function. Specify stringsAsFactors as FALSE
 ebooks &lt;- data.frame(title, author, checkouts, stringsAsFactors = F)</code></pre>

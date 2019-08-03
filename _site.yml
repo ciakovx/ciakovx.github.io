@@ -4,12 +4,13 @@ navbar:
   title: "Clarke Iakovakis"
   left:
     - text: "FSCI 2019 AM4 Session"
+      href: fsci2019.html
       menu:
         - text: "Course syllabus"
           href: fsci_syllabus.html
         - text: "Setting Up"
           href: setup_instructions.html
-        - text: "Introduction to R"
+        - text: "R Basics"
           href: RBasics.html
         - text: "rorcid"
           href: rorcid.html

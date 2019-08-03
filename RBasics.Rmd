@@ -1,6 +1,5 @@
 ---
-title: "FSCI AM4: Working with Scholarly Literature in R: Pulling, Wrangling, Cleaning, and Analyzing Structured Bibliographic Metadata"
-subtitle: "Day 1: Getting to Know R"
+title: "R Basics"
 output: 
   html_document:
     df_print: paged
@@ -28,7 +27,11 @@ library(png)
 
 # Introduction
 
-This guide accompanies Part 1 the *Introduction to R for Libraries* webinar, hosted by ALCTS, Association for Library Collections & Technical Services. It  covers Section B: Nuts & Bolts of R. See Section A: Introduction to R & R Studio, included with the course materials, for installation and preparatory remarks. It is distributed under a [https://creativecommons.org/licenses/by/4.0/](Creative Commons Attribution 4.0 International (CC BY 4.0) License). 
+This guide accompanies the first day of instruction for our course at the 2019 FORCE11 Scholarly Communications Institute: ["AM4 - Working with Scholarly Literature in R: Pulling, Wrangling, Cleaning, and Analyzing Structured Bibliographic Metadata."](https://www.force11.org/fsci/2019/course-abstracts#AM4) It covers basic nuts and bolts of using R.
+
+You can copy/paste the code we'll be using for this session [from this page](RBasics_files\code), or download it from the [Workshop Materials folder LINK WILL BE ADDED SOON]()
+
+It is distributed under a [https://creativecommons.org/licenses/by/4.0/](Creative Commons Attribution 4.0 International (CC BY 4.0) License). 
 
 ```{r,fig.height=1,echo=FALSE}
 cc <- readPNG(file.path("./images/cc.png"))
@@ -238,7 +241,7 @@ length(my_characters)
 
 * Logical (binary `TRUE/FALSE`)
 ```{r function6, comment=NA, eval = F}
-# create a vector of book titles. Even though 1984 is composed of numbers, putting it in quotation marks makes it a character string
+# create a logical vector
 my_logical <- c(TRUE, FALSE, FALSE, TRUE)
 
 # you can also use the is.logical (or is.character, is.numeric) to verify an object's class
@@ -459,6 +462,7 @@ You will likely be importing your dataset, but it is easy to create a data frame
 title <- c("Macbeth","Dracula","1984")
 author <- c("Shakespeare","Stoker","Orwell")
 checkouts <- c(25, 15, 18)
+available <- c(TRUE, FALSE, FALSE)
 
 # create a data frame using the data.frame() function. Specify stringsAsFactors as FALSE
 ebooks <- data.frame(title, author, checkouts, stringsAsFactors = F)

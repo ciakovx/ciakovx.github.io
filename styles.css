@@ -26,3 +26,13 @@ img {
 img-circle {
     border-radius: 50%;
 }
+
+body, td {
+   font-size: 16px;
+}
+.r{
+  font-size: 14px;
+}
+pre {
+  font-size: 14px
+}
