@@ -10,6 +10,8 @@ navbar:
           href: fsci_syllabus.html
         - text: "Setting Up"
           href: setup_instructions.html
+        - text: "Introduction to R"
+          href: IntroductiontoR.html
         - text: "R Basics"
           href: RBasics.html
         - text: "rorcid"
