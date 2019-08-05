@@ -16,6 +16,8 @@ navbar:
           href: RBasics.html
         - text: "Data Exploration"
           href: DataExploration.html
+        - text: "Exploring Data in Lists"
+          href: jennybc_lists_lesson.html
         - text: "rorcid"
           href: rorcid.html
         - text: "rcrossref"

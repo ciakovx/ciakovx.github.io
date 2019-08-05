@@ -21,6 +21,13 @@ library(kableExtra)
 knitr::opts_chunk$set(echo = TRUE, cache = TRUE, eval=FALSE)
 ```
 
+This is distributed under a [https://creativecommons.org/licenses/by/4.0/](Creative Commons Attribution 4.0 International (CC BY 4.0) License).  
+
+```{r,fig.height=1,echo=FALSE}
+cc <- readPNG(file.path("./images/cc.png"))
+grid::grid.raster(cc)
+```
+
 # Getting data into R
 
 ## Ways to get data into R

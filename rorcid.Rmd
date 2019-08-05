@@ -32,6 +32,15 @@ You can find more information about the API [on the ORCID site](http://members.o
 Credit to Paul Oldham at https://www.pauloldham.net/introduction-to-orcid-with-rorcid/ for inspiring some of the structure and ideas throughout this document. I highly recommend reading it.
 
 
+# Licensing
+
+This walkthrough is distributed under a [https://creativecommons.org/licenses/by/4.0/](Creative Commons Attribution 4.0 International (CC BY 4.0) License).  
+
+```{r,fig.height=1,echo=FALSE}
+cc <- readPNG(file.path("./images/cc.png"))
+grid::grid.raster(cc)
+```
+
 # Getting the latest version from github
 
 Because the newest version of `rorcid` came out in June, new features and bug fixes have since been added. We may need to install the latest version directly from GitHub by using the following code. I'll let you know in class if this is necessary.

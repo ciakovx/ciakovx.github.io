@@ -10,5 +10,6 @@ Hello everyone. I'm looking forward to our AM4 sessions at [FSCI 2019](https://w
 3. [Introduction to R](IntroductionToR.html)
 4. [R Basics](RBasics.html)
 4. [Data Exploration](DataExploration.html)
+5. [Exploring Data in Lists](jennybc_lists_lesson.html)
 5. [rorcid](doc/rorcid.html)
 6. [rcrossref](rcrossref.html)

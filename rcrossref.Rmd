@@ -55,6 +55,15 @@ There are other IDEs such as [Microsoft R Open](https://mran.microsoft.com/open)
     -  [data transformation cheat sheet](https://github.com/rstudio/cheatsheets/blob/master/data-transformation.pdf)
     - [data import cheat sheet](https://github.com/rstudio/cheatsheets/blob/master/data-import.pdf)
 
+# Licensing
+
+This walkthrough is distributed under a [https://creativecommons.org/licenses/by/4.0/](Creative Commons Attribution 4.0 International (CC BY 4.0) License).  
+
+```{r,fig.height=1,echo=FALSE}
+cc <- readPNG(file.path("./images/cc.png"))
+grid::grid.raster(cc)
+```
+
 ## Setting up `rcrossref`
 
 First install and load `rcrossref` in R. Also install `usethis` in order to send your email to Crossref, as well as `tidyverse`, which is a package that contains many packages we'll use throughout.

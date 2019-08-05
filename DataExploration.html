@@ -374,6 +374,9 @@ div.tocify {
       <a href="DataExploration.html">Data Exploration</a>
     </li>
     <li>
+      <a href="jennybc_lists_lesson.html">Exploring Data in Lists</a>
+    </li>
+    <li>
       <a href="rorcid.html">rorcid</a>
     </li>
     <li>
@@ -398,6 +401,7 @@ div.tocify {
 </div>
 
 
+<p>This is distributed under a <a href="Creative%20Commons%20Attribution%204.0%20International%20(CC%20BY%204.0)%20License">https://creativecommons.org/licenses/by/4.0/</a>.</p>
 <div id="getting-data-into-r" class="section level1">
 <h1>Getting data into R</h1>
 <div id="ways-to-get-data-into-r" class="section level2">
@@ -430,7 +434,7 @@ library(readr)</code></pre>
 books &lt;- readr::read_csv(books_url)
 books</code></pre>
 <p>You will notice a warning message telling you that because you did not specify the data type for each column, <code>read_csv()</code> parsed it automatically. For example, <code>LOCATION</code> was parsed as a <code>col_character()</code> field. You should now have an R object called <code>books</code> in the Environment pane: 10000 observations of 12 variables. We will be using this data file in the next module.</p>
-<p><img src="DataExploration_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p><img src="DataExploration_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 </div>
 <div id="loadlocal" class="section level2">
 <h2>Loading data from a local file</h2>
@@ -441,7 +445,7 @@ books</code></pre>
 <li>On Windows computers, directories in file paths are separated with a backslash <code>\</code>. However, in R, you must use a forward slash <code>/</code>. I usually copy and paste from the Windows Explorer (or Mac Finder) window directly into R and use the find/replace (Ctrl/Cmd + F).</li>
 <li>The directory must be in quotation marks.</li>
 </ul>
-<p><img src="DataExploration_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p><img src="DataExploration_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <pre class="r"><code># set working directory using a forward slash /
 setwd(&quot;C:/Users/iakovakis/Desktop/fsci_AM4&quot;)
 
@@ -462,7 +466,7 @@ books &lt;- readr::read_csv(&quot;./data/raw/books.csv&quot;)</code></pre>
 </div>
 <div id="import-dataset-tool-in-r-studio" class="section level2">
 <h2>Import Dataset tool in R Studio</h2>
-<p>R Studio has a data importing wizard in the Environment Pane (upper right): <strong>Import Dataset:</strong> <img src="DataExploration_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>R Studio has a data importing wizard in the Environment Pane (upper right): <strong>Import Dataset:</strong> <img src="DataExploration_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>I never use this. I type the <code>read_csv()</code> function directly in my script files, as it gives me more control over the arguments and I am not limited to the choices R Studio gives me.</p>
 </div>
 </div>
@@ -636,7 +640,7 @@ if(8 &gt; 16){
 </div>
 <div id="data-cleaning-transformation-with-dplyr" class="section level1">
 <h1>Data cleaning &amp; transformation with dplyr</h1>
-<p><img src="DataExploration_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="DataExploration_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>We are now entering the data cleaning and transforming phase. While it is possible to do much of the following using Base R functions (in other words, without loading an external package) <code>dplyr</code> makes it much easier. Like many of the most useful R packages, <code>dplyr</code> was developed by <a href="Hadley%20Wickham">http://hadley.nz/</a>, a data scientist and professor at Rice University.</p>
 <div id="renaming-variables" class="section level2">
 <h2>Renaming variables</h2>
