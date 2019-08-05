@@ -13,3 +13,7 @@ Hello everyone. I'm looking forward to our AM4 sessions at [FSCI 2019](https://w
 5. [Exploring Data in Lists](jennybc_lists_lesson.html)
 5. [rorcid](doc/rorcid.html)
 6. [rcrossref](rcrossref.html)
+
+The pre-class survey is available at https://info.library.okstate.edu/fsciAM4-preclass-survey. 
+
+The course etherpad is at https://etherpad.net/p/fsci_am4
