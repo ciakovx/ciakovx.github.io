@@ -1,8 +1,6 @@
 ---
 ---
 
-<img src="images/Iakovakis__Clarke.jpg" style="width:25%; border-radius: 15px; margin-right: 20px" align="left">
-
 I am currently the Scholarly Services Librarian at Oklahoma State University. I graduated from the School of Information at the University of Texas in 2011 with an MS in Information Studies, and from Texas State University in 2006 with a BA in History. I previously worked at the University of Houston-Clear Lake and the University of Texas at Arlington. 
 
 I used the following resources to help me build this page:
