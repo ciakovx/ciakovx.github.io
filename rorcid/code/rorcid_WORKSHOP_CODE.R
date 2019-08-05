@@ -1,3 +1,8 @@
+# Let's start by 
+
+
+
+
 library(tidyverse)
 library(rcrossref)
 library(usethis)
@@ -5,9 +10,26 @@ library(roadoi)
 library(rorcid)
 
 
+# Installing the latest version -------------------------------------------
+
+# Because the newest version of `rorcid` came out in June, new features and bug fixes have since been added. Let's install the latest version directly from GitHub by using the following code:
+
+install.packages("devtools")
+library(devtools)
+devtools::install_github("ropensci/rorcid")
+
+
 # Setting up rorcid -------------------------------------------------------
 
+# Create an ORCID account at https://orcid.org/signin
+
+# Authenticate with an ORCID API key
+
 orcid_auth()
+
+# You should see a message stating: `no ORCID token found; attempting OAuth authentication` and a window will open in your default internet browser. Log-in to your orcid account. You will be asked to give `rorcid` authorization to access your ORCID Record for the purposes of getting your ORCID iD. Click "Authorize."
+
+# Return to R Studio and you should see in your R console the word **Bearer**, followed by a long string of letters and numbers. These letters and numbers are your API key.
 
 ORCID_TOKEN="copy and paste your token here"
 

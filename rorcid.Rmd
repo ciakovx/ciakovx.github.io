@@ -34,7 +34,7 @@ Credit to Paul Oldham at https://www.pauloldham.net/introduction-to-orcid-with-r
 
 # Getting the latest version from github
 
-Because the newest version of `rorcid` came out in June, new features and bug fixes have since been added. Let's install the latest version directly from GitHub by using the following code:
+Because the newest version of `rorcid` came out in June, new features and bug fixes have since been added. We may need to install the latest version directly from GitHub by using the following code. I'll let you know in class if this is necessary.
 
 ```{r version, eval=FALSE}
 install.packages("devtools")
@@ -161,11 +161,11 @@ If the person has chosen to keep their email address private, the function will 
 
 ## Keywords
 
-If the individual has added keywords to their ORCID profile, we can search those. Dr. Carberry's profile includes the keyword "psychoceramics" (the study of cracked pots):
+If the individual has added keywords to their ORCID profile, we can search those. Dr. Carberry's profile includes the keyword "psychoceramics" (the study of cracked pots) (*note: this function is currently under development - :
 
 ```{r simple2.1, eval=TRUE}
-carberry <- rorcid::orcid_search(family_name = 'carberry',
-                                 keywords = 'psychoceramics')
+# carberry <- rorcid::orcid_search(family_name = 'carberry',
+#                                 keywords = 'psychoceramics')
 carberry
 ```
 
@@ -273,7 +273,7 @@ my_osu_orcids <- purrr::map(
 
 We can then use the `bind_rows()` function from `dplyr` to pull the data together into a single dataframe, and the `clean_names()` function from `janitor`, described below, to make the column names easier to handle. We also introduce here the Pipe Operator, which is also described below.
 
-```{r simple86, eval=FALSE}
+```{r simple86, eval=TRUE}
 my_osu_orcids_data <- my_osu_orcids %>%
   dplyr::bind_rows() %>%
   janitor::clean_names()
@@ -383,7 +383,7 @@ carberry_keywords
 
 We can see which columns are lists by calling `is_list()` in the `map_lgl()` function (this will return a TRUE/FALSE for each column that is a list), and subsetting the `names()` of `carberry_data` by those values:
 
-```{r unnest, eval=TRUE,cache=TRUE}
+```{r unnest2x, eval=TRUE,cache=TRUE}
 carberry_list_columns <- map_lgl(carberry_data, is_list)
 names(carberry_data)[carberry_list_columns]
 ```
@@ -499,6 +499,8 @@ When we want data on multiple people and have only their names, we can build a q
 Now we can build a query that will work with the `given-names:` and `family-name:` arguments to `query` in `orcid` in order to get the ORICID iDs:
 
 ```{r multiple4, eval=TRUE,cache=TRUE}
+profs <- tibble("FirstName" = c("Josiah", "Clarke"),
+                     "LastName" = c("Carberry", "Iakovakis"))
 orcid_query <- paste0("given-names:",
                       profs$FirstName,
                       " AND family-name:",
@@ -560,9 +562,9 @@ Create a tibble using the `tibble()` function from the `dplyr` package. Then, us
 
 ```{r multiple3, eval=TRUE,cache=TRUE}
 my_names <- dplyr::tibble("name" = c("Josiah Carberry", "Clarke Iakovakis"))
-profs <- my_names %>%
+my_clean_names <- my_names %>%
   tidyr::extract(name, c("FirstName", "LastName"), "([^ ]+) (.*)")
-profs
+my_clean_names
 ```
 
 ## Unnesting
@@ -598,7 +600,7 @@ clarke_employment <- rorcid::orcid_employments(orcid = "0000-0002-9260-8456")
 
 Again it comes in a series of nested lists, but we'll just `pluck()` what we need and use `flatten_dfr()` to flatten the lists into a data frame. We will also use the `anydate()` function to go ahead and convert the dates while we're at it. 
 
-```{r employment, eval=TRUE, cache=TRUE}
+```{r employment2x, eval=TRUE, cache=TRUE}
 clarke_employment_data <- clarke_employment %>%
   purrr::map(., purrr::pluck, "affiliation-group", "summaries") %>% 
   purrr::flatten_dfr() %>%
@@ -653,7 +655,7 @@ my_osu_employment_data_OSU <- my_osu_employment_data %>%
 
 Out of this set of 10 iDs, only 4 have OSU listed in their employment. The others may have achieved their degree from OSU, or done some service with OSU. Now, out of those 4, let's see how many are listed as current employees, as indicated with an `NA` in their `end_date_year_value`.
 
-```{r employment5, eval=TRUE, cache=TRUE}
+```{r employment5x, eval=TRUE, cache=TRUE}
 my_osu_employment_data_OSU_current <- my_osu_employment_data_OSU %>%
   filter(is.na(end_date_year_value))
 ```
@@ -675,14 +677,14 @@ my_osu_employment_data <- my_osu_employment %>%
 
 
 
-```{r simple84, eval=TRUE}
+```{r simple84x, eval=TRUE}
 my_pages <- seq(from = 0, to = 1402, by = 200)
 my_pages
 ```
 
 Finally, we will write a small function using `map` from the `purrr` package. In essence, this takes each value from our `my_pages` vector, and passes it into the `page` argument of the `orcid()` query. In other words, the first loop will get results 0-200, the next will get 200-400, and so on.
 
-```{r simple85, eval=FALSE}
+```{r simple85x, eval=FALSE}
 my_osu_orcids <- purrr::map(
   my_pages,
   function(page) {

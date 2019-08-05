@@ -14,6 +14,8 @@ navbar:
           href: IntroductiontoR.html
         - text: "R Basics"
           href: RBasics.html
+        - text: "Data Exploration"
+          href: DataExploration.html
         - text: "rorcid"
           href: rorcid.html
         - text: "rcrossref"

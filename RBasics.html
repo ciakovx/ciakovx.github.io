@@ -365,7 +365,13 @@ div.tocify {
       <a href="setup_instructions.html">Setting Up</a>
     </li>
     <li>
+      <a href="IntroductiontoR.html">Introduction to R</a>
+    </li>
+    <li>
       <a href="RBasics.html">R Basics</a>
+    </li>
+    <li>
+      <a href="DataExploration.html">Data Exploration</a>
     </li>
     <li>
       <a href="rorcid.html">rorcid</a>
@@ -538,16 +544,16 @@ rm(list =c(&quot;my_long_vector&quot;, &quot;my_vector&quot;))
 
 # Remove everything
 rm(list = ls())</code></pre>
-<div id="data-types-class" class="section level2">
-<h2>Data types (class)</h2>
-<p>A vector is a sequence of elements of the same <em>class</em>, or <em>type</em>. Vectors can only contain “homogenous” data–in other words, all data must be of the same type. The class of a vector determines what kind of analysis you can do on it. For example, you can perform mathematical operations on <code>numeric</code> objects, but not on <code>character</code> objects. Below I will briefly review some of the data types in R and their class. You can call the <code>class()</code> function on an R object to find out it’s class. For example, running <code>class(sum)</code> will tell you that <code>sum()</code> is a function.</p>
+<div id="data-types-type" class="section level2">
+<h2>Data types (type)</h2>
+<p>A vector is a sequence of elements of the same <em>type</em>. Vectors can only contain “homogenous” data–in other words, all data must be of the same type. The type of a vector determines what kind of analysis you can do on it. For example, you can perform mathematical operations on <code>numeric</code> objects, but not on <code>character</code> objects. Below I will briefly review some of the data types in R and their type. You can call the <code>)</code> function on an R object to find out it’s type. For example, running <code>sum)</code> will tell you that <code>sum()</code> is a function.</p>
 <ul>
 <li>Numeric or integer</li>
 </ul>
 <pre class="r"><code># create a vector of consecutive numbers 1-10 using the colon
 my_integers &lt;- c(1:10)
 
-class(my_integers)
+typeof(my_integers)
 ##  [1] &quot;integer&quot;</code></pre>
 <ul>
 <li>Character</li>
@@ -555,7 +561,7 @@ class(my_integers)
 <pre class="r"><code># create a vector of book titles. Even though 1984 is composed of numbers, putting it in quotation marks makes it a character string
 my_characters &lt;- c(&quot;Macbeth&quot;, &quot;Dracula&quot;, &quot;1984&quot;)
 
-class(my_characters)
+typeof(my_characters)
 ##  [1] &quot;character&quot;
 
 # how many elements in this vector?
@@ -613,7 +619,7 @@ my_ordinal_factor
 <pre class="r"><code># create a vector of consecutive numbers 1-5
 my_mixed_vector &lt;- c(1:10, &quot;a&quot;)
 
-class(my_mixed_vector)
+my_mixed_vector
 ##  [1] &quot;character&quot;
 
 # coerce the vector to an integer. R replaces the &quot;a&quot; with NA because `a` is not an integer
@@ -655,7 +661,7 @@ print(my_completes)
 <p>Helpful functions to provide information about vectors:</p>
 <ul>
 <li><code>length()</code> : number of elements in the vector</li>
-<li><code>class()</code> : returns the data type</li>
+<li><code>)</code> : returns the data type</li>
 <li><code>str()</code> : compactly displays infomration about the vector</li>
 <li><code>is.logical()</code>, <code>is.numeric()</code>, <code>is.character()</code>, etc. : verifies the data type (TRUE or FALSE)</li>
 <li><code>as.logical()</code>, <code>as.numeric()</code>, <code>as.character()</code>, etc. : coerces the vector from one data type to another</li>
@@ -798,15 +804,15 @@ ncol(ebooks)
 names(ebooks)
 ## [1] &quot;title&quot;     &quot;author&quot;    &quot;checkouts&quot;
 
-class(ebooks)
+ebooks)
 ## [1] &quot;data.frame&quot;</code></pre>
 <p>You can use the <code>$</code> symbol to work with particular variables.</p>
 <pre class="r"><code>print(ebooks$title)
 
-class(ebooks$title)
+ebooks$title)
 ## [1] &quot;character&quot;
 
-class(ebooks$checkouts)
+ebooks$checkouts)
 ## [1] &quot;numeric&quot;
 
 # use summary() for more detail on a variable
@@ -817,14 +823,83 @@ summary(ebooks$checkouts)
 <p><strong>TRY IT YOURSELF</strong></p>
 <ol style="list-style-type: decimal">
 <li>Look at the help file for <code>state.name</code></li>
-<li>Manually construct three vectors: <code>stateName</code>, <code>division</code>, and <code>area</code>.
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":["stateName"],"name":[1],"type":["chr"],"align":["left"]},{"label":["division"],"name":[2],"type":["fctr"],"align":["left"]},{"label":["area"],"name":[3],"type":["int"],"align":["right"]}],"data":[{"1":"Alaska","2":"Pacific","3":"590000"},{"1":"Arizona","2":"Mountain","3":"120000"},{"1":"California","2":"Pacific","3":"160000"},{"1":"Colorado","2":"Mountain","3":"110000"},{"1":"Montana","2":"Mountain","3":"150000"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
-</div></li>
+<li>Manually construct three vectors: <code>stateName</code>, <code>division</code>, and <code>area</code>.</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+stateName
+</th>
+<th style="text-align:left;">
+division
+</th>
+<th style="text-align:right;">
+area
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Alaska
+</td>
+<td style="text-align:left;">
+Pacific
+</td>
+<td style="text-align:right;">
+590000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Arizona
+</td>
+<td style="text-align:left;">
+Mountain
+</td>
+<td style="text-align:right;">
+120000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+California
+</td>
+<td style="text-align:left;">
+Pacific
+</td>
+<td style="text-align:right;">
+160000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Colorado
+</td>
+<td style="text-align:left;">
+Mountain
+</td>
+<td style="text-align:right;">
+110000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Montana
+</td>
+<td style="text-align:left;">
+Mountain
+</td>
+<td style="text-align:right;">
+150000
+</td>
+</tr>
+</tbody>
+</table>
+<ol start="3" style="list-style-type: decimal">
 <li>Use <code>data.frame()</code> to create a data frame of these three vectors. Assign it to <code>myStates</code>. Remember to set <code>stringsAsFactors</code> to <code>FALSE</code></li>
-<li>What is the <code>class()</code> of each vector?</li>
+<li>What is the <code>)</code> of each vector?</li>
 <li>Using the <code>$</code> character, run <code>sum()</code> on the <code>area</code> variable. What is the sum area of these five states? What is the median?</li>
 </ol>
 <hr />

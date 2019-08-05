@@ -214,15 +214,15 @@ rm(list =c("my_long_vector", "my_vector"))
 rm(list = ls())
 ```
 
-## Data types (class)
-A vector is a sequence of elements of the same *class*, or *type*. Vectors can only contain "homogenous" data--in other words, all data must be of the same type. The class of a vector determines what kind of analysis you can do on it. For example, you can perform mathematical operations on `numeric` objects, but not on `character` objects. Below I will briefly review some of the data types in R and their class. You can call the `class()` function on an R object to find out it's class. For example, running `class(sum)` will tell you that `sum()` is a function.
+## Data types (type)
+A vector is a sequence of elements of the same *type*. Vectors can only contain "homogenous" data--in other words, all data must be of the same type. The type of a vector determines what kind of analysis you can do on it. For example, you can perform mathematical operations on `numeric` objects, but not on `character` objects. Below I will briefly review some of the data types in R and their type. You can call the `)` function on an R object to find out it's type. For example, running `sum)` will tell you that `sum()` is a function.
 
 * Numeric or integer
 ```{r function42, comment=NA, eval = F}
 # create a vector of consecutive numbers 1-10 using the colon
 my_integers <- c(1:10)
 
-class(my_integers)
+typeof(my_integers)
 ##  [1] "integer"
 ```
 
@@ -231,7 +231,7 @@ class(my_integers)
 # create a vector of book titles. Even though 1984 is composed of numbers, putting it in quotation marks makes it a character string
 my_characters <- c("Macbeth", "Dracula", "1984")
 
-class(my_characters)
+typeof(my_characters)
 ##  [1] "character"
 
 # how many elements in this vector?
@@ -297,7 +297,7 @@ If you mix different objects in one vector, R will coerce the vector to be a sin
 # create a vector of consecutive numbers 1-5
 my_mixed_vector <- c(1:10, "a")
 
-class(my_mixed_vector)
+my_mixed_vector
 ##  [1] "character"
 
 # coerce the vector to an integer. R replaces the "a" with NA because `a` is not an integer
@@ -343,7 +343,7 @@ print(my_completes)
 Helpful functions to provide information about vectors:
 
 * `length()` : number of elements in the vector
-* `class()` : returns the data type
+* `)` : returns the data type
 * `str()` : compactly displays infomration about the vector
 * `is.logical()`, `is.numeric()`, `is.character()`, etc. : verifies the data type (TRUE or FALSE)
 * `as.logical()`, `as.numeric()`, `as.character()`, etc. : coerces the vector from one data type to another
@@ -506,7 +506,7 @@ ncol(ebooks)
 names(ebooks)
 ## [1] "title"     "author"    "checkouts"
 
-class(ebooks)
+ebooks)
 ## [1] "data.frame"
 ```
 
@@ -514,10 +514,10 @@ You can use the `$` symbol to work with particular variables.
 ```{r dataframes4, comment=NA, eval = F}
 print(ebooks$title)
 
-class(ebooks$title)
+ebooks$title)
 ## [1] "character"
 
-class(ebooks$checkouts)
+ebooks$checkouts)
 ## [1] "numeric"
 
 # use summary() for more detail on a variable
@@ -540,7 +540,7 @@ states <- data.frame("stateName" = state.name[c(2,  3,  5,  6, 26)]
 states
 ```
 3. Use `data.frame()` to create a data frame of these three vectors. Assign it to `myStates`. Remember to set `stringsAsFactors` to `FALSE`
-4. What is the `class()` of each vector?
+4. What is the `)` of each vector?
 5. Using the `$` character, run `sum()` on the `area` variable. What is the sum area of these five states? What is the median?
 
 
