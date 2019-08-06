@@ -74,14 +74,14 @@ str(x)
 # c() will combine arguments to form a vector.
 
 z <- c(5, 10, 15)
-q <- c(2, 4, 6, 8, 10, 12)
+q <- c(2.5, 4, 6.2, 8, 10, 12)
 
 # Congratulations! You have created your first vectors in R. A vector is a sequence of elements of the same type. Vectors can only contain "homogenous" data--in other words, all data must be of the same type. The class of a vector determines what kind of analysis you can do on it.
 
 ### Use length() to find the length of z.
 
 
-### call str() on z. Is it the same type as y?
+### call str() on q. Is it the same type as z?
 
 
 ### Add y and z
