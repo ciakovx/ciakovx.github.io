@@ -31,6 +31,8 @@ You can find more information about the API [on the ORCID site](http://members.o
 
 Credit to Paul Oldham at https://www.pauloldham.net/introduction-to-orcid-with-rorcid/ for inspiring some of the structure and ideas throughout this document. I highly recommend reading it.
 
+Workshop code for this module is at https://raw.githubusercontent.com/ciakovx/ciakovx.github.io/master/rorcid_workshopcode.R
+
 
 # Licensing
 

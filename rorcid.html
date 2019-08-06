@@ -408,6 +408,7 @@ div.tocify {
 <p><code>rorcid</code> is a package developed by <a href="https://scottchamberlain.info/">Scott Chamberlain</a>, co-founder of <a href="https://ropensci.org/">rOpenSci</a>, to serve as an interface to the ORCID API.</p>
 <p>You can find more information about the API <a href="http://members.orcid.org/api/about-public-api">on the ORCID site</a>.</p>
 <p>Credit to Paul Oldham at <a href="https://www.pauloldham.net/introduction-to-orcid-with-rorcid/" class="uri">https://www.pauloldham.net/introduction-to-orcid-with-rorcid/</a> for inspiring some of the structure and ideas throughout this document. I highly recommend reading it.</p>
+<p>Workshop code for this module is at <a href="https://raw.githubusercontent.com/ciakovx/ciakovx.github.io/master/rorcid_workshopcode.R" class="uri">https://raw.githubusercontent.com/ciakovx/ciakovx.github.io/master/rorcid_workshopcode.R</a></p>
 </div>
 <div id="licensing" class="section level1">
 <h1>Licensing</h1>
@@ -1055,8 +1056,7 @@ Iakovakis
 <div id="keywords" class="section level2">
 <h2>Keywords</h2>
 <p>If the individual has added keywords to their ORCID profile, we can search those. Dr. Carberry’s profile includes the keyword “psychoceramics” (the study of cracked pots) (*note: this function is currently under development - :</p>
-<pre class="r"><code># carberry &lt;- rorcid::orcid_search(family_name = &#39;carberry&#39;, keywords =
-# &#39;psychoceramics&#39;)
+<pre class="r"><code>carberry &lt;- rorcid::orcid_search(family_name = &quot;carberry&quot;, keywords = &quot;psychoceramics&quot;)
 carberry</code></pre>
 <table>
 <thead>
@@ -1075,112 +1075,13 @@ orcid
 <tbody>
 <tr>
 <td style="text-align:left;">
-Thomas
+Josiah
 </td>
 <td style="text-align:left;">
 Carberry
 </td>
 <td style="text-align:left;">
-0000-0003-3138-875X
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Adrian
-</td>
-<td style="text-align:left;">
-Carberry
-</td>
-<td style="text-align:left;">
-0000-0003-0362-0689
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Angela
-</td>
-<td style="text-align:left;">
-Carberry
-</td>
-<td style="text-align:left;">
-0000-0002-4672-8932
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Luke
-</td>
-<td style="text-align:left;">
-Carberry
-</td>
-<td style="text-align:left;">
-0000-0001-9374-9202
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Susan
-</td>
-<td style="text-align:left;">
-Carberry
-</td>
-<td style="text-align:left;">
-0000-0001-7710-0796
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Andrea
-</td>
-<td style="text-align:left;">
-Carberry
-</td>
-<td style="text-align:left;">
-0000-0002-1867-7031
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Paul
-</td>
-<td style="text-align:left;">
-Carberry
-</td>
-<td style="text-align:left;">
-0000-0002-3409-0724
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Amanda
-</td>
-<td style="text-align:left;">
-Carberry
-</td>
-<td style="text-align:left;">
-0000-0001-5591-5599
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Adam
-</td>
-<td style="text-align:left;">
-Carberry
-</td>
-<td style="text-align:left;">
-0000-0003-0041-7060
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Damien
-</td>
-<td style="text-align:left;">
-Carberry
-</td>
-<td style="text-align:left;">
-0000-0002-7019-0300
+0000-0002-1825-0097
 </td>
 </tr>
 </tbody>
@@ -3520,7 +3421,7 @@ orcid.org
     &quot;found&quot;)
 my_osu_orcid_count</code></pre>
 <pre><code>## [1] 1411</code></pre>
-<p>There are 1,402 records. Next we will first create a numeric vector using <code>seq</code> that starts with 0 and ends with 1402, adding 200 to each value.</p>
+<p>There are 1,413 records. Next we will first create a numeric vector using <code>seq</code> that starts with 0 and ends with 1413, adding 200 to each value.</p>
 <pre class="r"><code>my_pages &lt;- seq(from = 0, to = my_osu_orcid_count, by = 200)
 my_pages</code></pre>
 <pre><code>## [1]    0  200  400  600  800 1000 1200 1400</code></pre>

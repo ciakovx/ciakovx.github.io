@@ -33,6 +33,8 @@ You can copy/paste the code we'll be using for this session [from this page](RBa
 
 It is distributed under a [https://creativecommons.org/licenses/by/4.0/](Creative Commons Attribution 4.0 International (CC BY 4.0) License). 
 
+Workshop code for this module is at https://raw.githubusercontent.com/ciakovx/ciakovx.github.io/master/RBasics_workshopcode.R.
+
 ```{r,fig.height=1,echo=FALSE}
 cc <- readPNG(file.path("./images/cc.png"))
 grid::grid.raster(cc)

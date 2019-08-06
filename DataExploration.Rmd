@@ -28,6 +28,8 @@ cc <- readPNG(file.path("./images/cc.png"))
 grid::grid.raster(cc)
 ```
 
+Workshop code for this module is at https://raw.githubusercontent.com/ciakovx/ciakovx.github.io/master/DataExploration_workshopcode.R
+
 # Getting data into R
 
 ## Ways to get data into R
