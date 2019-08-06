@@ -148,9 +148,6 @@ seq()
 
 # If our data is missing values, we can use `NA` to represent those. R functions have special actions when they encounter NA. is.na() and conversely complete.cases() can test your vectors for missing values:
 
-letters
-rep(NA, 5)
-
 my_nas <- c(letters[1:5], rep(NA, 5))
 print(my_nas)
 
@@ -204,7 +201,7 @@ table(nchar(state.name) == 7)
 
 ### Use nchar() , the > symbol, and brackets [] to get only state names with more than 10 characters:
 ten_characters <- 
-state.name[ten_characters]
+  state.name[ten_characters]
 
 
 
@@ -323,5 +320,4 @@ purrr::map(myList, class)
 
 ### This will pluck the first element out of each list item
 purrr::map(myList, pluck, 1)
-
 
