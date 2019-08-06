@@ -173,8 +173,8 @@ If the person has chosen to keep their email address private, the function will 
 If the individual has added keywords to their ORCID profile, we can search those. Dr. Carberry's profile includes the keyword "psychoceramics" (the study of cracked pots) (*note: this function is currently under development - :
 
 ```{r simple2.1, eval=TRUE}
-# carberry <- rorcid::orcid_search(family_name = 'carberry',
-#                                 keywords = 'psychoceramics')
+carberry <- rorcid::orcid_search(family_name = 'carberry',
+                                 keywords = 'psychoceramics')
 carberry
 ```
 
@@ -258,7 +258,7 @@ my_osu_orcid_count <- base::attr(rorcid::orcid(query = 'ringgold-org-id:7618 OR
 my_osu_orcid_count
 ```
 
-There are 1,402 records. Next we will first create a numeric vector using `seq` that starts with 0 and ends with 1402, adding 200 to each value. 
+There are 1,413 records. Next we will first create a numeric vector using `seq` that starts with 0 and ends with 1413, adding 200 to each value. 
 
 ```{r simple84, eval=TRUE}
 my_pages <- seq(from = 0, to = my_osu_orcid_count, by = 200)
