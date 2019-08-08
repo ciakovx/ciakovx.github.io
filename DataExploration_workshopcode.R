@@ -10,6 +10,10 @@ books_url <- url("https://raw.githubusercontent.com/ciakovx/ciakovx.github.io/ma
 books <- readr::read_csv(books_url)
 books
 
+# shorter dataset
+books <- read_csv(url("https://raw.githubusercontent.com/ciakovx/ciakovx.github.io/master/workshop_files/data/books2.csv")
+
+
 # head will print the first few rows (you can specify more with n)
 head(books, n = 10)
 
