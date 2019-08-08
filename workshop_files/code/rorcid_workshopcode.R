@@ -1,111 +1,8 @@
 library(tidyverse)
-library(janitor)
-
-install.packages("usethis")
+library(rcrossref)
 library(usethis)
-
-install.packages("repurrrsive")
-library(repurrrsive)
-
-install.packages("devtools")
-library(devtools)
-devtools::install_github("ropensci/rorcid")
-
-
-# lists -------------------------------------------------------------------
-
-install.packages("tidyverse")
-install.packages("repurrrsive")
-
-library(purrr)
-library(repurrrsive)
-
-x <- list(a = "a", b = 2)
-View(x)
-
-# The $ operator. Extracts a single element by name. 
-x$a
-x$b
-
-# [[ a.k.a. double square bracket. Extracts a single element by name or position. Name must be quoted, if provided directly. Name or position can also be stored in a variable.
-x[["a"]]
-x[[2]]
-
-i <- 2
-x[[i]]
-
-
-# [ a.k.a. single square bracket. Regular vector indexing. For a list input, this always returns a list!
-x["a"]
-
-
-# pepper shaker example
-x <- list("a" = c(1, 2, 3, 4))
-x[1]
-x[[1]]
-x[[1]][[1]]
-
-# pluck allows you to index deeply and flexibly into data structures
-pluck(x, 1)
-pluck(x, 1, 1)
-
-y <- list("a" = list(1, 2, 3, 4),
-          "b" = list(11, 12, 13, 14))
-pluck(y, 1)
-
-### how would you pluck "b"? 
-
-
-# returns a list item with the first value of each list
-map(y, pluck(1))
-
-# returns a numberic item with the first value of each list
-map_dbl(y, pluck(1))
-
-
-View(got_chars)
-
-# Get all the data for the first name
-View(pluck(got_chars, 1))
-
-# Get all the name values only
-got_names <- map(got_chars, pluck(3))
-
-# Can also use column names
-got_names <- map(got_chars, pluck("name"))
-
-# Clearer to use pipes
-got_names <- got_chars %>%
-  map(pluck("name"))
-
-### Use names() to inspect the names of the list elements associated with a single character. What is the index or position of the playedBy element? Use the character and position shortcuts to extract the  playedBy elements for all characters.
-
-
-# map() always returns a list, even if all the elements have the same flavor and are of length one. But in that case, you might prefer a simpler object: an atomic vector.
-
-# map() makes a list.
-# map_lgl() makes a logical vector.
-# map_int() makes an integer vector.
-# map_dbl() makes a double vector.
-# map_chr() makes a character vector.
-
-got_names <- got_chars %>%
-  map_chr(pluck("name"))
-
-# When programming, it is safer, but more cumbersome, to explicitly specify type and build your data frame the usual way.
-
-got_data <- got_chars %>% {
-  tibble(
-    name = map_chr(., "name"),
-    culture = map_chr(., "culture"),
-    gender = map_chr(., "gender"),       
-    id = map_int(., "id"),
-    born = map_chr(., "born"),
-    alive = map_lgl(., "alive")
-  )
-}
-  
-
+library(roadoi)
+library(rorcid)
 
 
 # Setting up rorcid -------------------------------------------------------
@@ -119,6 +16,17 @@ usethis::edit_r_environ()
 library(rorcid)
 
 orcid_auth()
+
+install.packages("devtools")
+library(devtools)
+devtools::install_github("ropensci/rorcid")
+
+library(rorcid)
+library(usethis)
+library(tidyverse)
+library(anytime)
+library(lubridate)
+library(janitor)
 
 # We start with a simple search by family name with the `family_name` argument:
 carberry <- orcid_search(family_name = 'carberry')
@@ -134,11 +42,8 @@ carberry <- orcid_search(given_name = 'josiah',
 browse(carberry$orcid[1])
 browse(carberry$orcid[2])
 
-### Use filter to get only the ORCID iD 0000-0002-1028-6941
-
 
 ### if you have made your ORCID profile public, do a search for yourself, or pick someone you know with a public ORCID profile, or if none of those, do a search for Karthik Ram
-
 
 
 # `orcid_search` includes the argument `affiliation_org`, which searches across all of one's affiliation data (employment, education, invited positions, membership & service)
@@ -146,15 +51,9 @@ carberry <- orcid_search(family_name = 'carberry',
                          affiliation_org = 'Wesleyan')
 
 
-### Do an affiliation search for Scott Chamberlain at organization rOpenSci
+# `orcid_search` is a wrapper for another `rorcid` function--`orcid()`, which allows for a more advanced range of searching.
 
-
-
-# search by ringgold or grid
-
-# you can use ringgold_org_id to search by Ringgold, or grid_org_id
-carberry <- orcid_search(family_name = "carberry",
-                         ringgold_org_id = "6752")
+carberry <- orcid(query = 'family-name:carberry AND ringgold-org-id:6752')
 
 # We can combine affiliation names, Ringgold IDs, and email addresses using the `OR` operator to cover all our bases, in case the person or people we are looking for did not hit on of those values.
 
@@ -193,14 +92,6 @@ my_osu_orcids_data <- my_osu_orcids %>%
   bind_rows() %>%
   clean_names()
 
-# get a character string of all ORCID iDs
-my_osu_orcids_ids <- my_osu_orcids_data$orcid_identifier_path
-
-### get the orcid IDs for people affiliated with your institution, or an institution of your choosing. Return the iDs only to a new vector.
-# Ask me if you need your institution's Ringgold.
-
-
-
 
 # biographical information with orcid_person ------------------------------
 
@@ -233,18 +124,10 @@ carberry_data <- carberry_person %>% {
 my_orcids <- c("0000-0002-1825-0097", "0000-0002-9260-8456")
 my_orcid_person <- orcid_person(my_orcids)
 
-my_osu_person <- orcid_person(my_osu_orcids_ids)
-
-
 
 # building a query to search for names
-
-paste("hello", "world")
-paste0("hello", "world")
-
 profs <- tibble("FirstName" = c("Josiah", "Clarke"),
                 "LastName" = c("Carberry", "Iakovakis"))
-
 orcid_query <- paste0("given-names:",
                       profs$FirstName,
                       " AND family-name:",

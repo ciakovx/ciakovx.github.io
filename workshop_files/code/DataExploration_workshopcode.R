@@ -253,6 +253,96 @@ myBooks <- books %>%
 
 
 
+# lists -------------------------------------------------------------------
 
+install.packages("tidyverse")
+install.packages("repurrrsive")
+
+library(purrr)
+library(repurrrsive)
+
+x <- list(a = "a", b = 2)
+View(x)
+
+# The $ operator. Extracts a single element by name. 
+x$a
+x$b
+
+# [[ a.k.a. double square bracket. Extracts a single element by name or position. Name must be quoted, if provided directly. Name or position can also be stored in a variable.
+x[["a"]]
+x[[2]]
+
+i <- 2
+x[[i]]
+
+
+# [ a.k.a. single square bracket. Regular vector indexing. For a list input, this always returns a list!
+x["a"]
+
+
+# pepper shaker example
+x <- list("a" = c(1, 2, 3, 4))
+x[1]
+x[[1]]
+x[[1]][[1]]
+
+# pluck allows you to index deeply and flexibly into data structures
+pluck(x, 1)
+pluck(x, 1, 1)
+
+y <- list("a" = list(1, 2, 3, 4),
+          "b" = list(11, 12, 13, 14))
+pluck(y, 1)
+
+### how would you pluck "b"? 
+
+# returns a list item with the first value of each list
+map(y, pluck(1))
+
+# returns a numberic item with the first value of each list
+map_dbl(y, pluck(1))
+
+
+View(got_chars)
+
+# Get all the data for the first name
+View(pluck(got_chars, 1))
+
+# Get all the name values only
+got_names <- map(got_chars, pluck(3))
+
+# Can also use column names
+got_names <- map(got_chars, pluck("name"))
+
+# Clearer to use pipes
+got_names <- got_chars %>%
+  map(pluck("name"))
+
+### Use names() to inspect the names of the list elements associated with a single character. What is the index or position of the playedBy element? Use the character and position shortcuts to extract the  playedBy elements for all characters.
+
+
+# map() always returns a list, even if all the elements have the same flavor and are of length one. But in that case, you might prefer a simpler object: an atomic vector.
+
+# map() makes a list.
+# map_lgl() makes a logical vector.
+# map_int() makes an integer vector.
+# map_dbl() makes a double vector.
+# map_chr() makes a character vector.
+
+got_names <- got_chars %>%
+  map_chr(pluck("name"))
+
+# When programming, it is safer, but more cumbersome, to explicitly specify type and build your data frame the usual way.
+
+got_data <- got_chars %>% {
+  tibble(
+    name = map_chr(., "name"),
+    culture = map_chr(., "culture"),
+    gender = map_chr(., "gender"),       
+    id = map_int(., "id"),
+    born = map_chr(., "born"),
+    alive = map_lgl(., "alive")
+  )
+}
 
 

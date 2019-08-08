@@ -33,7 +33,6 @@ Credit to Paul Oldham at https://www.pauloldham.net/introduction-to-orcid-with-r
 
 Workshop code for this module is at https://raw.githubusercontent.com/ciakovx/ciakovx.github.io/master/rorcid_workshopcode.R
 
-
 # Licensing
 
 This walkthrough is distributed under a [https://creativecommons.org/licenses/by/4.0/](Creative Commons Attribution 4.0 International (CC BY 4.0) License).  
@@ -207,29 +206,32 @@ rorcid::browse(ropensci1$orcid[2])
 
 Thus a word of caution when searching by article title or DOI: a significant amount of data in ORCID is manually added or added with incorrect, inconsistent, or incomplete metadata. In other words, the fact that you didn't get results or got erroneous results may not be due to errors in your queries, but rather errors in the data itself.
 
-
-## Advanced searching
-
-`orcid_search` is a wrapper for another `rorcid` function--`orcid()`, which allows for a more advanced range of searching.
-
-### Institutional ID (Ringgold, ISNI, GRID) - `ringgold-org-id:`
+## Institutional ID (Ringgold, ISNI, GRID) - `ringgold-org-id:`
 
 When filling out an ORCID profile, users are encouraged to select their institutions from the drop-down menu, which will ensure it includes the Ringgold ID and any other unique identifiers, such as ISNI and GRID, that ORCID has for that institution. Read the ORCID report, ["Organization identifiers: current provider survey"](https://orcid.org/sites/default/files/ckfinder/userfiles/files/20161031%20OrgIDProviderSurvey.pdf) to learn more.  
 ```{r simple9, eval=TRUE}
-carberry <- rorcid::orcid(query = 'family-name:carberry AND ringgold-org-id:6752')
+carberry <- rorcid::orcid_search(family_name = 'carberry',
+                                 keywords = 'psychoceramics')
 ```
 
-Note that most institutions in ORCID have Ringgold IDs, but you have to [register with Ringgold](https://www.ringgold.com/identify-online-guests/) to search in their registry. Sometimes different entities on campus will have separate Ringgold IDs; you may consider contacting Ringgold to get the full list of your institution's identifiers. [GRID is open for searching](https://www.grid.ac/institutes/grid.268117.b), but not all institutions have a GRID in ORCID. 
+You have to [register with Ringgold](https://www.ringgold.com/identify-online-guests/) to search in their registry.  [GRID is open for searching](https://www.grid.ac/institutes/grid.268117.b). Unfortunately, most organizations in ORCID have a Ringgold and not a GRID.
 
-### Name and email address domain
+Sometimes different entities on campus will have separate Ringgold IDs; you may consider contacting Ringgold to get the full list of your institution's identifiers.
+
+## Name and email address domain
 
 We can search by name and email address domain by using an asterisk followed by the domain name
 ```{r simple71, eval=FALSE}
-clarke <- rorcid::orcid(family_name = 'family-name:iakovakis AND email:*@okstate.edu')
+clarke <- rorcid::orcid_search(family_name = 'iakovakis',
+email = '*@okstate.edu')
 clarke
 ```
 
-# Getting all ORCIDs affiliated with an institution
+## Advanced searching
+
+`orcid_search` is a wrapper for another `rorcid` function--`orcid()`, which allows for a more advanced range of searching, including Boolean OR operators.
+
+### Searching with Boolean OR
 
 We can combine affiliation names, Ringgold IDs, and email addresses using the `OR` operator to cover all our bases, in case the person or people we are looking for did not hit on of those values. This will return all records that either have a Ringgold of 7618, have an affiliation name of "Oklahoma State," or have an email domain ending in "\@okstate.edu."
 
@@ -260,7 +262,7 @@ my_osu_orcid_count <- base::attr(rorcid::orcid(query = 'ringgold-org-id:7618 OR
 my_osu_orcid_count
 ```
 
-There are 1,413 records. Next we will first create a numeric vector using `seq` that starts with 0 and ends with 1413, adding 200 to each value. 
+There are 1,418 records. Next we will first create a numeric vector using `seq` that starts with 0 and ends with 1418, adding 200 to each value. 
 
 ```{r simple84, eval=TRUE}
 my_pages <- seq(from = 0, to = my_osu_orcid_count, by = 200)
@@ -298,7 +300,7 @@ Often times the columns returned from the ORCID API have a complicated combinati
 
 A [Pipe Operator](https://www.datacamp.com/community/tutorials/pipe-r-tutorial) `%>%`. A pipe takes the output of one statement and makes it the input of the next statement. You can think of it as "then" in natural language. So the above script first runs the `orcid()` API call, then it clean the column names of the data that was pulled into R as a result of that call. So for example, in the expression above, we first call up the `my_osu_orcids` data. We then apply the `bind_rows()` function to pull all the data together into a single data frame, and then clean the names with `clean_names()`.
 
-# Finding biographical information with `rorcid::orcid_person()`
+# Finding biographical information
 
 The `orcid()` function gets the IDs, but no information about the person. For that, you will need to use `orcid_person()`.
 
