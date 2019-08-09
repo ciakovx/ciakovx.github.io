@@ -593,7 +593,7 @@ my_references_works_citation_count_joined <- my_references_dois_works %>%
 my_references_works_citation_count_joined
 ```
 
-Unfortunately, only the publishers who are members of Crossref and are owners of the target article are able to retrieve the actual articles citing it, [as described in this article](https://support.crossref.org/hc/en-us/articles/214318946-Retrieving-cited-by-matches). Until recently we've been beholden to Web of Science or Scopus for that data--unless you find some sneaky way of scraping it--but the [Initiative for Open Citations](https://i4oc.org/) is making great progress towards "the unrestricted availability of scholarly citation data."
+Unfortunately, only the publishers who are members of Crossref and are owners of the target article are able to retrieve the actual articles citing it, [as described in this article](https://support.crossref.org/hc/en-us/articles/214318946-Retrieving-cited-by-matches). Until recently we've been beholden to Web of Science or Scopus for that data--unless you find some sneaky way of scraping it--but the [Initiative for Open Citations](https://i4oc.org/) is making great progress towards "the unrestricted availability of scholarly citation data." The package [`citecorp`](https://github.com/ropenscilabs/citecorp) is currently under development to gather citations from the Open Science Corpus, and see also [`rcitoid`](https://github.com/ropenscilabs/rcitoid) for Wikipedia's Citoid service.
 
 # Getting citation data with `cr_cn()`
 

@@ -862,7 +862,7 @@ TRUE
 </div>
 <div id="getting-journal-publications-by-issn" class="section level2">
 <h2>Getting journal publications by ISSN</h2>
-<p>To get metadata for the publications themselves rather than data about the journal, we will again use the <code>plosone_issn</code> value in the <code>issn =</code> argument to <code>cr_journals</code>, but we now set <code>works = TRUE</code> (you can use a <code>T</code> or the full word <code>TRUE</code>). The default number of articles returned is 20, but you can increase or decrease that with the <code>limit</code> argument. The max limit is 1000, but you can get more using the <code>cursor</code> argument (see below). As above, we use <code>pluck()</code> to return only the list element called “data”, which is where the meat is.</p>
+<p>To get metadata for the publications themselves rather than data about the journal, we will again use the <code>plosone_issn</code> value in the <code>issn =</code> argument to <code>cr_journals</code>, but we now set <code>works = TRUE</code>. The default number of articles returned is 20, but you can increase or decrease that with the <code>limit</code> argument. The max limit is 1000, but you can get more using the <code>cursor</code> argument (see below). As above, we use <code>pluck()</code> to return only the list element called “data”, which is where the meat is.</p>
 <pre class="r"><code>plosone_publications &lt;- rcrossref::cr_journals(issn = plosone_issn, works = T, limit = 25) %&gt;%
   purrr::pluck(&quot;data&quot;)
 plosone_publications</code></pre>
@@ -41627,6 +41627,7 @@ my_references_bibtex &lt;- rcrossref::cr_cn(my_references_dois, format = &quot;b
 readr::write_lines(my_references_bibtex, file.path(my_filepath, &quot;my_references_bibtex.bib&quot;))</code></pre>
 <p>We again use <code>map_chr()</code> to scan each list item, <code>pluck()</code> out the first item and return a character. This gives us the full BibTeX reference for all 8 references.</p>
 <p>If you are using Zotero, go to <strong>File &gt; Import</strong>, then select “A file” and navigate to this .bib file we just created. Congratulations: you now have reference files!</p>
+<p>For a full package on converting between citation formats, see the rOpenSci package <a href="https://cran.r-project.org/web/packages/handlr/handlr.pdf"><code>handlr</code></a>.</p>
 <p>We’ll be covering more on <code>cr_cn()</code> below.</p>
 </div>
 </div>
@@ -45503,7 +45504,7 @@ NA
 </tr>
 </tbody>
 </table>
-<p>Unfortunately, only the publishers who are members of Crossref and are owners of the target article are able to retrieve the actual articles citing it, <a href="https://support.crossref.org/hc/en-us/articles/214318946-Retrieving-cited-by-matches">as described in this article</a>. Until recently we’ve been beholden to Web of Science or Scopus for that data–unless you find some sneaky way of scraping it–but the <a href="https://i4oc.org/">Initiative for Open Citations</a> is making great progress towards “the unrestricted availability of scholarly citation data.”</p>
+<p>Unfortunately, only the publishers who are members of Crossref and are owners of the target article are able to retrieve the actual articles citing it, <a href="https://support.crossref.org/hc/en-us/articles/214318946-Retrieving-cited-by-matches">as described in this article</a>. Until recently we’ve been beholden to Web of Science or Scopus for that data–unless you find some sneaky way of scraping it–but the <a href="https://i4oc.org/">Initiative for Open Citations</a> is making great progress towards “the unrestricted availability of scholarly citation data.” The package <a href="https://github.com/ropenscilabs/citecorp"><code>citecorp</code></a> is currently under development to gather citations from the Open Science Corpus, and see also <a href="https://github.com/ropenscilabs/rcitoid"><code>rcitoid</code></a> for Wikipedia’s Citoid service.</p>
 </div>
 <div id="getting-citation-data-with-cr_cn" class="section level1">
 <h1>Getting citation data with <code>cr_cn()</code></h1>
