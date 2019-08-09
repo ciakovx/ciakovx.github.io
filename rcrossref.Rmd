@@ -134,7 +134,7 @@ names(plosone_details)
 
 ## Getting journal publications by ISSN
 
-To get metadata for the publications themselves rather than data about the journal, we will again use the `plosone_issn` value in the `issn =` argument to `cr_journals`, but we now set `works = TRUE` (you can use a `T` or the full word `TRUE`). The default number of articles returned is 20, but you can increase or decrease that with the `limit` argument. The max limit is 1000, but you can get more using the `cursor` argument (see below). As above, we use `pluck()` to return only the list element called "data", which is where the meat is.
+To get metadata for the publications themselves rather than data about the journal, we will again use the `plosone_issn` value in the `issn =` argument to `cr_journals`, but we now set `works = TRUE`. The default number of articles returned is 20, but you can increase or decrease that with the `limit` argument. The max limit is 1000, but you can get more using the `cursor` argument (see below). As above, we use `pluck()` to return only the list element called "data", which is where the meat is.
 
 ```{r journals1, eval=TRUE,cache=TRUE}
 plosone_publications <- rcrossref::cr_journals(issn = plosone_issn, works = T, limit = 25) %>%
@@ -507,6 +507,8 @@ readr::write_lines(my_references_bibtex, file.path(my_filepath, "my_references_b
 We again use `map_chr()` to scan each list item, `pluck()` out the first item and return a character. This gives us the full BibTeX reference for all 8 references.
 
 If you are using Zotero, go to **File > Import**, then select "A file" and navigate to this .bib file we just created. Congratulations: you now have reference files!
+
+For a full package on converting between citation formats, see the rOpenSci package [`handlr`](https://cran.r-project.org/web/packages/handlr/handlr.pdf).
 
 We'll be covering more on `cr_cn()` below.
 
