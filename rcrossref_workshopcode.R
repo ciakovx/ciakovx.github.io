@@ -1,7 +1,87 @@
 library(rcrossref)
 library(usethis)
 library(tidyverse)
-library(curl)
+library(rorcid)
+# library(curl)
+
+# list review -------------------------------------------------------------
+
+# pepper shaker example
+x <- list("a" = c(1, 2, 3, 4))
+x[1]
+x[[1]]
+x[[1]][[1]]
+
+# pluck allows you to index deeply and flexibly into data structures
+pluck(x, 1)
+pluck(x, 1, 1)
+
+y <- list("a" = list("b" = list("c" = "hello")))
+pluck(y, "a", "b", "c")
+
+
+z <- list("a" = c(1, 2, 3, 4),
+          "b" = c("one", "two", "three", "four", "five"))
+
+map(z, pluck(1))
+
+
+
+# rorcid review -----------------------------------------------------------
+
+carberry <- orcid_search(given_name = 'josiah',
+                         family_name = 'carberry')
+
+carberry_orcid_id <- carberry$orcid
+
+carberry_person <- orcid_person(carberry_orcid_id)
+
+carberry_person %>%
+  map(pluck, "name", "given-names", "value", .default = NA)
+carberry_data <- carberry_person %>% {
+  tibble(
+    created_date = map_dbl(., pluck, "name", "created-date", "value", .default=NA_character_),
+    given_name = map_chr(., pluck, "name", "given-names", "value", .default=NA_character_),
+    family_name = map_chr(., pluck, "name", "family-name", "value", .default=NA_character_),
+    credit_name = map_chr(., pluck, "name", "credit-name", "value", .default=NA_character_),
+    other_names = map(., pluck, "other-names", "other-name", "content", .default=NA_character_),
+    orcid_identifier_path = map_chr(., pluck, "name", "path", .default = NA_character_),
+    biography = map_chr(., pluck, "biography", "content", .default=NA_character_),
+    researcher_urls = map(., pluck, "researcher-urls", "researcher-url", .default=NA_character_),
+    emails = map(., pluck, "emails", "email", "email", .default=NA_character_),
+    keywords = map(., pluck, "keywords", "keyword", "content", .default=NA_character_),
+    external_ids = map(., pluck, "external-identifiers", "external-identifier", .default=NA_character_)
+  )}
+
+clarke_employment <- orcid_employments(orcid = "0000-0002-9260-8456")
+
+# Again it comes in a series of nested lists, but we'll just `pluck()` what we need and use `flatten_dfr()` to flatten the lists into a data frame.
+
+clarke_employment_data <- clarke_employment %>%
+  map(., pluck, "affiliation-group", "summaries") %>% 
+  flatten_dfr() %>%
+  clean_names()
+
+
+
+# works -------------------------------------------------------------------
+
+carberry_orcid <- c("0000-0002-1825-0097")
+
+# get a person's works
+carberry_works <- works(carberry_orcid) %>%
+  clean_names()
+
+# unnest external IDs
+carberry_works_ids <- carberry_works %>%
+  unnest(external_ids_external_id) %>%
+  clean_names()
+
+my_orcids <- c("0000-0002-1825-0097", "0000-0002-9260-8456", "0000-0002-2771-9344")
+my_works <- orcid_works(my_orcids)
+
+
+# rcrossref ---------------------------------------------------------------
 
 options(roadoi_email = "name@example.com")
 
