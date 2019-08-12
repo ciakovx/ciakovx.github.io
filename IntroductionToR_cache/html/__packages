@@ -1,9 +1,6 @@
 base
-png
-tinytex
+kableExtra
 knitr
-printr
-xtable
 tidyverse
 ggplot2
 tibble
@@ -13,6 +10,6 @@ purrr
 dplyr
 stringr
 forcats
-kableExtra
 janitor
 rorcid
+png

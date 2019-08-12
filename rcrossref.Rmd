@@ -22,7 +22,7 @@ library(rcrossref)
 library(usethis)
 library(roadoi)
 library(curl)
-
+library(png)
 ```
 
 # Downloading R & R Studio
@@ -350,7 +350,7 @@ See more in the [API documentation](https://github.com/CrossRef/rest-api-doc#dee
 
 Here I will set the limit to 1,500 rather than collect the entire 8,534.
 
-```{r cursor2, eval=TRUE,cache=TRUE,echo=TRUE}
+```{r cursor2, eval=FALSE,cache=TRUE,echo=TRUE}
 philo_articles <- rcrossref::cr_journals(philo_issn, works = TRUE, cursor = "*", cursor_max = 1500) %>%
   pluck("data")
 ```

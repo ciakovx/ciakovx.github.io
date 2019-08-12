@@ -1,9 +1,6 @@
 base
-png
-tinytex
+kableExtra
 knitr
-printr
-xtable
 tidyverse
 ggplot2
 tibble
@@ -13,13 +10,9 @@ purrr
 dplyr
 stringr
 forcats
-kableExtra
-janitor
-rorcid
 prettydoc
-listviewer
 rcrossref
 usethis
 roadoi
 curl
-repurrrsive
+png

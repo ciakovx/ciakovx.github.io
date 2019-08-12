@@ -3,12 +3,12 @@ title: "rorcid walkthrough"
 author: "Clarke Iakovakis"
 output: 
   html_document:
-    df_print: paged
     toc: true
     toc_float:
       collapsed: false
       smooth_scroll: false
     toc_depth: 3
+    df_print: paged
 ---
 
 ```{r setup, include=FALSE}
@@ -21,6 +21,7 @@ library(prettydoc)
 library(listviewer)
 library(janitor)
 library(rorcid)
+library(png)
 ```
 
 # `rorcid`
