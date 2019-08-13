@@ -12,7 +12,7 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, tidy=TRUE, cache = TRUE)
+knitr::opts_chunk$set(echo = TRUE, tidy=FALSE, cache = TRUE)
 library(kableExtra)
 library(knitr)
 library(tidyverse)
@@ -312,7 +312,11 @@ carberry_orcid <- "0000-0002-1825-0097"
 carberry_person <- rorcid::orcid_person(carberry_orcid)
 ```
 
-If you look at the result for carberry_person in the Environment Pane in R Studio, you will see it returned a List of 1. 
+If you look at the result for carberry_person in the Environment Pane in R Studio, you will see it returned a List of 1. We can view it here on this website using the `listviewer` package.
+
+```{r personview, eval=TRUE, cache=TRUE}
+listviewer::jsonedit(carberry_person, mode = "view")
+```
 
 Click the drop-down arrow next to the ORICID iD. We see one list here (his ORCID iD) and inside of that list is more lists. And inside those lists is even more lists! We can see the names of the top-level elements of the list by running `names(carberry_person[[1]])`. 
 
@@ -481,6 +485,7 @@ write_csv(carberry_data_mutated, "C:/Users/MyUserName/Desktop/carberry_data2.csv
 ```{r multiple, eval=TRUE,cache=TRUE}
 my_orcids <- c("0000-0002-1825-0097", "0000-0002-9260-8456")
 my_orcid_person <- rorcid::orcid_person(my_orcids)
+listviewer::jsonedit(my_orcid_person, mode = "view")
 ```
 
 We see that we are given a list of 2, each containing the person data. We can put this into a data frame using the same code as above.
@@ -610,6 +615,7 @@ In addition to biographical data, we can also get employment data with `orcid_em
 
 ```{r employment, eval=TRUE, cache=TRUE}
 clarke_employment <- rorcid::orcid_employments(orcid = "0000-0002-9260-8456")
+listviewer::jsonedit(clarke_employment, mode = "view")
 ```
 
 Again it comes in a series of nested lists, but we'll just `pluck()` what we need and use `flatten_dfr()` to flatten the lists into a data frame. We will also use the `anydate()` function to go ahead and convert the dates while we're at it. 
@@ -753,6 +759,7 @@ So we can follow one of the three strategies outlined above if we want to write 
 ```{r works3, eval=TRUE,cache=TRUE}
 my_orcids <- c("0000-0002-1825-0097", "0000-0002-9260-8456", "0000-0002-2771-9344")
 my_works <- rorcid::orcid_works(my_orcids)
+listviewer::jsonedit(my_works, mode = "view")
 ```
 
 This returns a list of 3 elements, with the works nested in **group > work-summary**. They can be plucked and flattened into a data frame:
