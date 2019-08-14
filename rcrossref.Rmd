@@ -76,6 +76,7 @@ library(rcrossref)
 library(usethis)
 library(tidyverse)
 library(curl)
+library(listviewer)
 ```
 
 As described in the documentation, the Crossref team encourages requests with appropriate contact information, and will forward you to a dedicated API cluster for improved performance when you share your email with them. Learn more [here](https://github.com/CrossRef/rest-api-doc#good-manners--more-reliable-service). To do so, first open your R environment using the `edit_r_environ()` function from the `usethis` package.
@@ -99,12 +100,16 @@ First we will create a new vector `plosone_issn` with the ISSN for the journal *
 
 ```{r crjournals1, eval=TRUE,cache=TRUE}
 plosone_issn <- '1932-6203'
-plosone_details <- rcrossref::cr_journals(issn = plosone_issn, works = FALSE) %>%
-  purrr::pluck("data")
-plosone_details
+plosone_details <- rcrossref::cr_journals(issn = plosone_issn, works = FALSE)
+listviewer::jsonedit(plosone_details)
 ```
 
 It actually comes back as a list of three items, two of which are unnecessary, and only one of which that contains the actual data. We use the `pluck()` function from the `purrr` package to pull that data only, which comes in a list element called "data". We will be using `pluck` throughout this tutorial; it's an easy way of indexing deeply and flexibly into lists to extract information.
+
+```{r crjournals1x, eval=TRUE,cache=TRUE}
+plosone_details <- plosone_details %>%
+  pluck("data")
+```
 
 The `purrr::pluck()` function is connected to `plosone_details` with something called a [Pipe Operator](https://www.datacamp.com/community/tutorials/pipe-r-tutorial) `%>%`, which We will also be using throughout the tutorial. A pipe takes the output of one statement and immediately makes it the input of the next statement. It helps so that you don't have to write every intermediate, processing data to your R environment. You can think of it as "then" in natural language. So the above script first makes the API call with `cr_journals()`, then it applies `pluck()` to extract only the list element called "data", and returns it to the `plosone_details` value.
 
