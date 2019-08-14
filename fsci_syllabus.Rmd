@@ -20,7 +20,7 @@ Hello everyone. I'm looking forward to our AM4 sessions at [FSCI 2019](https://w
 4. [R Basics](RBasics.html)
 4. [Data Exploration](DataExploration.html)
 5. [Exploring Data in Lists](jennybc_lists_lesson.html)
-5. [rorcid](doc/rorcid.html)
+5. [rorcid](rorcid.html)
 6. [rcrossref](rcrossref.html)
 
 The pre-class survey is available at https://info.library.okstate.edu/fsciAM4-preclass-survey. 
@@ -38,31 +38,26 @@ A participant in this course will at the end of the course be able to:
 
 # Schedule
 
-## [Monday: Introduction to R and R Studio]()
+## Monday: Introduction to R and R Studio
 
 * Installation & introduction to R/RStudio and its advantages over other data tools. Setting up R and RStudio and getting to know the interface.
 * Nuts and bolts of R syntax: writing and evaluating expressions, assigning values, calling functions, understanding data types, reading data into R, working with data frames.
 * Using dplyr functions for data manipulation: renaming/recoding/selecting/creating variables, recoding values, ordering data.
 
-## [Tuesday: Introduction to `rorcid`](rorcid.html)
+## Tuesday: Introduction to `rorcid`
 
 * Continue [Introduction to R and R Studio](). 
 * Introduction to ORCID, the ORCID API, and `rorcid`. Authenticating `rorcid` in your R environment.
 * Finding ORCID iDs by name, iD, email, and affiliation. Constructing queries.
 * Getting biographical metadata (date created, last modified, name, biography, email, keywords) and works metadata (type, title, publication date).
 
-## [Thursday: Introduction to `rcrossref` and `roadoi`
+## Thursday: Introduction to `rcrossref` and `roadoi`
 
 * Introduction to Crossref, the Crossref API, and `rcrossref`. Authenticating `rcrossref` in your R environment.
 * Getting publication and article data by journal, keyword, and author. Constructing and filtering queries. Writing to CSV, BibTeX, and RIS.
 * Introduction to Unpaywall, the Unpaywall API, and `roadoi`. Getting data on open access availability. Getting URLs and downloading full text.
 
 
-## [Friday: Recap, review, & next steps]()
+## Friday: Recap, review, & next steps
 
-
-
-
-
-
-The workshop materials are available on the Google Drive folder for our course at http://tiny.cc/fsci19_am4. You can also find them [on my GitHub](https://github.com/ciakovx/rorcid.workshop). 
+You can also find workshop materials [on my GitHub](https://github.com/ciakovx/ciakovx.github.io). 
