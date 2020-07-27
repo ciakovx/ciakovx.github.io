@@ -509,7 +509,7 @@ Go to [Code Beautify](https://codebeautify.org/jsonviewer) and paste the JSON on
 
 To write to JSON, use `jsonlite::write_json()`
 
-```{r}
+```{r,eval=FALSE}
 # write a JSON file
 jsonlite::write_json(plosone_publications_json, "plosone_publications.json")
 ```
@@ -671,7 +671,7 @@ my_citations
 
 Beautiful formatted citations from simply a list of DOIs! You can then write this to a text file using `writeLines`. 
 
-```{r}
+```{r, eval=FALSE}
 # write the formatted citations to a text file
 writeLines(my_citations, "my_citations_text.txt")
 ```
@@ -687,7 +687,7 @@ rcrossref::get_styles()[1:15]
 
 In addition to a text file, you can also write it to BibTeX or RIS:
 
-```{r}
+```{r, eval = FALSE}
 # Use cr_cn() to get BibTeX files for my DOIs
 my_citations_bibtex <- rcrossref::cr_cn(my_dois, format = "bibtex") %>%
   purrr::map_chr(., purrr::pluck, 1)
@@ -695,7 +695,7 @@ my_citations_bibtex <- rcrossref::cr_cn(my_dois, format = "bibtex") %>%
 
 Write it to a .bib file using `writeLines()`:
 
-```{r}
+```{r, eval=FALSE}
 # write to bibtex file
 writeLines(my_citations_bibtex, "my_citations_bibtex.bib")
 ```
