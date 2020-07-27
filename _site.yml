@@ -6,7 +6,7 @@ navbar:
     - text: "FSCI 2020 W24 Session"
       menu:
         - text: "Course syllabus"
-          href: fsci2020/fsci_syllabus2020.html
+          href: fsci2020/fsci2020_syllabus.html
         - text: "Setting Up"
           href: fsci2020/setup_instructions.html
         - text: "Introduction to R"
