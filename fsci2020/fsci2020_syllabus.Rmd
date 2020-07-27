@@ -14,14 +14,15 @@ output:
 
 Hello everyone. I'm looking forward to our AM4 sessions at [FSCI 2019](https://www.force11.org/fsci/2019) on ["AM4 - Working with Scholarly Literature in R: Pulling, Wrangling, Cleaning, and Analyzing Structured Bibliographic Metadata."](https://www.force11.org/fsci/2019/course-abstracts#AM4) 
 
-1. [Course Syllabus](fsci_syllabus.html)
-2. [Setup Instructions](setup_instructions.html)
-3. [Introduction to R](IntroductionToR.html)
-4. [R Basics](RBasics.html)
-4. [Data Exploration](DataExploration.html)
-5. [Exploring Data in Lists](jennybc_lists_lesson.html)
-5. [rorcid](rorcid.html)
-6. [rcrossref](rcrossref.html)
+1. [Course Syllabus](fsci2020/fsci_syllabus2020.html)
+2. [Setup Instructions](fsci2020/setup_instructions.html)
+3. [Introduction to R](fsci2020/IntroductionToR.html)
+4. [R Basics](fsci2020/RBasics.html)
+5. [Data Exploration](fsci2020/DataExploration.html)
+6. [Exploring Data in Lists](fsci2020/jennybc_lists_lesson.html)
+7. [rcrossref](fsci2020/rcrossref.html)
+8. [rorcid](fsci2020/rorcid.html)
+
 
 The pre-class survey is available at x
 
@@ -32,15 +33,17 @@ The pre-class survey is available at x
 **Instructor:**
 Clarke Iakovakis, Scholarly Services Librarian, Oklahoma State University, <https://info.library.okstate.edu/clarke-iakovakis>
 
-**Website:**
-<https://ciakovx.github.io/fsci2020/fsci_syllabus2020.html>
+**Website:** <https://ciakovx.github.io/fsci2020/fsci_syllabus2020.html>
 
 
 # Description: 
 Developers have created a number of packages for accessing the scholarly literature in R over the last several years, among them rcrossref, rorcid, and roadoi. These packages make use of the APIs in their systems to allow users to execute specific queries and pull the structured data into R, where it can be reshaped, merged with other data, and analyzed. This session will be based on the workshop I provided at last year's FSCI, available at https://ciakovx.github.io/fsci_syllabus.html. The course will assume no experience with R; however, a thorough explanation of the R programming language will not be provided. 
+
 Students will create a free account with Microsoft Azure Notebooks at https://notebooks.azure.com/, which will provide an environment in which we can run R scripts written in Jupyter Notebooks without having to download R and R studio. Students will then download an IPNYB (Jupyter Notebooks) file containing the scripts for the workshop, and will open that notebook in Azure. The file will include executable code alongside descriptions of what the code is doing. Students can therefore run code that has already been written, but will also write and execute their own R scripts within the Azure environment.
+
 We will begin with a general orientation of the Jupyter Notebooks environment. We will then discuss R and provide a basic overview of how it works. This introduction will include reading data into R, installing packages, and some functions for cleaning and restructuring data. We will also discuss Crossref, ORCID, and Unpaywall, and the packages developed by the rOpenSci organization to access the API services of these organizations. 
 We will then walk through the tasks outlined at https://ciakovx.github.io/rorcid.html and https://ciakovx.github.io/rcrossref.html. All course content will be delivered synchronously, with exercises built into the Jupyter Notebooks.
+
 rorcid interfaces with the ORCID API, allowing users to pull publication data based on a specific ORCID iD, or to input names and other identifying information to find a specific individual’s identifier. 
 rcrossref interfaces with the CrossRef API, allowing users to pull article metadata based on ISSN, filter queries by publication date and license information, running queries by title and author, getting funder data, getting citation counts, and exporting to BibTeX, RIS, and CSV. This can be immensely powerful for collecting citation data, conducting literature reviews, creating bibliographies, and more.
 roadoi interfaces with Unpaywall, allowing users to input a set of DOIs and return publication information along with potential locations of open access versions.
