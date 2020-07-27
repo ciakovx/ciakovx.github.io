@@ -23,13 +23,14 @@ Hello everyone. I'm looking forward to our AM4 sessions at [FSCI 2019](https://w
 5. [rorcid](rorcid.html)
 6. [rcrossref](rcrossref.html)
 
-The pre-class survey is available at https://info.library.okstate.edu/fsciAM4-preclass-survey. 
+The pre-class survey is available at x
 
-The course etherpad is at https://etherpad.net/p/fsci_am4
 
-# Title: Working with Scholarly Literature in R: Pulling, Wrangling, Cleaning, and Analyzing Structured Bibliographic Metadata
+# Title: 
+Working with Scholarly Literature in R: Pulling, Wrangling, Cleaning, and Analyzing Structured Bibliographic Metadata
 
-# Instructor: Clarke Iakovakis, Scholarly Services Librarian, Oklahoma State University, <https://info.library.okstate.edu/clarke-iakovakis>
+# Instructor: 
+Clarke Iakovakis, Scholarly Services Librarian, Oklahoma State University, <https://info.library.okstate.edu/clarke-iakovakis>
 
 # Description: 
 Developers have created a number of packages for accessing the scholarly literature in R over the last several years, among them rcrossref, rorcid, and roadoi. These packages make use of the APIs in their systems to allow users to execute specific queries and pull the structured data into R, where it can be reshaped, merged with other data, and analyzed. This session will be based on the workshop I provided at last year's FSCI, available at https://ciakovx.github.io/fsci_syllabus.html. The course will assume no experience with R; however, a thorough explanation of the R programming language will not be provided. 

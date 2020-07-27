@@ -62,7 +62,7 @@ For this session, we will be reading a CSV from a web connection rather than sav
 To get our sample data into our R session, we will use the `read_csv()` function and connect to a CSV saved on my GitHub using the `url()` function.
 
 ```{r readr2, comment=NA, eval=FALSE}
-books_url <- url("https://raw.githubusercontent.com/ciakovx/ciakovx.github.io/master/RBasics_files/data/raw/books.csv")
+books_url <- url("https://raw.githubusercontent.com/ciakovx/ciakovx.github.io/master/fsci2020/data/books.csv")
 books <- readr::read_csv(books_url)
 books
 ```

@@ -1,285 +1,42 @@
 ---
-title: An R Markdown document converted from "./fsci2020/rcrossref.ipynb"
-output: html_document
+title: "rcrossref"
+output: 
+  html_document:
+    df_print: paged
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+    toc_depth: 3
 ---
 
-# Introduction
-
-The Jupyter Notebook is an open-source web application that allows you to create and share documents that contain live code, equations, visualizations and narrative text. 
-
-Azure Notebooks is a free hosted service to develop and run Jupyter notebooks in the cloud with no installation.
-
-We are using these platforms to avoid having to install R and R Studio onto your own computer. Furthermore, by interacting with R in this notebook, you will be able to execute code that I have already written, and see explanations of it first hand. Because this is such a brief session, we cannot go into detail about learning the R language, but I have provided some resources at the end of this document.
-
-I have also created a **binder** of this project, which will allow you to launch it in RStudio in your browser without having to download anything. Though we will not be using this as the basis of today's session, it may be of some use to you. Launch it at 
-
-[![launch binder](https://camo.githubusercontent.com/483bae47a175c24dfbfc57390edd8b6982ac5fb3/68747470733a2f2f6d7962696e6465722e6f72672f62616467655f6c6f676f2e737667)](https://mybinder.org/v2/gh/ciakovx/rcrossref_erl/master?urlpath=rstudio)
-
-If you plan on using `rcrossref` more extensively, I would recommend downloading R and R Studio to your own computer and using it there. Also, the Crossref team encourages requests with appropriate contact information, and will forward you to a dedicated API cluster for improved performance when you share your email with them. We cannot do that in this notebook, but you can do that in R.
-
-For a more detailed walkthrough of this entire lesson, including instructions for downloading R and R Studio, sharing your email with Crossref, and much more, please visit the set of tutorials at https://ciakovx.github.io/fsci_syllabus.html.
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, tidy=TRUE, cache = TRUE)
+library(kableExtra)
+library(knitr)
+library(tidyverse)
+library(tibble)
+library(janitor)
+library(png)
+library(rcrossref)
+library(roadoi)
+library(listviewer)
+```
 
 # Licensing
 
 This walkthrough is distributed under a [https://creativecommons.org/licenses/by/4.0/](Creative Commons Attribution 4.0 International (CC BY 4.0) License). 
 
 
-<div>
-    <br>
-    <a>
-        <img src="images/ccby.png" style="width: 400px;">
-    </a>
-</div>
-
-# Jupyter Notebooks
-
-<div>
-        <a>
-            <img src="images/jupyter.png" style="width: 400px;">
-</a></div><a>
-
-Jupyter Notebooks have two different keyboard input modes:
-
-* **Command Mode** - Make changes on the Notebook level. Indicated by a grey cell border with a blue left margin. 
-* **Edit Mode** - Make changes to an individual cell. Indicated by a green cell border
-
-A new cell will always start as a **Code** cell, where you can type in R code and execute it here in your Jupyter notebook. All code in this notebook is R, but in Azure Notebooks you can create Notebooks that are F# or Python.
-
-Please feel free to add your own notes in a Markdown cell during this workshop, or write your own R code!
-
-Useful keyboard shortcurts when you are in Command Mode:
-* **Enter** to enter Edit Mode to edit the cell
-* **B** to create new cell below the current cell
-* **A** to create new cell above the current cell
-* **Y** to change a Markdown cell to Code
-* **M** to change a Code cell to Markdown
-* Press **D** twice to delete the cell
-  
-Shortcuts when you are in Edit Mode:
-* **Esc** to enter Command Mode
-* **Ctrl + Enter** to Run cell and stay in the cell
-* **Shift + Enter** to Run cell and select the next cell
-* **Alt (or option on Mac) + Enter** to Run cell and insert a new cell below.
-* **Ctrl (or Cmd on Mac) + Z**: Undo
-
----
-**TRY IT YOURSELF**
-
-Select the below cell in Edit Mode by double clicking in it, or by clicking it on the margin and pressing **Enter**. It should have a green border. Notice that this is a **Code** cell. Press Shift + Enter to execute the code. This will print the output and select the next cell.
-
-Then, when you are in the next cell, press Ctrl + Enter. This will print the output and stay in the same cell.
-
-Then, press the down arrow on your keyboard to to to the next cell. Enter Edit Mode (green border) by pressing Enter. Press Alt (or option on Mac) + Enter. This will print the output and create a new cell.
-
-Then press the down arrow or select the new empty cell. Make sure you are in Command Mode (blue border). Press D twice to delete the new cell.</a>
-
-```{r}
-# press Shift + Enter
-print("You just ran the cell and selected the next cell")
-```
-
-```{r}
-# press Ctrl + Enter
-print("You just ran this cell and the focus stayed here in this cell")
-```
-
-```{r}
-# press Alt (or option on Mac) + Enter
-print("You just ran the cell and inserted a new cell below it")
-```
-
-Notice the text in the above cells that starts with a hash **#** character. The hash indicates a **comment**. Anything following the hash symbol will not be evaluated. 
-
-# Install and load `rcrossref`, `dplyr`, `purrr`, `stringr`, and `tidyr`
-
-When you download R it already has a number of functions built in: these encompass what is called **Base R**. However, many R users write their own libraries of functions, package them together in R **packages**, and provide them to the R community at no charge. This extends the capacity of R and allows us to do much more. In many cases, they improve on the Base R functions by making them easier and more straight-forward to use.
-
-First install `rcrossref` using the `install.packages()` function. Notice the package name is in quotation marks.
-
-Click on the left margin of the cell below so it turns blue. Then click the **Run** button on the top toolbar, or press **Ctrl + Enter**. This will **execute** the code, installing the necessary packages into your Jupyter Notebook environment. 
-
-This may take a couple minutes. You will see a \[*\] on the left margins while the package installs. When the asterisk becomes a number, we will be ready. 
-
-```{r}
-install.packages('rcrossref')
-```
-
-We will also be using the `dplyr`, `purrr`, `stringr` and `tidyr` packages. These packages are part of the [tidyverse](https://www.tidyverse.org/), a collection of R packages designed for data science.
-
-Fortunately, these packages are pre-installed in Azure Notebooks, so we don't need to install them; we just need to load them into our environment. We do this with the `library()` function. Let's load all three packages by clicking the left margin of the below cell (so it turns blue) and clicking the **Run** button on the top toolbar.
-
-Let's also set an option to see a max number of 100 columns and max 20 rows in our Jupyter Notebooks environment. 
-
-
-```{r}
-# load packages
-library(rcrossref)
-library(dplyr)
-library(purrr)
-library(stringr)
-library(tidyr)
-
-# increase number of columns and rows displayed when we print a table
-options(repr.matrix.max.cols=100, repr.matrix.max.rows=20)
-```
-
-<div>
-    <br>
-    <a>
-        <img src="images/tidyverse.png" style="width: 150px;">
-    </a>
-</div>
-
-# R Basics
-
-<div>
-    <br>
-    <a>
-        <img src="images/R.png" style="width: 200px;">
-    </a>
-    <br>
-</div>
-
-R is more of a programming language than a statistics program. It was started by Robert Gentleman and Ross Ihaka from the University of Auckland in 1995. They described it as “a language for data analysis and graphics.”1 You can use R to create, import, and scrape data from the web; clean and reshape it; visualize it; run statistical analysis and modeling operations on it; text and data mine it; and much more.
-
-If you intend on continuing your R journey after this workshop, I recommend installing R and R Studio and doing your scripting there. To install R, go to https://www.r-project.org/. Click on CRAN (Comprehensive R Archive Network) under Download, and scroll down to your country. Select the download link corresponding to the city that is geographically closest to you. Go to https://www.rstudio.com/products/RStudio/#Desktop to download the RStudio desktop software.
-
-
-We don't have enough time in today's workshop to learn much about R. There are many excellent R tutorials at the end of this document. To get help on R functions within Jupyter Notebooks, type `help()` with the function name in parentheses. For example, `help(sum)` or `help(which)`. This will provide a description of the function, its usage, and the arguments the function takes.
-
-## Writing &amp; Evaluating Expressions
-
-The *prompt* is the blinking cursor in a Code cell prompting you to take action. We type *expressions* into the prompt, and press Ctrl + Enter to *evaluate* those expressions.
-
-Evaluate this expression:
-
-```{r}
-# Press Ctrl + Enter or click the Run button to evaluate 2 + 2
-2 + 2
-```
-
-## Assigning values
-
-The first operator you're going to come across is the assignment operator. This is the angle bracket (AKA the "less than"" symbol): `&lt;`, which you'll get by pressing **Shift + comma** and the hyphen `-` which is located next to the zero key. There is no space between them, and it is designed to look like a left pointing arrow `&lt;-`. 
-
-
-```{r}
-# assign 5 to y
-y <- 5
-```
-
-Here I am creating a symbol called `y` and I'm *assigning* it the numeric value 5. Some R users would say "y *gets* 5." Lowercase `y`, is now a *numeric vector* with one element. Or you could say `y` is a numeric vector, and the first element is the number 5. When you assign something to a symbol, nothing happens in the console, but in the Environment pane in the upper right, you will notice a new object, y.
-
-If you now type y into the console, and press Enter on your keyboard, R will evaluate the expression. In this case, R will print the elements that are assigned to y (the number 5). We can do this easily since y only has one element, but if you do this with a large dataset loaded into R, it will obliterate your console because it will print the entire thing. The [1] indicates that the number 5 is the first element of this vector.
-
-```{r}
-# evaluate y
-y
-```
-
-As we saw above, you can also use the `print()` function:
-
-```{r}
-# using print() will do the same thing as just typing the variable in, it just makes it explicit
-print(y)
-```
-
----
-**TRY IT YOURSELF**
-
-1. Use the new code cells below. Make sure that 5 is assigned to `y` by typing in `y &lt;- 5`
-2. Assign the number 10 to variable `x`. Add `x` and `y` and evaluate the expression.
-3. Assign `x + y` to variable `myTotal`. 
-
-```{r}
-# assign 5 to y
-```
-
-```{r}
-# assign 10 to x
-```
-
-```{r}
-# assign the sum of x and y to myTotal. Print myTotal to the console.
-```
-
-### Tips for assigning values
-
-* **Do not use names of functions that already exist in R:** The assignment operator assigns a value to a symbol. We can pretty much pick any symbol, or name, for that variable, as long as it is not already a function in R. For example, you wouldn't want to name a variable `sum` because if you might end up in a confusing situation writing `sum(sum)`
-* **R is case sensitive**: It is important to note that R is *case sensitive.* If you try evaluating a capital `Y`, you will be told `Error in eval(expr, envir, enclos): object 'Y' not found`.
-* **No blank spaces or symbols other than underscores**: R users get around this in a couple of ways, either through capitalization (e.g. `myData`) or underscores (e.g. `my_data`). 
-* **Do not begin with numbers or symbols**: Try to evaluate `1z &lt;- 4` or `%z &lt;- 4` and read the error message.
-* **Be descriptive, but make your variable names short**: It's good practice to be descriptive with your variable names. If you're loading in a lot of data, choosing `myData` or `x` as a name may not be as helpful as, say, `ebookUsage`. Finally, keep your variable names short, since you will likely be typing them in frequently.
-
-
-## Calling a function
-
-R is a “functional programming language,” meaning it contains a number of functions you use to do something with your data. Call a function on a variable by entering the function into the console, followed by parentheses and the variables. 
-
-```{r}
-# take the square root of the sum of 2 + 2
-sum(2, 2)
-```
-
-Typing a question mark before a function will pull the help page up in the Navigation Pane in the lower right. Type `?sum` to view the help page for the `sum` function. You can also call `help(sum)`. This will provide the description of the function, how it is to be used, and the arguments. 
-
-In the case of `sum()`, the ellipses `. . .` represent an unlimited number of numeric elements. `sum()` also takes the argument `na.rm`. This is a logical (`TRUE/FALSE`) argument specifying if NA values (missing data) should be removed when the argument is evaluated.
-
-The function `is.function()` will check if an argument is a function in R. If it is a function, it will print `TRUE` to the console.
-
-```{r}
-# confirm that sum is a function
-is.function(sum)
-```
-
-```{r}
-# sum takes an unlimited number (. . .) of numeric elements
-sum(3, 4, 5, 6, 7)
-```
-
-```{r}
-# evaluating a sum with missing values will return NA
-sum(3, 4, NA)
-```
-
-```{r}
-# look at the help file for sum
-?sum
-```
-
-```{r}
-# but setting the argument na.rm to TRUE will remove the NA
-sum(3, 4, na.rm = TRUE)
-```
-
-Functions can be nested within each other. For example, `sqrt()` takes the square root of the number provided in the function call. Therefore you can run `sum(sqrt(9), 4)` to take the sum of the square root of 9 (3) and add it to 4. Or you could write the quadratic formula: `[(-b) + sqrt((b^2) - 4ac)] / (2*a)`.
-
-# Crossref &amp; `rcrossref`
+# Crossref and `rcrossref`
 
 ## Crossref
-
-<div>
-    <br>
-    <a>
-        <img src="images/crossref-logo.png" style="width: 200px;">
-    </a>
-    <br>
-</div>
-
 
 Crossref is a a not-for-profit membership organization dedicated to interlinking scholarly metadata, including journals, books, conference proceedings, working papers, technical reports, data sets, authors, funders, and more. The [Crossref REST API](https://github.com/CrossRef/rest-api-doc) allows anybody to search and reuse members' metadata in a variety of ways. Read [examples of user stories](https://www.crossref.org/services/metadata-delivery/user-stories/).
 
 ## `rcrossref`
 
 `rcrossref` is a package developed by [Scott Chamberlain](https://scottchamberlain.info/), Hao Zhu, Najko Jahn, Carl Boettiger, and Karthik Ram, part of the [rOpenSci](https://ropensci.org/) set of packages. rOpenSci is an incredible organization dedicated to open and reproducible research using shared data and reusable software. I strongly recommend you browse their set of packages at https://ropensci.org/packages/.
-
-<div>
-    <br>
-    <a>
-        <img src="images/ropensci.png" style="width: 200px;">
-    </a>
-    <br>
-</div>
 
 `rcrossref` serves as an interface to the Crossref API.
 
@@ -321,8 +78,7 @@ This actually comes back as a list of three items: `meta`, `data`, and `facets`.
 
 We use the `pluck()` function from the `purrr` package to pull that data only. We will be using `pluck` throughout this tutorial; it's an easy way of indexing deeply and flexibly into lists to extract information.
 
-We don't have time in this tutorial to discuss list items and purr. For an excellent in-depth tutorial, see Jenny Bryan's [
-Introduction to map(): extract elements](https://jennybc.github.io/purrr-tutorial/ls01_map-name-position-shortcuts.html).
+We don't have time in this tutorial to discuss list items and purr. For an excellent in-depth tutorial, see Jenny Bryan's [Introduction to map(): extract elements](https://jennybc.github.io/purrr-tutorial/ls01_map-name-position-shortcuts.html), also provided on this website.
 
 ```{r}
 # get information about the journal and pluck the data
@@ -402,15 +158,24 @@ plosone_details$deposits_funders_current
 
 ```{r}
 # assign an ISSN to a value. Call the value what you want (e.g. plosone_issn)
+
+
+
 ```
 
 ```{r}
 # look up journal details using the cr_journals function and assign it to a new value (e.g. plosone_details). 
 # Remember to include a %>% pipe and call purrr::pluck("data")
+
+
+
 ```
 
 ```{r}
 # print the journal details to the console by typing in the value name
+
+
+
 ```
 
 ## Getting journal publications by ISSN
@@ -494,76 +259,6 @@ jah_jama_publications %>%
 
 You can use the `filter` argument within `cr_journals` to specify some parameters as the query is executing. This filter is built into the Crossref API query. See the available filters by calling `rcrossref::filter_names()`, and details by calling `rcrossref::filter_details`. It's also in [the API documentation](https://github.com/CrossRef/rest-api-doc#filter-names).
 
-| filter     | possible values | description|
-|:-----------|:----------------|:-----------|
-| `has-funder` | | metadata which includes one or more funder entry |
-| `funder` | `{funder_id}` | metadata which include the `{funder_id}` in FundRef data |
-| `location` |`{country_name}` | funder records where location = `{country name}`. Only works on `/funders` route |
-| `prefix` | `{owner_prefix}` | metadata belonging to a DOI owner prefix `{owner_prefix}` (e.g. `10.1016` ) |
-| `member` | `{member_id}` | metadata belonging to a Crossref member |
-| `from-index-date` | `{date}` | metadata indexed since (inclusive) `{date}` |
-| `until-index-date` | `{date}` | metadata indexed before (inclusive) `{date}` |
-| `from-deposit-date` | `{date}` | metadata last (re)deposited since (inclusive) `{date}` |
-| `until-deposit-date` | `{date}` | metadata last (re)deposited before (inclusive) `{date}` |
-| `from-update-date` | `{date}` | Metadata updated since (inclusive) `{date}`. Currently the same as `from-deposit-date`. |
-| `until-update-date` | `{date}` | Metadata updated before (inclusive) `{date}`. Currently the same as `until-deposit-date`. |
-| `from-created-date` | `{date}` | metadata first deposited since (inclusive) `{date}` |
-| `until-created-date` | `{date}` | metadata first deposited before (inclusive) `{date}` |
-| `from-pub-date` | `{date}` | metadata where published date is since (inclusive) `{date}` |
-| `until-pub-date` | `{date}` | metadata where published date is before (inclusive)  `{date}` |
-| `from-online-pub-date` | `{date}` | metadata where online published date is since (inclusive) `{date}` |
-| `until-online-pub-date` | `{date}` | metadata where online published date is before (inclusive)  `{date}` |
-| `from-print-pub-date` | `{date}` | metadata where print published date is since (inclusive) `{date}` |
-| `until-print-pub-date` | `{date}` | metadata where print published date is before (inclusive)  `{date}` |
-| `from-posted-date` | `{date}` | metadata where posted date is since (inclusive) `{date}` |
-| `until-posted-date` | `{date}` | metadata where posted date is before (inclusive)  `{date}` |
-| `from-accepted-date` | `{date}` | metadata where accepted date is since (inclusive) `{date}` |
-| `until-accepted-date` | `{date}` | metadata where accepted date is before (inclusive)  `{date}` |
-| `has-license` | | metadata that includes any `&lt;license_ref&gt;` elements. |
-| `license.url` | `{url}` | metadata where `&lt;license_ref&gt;` value equals `{url}` |
-| `license.version` | `{string}` | metadata where the `&lt;license_ref&gt;`'s `applies_to` attribute  is `{string}`|
-| `license.delay` | `{integer}` | metadata where difference between publication date and the `&lt;license_ref&gt;`'s `start_date` attribute is &lt;= `{integer}` (in days)|
-| `has-full-text` |  | metadata that includes any full text `&lt;resource&gt;` elements. |
-| `full-text.version` | `{string}`  | metadata where `&lt;resource&gt;` element's `content_version` attribute is `{string}`. |
-| `full-text.type` | `{mime_type}`  | metadata where `&lt;resource&gt;` element's `content_type` attribute is `{mime_type}` (e.g. `application/pdf`). |
-| `full-text.application` | `{string}` | metadata where `&lt;resource&gt;` link has one of the following intended applications: `text-mining`, `similarity-checking` or `unspecified` |
-| `has-references` | | metadata for works that have a list of references |
-| `reference-visibility` | `[open, limited, closed]` | metadata for works where references are either `open`, `limited` (to [Metadata Plus subscribers](https://www.crossref.org/services/metadata-delivery/plus-service/)) or `closed` |
-| `has-archive` | | metadata which include name of archive partner |
-| `archive` | `{string}` | metadata which where value of archive partner is `{string}` |
-| `has-orcid` | | metadata which includes one or more ORCIDs |
-| `has-authenticated-orcid` | | metadata which includes one or more ORCIDs where the depositing publisher claims to have witness the ORCID owner authenticate with ORCID |
-| `orcid` | `{orcid}` | metadata where `&lt;orcid&gt;` element's value = `{orcid}` |
-| `issn` | `{issn}` | metadata where record has an ISSN = `{issn}`. Format is `xxxx-xxxx`. |
-| `isbn` | `{isbn}` | metadata where record has an ISBN = `{issn}`. |
-| `type` | `{type}` | metadata records whose type = `{type}`. Type must be an ID value from the list of types returned by the `/types` resource |
-| `directory` | `{directory}` | metadata records whose article or serial are mentioned in the given `{directory}`. Currently the only supported value is `doaj`. |
-| `doi` | `{doi}` | metadata describing the DOI `{doi}` |
-| `updates` | `{doi}` | metadata for records that represent editorial updates to the DOI `{doi}` |
-| `is-update` | | metadata for records that represent editorial updates |
-| `has-update-policy` | | metadata for records that include a link to an editorial update policy |
-| `container-title` | | metadata for records with a publication title exactly with an exact match |
-| `category-name` | | metadata for records with an exact matching category label. Category labels come from [this list](https://www.elsevier.com/solutions/scopus/content) published by Scopus |
-| `type` | | metadata for records with type matching a type identifier (e.g. `journal-article`) |
-| `type-name` | | metadata for records with an exactly matching type label |
-| `award.number` | `{award_number}` | metadata for records with a matching award nunber. Optionally combine with `award.funder` |
-| `award.funder` | `{funder doi or id}` | metadata for records with an award with matching funder. Optionally combine with `award.number` |
-| `has-assertion` | | metadata for records with any assertions |
-| `assertion-group` | | metadata for records with an assertion in a particular group |
-| `assertion` | | metadata for records with a particular named assertion |
-| `has-affiliation` | | metadata for records that have any affiliation information |
-| `alternative-id` | | metadata for records with the given alternative ID, which may be a publisher-specific ID, or any other identifier a publisher may have provided |
-| `article-number` | | metadata for records with a given article number |
-| `has-abstract` | | metadata for records which include an abstract |
-| `has-clinical-trial-number` | | metadata for records which include a clinical trial number |
-| `content-domain` | | metadata where the publisher records a particular domain name as the location Crossmark content will appear |
-| `has-content-domain` | | metadata where the publisher records a domain name location for Crossmark content |
-| `has-domain-restriction` | | metadata where the publisher restricts Crossmark usage to content domains |
-| `has-relation` | | metadata for records that either assert or are the object of a relation |
-| `relation.type` | | One of the relation types from the Crossref relations schema (e.g. `is-referenced-by`, `is-parent-of`, `is-preprint-of`) |
-| `relation.object` | | Relations where the object identifier matches the identifier provided |
-| `relation.object-type` | | One of the identifier types from the Crossref relations schema (e.g. `doi`, `issn`) |&lt;/orcid&gt;&lt;/resource&gt;&lt;/resource&gt;&lt;/resource&gt;&lt;/resource&gt;&lt;/license_ref&gt;&lt;/license_ref&gt;&lt;/license_ref&gt;&lt;/license_ref&gt;
-
 ### Filtering by publication date with `from_pub_date` and `until_pub_date`
 For example, you may only want to pull publications from a given year, or within a date range. Remember to increase the limit or use `cursor` if you need to. Also notice three things about the `filter` argument:
 
@@ -584,7 +279,7 @@ jlsc_publications_2019 <- rcrossref::cr_journals(issn = jlsc_issn, works = T,
 
 # print the dataframe with select column
 jlsc_publications_2019 %>%
-  dplyr::select(title, doi, volume, issue, page, issued, url, publisher, reference.count, type, issn)
+  dplyr::select(title, doi, volume, issue, issued, url, publisher, reference.count, type, issn)
 ```
 
 ### Filtering by funder with `award.funder`
@@ -1013,7 +708,7 @@ If each citation is on its own line in your document's bibliography, then you ca
 
 ```{r}
 # read in a CSV file of citations
-my_references <- read.csv("references.txt", stringsAsFactors = FALSE, fileEncoding = "ISO 8859-1")
+my_references <- read.csv("data/references.txt", stringsAsFactors = FALSE)
 
 # print the file
 my_references
@@ -1112,7 +807,7 @@ This incredible [Introduction to `roadoi`](https://cran.r-project.org/web/packag
 
 First install the package and load it.
 
-```{r}
+```{r, eval=FALSE}
 # install the roadoi package
 install.packages("roadoi")
 ```
@@ -1144,7 +839,7 @@ my_dois <- c("10.2139/ssrn.2697412",
 
 # use oadoi_fetch() to get Unpaywall data on those DOIs
 my_dois_oa <- roadoi::oadoi_fetch(dois = my_dois,
-                                 email = "name@example.edu")
+                                 email = "clarke.iakovakis@okstate.edu")
 ```
 
 Look at the column names.
@@ -1169,7 +864,8 @@ As above, it is easier to use `unnest()` to more closely view one of the variabl
 ```{r}
 # print the data frame with best open access location unnested
 my_dois_oa %>%
-    tidyr::unnest(best_oa_location)
+    tidyr::unnest(best_oa_location,
+                  names_repair = "universal")
 ```
 
 # Next steps

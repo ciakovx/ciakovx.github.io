@@ -1,0 +1,16 @@
+base
+kableExtra
+knitr
+tidyverse
+ggplot2
+tibble
+tidyr
+readr
+purrr
+dplyr
+stringr
+forcats
+janitor
+png
+rcrossref
+roadoi
