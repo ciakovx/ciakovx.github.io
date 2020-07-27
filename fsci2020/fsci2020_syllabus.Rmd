@@ -1,5 +1,5 @@
 ---
-title: "FSCI AM4: Working with Scholarly Literature in R: Pulling, Wrangling, Cleaning, and Analyzing Structured Bibliographic Metadata"
+title: "FSCI 2020: W24 Syllabus - Working with Scholarly Literature in R: Pulling, Wrangling, Cleaning, and Analyzing Structured Bibliographic Metadata."
 output: 
   html_document:
     df_print: paged
@@ -12,7 +12,7 @@ output:
 
 # Intro
 
-Hello everyone. I'm looking forward to our AM4 sessions at [FSCI 2019](https://www.force11.org/fsci/2019) on ["AM4 - Working with Scholarly Literature in R: Pulling, Wrangling, Cleaning, and Analyzing Structured Bibliographic Metadata."](https://www.force11.org/fsci/2019/course-abstracts#AM4) 
+Hello everyone. I'm looking forward to our session at [FSCI 2020](https://www.force11.org/fsci/2020) on ["W24 - Working with Scholarly Literature in R: Pulling, Wrangling, Cleaning, and Analyzing Structured Bibliographic Metadata."](https://www.force11.org/fsci/2020/fsci-2020-course-abstracts#W24) 
 
 1. [Course Syllabus](fsci2020/fsci_syllabus2020.html)
 2. [Setup Instructions](fsci2020/setup_instructions.html)
@@ -37,23 +37,32 @@ Clarke Iakovakis, Scholarly Services Librarian, Oklahoma State University, <http
 
 
 # Description: 
-Developers have created a number of packages for accessing the scholarly literature in R over the last several years, among them rcrossref, rorcid, and roadoi. These packages make use of the APIs in their systems to allow users to execute specific queries and pull the structured data into R, where it can be reshaped, merged with other data, and analyzed. This session will be based on the workshop I provided at last year's FSCI, available at https://ciakovx.github.io/fsci_syllabus.html. The course will assume no experience with R; however, a thorough explanation of the R programming language will not be provided. 
+Developers have created a number of packages for accessing the scholarly literature in R over the last several years, among them `rcrossref`, `rorcid`, and `roadoi.` These packages make use of the APIs in their systems to allow users to execute specific queries and pull the structured data into R, where it can be reshaped, merged with other data, and analyzed. This session will be based on the workshop I provided at last year's FSCI. The course will assume no experience with R; however, a thorough explanation of the R programming language will not be provided. 
 
-Students will create a free account with Microsoft Azure Notebooks at https://notebooks.azure.com/, which will provide an environment in which we can run R scripts written in Jupyter Notebooks without having to download R and R studio. Students will then download an IPNYB (Jupyter Notebooks) file containing the scripts for the workshop, and will open that notebook in Azure. The file will include executable code alongside descriptions of what the code is doing. Students can therefore run code that has already been written, but will also write and execute their own R scripts within the Azure environment.
+The course will a mixture of pre-recorded videos and synchronous explanation and Question & Answer sessions. 
+
+Students will access IPNYB (Jupyter Notebooks) files containing the scripts for the workshop, created with [binder](https://mybinder.org/). The files will include executable code alongside descriptions of what the code is doing. Students can therefore run code that has already been written, but will also write and execute their own R scripts within the Jupyter Notebooks environment. Students will access these notebooks while watching the videos explaining the code.
 
 We will begin with a general orientation of the Jupyter Notebooks environment. We will then discuss R and provide a basic overview of how it works. This introduction will include reading data into R, installing packages, and some functions for cleaning and restructuring data. We will also discuss Crossref, ORCID, and Unpaywall, and the packages developed by the rOpenSci organization to access the API services of these organizations. 
-We will then walk through the tasks outlined at https://ciakovx.github.io/rorcid.html and https://ciakovx.github.io/rcrossref.html. All course content will be delivered synchronously, with exercises built into the Jupyter Notebooks.
 
-rorcid interfaces with the ORCID API, allowing users to pull publication data based on a specific ORCID iD, or to input names and other identifying information to find a specific individual’s identifier. 
-rcrossref interfaces with the CrossRef API, allowing users to pull article metadata based on ISSN, filter queries by publication date and license information, running queries by title and author, getting funder data, getting citation counts, and exporting to BibTeX, RIS, and CSV. This can be immensely powerful for collecting citation data, conducting literature reviews, creating bibliographies, and more.
-roadoi interfaces with Unpaywall, allowing users to input a set of DOIs and return publication information along with potential locations of open access versions.
-As we work through the tutorials, Students will continue to learn R functions for working with data, including dplyr, purrr, and tidyr. 
+We will then walk through `rcrossref`, `roadoi`, and `rorcid`.
+
+* `rcrossref` interfaces with the CrossRef API, allowing users to pull article metadata based on ISSN, filter queries by publication date and license information, running queries by title and author, getting funder data, getting citation counts, and exporting to BibTeX, RIS, and CSV. This can be immensely powerful for collecting citation data, conducting literature reviews, creating bibliographies, and more.
+* `roadoi` interfaces with Unpaywall, allowing users to input a set of DOIs and return publication information along with potential locations of open access versions.
+* `rorcid` interfaces with the ORCID API, allowing users to pull publication data based on a specific ORCID iD, or to input names and other identifying information to find a specific individual’s identifier. 
+
+As we work through the tutorials, students will continue to learn R functions for working with data, including `dplyr`, `purrr`, and `tidyr`. 
+
 By the conclusion of the session, students will be able to work with and analyze data in R. On a deeper level, they will have more powerful tools for gathering subsets of the scholarly literature in clean and structured formats based on specific parameters. Because they will be walking away with executable scripts, they will be able to modify those and collect data based on parameters they are interested in. 
-Level: All levels
-Intended audience: This course is intended for scholarly communications librarians, repository managers, research funders, publishers, bibliometricians, and managers of Research Information Management Systems (RIMS).
+
+# Level: 
+All levels
+
+# Intended audience: 
+This course is intended for scholarly communications librarians, repository managers, research funders, publishers, bibliometricians, and managers of Research Information Management Systems (RIMS).
 
 # Requirements: 
-Students will need a computer with internet access and a free Microsoft Azure Notebooks account. It will not be necessary to download R or R Studio.
+Students will need a computer with internet access. It will not be necessary to download R or R Studio, as all code will be executed in Jupyter Notebooks in the browser, hosted by binder.
 
 # Course Learning Objectives
 A participant in this course will, at the end of the course, be able to:
@@ -63,21 +72,26 @@ A participant in this course will, at the end of the course, be able to:
 
 # Course Topics
 This course will cover these  topics:
-Introduction to R and RStudio
-Introduction to rorcid
-Introduction to rcrossref and roadoi
+- Introduction to R and RStudio
+- Introduction to rorcid
+- Introduction to rcrossref and roadoi
 
 
 # Course Schedule
 
-LIVE ZOOM SESSION SCHEDULE
+Following each Zoom session schedule, students will watch the videos and walk through the Jupyter Notebooks exercises.
+
+**LIVE ZOOM SESSION SCHEDULE**
 (All times Pacific)
+
 Wednesday, Aug. 5
 8-9AM: Introductory session
 5-6PM: REPEAT Introductory session
+
 Monday, Aug. 10
 8-9AM: Actvity session 1
 5-6PM: REPEAT Activity session 1
+
 Wednesday, Aug. 12
 8-9AM: Activity session 2
 5-6PM: REPEAT Activity session 2
@@ -85,7 +99,7 @@ Wednesday, Aug. 12
 ## Day 1 
 Orientation to Jupyter Notebooks. Introduction to R/RStudio and its advantages over other data tools. Nuts and bolts of R syntax. Installing packages.
 Using dplyr functions for data manipulation: renaming/recoding/selecting/creating variables, recoding values, ordering data.
-Introduction to ORCID, the ORCID API, and rorcid. Authenticating rorcid in your R environment. Course outline at https://ciakovx.github.io/rorcid.html. 
+Introduction to ORCID, the ORCID API, and rorcid. Authenticating rorcid in your R environment. Course outline at https://ciakovx.github.io/fsci2020/rorcid.html. 
 Finding ORCID iDs by name, iD, email, and affiliation. Constructing queries.
 Getting biographical metadata (date created, last modified, name, biography, email, keywords) and works metadata (type, title, publication date).
 
