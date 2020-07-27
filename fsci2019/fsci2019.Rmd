@@ -1,0 +1,19 @@
+---
+title: "FSCI 2019: AM4 - Working with Scholarly Literature in R: Pulling, Wrangling, Cleaning, and Analyzing Structured Bibliographic Metadata."
+output: html_document
+---
+
+Hello everyone. I'm looking forward to our AM4 sessions at [FSCI 2019](https://www.force11.org/fsci/2019) on ["AM4 - Working with Scholarly Literature in R: Pulling, Wrangling, Cleaning, and Analyzing Structured Bibliographic Metadata."](https://www.force11.org/fsci/2019/course-abstracts#AM4) 
+
+1. [Course Syllabus](fsci_syllabus.html)
+2. [Setup Instructions](setup_instructions.html)
+3. [Introduction to R](IntroductionToR.html)
+4. [R Basics](RBasics.html)
+4. [Data Exploration](DataExploration.html)
+5. [Exploring Data in Lists](jennybc_lists_lesson.html)
+5. [rorcid](doc/rorcid.html)
+6. [rcrossref](rcrossref.html)
+
+The pre-class survey is available at https://info.library.okstate.edu/fsciAM4-preclass-survey. 
+
+The course etherpad is at https://etherpad.net/p/fsci_am4

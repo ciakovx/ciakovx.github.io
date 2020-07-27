@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Set-up Instructions</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 64px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h2 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h3 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h4 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h5 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h6 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Clarke Iakovakis</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    FSCI 2019 AM4 Session
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="fsci_syllabus.html">Course syllabus</a>
+    </li>
+    <li>
+      <a href="setup_instructions.html">Setting Up</a>
+    </li>
+    <li>
+      <a href="IntroductionToR.html">Introduction to R</a>
+    </li>
+    <li>
+      <a href="RBasics.html">R Basics</a>
+    </li>
+    <li>
+      <a href="DataExploration.html">Data Exploration</a>
+    </li>
+    <li>
+      <a href="jennybc_lists_lesson.html">Exploring Data in Lists</a>
+    </li>
+    <li>
+      <a href="rorcid.html">rorcid</a>
+    </li>
+    <li>
+      <a href="rcrossref.html">rcrossref</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Set-up Instructions</h1>
+
+</div>
+
+
+<p>I ask that you please complete at least the R and R Studio installation before our session. If you feel comfortable, you can go through the installation of packages and setting up the packages, but we will probably discuss this in class. Please <a href="https://info.library.okstate.edu/clarke-iakovakis">contact me</a> if you have questions or problems with any of this.</p>
+<div id="download-r-r-studio" class="section level1">
+<h1>Download R &amp; R Studio</h1>
+<p>To download R, go to <a href="https://www.r-project.org/" class="uri">https://www.r-project.org/</a>. Click on CRAN (Comprehensive R Archive Network) under Download, and scroll down to your country. Select the download link corresponding to the city that is geographically closest to you.</p>
+<p>Go to <a href="https://www.rstudio.com/products/RStudio/#Desktop" class="uri">https://www.rstudio.com/products/RStudio/#Desktop</a> to download the RStudio desktop software. RStudio is a user interface for working with R. It is called an Integrated Development Environment (IDE) and acts as a sort of wrapper around the R language. You can use R without RStudio, but it’s much more limiting. RStudio makes it easier to import datasets, create and write scripts, and has an autocomplete activated for functions and variables you’ve already assigned. RStudio makes using R much more effective, and is also free and open source.</p>
+</div>
+<div id="install-r-packages" class="section level1">
+<h1>Install R packages</h1>
+<p>Open R Studio and go to <strong>File &gt; New File &gt; R Script</strong>.</p>
+<p>Copy the first line of code below and paste it into the blank R script. Then click the <strong>Run</strong> button in the upper right corner of that window.</p>
+<pre class="r"><code>install.packages(&quot;rorcid&quot;)
+library(rorcid)</code></pre>
+<p>It will print some lines of code and make take a few seconds. If successful, it will tell you the packaged was successfully unpacked. Now run the next line, <code>library(rorcid)</code>. As long as it doesn’t say "there is no package called ‘rorcid’, you should be good.</p>
+<p>Do the same thing with the remaining packages:</p>
+<pre class="r"><code>install.packages(&quot;tidyverse&quot;)
+library(tidyverse)
+
+install.packages(&quot;anytime&quot;)
+library(anytime)
+
+install.packages(&quot;httpuv&quot;)
+library(httpuv)
+
+install.packages(&quot;rcrossref&quot;)
+library(rcrossref)
+
+install.packages(&quot;usethis&quot;)
+library(usethis)
+
+install.packages(&quot;janitor&quot;)
+library(janitor)
+
+install.packages(&quot;roadoi&quot;)
+library(roadoi)</code></pre>
+<p>Now in R Studio, click <strong>Session &gt; Restart R.</strong></p>
+</div>
+<div id="set-up-rorcid" class="section level1">
+<h1>Set up <code>rorcid</code></h1>
+<p>Next, you need to authenticate with an ORCID API Key. According to the <a href="https://members.orcid.org/api/tutorial/read-orcid-records">ORCID API tutorial</a>, anyone can receive a key to access the public API.</p>
+<p>Make sure your R script is still open. If it’s not, click <strong>File &gt; New File &gt; R Script.</strong></p>
+<p>Copy the below two lines of code and paste them in your new R Script. Execute them by clicking the Run button in the top right hand corner.</p>
+<pre class="r"><code>library(rorcid)
+orcid_auth()</code></pre>
+<p>You should see a message stating: <code>no ORCID token found; attempting OAuth authentication</code> and a window will open in your default internet browser. Log-in to your orcid account. You will be asked to give <code>rorcid</code> authorization to access your ORCID Record for the purposes of getting your ORCID iD. Click “Authorize.”</p>
+<p>If successful, the browser window will state: “Authentication complete. Please close this page and return to R.” Return to R Studio and you should see in your R console the word <strong>Bearer</strong>, followed by a long string of letters and numbers. These letters and numbers are your API key. At this point, this should be cached locally in your working directory.</p>
+<p>Highlight and copy the API key (the letters and numbers only–exclude the word “Bearer” and the space). Paste it into the quotation marks for the code below. Be sure to keep the quotation marks there. Don’t run this line of code. Instead, just copy it to the clipboard.</p>
+<pre class="r"><code>ORCID_TOKEN=&quot;copy and paste your token here&quot;</code></pre>
+<p>Now paste the below text to your R Script and run it:</p>
+<pre class="r"><code>library(usethis)
+usethis::edit_r_environ()</code></pre>
+<p>A new window will open in R Studio. Type <code>ORCID_TOKEN="my-token"</code>, replacing <code>my-token</code> with the API key. <strong>Then press enter to create a new line, and leave it blank.</strong> It will look like something like this (below is a fake token):</p>
+<pre class="r"><code>ORCID_TOKEN=&quot;4bed1e13-7792-4129-9f07-aaf7b88ba88f&quot;</code></pre>
+<p>Press <kbd>Ctrl</kbd> + <kbd>S</kbd> (Mac: <kbd>Cmd</kbd> + <kbd>S</kbd> to save the API key to your R environment and close the tab In R Studio, click Session &gt; Restart R. Your token should now be saved to your R environment. You can confirm this by calling <code>orcid_auth()</code>, and it will print the token.</p>
+</div>
+<div id="set-up-rcrossref" class="section level1">
+<h1>Set up <code>rcrossref</code></h1>
+<p>As described in the documentation, the Crossref team encourages requests with appropriate contact information, and will forward you to a dedicated API cluster for improved performance when you share your email with them. Learn more <a href="https://github.com/CrossRef/rest-api-doc#good-manners--more-reliable-service">here</a>. To do so, first open your R environment using the <code>edit_r_environ()</code> function from the <code>usethis</code> package.</p>
+<pre class="r"><code>library(usethis)
+usethis::edit_r_environ()</code></pre>
+<p>A new window will open in R Studio. Type <code>crossref_email=name@example.com</code>, replacing the example with your own email address. Then press enter to create a new line, and leave it blank. Press <kbd>Ctrl</kbd> + <kbd>S</kbd> (Mac: <kbd>Cmd</kbd> + <kbd>S</kbd> to save the API key to your R environment and close the tab Your email address will now be shared with Crossref.</p>
+</div>
+<div id="set-up-roadoi" class="section level1">
+<h1>Set up <code>roadoi</code></h1>
+<p>As with <code>rcrossref</code>, your API calls to Unpaywall must include a valid email address where you can be reached in order to keep the service open and free for everyone.</p>
+<p>Run this line of code, replacing the example with your email address:</p>
+<pre class="r"><code>options(roadoi_email = &quot;name@example.com&quot;)</code></pre>
+<p>Your email address will now be shared with Unpaywall.</p>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = false;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
