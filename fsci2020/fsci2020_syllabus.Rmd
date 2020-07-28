@@ -8,13 +8,14 @@ output:
       collapsed: false
       smooth_scroll: false
     toc_depth: 3
+    css: styles.css
 ---
 
 # Intro
 
 Hello everyone. I'm looking forward to our session at [FSCI 2020](https://www.force11.org/fsci/2020) on ["W24 - Working with Scholarly Literature in R: Pulling, Wrangling, Cleaning, and Analyzing Structured Bibliographic Metadata."](https://www.force11.org/fsci/2020/fsci-2020-course-abstracts#W24) 
 
-1. [Course Syllabus](fsci2020/fsci_syllabus2020.html)
+1. [Course Syllabus](fsci2020/fsci2020_syllabus.html)
 2. [Setup Instructions](fsci2020/setup_instructions.html)
 3. [Introduction to R](fsci2020/IntroductionToR.html)
 4. [R Basics](fsci2020/RBasics.html)
