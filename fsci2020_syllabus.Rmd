@@ -16,7 +16,7 @@ output:
 Hello everyone. I'm looking forward to our session at [FSCI 2020](https://www.force11.org/fsci/2020) on ["W24 - Working with Scholarly Literature in R: Pulling, Wrangling, Cleaning, and Analyzing Structured Bibliographic Metadata."](https://www.force11.org/fsci/2020/fsci-2020-course-abstracts#W24) 
 
 1. [Course Syllabus](fsci2020/fsci2020_syllabus.html)
-2. [Setup Instructions](fsci2020/setup_instructions.html)
+2. [Getting Started with Jupyter Notebooks]
 3. [Introduction to R](fsci2020/IntroductionToR.html)
 4. [R Basics](fsci2020/RBasics.html)
 5. [Data Exploration](fsci2020/DataExploration.html)
@@ -34,13 +34,13 @@ The pre-class survey is available at x
 **Instructor:**
 Clarke Iakovakis, Scholarly Services Librarian, Oklahoma State University, <https://info.library.okstate.edu/clarke-iakovakis>
 
-**Website:** <https://ciakovx.github.io/fsci2020/fsci_syllabus2020.html>
+**Website:** <https://ciakovx.github.io/fsci_syllabus.html>
 
 
 # Description: 
 Developers have created a number of packages for accessing the scholarly literature in R over the last several years, among them `rcrossref`, `rorcid`, and `roadoi.` These packages make use of the APIs in their systems to allow users to execute specific queries and pull the structured data into R, where it can be reshaped, merged with other data, and analyzed. This session will be based on the workshop I provided at last year's FSCI. The course will assume no experience with R; however, a thorough explanation of the R programming language will not be provided. 
 
-The course will a mixture of pre-recorded videos and synchronous explanation and Question & Answer sessions. 
+The course will a mixture of pre-recorded videos and synchronous meeting for discussion and Q&A sessions. 
 
 Students will access IPNYB (Jupyter Notebooks) files containing the scripts for the workshop, created with [binder](https://mybinder.org/). The files will include executable code alongside descriptions of what the code is doing. Students can therefore run code that has already been written, but will also write and execute their own R scripts within the Jupyter Notebooks environment. Students will access these notebooks while watching the videos explaining the code.
 
