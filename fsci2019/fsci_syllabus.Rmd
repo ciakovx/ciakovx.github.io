@@ -1,14 +1,12 @@
 ---
 title: "FSCI AM4: Working with Scholarly Literature in R: Pulling, Wrangling, Cleaning, and Analyzing Structured Bibliographic Metadata"
 output: 
-  html_document:
-    df_print: paged
-    toc: true
-    toc_float:
-      collapsed: false
-      smooth_scroll: false
-    toc_depth: 3
+  html_document
 ---
+
+# IMPORTANT NOTE:
+
+This is the FSCI 2019 syllabus. For the 2020 FSCI syllabus, visit <https://ciakovx.github.io/fsci2020/fsci2020_syllabus.html>
 
 # Intro
 

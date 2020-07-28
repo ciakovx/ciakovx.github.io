@@ -21,6 +21,10 @@ library(kableExtra)
 knitr::opts_chunk$set(echo = TRUE, cache = TRUE, eval=FALSE)
 ```
 
+# IMPORTANT NOTE:
+This is the 2019 FSCI data exploration exercise. Visit <https://ciakovx.github.io/fsci2020/DataExploration.html"> for the 2020 exercise.
+
+
 This is distributed under a [https://creativecommons.org/licenses/by/4.0/](Creative Commons Attribution 4.0 International (CC BY 4.0) License).  
 
 ```{r,fig.height=1,echo=FALSE}
