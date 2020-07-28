@@ -15,19 +15,6 @@ output:
 
 Hello everyone. I'm looking forward to our session at [FSCI 2020](https://www.force11.org/fsci/2020) on ["W24 - Working with Scholarly Literature in R: Pulling, Wrangling, Cleaning, and Analyzing Structured Bibliographic Metadata."](https://www.force11.org/fsci/2020/fsci-2020-course-abstracts#W24) 
 
-1. [Course Syllabus](fsci2020/fsci2020_syllabus.html)
-2. [Getting Started with Jupyter Notebooks]
-3. [Introduction to R](fsci2020/IntroductionToR.html)
-4. [R Basics](fsci2020/RBasics.html)
-5. [Data Exploration](fsci2020/DataExploration.html)
-6. [Exploring Data in Lists](fsci2020/jennybc_lists_lesson.html)
-7. [rcrossref](fsci2020/rcrossref.html)
-8. [rorcid](fsci2020/rorcid.html)
-
-
-The pre-class survey is available at x
-
-
 # Course Information
 **Title:** Working with Scholarly Literature in R: Pulling, Wrangling, Cleaning, and Analyzing Structured Bibliographic Metadata
 
@@ -80,18 +67,62 @@ This course will cover these  topics:
 
 # Course Schedule
 
-Following each Zoom session schedule, students will watch the videos and walk through the Jupyter Notebooks exercises.
+## Wednesday, August 5
 
-**LIVE ZOOM SESSION SCHEDULE**
-(All times Pacific)
-
-Wednesday, Aug. 5
+### Live Zoom Session (All times Pacific)
 8-9AM: Introductory session
 5-6PM: REPEAT Introductory session
 
-Monday, Aug. 10
+### Exercises (complete by 8/10)
+
+1. Using Jupyter Notebooks (*required*): 30 minutes
+* Launch the Using Jupyter Notebooks Jupyter Notebook at [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=using_jupyter_notebooks.ipynb)
+* Watch the Using Jupyter Notebooks video tutorial at
+
+2. Introduction to R (*optional*): 15 minutes
+* Skim the [Introduction to R](IntroductionToR.html) webpage for information on what R is, how it applies to librarianship, what R Studio is, and some useful help resources. We will not be using R Studio in this class; instead, we will be working entirely with Jupyter Notebooks, but if you are going further in your R journey you will want to use R Studio.
+
+3. R Basics (*required*): 1 hour
+* Access the R Basics Jupyter Notebook at [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=RBasics.ipynb)
+* Watch the R Basics video tutorial at
+* Skim the [R Basics](RBasics.html) webpage. Most of this content is covered in the R Basics Jupyter Notebook.
+
+
+4. Data Exploration (*optional*): 1 hour
+* Skim the [Data Exploration](DataExploration.html) webpage for information on getting data into R, exploring and transforming data, particularly using `dplyr`. Some of these functions will be used in the `rcrossref` and `rorcid` tutorials, but they will be explained as we are running through them.
+
+5. rcrossref & roadoi (*required*): 1 hour
+* Access the rcrossref & roadoi Jupyter Notebook at 
+* Skim the * [rcrossref](rcrossref.html) webpage. Much of this content is identical to that on the Jupyter Notebook.
+
+Introduction to Crossref, the Crossref API, and rcrossref. Authenticating rcrossref in your R environment.
+Getting publication and article data by journal, keyword, and author. Constructing and filtering queries. Writing to CSV, BibTeX, and RIS. Using roadoi to query the Unpaywall API for open access availability. Getting URLs and downloading full text.
+
+## Monday, August 10
+
+### Live Zoom Session (All times Pacific)
 8-9AM: Actvity session 1
 5-6PM: REPEAT Activity session 1
+
+### Exercises (complete by 8/12)
+
+
+
+Putting it all together: gathering IDs of authors affiliated at your university, harvesting their publications, determining funders, OA eligibility, and other questions
+
+
+
+6. Exploring Data in Lists (*optional*): 1 hour
+* Skim the [Exploring Data in Lists](fsci2020/jennybc_lists_lesson.html) webpage for a tutorial by Jenny Bryan on using `purrr` to explore and extract data from lists. Our API calls pull data into our session in nested lists, so this tutorial is helpful for managing that.
+
+8. [rorcid](fsci2020/rorcid.html)
+
+
+
+
+
+
+
 
 Wednesday, Aug. 12
 8-9AM: Activity session 2
@@ -106,11 +137,9 @@ Getting biographical metadata (date created, last modified, name, biography, ema
 
 ## Day 2
 Recap of rorcid, answer outstanding questions.
-Course outline at https://ciakovx.github.io/rcrossref.html. Introduction to Crossref, the Crossref API, and rcrossref. Authenticating rcrossref in your R environment.
-Getting publication and article data by journal, keyword, and author. Constructing and filtering queries. Writing to CSV, BibTeX, and RIS.
-Using roadoi to query the Unpaywall API for open access availability. Getting URLs and downloading full text.
-Putting it all together: gathering IDs of authors affiliated at your university, harvesting their publications, determining funders, OA eligibility, and other questions
-Course Materials and Supplies Required  
+Course outline at https://ciakovx.github.io/rcrossref.html. 
+
+# Course Materials and Supplies Required  
 Students will need a laptop with internet access and an account with Microsoft Azure Notebooks at https://notebooks.azure.com/. 
 Students will download the course code, data, and walkthrough PDFs from https://ciakovx.github.io/fsci_syllabus.html. We will do this together during the class.
 

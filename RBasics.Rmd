@@ -28,13 +28,14 @@ library(png)
 
 # Introduction
 
-This guide accompanies the first day of instruction for our course at the 2019 FORCE11 Scholarly Communications Institute: ["AM4 - Working with Scholarly Literature in R: Pulling, Wrangling, Cleaning, and Analyzing Structured Bibliographic Metadata."](https://www.force11.org/fsci/2019/course-abstracts#AM4) It covers basic nuts and bolts of using R.
+Launch the Jupyter Notebook for this module at [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=RBasics.ipynb)
 
-You can copy/paste the code we'll be using for this session [from this page](RBasics_files/code/RBasics_workshopcode.R), or download it from the [Workshop Materials folder LINK WILL BE ADDED SOON]()
+
+This guide accompanies the first day of instruction for our course at the 2020 FORCE11 Scholarly Communications Institute: ["W24 - Working with Scholarly Literature in R: Pulling, Wrangling, Cleaning, and Analyzing Structured Bibliographic Metadata."](https://www.force11.org/fsci/2020/fsci-2020-course-abstracts#W24). It covers basic nuts and bolts of using R.
+
 
 It is distributed under a [https://creativecommons.org/licenses/by/4.0/](Creative Commons Attribution 4.0 International (CC BY 4.0) License). 
 
-Workshop code for this module is at https://raw.githubusercontent.com/ciakovx/ciakovx.github.io/master/RBasics_workshopcode.R.
 
 ```{r,fig.height=1,echo=FALSE}
 cc <- readPNG(file.path("./images/cc.png"))
