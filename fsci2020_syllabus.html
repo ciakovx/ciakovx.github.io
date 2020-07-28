@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>FSCI 2020: W24 Syllabus - Working with Scholarly Literature in R: Pulling, Wrangling, Cleaning, and Analyzing Structured Bibliographic Metadata.</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 64px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h2 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h3 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h4 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h5 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h6 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Clarke Iakovakis</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    FSCI 2020 W24 Session
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="fsci_syllabus.html">Course syllabus</a>
+    </li>
+    <li>
+      <a href="setup_instructions.html">Setting Up</a>
+    </li>
+    <li>
+      <a href="IntroductionToR.html">Introduction to R</a>
+    </li>
+    <li>
+      <a href="RBasics.html">R Basics</a>
+    </li>
+    <li>
+      <a href="DataExploration.html">Data Exploration</a>
+    </li>
+    <li>
+      <a href="jennybc_lists_lesson.html">Exploring Data in Lists</a>
+    </li>
+    <li>
+      <a href="rcrossref.html">rcrossref</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">FSCI 2020: W24 Syllabus - Working with Scholarly Literature in R: Pulling, Wrangling, Cleaning, and Analyzing Structured Bibliographic Metadata.</h1>
+
+</div>
+
+
+<div id="intro" class="section level1">
+<h1>Intro</h1>
+<p>Hello everyone. I’m looking forward to our session at <a href="https://www.force11.org/fsci/2020">FSCI 2020</a> on <a href="https://www.force11.org/fsci/2020/fsci-2020-course-abstracts#W24">“W24 - Working with Scholarly Literature in R: Pulling, Wrangling, Cleaning, and Analyzing Structured Bibliographic Metadata.”</a></p>
+<ol style="list-style-type: decimal">
+<li><a href="fsci2020/fsci2020_syllabus.html">Course Syllabus</a></li>
+<li><a href="fsci2020/setup_instructions.html">Setup Instructions</a></li>
+<li><a href="fsci2020/IntroductionToR.html">Introduction to R</a></li>
+<li><a href="fsci2020/RBasics.html">R Basics</a></li>
+<li><a href="fsci2020/DataExploration.html">Data Exploration</a></li>
+<li><a href="fsci2020/jennybc_lists_lesson.html">Exploring Data in Lists</a></li>
+<li><a href="fsci2020/rcrossref.html">rcrossref</a></li>
+<li><a href="fsci2020/rorcid.html">rorcid</a></li>
+</ol>
+<p>The pre-class survey is available at x</p>
+</div>
+<div id="course-information" class="section level1">
+<h1>Course Information</h1>
+<p><strong>Title:</strong> Working with Scholarly Literature in R: Pulling, Wrangling, Cleaning, and Analyzing Structured Bibliographic Metadata</p>
+<p><strong>Instructor:</strong> Clarke Iakovakis, Scholarly Services Librarian, Oklahoma State University, <a href="https://info.library.okstate.edu/clarke-iakovakis" class="uri">https://info.library.okstate.edu/clarke-iakovakis</a></p>
+<p><strong>Website:</strong> <a href="https://ciakovx.github.io/fsci2020/fsci_syllabus2020.html" class="uri">https://ciakovx.github.io/fsci2020/fsci_syllabus2020.html</a></p>
+</div>
+<div id="description" class="section level1">
+<h1>Description:</h1>
+<p>Developers have created a number of packages for accessing the scholarly literature in R over the last several years, among them <code>rcrossref</code>, <code>rorcid</code>, and <code>roadoi.</code> These packages make use of the APIs in their systems to allow users to execute specific queries and pull the structured data into R, where it can be reshaped, merged with other data, and analyzed. This session will be based on the workshop I provided at last year’s FSCI. The course will assume no experience with R; however, a thorough explanation of the R programming language will not be provided.</p>
+<p>The course will a mixture of pre-recorded videos and synchronous explanation and Question &amp; Answer sessions.</p>
+<p>Students will access IPNYB (Jupyter Notebooks) files containing the scripts for the workshop, created with <a href="https://mybinder.org/">binder</a>. The files will include executable code alongside descriptions of what the code is doing. Students can therefore run code that has already been written, but will also write and execute their own R scripts within the Jupyter Notebooks environment. Students will access these notebooks while watching the videos explaining the code.</p>
+<p>We will begin with a general orientation of the Jupyter Notebooks environment. We will then discuss R and provide a basic overview of how it works. This introduction will include reading data into R, installing packages, and some functions for cleaning and restructuring data. We will also discuss Crossref, ORCID, and Unpaywall, and the packages developed by the rOpenSci organization to access the API services of these organizations.</p>
+<p>We will then walk through <code>rcrossref</code>, <code>roadoi</code>, and <code>rorcid</code>.</p>
+<ul>
+<li><code>rcrossref</code> interfaces with the CrossRef API, allowing users to pull article metadata based on ISSN, filter queries by publication date and license information, running queries by title and author, getting funder data, getting citation counts, and exporting to BibTeX, RIS, and CSV. This can be immensely powerful for collecting citation data, conducting literature reviews, creating bibliographies, and more.</li>
+<li><code>roadoi</code> interfaces with Unpaywall, allowing users to input a set of DOIs and return publication information along with potential locations of open access versions.</li>
+<li><code>rorcid</code> interfaces with the ORCID API, allowing users to pull publication data based on a specific ORCID iD, or to input names and other identifying information to find a specific individual’s identifier.</li>
+</ul>
+<p>As we work through the tutorials, students will continue to learn R functions for working with data, including <code>dplyr</code>, <code>purrr</code>, and <code>tidyr</code>.</p>
+<p>By the conclusion of the session, students will be able to work with and analyze data in R. On a deeper level, they will have more powerful tools for gathering subsets of the scholarly literature in clean and structured formats based on specific parameters. Because they will be walking away with executable scripts, they will be able to modify those and collect data based on parameters they are interested in.</p>
+</div>
+<div id="level" class="section level1">
+<h1>Level:</h1>
+<p>All levels</p>
+</div>
+<div id="intended-audience" class="section level1">
+<h1>Intended audience:</h1>
+<p>This course is intended for scholarly communications librarians, repository managers, research funders, publishers, bibliometricians, and managers of Research Information Management Systems (RIMS).</p>
+</div>
+<div id="requirements" class="section level1">
+<h1>Requirements:</h1>
+<p>Students will need a computer with internet access. It will not be necessary to download R or R Studio, as all code will be executed in Jupyter Notebooks in the browser, hosted by binder.</p>
+</div>
+<div id="course-learning-objectives" class="section level1">
+<h1>Course Learning Objectives</h1>
+<p>A participant in this course will, at the end of the course, be able to: - Use R to complete a range of data tasks, including understanding R syntax and data types, installing and loading packages, reading data from files and APIs, and executing functions for tidying and analyzing data. - Use the rorcid package in R to extract data from ORCID profiles, including authenticating with the ORCID API, finding ORCID iDs by name/affiliation, getting author biographical information, and getting works associated with individuals. - Use the rcrossref and roadoi packages in R to extract data from the Crossref and Unpaywall database, including authenticating with the Crossref API, forming queries, getting publication information, getting data on articles, converting articles to BibTeX/RIS, getting citation data, and checking for open access versions.</p>
+</div>
+<div id="course-topics" class="section level1">
+<h1>Course Topics</h1>
+<p>This course will cover these topics: - Introduction to R and RStudio - Introduction to rorcid - Introduction to rcrossref and roadoi</p>
+</div>
+<div id="course-schedule" class="section level1">
+<h1>Course Schedule</h1>
+<p>Following each Zoom session schedule, students will watch the videos and walk through the Jupyter Notebooks exercises.</p>
+<p><strong>LIVE ZOOM SESSION SCHEDULE</strong> (All times Pacific)</p>
+<p>Wednesday, Aug. 5 8-9AM: Introductory session 5-6PM: REPEAT Introductory session</p>
+<p>Monday, Aug. 10 8-9AM: Actvity session 1 5-6PM: REPEAT Activity session 1</p>
+<p>Wednesday, Aug. 12 8-9AM: Activity session 2 5-6PM: REPEAT Activity session 2</p>
+<div id="day-1" class="section level2">
+<h2>Day 1</h2>
+<p>Orientation to Jupyter Notebooks. Introduction to R/RStudio and its advantages over other data tools. Nuts and bolts of R syntax. Installing packages. Using dplyr functions for data manipulation: renaming/recoding/selecting/creating variables, recoding values, ordering data. Introduction to ORCID, the ORCID API, and rorcid. Authenticating rorcid in your R environment. Course outline at <a href="https://ciakovx.github.io/fsci2020/rorcid.html" class="uri">https://ciakovx.github.io/fsci2020/rorcid.html</a>. Finding ORCID iDs by name, iD, email, and affiliation. Constructing queries. Getting biographical metadata (date created, last modified, name, biography, email, keywords) and works metadata (type, title, publication date).</p>
+</div>
+<div id="day-2" class="section level2">
+<h2>Day 2</h2>
+<p>Recap of rorcid, answer outstanding questions. Course outline at <a href="https://ciakovx.github.io/rcrossref.html" class="uri">https://ciakovx.github.io/rcrossref.html</a>. Introduction to Crossref, the Crossref API, and rcrossref. Authenticating rcrossref in your R environment. Getting publication and article data by journal, keyword, and author. Constructing and filtering queries. Writing to CSV, BibTeX, and RIS. Using roadoi to query the Unpaywall API for open access availability. Getting URLs and downloading full text. Putting it all together: gathering IDs of authors affiliated at your university, harvesting their publications, determining funders, OA eligibility, and other questions Course Materials and Supplies Required<br />
+Students will need a laptop with internet access and an account with Microsoft Azure Notebooks at <a href="https://notebooks.azure.com/" class="uri">https://notebooks.azure.com/</a>. Students will download the course code, data, and walkthrough PDFs from <a href="https://ciakovx.github.io/fsci_syllabus.html" class="uri">https://ciakovx.github.io/fsci_syllabus.html</a>. We will do this together during the class.</p>
+</div>
+</div>
+<div id="other-resources" class="section level1">
+<h1>Other Resources</h1>
+<p>If students have time, it is recommended to install and work through the swirl package in R at <a href="https://swirlstats.com/students.html" class="uri">https://swirlstats.com/students.html</a>. This will give them a good introduction to R and RStudio. R cheat sheets base R cheat sheet purrr cheat sheet data transformation cheat sheet data import cheat sheet</p>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = false;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

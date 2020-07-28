@@ -6,19 +6,19 @@ navbar:
     - text: "FSCI 2020 W24 Session"
       menu:
         - text: "Course syllabus"
-          href: fsci2020/fsci2020_syllabus.html
+          href: fsci_syllabus.html
         - text: "Setting Up"
-          href: fsci2020/setup_instructions.html
+          href: setup_instructions.html
         - text: "Introduction to R"
-          href: fsci2020/IntroductionToR.html
+          href: IntroductionToR.html
         - text: "R Basics"
-          href: fsci2020/RBasics.html
+          href: RBasics.html
         - text: "Data Exploration"
-          href: fsci2020/DataExploration.html
+          href: DataExploration.html
         - text: "Exploring Data in Lists"
-          href: fsci2020/jennybc_lists_lesson.html
+          href: jennybc_lists_lesson.html
         - text: "rcrossref"
-          href: fsci2020/rcrossref.html
+          href: rcrossref.html
 output:
   html_document:
     theme: paper
