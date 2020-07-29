@@ -285,11 +285,11 @@ my_osu_orcids <- purrr::map(
   })
 ```
 
-We can then use the `bind_rows()` function from `dplyr` to pull the data together into a single dataframe, and the `clean_names()` function from `janitor`, described below, to make the column names easier to handle. We also introduce here the Pipe Operator, which is also described below.
+We can then use the `map_dfr()` function from `purrr` to pull the data together, coercing it with `as_tibble()`, and the `clean_names()` function from `janitor`, described below, to make the column names easier to handle. We also introduce here the Pipe Operator, which is also described below.
 
 ```{r simple86, eval=TRUE}
 my_osu_orcids_data <- my_osu_orcids %>%
-  dplyr::bind_rows() %>%
+  map_dfr(., as_tibble) %>%
   janitor::clean_names()
 ```
 
@@ -513,6 +513,81 @@ my_orcid_person_data
 
 We now have a nice, neat dataframe of both people's ORCID name data.
 
+## Searching by names
+
+When we want data on multiple people and have only their names, we can build a query. 
+
+Now we can build a query that will work with the `given-names:` and `family-name:` arguments to `query` in `orcid` in order to get the ORICID iDs:
+
+```{r multiple4, eval=TRUE,cache=TRUE}
+profs <- tibble("FirstName" = c("Josiah", "Clarke"),
+                     "LastName" = c("Carberry", "Iakovakis"))
+orcid_query <- paste0("given-names:",
+                      profs$FirstName,
+                      " AND family-name:",
+                      profs$LastName)
+orcid_query
+```
+
+This returns a vector with two queries formatted for nice insertion into `rorcid::orcid()`. We can use `purr::map()` to create a loop. What this is saying is, take each element of `orcid_query` and run a function with it that prints it to the console and runs `rorcid::orcid()` on it, then return each result to `my_orcids_list().` This returns a list of two items. We can then wrap `as_tibble()` in `map_dfr` to create a data frame from those list elements.
+
+```{r multiple5, eval=TRUE,cache=TRUE}
+my_orcids_df <- purrr::map(
+  orcid_query,
+  function(x) {
+    print(x)
+    orc <- rorcid::orcid(x)
+  }
+  ) %>%
+    map_dfr(., as_tibble) %>%
+  janitor::clean_names()
+my_orcids_df
+```
+
+First we want to remove the Carberry row that we don't want (remember that there are two Carberry ORCID accounts, and one doesn't have much data in it). We can do this using the `filter()` function from `dplyr` and the `!=` symbol, which is equivalent to "is not equal to."
+
+```{r multiple5x, eval=TRUE,cache=TRUE}
+my_orcids_df <- my_orcids_df %>%
+  dplyr::filter(orcid_identifier_path != "0000-0002-1028-6941")
+```
+
+This is a data frame of two items. , grab the ORICID iDs, and run the same function we ran above in order to get the name data and the IDs into a single data frame. 
+
+```{r multiple6, eval=TRUE,cache=TRUE}
+my_orcids <- my_orcids_df$orcid_identifier_path
+my_orcid_person <- rorcid::orcid_person(my_orcids)
+my_orcid_person_data <- my_orcid_person %>% {
+    dplyr::tibble(
+      created_date = purrr::map_dbl(., purrr::pluck, "name", "created-date", "value", .default=NA_character_),
+      given_name = purrr::map_chr(., purrr::pluck, "name", "given-names", "value", .default=NA_character_),
+      family_name = purrr::map_chr(., purrr::pluck, "name", "family-name", "value", .default=NA_character_),
+      credit_name = purrr::map_chr(., purrr::pluck, "name", "credit-name", "value", .default=NA_character_),
+      other_names = purrr::map(., purrr::pluck, "other-names", "other-name", "content", .default=NA_character_),
+      orcid_identifier_path = purrr::map_chr(., purrr::pluck, "name", "path", .default = NA_character_),
+      biography = purrr::map_chr(., purrr::pluck, "biography", "content", .default=NA_character_),
+      researcher_urls = purrr::map(., purrr::pluck, "researcher-urls", "researcher-url", .default=NA_character_),
+      emails = purrr::map(., purrr::pluck, "emails", "email", "email", .default=NA_character_),
+      keywords = purrr::map(., purrr::pluck, "keywords", "keyword", "content", .default=NA_character_),
+      external_ids = purrr::map(., purrr::pluck, "external-identifiers", "external-identifier", .default=NA_character_)
+    )} %>%
+  dplyr::mutate(created_date = anytime::anydate(created_date/1000))
+my_orcid_person_data
+```
+
+This will be exactly the same thing as we saw above, however we got it from a simple vector of names.
+
+# Splitting Names
+
+If the names you have are not already separated into first and last name variables, here is a trick to do that:
+
+Create a tibble using the `tibble()` function from the `dplyr` package. Then, use the `extract()` function from `tidyr`, along with some [regular expressions](https://www.rexegg.com/regex-quickstart.html), to create a first and last name variable:
+
+```{r multiple3, eval=TRUE,cache=TRUE}
+my_names <- dplyr::tibble("name" = c("Josiah Carberry", "Clarke Iakovakis"))
+my_clean_names <- my_names %>%
+  tidyr::extract(name, c("FirstName", "LastName"), "([^ ]+) (.*)")
+my_clean_names
+```
 
 ## Unnesting
 
@@ -619,11 +694,29 @@ Like `orcid_person()`, these functions require an ORICID iD, and do not use the 
 ```{r works1, eval=TRUE,cache=TRUE}
 carberry_orcid <- c("0000-0002-1825-0097")
 carberry_works <- rorcid::works(carberry_orcid) %>%
-  janitor::clean_names()
+  as_tibble() %>%
+  janitor::clean_names() %>%
+  dplyr::mutate(created_date_value = anytime::anydate(created_date_value/1000))
 carberry_works
 ```
 
 Dr. Carberry has seven works. Because ORCID data can be manually entered, the integrity, completeness, and consistency of this data will sometimes vary. 
+
+You can see the **external_ids_external_id** column is actually a nested list, a concept we discussed above. This can be unnested with the `tidyr::unnest()` function. Just as a single researcher can have multiple identifiers, a single work may also have multiple identifiers (e.g., DOI, ISSN, EID). If that is the case, when this column is unnested, there will be repeating rows for those items.
+
+```{r works2, eval=TRUE,cache=TRUE}
+carberry_works_ids <- carberry_works %>%
+  tidyr::unnest(external_ids_external_id) %>%
+  janitor::clean_names()
+carberry_works_ids
+```
+
+In this case, we now have 13 observations of 27 variables rather than 7 observations of 24 variables. The extra rows are there because all but one of the works has two external identifiers. The extra columns are there because four new columns were added with the unnest (that's why we had to clean the names again): 
+
+* **external_id_type** identifies the type of external identifier--see a list of [supported identifiers in ORCID](https://pub.orcid.org/v2.0/identifiers). (required)
+* **external_id_value**: contains the identifier itself (required)
+* **external_id_url:**  contains a link the identifier will resolve to (optional)
+* **external_id_relationship**: indicates if the identifier refers to the item itself (`SELF`), such as a DOI or a person identifier, or a whole that the item is part of (`PART_OF`), such as an ISSN for a journal article.
 
 So we can follow one of the three strategies outlined above if we want to write this to a CSV file: 1) unnest the column (as above), 2) drop the nested lists, or 3) mutate them into character vectors. 
 

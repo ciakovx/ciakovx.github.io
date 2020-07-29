@@ -263,7 +263,7 @@ my_osu_orcid_count <- base::attr(rorcid::orcid(query = 'ringgold-org-id:7618 OR
 my_osu_orcid_count
 ```
 
-There are 1,418 records. Next we will first create a numeric vector using `seq` that starts with 0 and ends with 1418, adding 200 to each value. 
+There are 1,418 records. Next we will first create a numeric vector using `seq` that starts with 0 and ends with 1898, adding 200 to each value. 
 
 ```{r simple84, eval=TRUE}
 my_pages <- seq(from = 0, to = my_osu_orcid_count, by = 200)
@@ -289,7 +289,7 @@ We can then use the `bind_rows()` function from `dplyr` to pull the data togethe
 
 ```{r simple86, eval=TRUE}
 my_osu_orcids_data <- my_osu_orcids %>%
-  dplyr::bind_rows() %>%
+  map_dfr(., as_tibble) %>%
   janitor::clean_names()
 ```
 
@@ -727,6 +727,7 @@ Like `orcid_person()`, these functions require an ORICID iD, and do not use the 
 ```{r works1, eval=TRUE,cache=TRUE}
 carberry_orcid <- c("0000-0002-1825-0097")
 carberry_works <- rorcid::works(carberry_orcid) %>%
+  as_tibble() %>%
   janitor::clean_names() %>%
   dplyr::mutate(created_date_value = anytime::anydate(created_date_value/1000))
 carberry_works
