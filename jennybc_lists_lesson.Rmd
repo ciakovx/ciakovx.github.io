@@ -1,5 +1,6 @@
 ---
 title: "Exploring and Extracting Data in Lists"
+author: "Jenny Bryan, adapted by Clarke Iakovakis"
 output: 
   html_document:
     df_print: paged

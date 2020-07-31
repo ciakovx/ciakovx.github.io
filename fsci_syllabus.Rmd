@@ -1,5 +1,6 @@
 ---
 title: "FSCI 2020: W24 Syllabus - Working with Scholarly Literature in R: Pulling, Wrangling, Cleaning, and Analyzing Structured Bibliographic Metadata."
+author: "Clarke Iakovakis"
 output: 
   html_document:
     df_print: paged
@@ -71,8 +72,11 @@ This course will cover these  topics:
 ### Live Zoom Session (All times Pacific)
 8-9AM: Introductory session
 5-6PM: REPEAT Introductory session
+[Convert time](https://www.thetimezoneconverter.com/)
 
-### Exercises & Videos (complete by 8/5)
+### Exercises & Videos 
+
+Try to complete this by beginning of class, but it's fine if you push it to the weekend.
 
 1. Using Jupyter Notebooks (*required*): 30 minutes
 * Launch the Using Jupyter Notebooks Jupyter Notebook at [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=using_jupyter_notebooks.ipynb)
@@ -88,6 +92,7 @@ This course will cover these  topics:
 ### Live Zoom Session (All times Pacific)
 8-9AM: Actvity session 1
 5-6PM: REPEAT Activity session 1
+[Convert time](https://www.thetimezoneconverter.com/)
 
 ### Exercises (complete by 8/12)
 
@@ -108,20 +113,11 @@ Introduction to Crossref, the Crossref API, and rcrossref. Authenticating rcross
 Getting publication and article data by journal, keyword, and author. Constructing and filtering queries. Writing to CSV, BibTeX, and RIS. Using roadoi to query the Unpaywall API for open access availability. Getting URLs and downloading full text.
 
 
-Putting it all together: gathering IDs of authors affiliated at your university, harvesting their publications, determining funders, OA eligibility, and other questions
-
-
-
-
-
-
-
-
-
-### Live Zoom Session
+### Live Zoom Session (All times Pacific)
 Wednesday, Aug. 12
 8-9AM: Activity session 2
 5-6PM: REPEAT Activity session 2
+[Convert time](https://www.thetimezoneconverter.com/)
 
 6. Exploring Data in Lists (*optional*): 1 hour
 * Skim the [Exploring Data in Lists](fsci2020/jennybc_lists_lesson.html) webpage for a tutorial by Jenny Bryan on using `purrr` to explore and extract data from lists. Our API calls pull data into our session in nested lists, so this tutorial is helpful for managing that.

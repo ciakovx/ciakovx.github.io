@@ -85,8 +85,61 @@ usethis::edit_r_environ()
 
 A new window will open in R Studio. Type `ORCID_TOKEN="my-token"`, replacing `my-token` with the API key. **Then press enter to create a new line, and leave it blank.** It will look like something like this (below is a fake token):
 
+```{r addkey2, eval=FALSE}
+ORCID_TOKEN="4dsw1e14-7212-4129-9f07-aaf7b88ba88f"
+```
+
+Press <kbd>Ctrl</kbd> + <kbd>S</kbd> (Mac: <kbd>Cmd</kbd> + <kbd>S</kbd> to save the API key to your R environment and close the window. In R Studio, click Session > Restart R. Your token should now be saved to your R environment. You can confirm this by calling `orcid_auth()`, and it will print the token.
+
+### Option 2
+
+If this does not work for you, there is another option:
+
+1. Sign in to your ORCID account
+2. In the upper right corner, click your name, then in the drop-down menu, click **Developer Tools**. Note: In order to access Developer Tools, you must verify your email address. If you have not already verified your email address, you will be prompted to do so at this point.
+4. Click the **"Register for the free ORCID public API"** button
+5. Review and agree to the terms of service when prompted.
+6. Add your name in the Name field, https://www.orcid.org in the Your Website URL field, "Getting public API key" in Description field, and https://www.orcid.org in the redirect URI field. Click the diskette button to save.
+7. A gray box will appear including your Client ID and Client Secret. In the below code chunk, copy and paste the client ID and the client secret respectively. Make sure to leave the quotation marks (e.g. `orcid_client_id <- "APP-FDFJKDSLF320SDFF"` and `orcid_client_secret <- "c8e987sa-0b9c-82ed-91as-1112b24234e"`). Then execute the code chunk.
+
+```{r, eval=FALSE}
+# copy/paste your client ID from https://orcid.org/developer-tools
+orcid_client_id <- "APP-UXL71DIF91UFKDA"
+
+# copy/paste your client secret from https://orcid.org/developer-tools
+orcid_client_secret <- "c7e221dc-0b9c-48cf-92sq-24446b8490231e"
+```
+
+8. Now execute the below code, which will send a `POST` request (from the `httr` package) to ORCID and return to you an access token.
+
+```{r, eval=FALSE}
+orcid_request <- POST(url  = "https://orcid.org/oauth/token",
+          config = add_headers(`Accept` = "application/json",
+                               `Content-Type` = "application/x-www-form-urlencoded"),
+          body = list(grant_type = "client_credentials",
+                      scope = "/read-public",
+                      client_id = orcid_client_id,
+                      client_secret = orcid_client_secret),
+          encode = "form")
+```
+
+Now that we have the response, we can use `content` from `httr` to get the information we want. If you look at the result, you'll see it includes a variable called `access_token`.
+
+```{r, eval=FALSE}
+orcid_response <- content(orcid_request)
+print(orcid_response$access_token)
+```
+
+Copy that to the clipboard. Now you can use the `edit_r_environ()` function from the `usethis` package to store the token in your R environment. 
+
+```{r, eval=FALSE}
+usethis::edit_r_environ()
+```
+
+A new window will open in R Studio. Type `ORCID_TOKEN="my-token"`, pasting `my-token` with the `access_token` you just copied. **Then press enter to create a new line, and leave it blank.** It will look like something like this (below is a fake token):
+
 ```{r addkey, eval=FALSE}
-ORCID_TOKEN="4bed1e13-7792-4129-9f07-aaf7b88ba88f"
+ORCID_TOKEN="4dsw1e14-7212-4129-9f07-aaf7b88ba88f"
 ```
 
 Press <kbd>Ctrl</kbd> + <kbd>S</kbd> (Mac: <kbd>Cmd</kbd> + <kbd>S</kbd> to save the API key to your R environment and close the window. In R Studio, click Session > Restart R. Your token should now be saved to your R environment. You can confirm this by calling `orcid_auth()`, and it will print the token.
@@ -216,7 +269,7 @@ Sometimes different entities on campus will have separate Ringgold IDs; you may 
 ## Name and email address domain
 
 We can search by name and email address domain by using an asterisk followed by the domain name
-```{r simple71, eval=FALSE}
+```{r simple71x, eval=FALSE}
 clarke <- rorcid::orcid_search(family_name = 'iakovakis',
                                email = '*@okstate.edu')
 clarke

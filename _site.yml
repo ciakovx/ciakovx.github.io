@@ -19,6 +19,8 @@ navbar:
           href: jennybc_lists_lesson.html
         - text: "rcrossref"
           href: rcrossref.html
+        - text: "rorcid"
+          href: rorcid.html
 output:
   html_document:
     theme: paper

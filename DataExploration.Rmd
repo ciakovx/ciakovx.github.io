@@ -1,5 +1,6 @@
 ---
 title: "Data Exploration"
+author: "Clarke Iakovakis"
 output: 
   html_document:
     df_print: paged
