@@ -7,8 +7,6 @@ navbar:
       menu:
         - text: "Course syllabus"
           href: fsci_syllabus.html
-        - text: "Setting Up"
-          href: setup_instructions.html
         - text: "Introduction to R"
           href: IntroductionToR.html
         - text: "R Basics"

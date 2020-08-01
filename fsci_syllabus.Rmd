@@ -17,6 +17,12 @@ Hello everyone. I'm looking forward to our session at [FSCI 2020](https://www.fo
 
 This entire course is distributed under a [Creative Commons Attribution 4.0 International (CC BY 4.0) License](https://creativecommons.org/licenses/by/4.0/).
 
+The OSF home is at <https://osf.io/hd4re/>
+
+Click the button below to launch the Binder repo:
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master)
+
+
 To view the course structure and exercises, see below Course Schedule:
 
 * [Day One](https://ciakovx.github.io/fsci_syllabus.html#DAY_ONE:_Wednesday,_August_5)
@@ -98,7 +104,7 @@ Try to complete this by beginning of class, but it's fine if you push it until a
 ## DAY TWO: Monday, August 10
 
 ### Live Zoom Session (All times Pacific)
-* 8-9AM: Actvity session 1
+* 8-9AM: Activity session 1
 * 5-6PM: REPEAT Activity session 1
 
 [Convert time](https://www.thetimezoneconverter.com/)
@@ -107,7 +113,7 @@ Try to complete this by beginning of class, but it's fine if you push it until a
 
 **3. R Basics (*required*): 1 hour**
 * Launch the R Basics Jupyter Notebook at [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=RBasics.ipynb)
-* Watch the R Basics video tutorial at
+* Watch the R Basics video tutorial at <COMING SOON>
 * Skim the [R Basics](RBasics.html) webpage. Most of this content is covered in the R Basics Jupyter Notebook.
 
 
@@ -117,8 +123,8 @@ Try to complete this by beginning of class, but it's fine if you push it until a
 * Skim the [Data Exploration](DataExploration.html) webpage for information on getting data into R, exploring and transforming data, particularly using `dplyr`. Some of these functions will be used in the `rcrossref` and `rorcid` tutorials, but they will be explained as we are running through them.
 
 **5. rcrossref & roadoi (*required*): 1 hour**
-* Launch the `rcrossref` & `roadoi` Jupyter Notebook at 
-* Watch the `rcrossref` and `roadoi` video tutorial at 
+* Launch the `rcrossref` & `roadoi` Jupyter Notebook at [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=rcrossref.ipynb)
+* Watch the `rcrossref` and `roadoi` video tutorial at <COMING SOON>
 * Skim the * [rcrossref](rcrossref.html) webpage. Much of this content is identical to that on the Jupyter Notebook.
 
 ## DAY THREE: Wednesday, Aug. 12
@@ -130,26 +136,25 @@ Try to complete this by beginning of class, but it's fine if you push it until a
 
 [Convert time](https://www.thetimezoneconverter.com/)
 
-6. Exploring Data in Lists (*optional*): 1 hour
+**6. Exploring Data in Lists (*optional*): 1 hour**
 * Skim the [Exploring Data in Lists](fsci2020/jennybc_lists_lesson.html) webpage for a tutorial by Jenny Bryan on using `purrr` to explore and extract data from lists. Our API calls pull data into our session in nested lists, so this tutorial is helpful for managing that.
 * No Notebook or video for this lesson
 
-8. [rorcid](fsci2020/rorcid.html)
-* Access the `rorcid` Jupyter Notebook at 
-* Watch the `rorcid` video tutorial at 
+**8. [rorcid](fsci2020/rorcid.html)**
+* Access the `rorcid` Jupyter Notebook at [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=rorcid.ipynb)
+* Watch the `rorcid` video tutorial at <COMING SOON>
 * Skim the [rorcid](rorcid.html) webpage. Much of this content is identical to that on the Jupyter Notebook.
-
-
-
 
 # Course Materials and Supplies Required  
 Students will need a computer with internet access. 
 
 # Other Resources
-If students have time, it is recommended to install and work through the swirl package in R at https://swirlstats.com/students.html. This will give them a good introduction to R and RStudio.
-R cheat sheets
-base R cheat sheet
-purrr cheat sheet
-data transformation cheat sheet
-data import cheat sheet
+The more time you spend reviewing the lessons on the course webpage and practicing R, the better. 
 
+Here are some useful cheat sheets:
+
+* [Base R Cheat Sheet](https://paulvanderlaken.files.wordpress.com/2017/08/base-r-cheetsheat.pdf) by Mhairi McNeill
+* [Data Transformation with dplyr Cheat Sheet](https://github.com/rstudio/cheatsheets/blob/master/data-transformation.pdf) by RStudio
+* [Data Wrangling with dplyr and tidyr Cheat Sheet](https://paulvanderlaken.files.wordpress.com/2017/08/ddplyr-cheatsheet-data-wrangling-plyr.pdf) by RStudio
+* [Jupyter Notebooks Cheat Sheet](https://www.edureka.co/blog/wp-content/uploads/2018/10/Jupyter_Notebook_CheatSheet_Edureka.pdf)
+* [Complete list of RStudio cheatsheets](https://github.com/rstudio/cheatsheets/)
