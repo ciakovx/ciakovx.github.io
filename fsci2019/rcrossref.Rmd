@@ -25,6 +25,11 @@ library(curl)
 library(png)
 ```
 
+# Licensing
+
+This walkthrough is distributed under a [Creative Commons Attribution 4.0 International (CC BY 4.0) License](https://creativecommons.org/licenses/by/4.0/).
+
+
 # Downloading R & R Studio
 
 To download R, go to <https://www.r-project.org/>. Click on CRAN (Comprehensive R Archive Network) under Download, and scroll down to your country. Select the download link corresponding to the city that is geographically closest to you.

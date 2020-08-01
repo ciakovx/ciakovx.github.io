@@ -26,7 +26,8 @@ library(png)
 
 This guide accompanies the first day of instruction for our course at the 2020 FORCE11 Scholarly Communications Institute: ["W24 - Working with Scholarly Literature in R: Pulling, Wrangling, Cleaning, and Analyzing Structured Bibliographic Metadata."](https://www.force11.org/fsci/2020/fsci-2020-course-abstracts#W24). It covers the essentials of what R is.
 
-It is distributed under a [https://creativecommons.org/licenses/by/4.0/](Creative Commons Attribution 4.0 International (CC BY 4.0) License).  
+This walkthrough is distributed under a [Creative Commons Attribution 4.0 International (CC BY 4.0) License](https://creativecommons.org/licenses/by/4.0/).
+
 
 ```{r,fig.height=1,echo=FALSE}
 cc <- readPNG(file.path("./images/cc.png"))

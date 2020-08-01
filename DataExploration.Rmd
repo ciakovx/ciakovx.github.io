@@ -13,7 +13,7 @@ library(tidyverse)
 knitr::opts_chunk$set(echo = TRUE, cache = TRUE, eval=TRUE)
 ```
 
-This is distributed under a [https://creativecommons.org/licenses/by/4.0/](Creative Commons Attribution 4.0 International (CC BY 4.0) License).  
+This walkthrough is distributed under a [Creative Commons Attribution 4.0 International (CC BY 4.0) License](https://creativecommons.org/licenses/by/4.0/).
 
 ```{r,fig.height=1,echo=FALSE}
 cc <- readPNG(file.path("./images/cc.png"))

@@ -19,7 +19,7 @@ library(repurrrsive)
 
 ## Attribution
 
-This lesson was created and is copyrighted by Jenny Bryan, distributed under the terms of a [Creative Commons BY-NC 4.0 License](http://creativecommons.org/licenses/by-nc/4.0/)
+This lesson was created and is copyrighted by Jenny Bryan, distributed under the terms of a [Creative Commons BY-NC 4.0 License](http://creativecommons.org/licenses/by-nc/4.0/). It has been adapted by Clarke Iakovakis and the adaptation is likewise distributed under a [Creative Commons BY-NC 4.0 License](http://creativecommons.org/licenses/by-nc/4.0/).
 
 ```{r,fig.height=1,echo=FALSE}
 cc <- readPNG(file.path("./images/cc bync.png"))
