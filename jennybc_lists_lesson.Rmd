@@ -9,7 +9,6 @@ output:
       collapsed: false
       smooth_scroll: false
     toc_depth: 3
-    css: styles.css
 ---
 
 ```{r, echo = FALSE}

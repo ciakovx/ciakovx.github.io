@@ -25,3 +25,4 @@ output:
   html_document:
     theme: paper
     css: 'styles.css'
+    df_print: paged

@@ -13,10 +13,8 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, tidy=TRUE, cache = TRUE)
-library(kableExtra)
 library(knitr)
 library(tidyverse)
-library(tibble)
 library(janitor)
 library(png)
 library(rcrossref)
@@ -260,6 +258,11 @@ jah_jama_publications %>%
 
 You can use the `filter` argument within `cr_journals` to specify some parameters as the query is executing. This filter is built into the Crossref API query. See the available filters by calling `rcrossref::filter_names()`, and details by calling `rcrossref::filter_details`. It's also in [the API documentation](https://github.com/CrossRef/rest-api-doc#filter-names).
 
+```{r filternames, echo=FALSE}
+kable(rcrossref::filter_names(), format = "html") %>%
+  kableExtra::kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"))
+```
+
 ### Filtering by publication date with `from_pub_date` and `until_pub_date`
 For example, you may only want to pull publications from a given year, or within a date range. Remember to increase the limit or use `cursor` if you need to. Also notice three things about the `filter` argument:
 
@@ -487,7 +490,7 @@ jlsc_publications_auth %>%
 
 # Viewing the JSON file
 
-You can view these files in a JSON viewer using the `toJSON()` function from the `jsonlite` package.
+You can view these files in a JSON viewer using `jsonedit()` from the `listviewer` package. Note especially the last few variables. These are nested lists, as a single article can have multiple authors, and each author has a given name, family name, and sequence of authorship.
 
 ```{r}
 # assign the PLOS ISSN and get the last 25 articles on deposit
@@ -495,25 +498,20 @@ plosone_issn <- '1932-6203'
 plosone_publications <- cr_journals(issn = plosone_issn, works = TRUE, limit = 5) %>%
   pluck("data")
 
+listviewer::jsonedit(plosone_publications, mode = "view")
+```
+
+To save the JSON output, first use `toJSON()`, then `write_json()` from `jsonlite`.
+
+```{r savejson, eval=FALSE}
 # use the toJSON function to convert the output to JSON
 plosone_publications_json <- jsonlite::toJSON(plosone_publications)
-```
 
-Print the JSON, triple click inside the box to highlight the text, and copy it to the clipboard.
-
-```{r}
-# print the JSON
-plosone_publications_json
-```
-
-Go to [Code Beautify](https://codebeautify.org/jsonviewer) and paste the JSON on the left side. Click **Tree Viewer** to view the data. Open the first item to view the metadata. Note especially the last few variables. These are nested lists, as a single article can have multiple authors, and each author has a given name, family name, and sequence of authorship.
-
-To write to JSON, use `jsonlite::write_json()`
-
-```{r,eval=FALSE}
 # write a JSON file
 jsonlite::write_json(plosone_publications_json, "plosone_publications.json")
 ```
+
+You can also open the json in an online json viewer such as [Code Beautify](https://codebeautify.org/jsonviewer). Either open a file or paste the JSON output on the left side. Click **Tree Viewer** to view the data. 
 
 # Using `cr_works()` to get data on articles
 
@@ -521,7 +519,7 @@ jsonlite::write_json(plosone_publications_json, "plosone_publications.json")
 
 It is important to note, as Crossref does [in the documentation](https://github.com/CrossRef/rest-api-doc/blob/master/demos/crossref-api-demo.ipynb):
 
-&gt; Crossref does not use "works" in the FRBR sense of the word. In Crossref parlance, a "work" is just a thing identified by a DOI. In practice, Crossref DOIs are used as citation identifiers. So, in FRBR terms, this means, that a Crossref DOI tends to refer to one *expression* which might include multiple *manifestations*. So, for example, the ePub, HTML and PDF version of an article will share a Crossref DOI because the differences between them should not effect the interpretation or crediting of the content. In short, they can be cited interchangeably. The same is true of the "accepted manuscript" and the "version-of-record" of that accepted manuscript.
+> Crossref does not use "works" in the FRBR sense of the word. In Crossref parlance, a "work" is just a thing identified by a DOI. In practice, Crossref DOIs are used as citation identifiers. So, in FRBR terms, this means, that a Crossref DOI tends to refer to one *expression* which might include multiple *manifestations*. So, for example, the ePub, HTML and PDF version of an article will share a Crossref DOI because the differences between them should not effect the interpretation or crediting of the content. In short, they can be cited interchangeably. The same is true of the "accepted manuscript" and the "version-of-record" of that accepted manuscript.
 
 
 ## Searching by DOI
@@ -591,7 +589,27 @@ See https://ciakovx.github.io/rcrossref.html#unnesting_list_columns for more det
 
 ## Getting more than 1000 results with the `cursor` argument to `cr_journals`
 
-If our result will have more than 1000 results, we have to use the `cursor` argument. We will not be covering this in this class, but see https://ciakovx.github.io/rcrossref.html#getting_more_than_1000_results_with_the_cursor_argument_to_cr_journals for instructions on how to do it.
+If our result will have more than 1000 results, we have to use the `cursor` argument. Here we will look at the journal *Philosophical Transactions*, the longest running scientific journal in the world. We first run `cr_journals` with `works` set to `FALSE` in order to get the journal details, specifically to find out how many articles from this journal are indexed in Crossref.
+
+```{r cursor, eval=TRUE,cache=TRUE,echo=TRUE}
+philo_issn <- '2053-9223'
+philo_details <- rcrossref::cr_journals(philo_issn, works = FALSE) %>%
+  pluck("data")
+philo_details$total_dois
+```
+
+Because there are 8,534 articles, we need to pass the `cursor` argument to `cr_journals`, which is called "deep paging." As described by [Paul Oldham](https://poldham.github.io/abs/crossref.html):
+
+> "the CrossRef API also permits deep paging (fetching results from multiple pages). We can retrieve all the results by setting the cursor to the wildcard * and the cursor_max to the total results. Note that the cursor and the cursor_max arguments must appear together for this to work."
+
+See more in the [API documentation](https://github.com/CrossRef/rest-api-doc#deep-paging-with-cursors)
+
+We set `cursor` to `*` and `max` to the maximum number of results to return. 
+
+```{r cursor2, eval=FALSE,cache=TRUE,echo=TRUE}
+philo_articles <- rcrossref::cr_journals(philo_issn, works = TRUE, cursor = "*", cursor_max = 8534) %>%
+  pluck("data")
+```
 
 ## Running general queries on `cr_works()`
 

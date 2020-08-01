@@ -3,21 +3,18 @@ title: "rorcid walkthrough"
 author: "Clarke Iakovakis"
 output: 
   html_document:
+    df_print: paged
     toc: true
     toc_float:
       collapsed: false
       smooth_scroll: false
     toc_depth: 3
-    df_print: paged
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, tidy=FALSE, cache = TRUE)
-library(kableExtra)
 library(knitr)
 library(tidyverse)
-library(tibble)
-library(prettydoc)
 library(listviewer)
 library(janitor)
 library(rorcid)
@@ -163,7 +160,7 @@ carberry
 
 Looking at the data frame in your R environment, you will see it returns 10 observations of three variables. By default, `orcid_search` returns a limit of 10. We can increase the number of results returned by using the `rows` argument:
 
-```{r simplexx, eval=TRUE, cache=TRUE}
+```{r simplexx, eval=TRUE, cache=TRUE, paged.print=TRUE}
 carberry <- rorcid::orcid_search(family_name = 'carberry',
                                  rows = 50)
 carberry
@@ -188,7 +185,12 @@ rorcid::browse(carberry$orcid[2])
 
 When we look at the profiles on the web, we that the first (0000-0002-1028-6941) is more recent and less complete, and the second (0000-0002-1825-0097) has much more data. 
 
-What other fields can we search? Call `View(rorcid:::field_match_list)` to see a map of arguments.
+What other fields can we search? Call `View(rorcid:::fields)` to see a map of arguments.
+
+```{r printfields, echo=FALSE}
+kable(rorcid::fields, format = "html") %>%
+  kableExtra::kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"))
+```
 
 ## Affiliation name
 
@@ -316,7 +318,7 @@ my_osu_orcid_count <- base::attr(rorcid::orcid(query = 'ringgold-org-id:7618 OR
 my_osu_orcid_count
 ```
 
-There are 1,897 records at the time of writing. Next we will first create a numeric vector using `seq` that starts with 0 and ends with 1897, adding 200 to each value incrementally. 
+There are 1,903 records at the time of writing. Next we will first create a numeric vector using `seq` that starts with 0 and ends with 1903 (which has been assigned to `my_osu_orcid_count`), adding 200 to each value incrementally. 
 
 ```{r simple84, eval=TRUE}
 my_pages <- seq(from = 0, to = my_osu_orcid_count, by = 200)
@@ -340,7 +342,7 @@ my_osu_orcids <- purrr::map(
 
 We can then use the `map_dfr()` function from `purrr` to pull the data together, coercing it with `as_tibble()`, and the `clean_names()` function from `janitor`, described below, to make the column names easier to handle. We also introduce here the Pipe Operator, which is also described below.
 
-```{r simple86, eval=TRUE}
+```{r simple86, eval=FALSE}
 my_osu_orcids_data <- my_osu_orcids %>%
   map_dfr(., as_tibble) %>%
   janitor::clean_names()

@@ -1,9 +1,6 @@
 base
 png
-tinytex
 knitr
-printr
-xtable
 tidyverse
 ggplot2
 tibble
@@ -19,3 +16,5 @@ rorcid
 repurrrsive
 prettydoc
 listviewer
+rcrossref
+roadoi

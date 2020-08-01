@@ -14,14 +14,8 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, cache = TRUE)
-library(kableExtra)
 library(knitr)
 library(tidyverse)
-library(tibble)
-library(prettydoc)
-library(listviewer)
-library(janitor)
-library(rorcid)
 library(png)
 ```
 

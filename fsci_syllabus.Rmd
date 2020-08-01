@@ -70,8 +70,8 @@ This course will cover these  topics:
 ## DAY ONE: Wednesday, August 5
 
 ### Live Zoom Session (All times Pacific)
-8-9AM: Introductory session
-5-6PM: REPEAT Introductory session
+* 8-9AM: Introductory session
+* 5-6PM: REPEAT Introductory session
 [Convert time](https://www.thetimezoneconverter.com/)
 
 ### Exercises & Videos 
@@ -90,8 +90,8 @@ Try to complete this by beginning of class, but it's fine if you push it to the 
 ## Monday, August 10
 
 ### Live Zoom Session (All times Pacific)
-8-9AM: Actvity session 1
-5-6PM: REPEAT Activity session 1
+* 8-9AM: Actvity session 1
+* 5-6PM: REPEAT Activity session 1
 [Convert time](https://www.thetimezoneconverter.com/)
 
 ### Exercises (complete by 8/12)
@@ -115,8 +115,8 @@ Getting publication and article data by journal, keyword, and author. Constructi
 
 ### Live Zoom Session (All times Pacific)
 Wednesday, Aug. 12
-8-9AM: Activity session 2
-5-6PM: REPEAT Activity session 2
+* 8-9AM: Activity session 2
+* 5-6PM: REPEAT Activity session 2
 [Convert time](https://www.thetimezoneconverter.com/)
 
 6. Exploring Data in Lists (*optional*): 1 hour
