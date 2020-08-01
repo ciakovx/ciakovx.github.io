@@ -594,7 +594,7 @@ my_orcids_df <- purrr::map(
     orc <- rorcid::orcid(x)
   }
   ) %>%
-    map_dfr(., as_tibble) %>%
+    purrr::map_dfr(., as_tibble) %>%
   janitor::clean_names()
 my_orcids_df
 ```
@@ -692,7 +692,8 @@ If you take a look at the data, you will see that there is no variable indicatin
 
 ```{r employment2, eval=TRUE, cache=TRUE}
 clarke_employment_data_current <- clarke_employment_data %>%
-  filter(is.na(employment_summary_end_date_year_value))
+  dplyr::filter(is.na(employment_summary_end_date_year_value))
+clarke_employment_data_current
 ```
 
 This will remove my previous two institutions, and keep only my current one: Oklahoma State University.
@@ -713,29 +714,34 @@ my_osu_employment_data <- my_osu_employment %>%
   dplyr::mutate(employment_summary_end_date = anytime::anydate(employment_summary_end_date/1000),
                 employment_summary_created_date_value = anytime::anydate(employment_summary_created_date_value/1000),
                 employment_summary_last_modified_date_value = anytime::anydate(employment_summary_last_modified_date_value/1000))
+my_osu_employment_data
 ```
 
 First, let's rename some of the long names by removing some of the words. We'll do this using the `str_replace` function from `stringr`. You can think of this as analogous to Find + Replace in word processing. We take the `names()` of the data, and replace each of the phrases with nothing (i.e. the set of empty quotes).
 
 ```{r employment4, eval=TRUE, cache=TRUE}
+names(my_osu_employment_data)
 names(my_osu_employment_data) <- names(my_osu_employment_data) %>%
   stringr::str_replace(., "employment_summary_", "") %>%
   stringr::str_replace(., "source_source_", "") %>%
   stringr::str_replace(., "organization_disambiguated_", "")
+names(my_osu_employment_data)
 ```
 
 Note that this may have multiple entries per person because it gathered their entire employment history. Now let's take a look at how many of these have Oklahoma State listed in their organization name:
 
 ```{r employment5, eval=TRUE, cache=TRUE}
 my_osu_employment_data_OSU <- my_osu_employment_data %>%
-  filter(organization_name == "Oklahoma State University Stillwater")
+  dplyr::filter(organization_name == "Oklahoma State University Stillwater")
+my_osu_employment_data_OSU
 ```
 
 Out of this set of 10 iDs, only 4 have OSU listed in their employment. The others may have achieved their degree from OSU, or done some service with OSU. Now, out of those 4, let's see how many are listed as current employees, as indicated with an `NA` in their `end_date_year_value`.
 
 ```{r employment5x, eval=TRUE, cache=TRUE}
 my_osu_employment_data_OSU_current <- my_osu_employment_data_OSU %>%
-  filter(is.na(end_date_year_value))
+  dplyr::filter(is.na(end_date_year_value))
+my_osu_employment_data_OSU_current
 ```
 
 # Getting Works with `rorcid::works()` and `rorcid::orcid_works()`
@@ -803,7 +809,7 @@ We run into a problem here when we try to unnest the external IDs:
 
 ```{r works5, eval=FALSE}
 my_works_externalIDs <- my_works_data %>%
-  unnest(external_ids_external_id)
+  tidyr::unnest(external_ids_external_id)
 ```
 
 The error message reads: `"Error: Each column must either be a list of vectors or a list of data frames [external_ids_external_id]".` This is because some of the list columns are empty. We can just filter them out before unnesting:
