@@ -8,8 +8,7 @@ output:
     toc_float:
       collapsed: false
       smooth_scroll: false
-    toc_depth: 3
-    css: styles.css
+    toc_depth: 2
 ---
 
 ```{r setup, include=FALSE}

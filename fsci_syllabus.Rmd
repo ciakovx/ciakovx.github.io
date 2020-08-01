@@ -8,7 +8,7 @@ output:
     toc_float:
       collapsed: false
       smooth_scroll: false
-    toc_depth: 3
+    toc_depth: 2
 ---
 
 # Intro
@@ -83,10 +83,11 @@ This course will cover these  topics:
 
 ## DAY ONE: Wednesday, August 5
 
-### Live Zoom Session (All times Pacific)
+### Live Zoom Sessions 
 * 8-9AM: Introductory session
 * 5-6PM: REPEAT Introductory session
 
+**ALL TIMES PACIFIC**
 [Convert time](https://www.thetimezoneconverter.com/)
 
 ### Exercises & Videos 
@@ -103,10 +104,11 @@ Try to complete this by beginning of class, but it's fine if you push it until a
 
 ## DAY TWO: Monday, August 10
 
-### Live Zoom Session (All times Pacific)
+### Live Zoom Sessions 
 * 8-9AM: Activity session 1
 * 5-6PM: REPEAT Activity session 1
 
+**ALL TIMES PACIFIC**
 [Convert time](https://www.thetimezoneconverter.com/)
 
 ### Exercises (complete by 8/12)
@@ -130,10 +132,11 @@ Try to complete this by beginning of class, but it's fine if you push it until a
 ## DAY THREE: Wednesday, Aug. 12
 
 
-### Live Zoom Session (All times Pacific)
+### Live Zoom Sessions
 * 8-9AM: Activity session 2
 * 5-6PM: REPEAT Activity session 2
 
+**ALL TIMES PACIFIC**
 [Convert time](https://www.thetimezoneconverter.com/)
 
 **6. Exploring Data in Lists (*optional*): 1 hour**

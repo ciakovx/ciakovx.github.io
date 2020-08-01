@@ -4,9 +4,14 @@ author: "Clarke Iakovakis"
 output: 
   html_document:
     df_print: paged
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+    toc_depth: 2
 ---
 
-```{r setup, include=FALSE, eval=TRUE, tidy=TRUE}
+```{r setup, include=FALSE}
 library(png)
 library(knitr)
 library(tidyverse)

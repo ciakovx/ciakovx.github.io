@@ -16,7 +16,7 @@
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
+<link href="site_libs/bootstrap-3.3.5/css/spacelab.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
@@ -113,33 +113,33 @@ summary {
 <style type="text/css">
 /* padding for bootstrap navbar */
 body {
-  padding-top: 64px;
+  padding-top: 52px;
   padding-bottom: 40px;
 }
 /* offset scroll position for anchor links (for fixed navbar)  */
 .section h1 {
-  padding-top: 69px;
-  margin-top: -69px;
+  padding-top: 57px;
+  margin-top: -57px;
 }
 .section h2 {
-  padding-top: 69px;
-  margin-top: -69px;
+  padding-top: 57px;
+  margin-top: -57px;
 }
 .section h3 {
-  padding-top: 69px;
-  margin-top: -69px;
+  padding-top: 57px;
+  margin-top: -57px;
 }
 .section h4 {
-  padding-top: 69px;
-  margin-top: -69px;
+  padding-top: 57px;
+  margin-top: -57px;
 }
 .section h5 {
-  padding-top: 69px;
-  margin-top: -69px;
+  padding-top: 57px;
+  margin-top: -57px;
 }
 .section h6 {
-  padding-top: 69px;
-  margin-top: -69px;
+  padding-top: 57px;
+  margin-top: -57px;
 }
 .dropdown-submenu {
   position: relative;
@@ -372,9 +372,6 @@ div.tocify {
       <a href="fsci_syllabus.html">Course syllabus</a>
     </li>
     <li>
-      <a href="setup_instructions.html">Setting Up</a>
-    </li>
-    <li>
       <a href="IntroductionToR.html">Introduction to R</a>
     </li>
     <li>
@@ -414,7 +411,7 @@ div.tocify {
 
 <div id="attribution" class="section level2">
 <h2>Attribution</h2>
-<p>This lesson was created and is copyrighted by Jenny Bryan, distributed under the terms of a <a href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons BY-NC 4.0 License</a></p>
+<p>This lesson was created and is copyrighted by Jenny Bryan, distributed under the terms of a <a href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons BY-NC 4.0 License</a>. It has been adapted by Clarke Iakovakis and the adaptation is likewise distributed under a <a href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons BY-NC 4.0 License</a>.</p>
 <p><img src="jennybc_lists_lesson_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 </div>
 <div id="load-packages" class="section level2">
@@ -2072,7 +2069,7 @@ $(document).ready(function ()  {
 
     // establish options
     var options = {
-      selectors: "h1,h2,h3",
+      selectors: "h1,h2",
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {

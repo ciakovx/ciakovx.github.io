@@ -21,6 +21,6 @@ navbar:
           href: rorcid.html
 output:
   html_document:
-    theme: paper
+    theme: spacelab
     css: 'styles.css'
     df_print: paged
