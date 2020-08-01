@@ -453,11 +453,9 @@ bookCheckouts <- dplyr::filter(books,
 # How many are there? 
 # What percentage of all books have at least one checkout?
 nrow(bookCheckouts)
-## [1] 4267
+
 
 nrow(bookCheckouts)/nrow(booksOnly) * 100
-## [1] 61.10554
-# 61%...not bad :-)
 
 library(stringr)
 # use the str_detect() function from the stringr package to return all 
