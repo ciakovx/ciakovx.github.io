@@ -22,6 +22,8 @@ library(png)
 # Binder link to this notebook:
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=RBasics.ipynb)
 
+Please note the Binder link is condensed and modified for the Jupyter Notebooks environment, whereas this page is longer and pertains to the R Studio environment.
+
 # Introduction
 
 This guide accompanies the first day of instruction for our course at the 2020 FORCE11 Scholarly Communications Institute: ["W24 - Working with Scholarly Literature in R: Pulling, Wrangling, Cleaning, and Analyzing Structured Bibliographic Metadata."](https://www.force11.org/fsci/2020/fsci-2020-course-abstracts#W24). It covers basic nuts and bolts of using R.
@@ -108,8 +110,6 @@ You can assign anything to any variable, and then perform operations on or with 
 * **Do not begin with numbers or symbols**: Try to evaluate `1z <- 4` or `%z <- 4` and read the error message.
 * **Be descriptive, but make your variable names short**: It's good practice to be descriptive with your variable names. If you're loading in a lot of data, choosing `myData` or `x` as a name may not be as helpful as, say, `ebookUsage`. Finally, keep your variable names short, since you will likely be typing them in frequently.
 
-\pagebreak
-
 # Calling a function
 R is a "functional programming language," meaning it contains a number of *functions* you use to do something with your data. *Call* a function on a variable by entering the function into the console, followed by parentheses and the variables. For example, if you want to take the sum of 3 and 4, you can type in `sum(3, 4)`. 
 
@@ -176,7 +176,6 @@ myFives + 5
 ## [1] 10 15 20
 ```
 
-\pagebreak
 
 # Vectors
 Everything you manipulate in R is called an *object*. An object has a *class,* explained below. *Vectors* are the most basic type of object. 
@@ -212,14 +211,14 @@ rm(list = ls())
 ```
 
 ## Data types (type)
-A vector is a sequence of elements of the same *type*. Vectors can only contain "homogenous" data--in other words, all data must be of the same type. The type of a vector determines what kind of analysis you can do on it. For example, you can perform mathematical operations on `numeric` objects, but not on `character` objects. Below I will briefly review some of the data types in R and their type. You can call the `)` function on an R object to find out it's type. For example, running `sum)` will tell you that `sum()` is a function.
+A vector is a sequence of elements of the same *type*. Vectors can only contain "homogenous" data--in other words, all data must be of the same type. The type of a vector determines what kind of analysis you can do on it. For example, you can perform mathematical operations on `numeric` objects, but not on `character` objects. Below I will briefly review some of the data types in R and their type. You can call the `class()` function on an R object to find out it's type. For example, running `class(sum)` will tell you that `sum()` is a function.
 
 * Numeric or integer
 ```{r function42, comment=NA, eval = F}
 # create a vector of consecutive numbers 1-10 using the colon
 my_integers <- c(1:10)
 
-typeof(my_integers)
+class(my_integers)
 ##  [1] "integer"
 ```
 
@@ -228,7 +227,7 @@ typeof(my_integers)
 # create a vector of book titles. Even though 1984 is composed of numbers, putting it in quotation marks makes it a character string
 my_characters <- c("Macbeth", "Dracula", "1984")
 
-typeof(my_characters)
+class(my_characters)
 ##  [1] "character"
 
 # how many elements in this vector?
