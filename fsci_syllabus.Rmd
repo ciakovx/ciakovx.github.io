@@ -17,7 +17,7 @@ Hello everyone. I'm looking forward to our session at [FSCI 2020](https://www.fo
 
 This entire course is distributed under a [Creative Commons Attribution 4.0 International (CC BY 4.0) License](https://creativecommons.org/licenses/by/4.0/).
 
-The OSF home is at <https://osf.io/hd4re/>. Here you can find each day's components laid out clearly, as well as links to the live Zoom sessions. While FSCI is in session, this link is only available to people enrolled in the class. The FSCI course Slack can be found at <https://fsci2020.slack.com/>.
+The OSF home is at <https://osf.io/hd4re/>. Here you can find each day's components laid out clearly, as well as links to the live Zoom sessions. While FSCI is in session, this link is only available to people enrolled in the class. The FSCI course Slack can be found at <https://fsci2020.slack.com/>--participants will already be added to the `w24_working_with_scholarly_literature_in_r` channel.
 
 Click the button below to launch the Binder for the entire repository:
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master)
