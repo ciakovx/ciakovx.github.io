@@ -96,13 +96,28 @@ Try to complete this by beginning of class, but it's fine if you push it until a
 
 * This lesson is required.
 * Launch the Using Jupyter Notebooks Jupyter Notebook at [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=using_jupyter_notebooks.ipynb)
-* Watch the Using Jupyter Notebooks video tutorial at <COMING SOON>
+* Watch the [Using Jupyter Notebooks video tutorial](https://osf.io/4mn7p/) (25 min.)
 
 **2. Introduction to R: 30 minutes**
 
 * This lesson is optional.
 * No Jupyter Notebook for this lesson
 * Skim the [Introduction to R](IntroductionToR.html) webpage for information on what R is, how it applies to librarianship, what R Studio is, and some useful help resources. We will not be using R Studio in this class; instead, we will be working entirely with Jupyter Notebooks, but if you are going further in your R journey you will want to use R Studio.
+
+**3. R Basics: 1 hour**
+
+* This lesson is required.
+* Launch the R Basics Jupyter Notebook at [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=RBasics.ipynb)
+* Watch the R Basics video tutorial at <COMING SOON>
+* Skim the [R Basics](RBasics.html) webpage. Most of this content is covered in the R Basics Jupyter Notebook.
+
+**4. Data Exploration: 1 hour**
+
+* This lesson is optional.
+* Launch the Data Exploration Jupyter Notebook at [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=DataExploration.ipynb)
+* Watch the Data Exploration video tutorial at <COMING SOON>
+* Skim the [Data Exploration](DataExploration.html) webpage for information on getting data into R, exploring and transforming data, particularly using `dplyr`. Some of these functions will be used in the `rcrossref` and `rorcid` tutorials, but they will be explained as we are running through them.
+
 
 ---
 
@@ -116,20 +131,6 @@ Try to complete this by beginning of class, but it's fine if you push it until a
 [Convert time](https://www.thetimezoneconverter.com/)
 
 ### Exercises
-
-**3. R Basics: 1 hour**
-
-* This lesson is required.
-* Launch the R Basics Jupyter Notebook at [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=RBasics.ipynb)
-* Watch the R Basics video tutorial at <COMING SOON>
-* Skim the [R Basics](RBasics.html) webpage. Most of this content is covered in the R Basics Jupyter Notebook.
-
-**4. Data Exploration: 1 hour**
-
-* This lesson is optional.
-* Launch the Data Exploration Jupyter Notebook at [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=DataExploration.ipynb)
-* No video for this lesson
-* Skim the [Data Exploration](DataExploration.html) webpage for information on getting data into R, exploring and transforming data, particularly using `dplyr`. Some of these functions will be used in the `rcrossref` and `rorcid` tutorials, but they will be explained as we are running through them.
 
 **5. Using `rcrossref` & `roadoi`: 1 hour**
 
