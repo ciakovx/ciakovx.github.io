@@ -30,9 +30,9 @@ To view the course structure and exercises, see below [Course Schedule](#course-
 **Instructor:**
 Clarke Iakovakis, Scholarly Services Librarian, Oklahoma State University, <https://info.library.okstate.edu/clarke-iakovakis>
 
-**Website:** <https://ciakovx.github.io/fsci_syllabus.html>
+**Course Website:** <https://ciakovx.github.io/fsci_syllabus.html>
 
-**Acknowledgments:** Acknowledgements for this course go to the organizations and developers who have created the APIs we have used and made them open--namely Crossref, Orcid, and Unpaywall; those who have created the software, packages and tools we are using--namely the R Core Team, the RStudio Team, Hadley Wickham, Karthik Ram, Najko Jahn, Scott Chamberlain, rOpenSci, Yihui Xie, Garrett Grolemund, Linus Torvalds, Scott Chacon, Ben Straub, Git, GitHub, The Binder Project, and Project Jupyter; and finally those who have created enormously helpful resources for learning and teaching R--namely Roger Peng, Jeff Leek, Coursera, the Carpentries, Lisa Federer, Brad Boehmke, Edwin de Jonge and Mark van der Loo. I have benefitted from many, many more have dedicated their time, labor, and effort that I have overlooked. It is only due to the generosity and dedication of these people and organizations I am able to put this class together.
+**Acknowledgments:** Acknowledgements for this course go to the organizations and developers who have created the APIs we have used and made them open--namely Crossref, Orcid, and Unpaywall; those who have created the software, packages and tools we are using--namely the R Core Team, the RStudio Team, Hadley Wickham, Karthik Ram, Najko Jahn, Scott Chamberlain, rOpenSci, Yihui Xie, Garrett Grolemund, Linus Torvalds, Scott Chacon, Ben Straub, Git, GitHub, The Binder Project, Project Jupyter, and see also the [package citations](#package-citations); and finally those who have created enormously helpful resources for learning and teaching R--namely Roger Peng, Jeff Leek, Coursera, the Carpentries, Lisa Federer, Paul Oldham, Brad Boehmke, Edwin de Jonge and Mark van der Loo. I have benefitted from many, many more have dedicated their time, labor, and effort that I have overlooked. It is only due to the generosity and dedication of these people and organizations I am able to put this class together.
 
 # Description: 
 Developers have created a number of packages for accessing the scholarly literature in R over the last several years, among them `rcrossref`, `rorcid`, and `roadoi.` These packages make use of the APIs in their systems to allow users to execute specific queries and pull the structured data into R, where it can be reshaped, merged with other data, and analyzed. This session will be based on the workshop I provided at last year's FSCI. The course will assume no experience with R; however, a thorough explanation of the R programming language will not be provided. 
@@ -180,6 +180,11 @@ Here are some useful cheat sheets:
 
 # Package citations
 
+`anytime`
+Dirk Eddelbuettel (2020). anytime: Anything to 'POSIXct' or 'Date'
+  Converter. R package version 0.3.8.
+  <https://CRAN.R-project.org/package=anytime>
+
 `Binder`
 Jupyter et al., "Binder 2.0 - Reproducible, Interactive, Sharable
   Environments for Science at Scale." Proceedings of the 17th Python
@@ -189,6 +194,15 @@ Jupyter et al., "Binder 2.0 - Reproducible, Interactive, Sharable
 Hadley Wickham, Romain François, Lionel Henry and Kirill Müller
   (2020). dplyr: A Grammar of Data Manipulation. R package version
   1.0.0. <https://CRAN.R-project.org/package=dplyr>
+  
+`httpuv`
+Joe Cheng and Winston Chang (2020). httpuv: HTTP and WebSocket Server
+  Library. R package version 1.5.4.
+  <https://CRAN.R-project.org/package=httpuv>
+
+`httr`
+Hadley Wickham (2020). httr: Tools for Working with URLs and HTTP. R
+  package version 1.4.2. <https://CRAN.R-project.org/package=httr>
 
 `janitor`
  Sam Firke (2020). janitor: Simple Tools for Examining and Cleaning
@@ -207,6 +221,12 @@ Kluyver, Thomas, Benjamin Ragan-Kelley, Fernando Pérez, Brian E. Granger,
   In ELPUB, pp. 87-90. 2016. 
   <https://eprints.soton.ac.uk/403913/1/STAL9781614996491-0087.pdf>
 
+`kableExtra`
+Hao Zhu (2019). kableExtra: Construct Complex Table with 'kable' and
+  Pipe Syntax. R package version 1.1.0.
+  <https://CRAN.R-project.org/package=kableExtra>
+
+
 `knitr`
 Yihui Xie (2020). knitr: A General-Purpose Package for Dynamic Report
   Generation in R. R package version 1.29.
@@ -214,7 +234,18 @@ Yihui Xie (2020). knitr: A General-Purpose Package for Dynamic Report
 `listviewer`
 Jos de Jong, Mac Gainer and Kent Russell (2019). listviewer:
   'htmlwidget' for Interactive Views of R Lists. R package version
-  3.0.0. https://CRAN.R-project.org/package=listviewer
+  3.0.0. <https://CRAN.R-project.org/package=listviewer>
+  
+`lubridate`
+Garrett Grolemund, Hadley Wickham (2011). Dates and Times Made Easy
+  with lubridate. Journal of Statistical Software, 40(3), 1-25. URL
+  <http://www.jstatsoft.org/v40/i03/>.
+
+  
+`magrittr`
+Stefan Milton Bache and Hadley Wickham (2014). magrittr: A
+  Forward-Pipe Operator for R. R package version 1.5.
+  <https://CRAN.R-project.org/package=magrittr>
 
 `png`
 Simon Urbanek (2013). png: Read and write PNG images. R package
@@ -249,7 +280,13 @@ Jennifer Bryan (2019). repurrrsive: Examples of Recursive Lists and
 Najko Jahn (2019). roadoi: Find Free Versions of Scholarly
   Publications via Unpaywall. R package version 0.6.
   <https://CRAN.R-project.org/package=roadoi>
-  
+
+`rmarkdown`
+JJ Allaire and Yihui Xie and Jonathan McPherson and Javier Luraschi
+  and Kevin Ushey and Aron Atkins and Hadley Wickham and Joe Cheng and
+  Winston Chang and Richard Iannone (2020). rmarkdown: Dynamic Documents
+  for R. R package version 2.3. URL <https://rmarkdown.rstudio.com>.
+
 `rorcid`
 Scott Chamberlain (2020). rorcid: Interface to the 'Orcid.org' API.
   <https://github.com/ropensci/rorcid> (devel),
@@ -264,6 +301,16 @@ Hadley Wickham (2019). stringr: Simple, Consistent Wrappers for Common
   String Operations. R package version 1.4.0.
   <https://CRAN.R-project.org/package=stringr>
   
+`tibble`
+Kirill Müller and Hadley Wickham (2020). tibble: Simple Data Frames. R
+  package version 3.0.3. <https://CRAN.R-project.org/package=tibble>
+
+  
 `tidyr`
 Hadley Wickham and Lionel Henry (2020). tidyr: Tidy Messy Data. R
   package version 1.1.0. <https://CRAN.R-project.org/package=tidyr>
+  
+`usethis`
+Hadley Wickham and Jennifer Bryan (2020). usethis: Automate Package
+  and Project Setup. R package version 1.6.1.
+  <https://CRAN.R-project.org/package=usethis>
