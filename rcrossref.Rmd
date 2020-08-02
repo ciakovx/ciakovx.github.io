@@ -26,6 +26,8 @@ library(listviewer)
 
 This walkthrough is distributed under a [https://creativecommons.org/licenses/by/4.0/](Creative Commons Attribution 4.0 International (CC BY 4.0) License). 
 
+# Binder link to this notebook:
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=rcrossref.ipynb)
 
 # Crossref and `rcrossref`
 
@@ -894,4 +896,3 @@ There are several other excellent R packages that interface with publication met
 * `bibliometrix` "is an open-source tool for quantitative research in scientometrics and bibliometrics that includes all the main bibliometric methods of analysis." See more information at https://bibliometrix.org/.
 * `rromeo` is a wrapper for the SHERPA-RoMEO API. You can retrieve a set of publications metadata from `rcrossref`, then use the ISSN to look up the policies of the journal regarding the archival of preprints, postprints, and publisher versions. https://cran.r-project.org/web/packages/rromeo/rromeo.pdf
 * `crminer` "includes functions for getting getting links to full text of articles, fetching full text articles from those links or Digital Object Identifiers ('DOIs'), and text extraction from 'PDFs'." https://cran.r-project.org/web/packages/crminer/crminer.pdf
-

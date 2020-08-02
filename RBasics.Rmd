@@ -18,12 +18,11 @@ library(tidyverse)
 library(png)
 ```
 
-\pagebreak
+
+# Binder link to this notebook:
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=RBasics.ipynb)
 
 # Introduction
-
-Launch the Jupyter Notebook for this module at [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=RBasics.ipynb)
-
 
 This guide accompanies the first day of instruction for our course at the 2020 FORCE11 Scholarly Communications Institute: ["W24 - Working with Scholarly Literature in R: Pulling, Wrangling, Cleaning, and Analyzing Structured Bibliographic Metadata."](https://www.force11.org/fsci/2020/fsci-2020-course-abstracts#W24). It covers basic nuts and bolts of using R.
 
@@ -537,16 +536,3 @@ states
 3. Use `data.frame()` to create a data frame of these three vectors. Assign it to `myStates`. Remember to set `stringsAsFactors` to `FALSE`
 4. What is the `)` of each vector?
 5. Using the `$` character, run `sum()` on the `area` variable. What is the sum area of these five states? What is the median?
-
-
----
-
-\pagebreak
-
-# Next session
-
-Next session we will be doing more advanced work with data, including importing and exploring data files. If you want a head start:
-
-* Read the help pages for `help(setwd)` and  `help(read.table)`. See if you can change your working directory and load a CSV file into R.
-* Read the [overview for `tidyverse`](http://tidyverse.tidyverse.org/) and install it by running `install.packages("tidyverse")` in your console. After installing, run `library(tidyverse)` and read the help pages for: `help(select)`
-* Review some of the help resources in Part A of this guide

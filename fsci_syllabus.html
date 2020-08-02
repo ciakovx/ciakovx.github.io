@@ -368,6 +368,9 @@ div.tocify {
       <a href="fsci_syllabus.html">Course syllabus</a>
     </li>
     <li>
+      <a href="using_jupyter_notebooks.html">Jupyter Notebooks and Binder</a>
+    </li>
+    <li>
       <a href="IntroductionToR.html">Introduction to R</a>
     </li>
     <li>
@@ -409,12 +412,13 @@ div.tocify {
 <h1>Intro</h1>
 <p>Hello everyone. I’m looking forward to our session at <a href="https://www.force11.org/fsci/2020">FSCI 2020</a> on <a href="https://www.force11.org/fsci/2020/fsci-2020-course-abstracts#W24">“W24 - Working with Scholarly Literature in R: Pulling, Wrangling, Cleaning, and Analyzing Structured Bibliographic Metadata.”</a></p>
 <p>This entire course is distributed under a <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International (CC BY 4.0) License</a>.</p>
-<p>The OSF home is at <a href="https://osf.io/hd4re/" class="uri">https://osf.io/hd4re/</a></p>
-<p>Click the button below to launch the Binder repo: <a href="https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master"><img src="https://mybinder.org/badge_logo.svg" alt="Binder" /></a></p>
+<p>The OSF home is at <a href="https://osf.io/hd4re/" class="uri">https://osf.io/hd4re/</a>. Here you can find each day’s components laid out clearly, as well as links to the live Zoom sessions. While FSCI is in session, this link is only available to people enrolled in the class. The FSCI course Slack can be found at <a href="https://fsci2020.slack.com/" class="uri">https://fsci2020.slack.com/</a>.</p>
+<p>Click the button below to launch the Binder for the entire repository: <a href="https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master"><img src="https://mybinder.org/badge_logo.svg" alt="Binder" /></a></p>
 <p>To view the course structure and exercises, see below Course Schedule:</p>
 <ul>
 <li><a href="https://ciakovx.github.io/fsci_syllabus.html#DAY_ONE:_Wednesday,_August_5">Day One</a></li>
-<li><a href="">Day Two</a></li>
+<li><a href="https://ciakovx.github.io/fsci_syllabus.html#DAY_TWO:_Monday,_August_10">Day Two</a></li>
+<li><a href="https://ciakovx.github.io/fsci_syllabus.html#DAY_THREE:_Wednesday,_Aug_12">Day Three</a></li>
 </ul>
 </div>
 <div id="course-information" class="section level1">
@@ -422,14 +426,14 @@ div.tocify {
 <p><strong>Title:</strong> Working with Scholarly Literature in R: Pulling, Wrangling, Cleaning, and Analyzing Structured Bibliographic Metadata</p>
 <p><strong>Instructor:</strong> Clarke Iakovakis, Scholarly Services Librarian, Oklahoma State University, <a href="https://info.library.okstate.edu/clarke-iakovakis" class="uri">https://info.library.okstate.edu/clarke-iakovakis</a></p>
 <p><strong>Website:</strong> <a href="https://ciakovx.github.io/fsci_syllabus.html" class="uri">https://ciakovx.github.io/fsci_syllabus.html</a></p>
+<p><strong>Acknowledgments:</strong> Acknowledgements for this course go to the organizations and developers who have created the APIs we have used and made them open–namely Crossref, Orcid, and Unpaywall; those who have created the software, packages and tools we are using–namely the R Core Team, the RStudio Team, Hadley Wickham, Karthik Ram, Najko Jahn, Scott Chamberlain, rOpenSci, Yihui Xie, Garrett Grolemund, Linus Torvalds, Scott Chacon, Ben Straub, Git, GitHub, The Binder Project, and Project Jupyter; and finally those who have created enormously helpful resources for learning and teaching R–namely Roger Peng, Jeff Leek, Coursera, the Carpentries, Lisa Federer, Brad Boehmke, Edwin de Jonge and Mark van der Loo. I have benefitted from many, many more have dedicated their time, labor, and effort that I have overlooked. It is only due to the generosity and dedication of these people and organizations I am able to put this class together.</p>
 </div>
 <div id="description" class="section level1">
 <h1>Description:</h1>
 <p>Developers have created a number of packages for accessing the scholarly literature in R over the last several years, among them <code>rcrossref</code>, <code>rorcid</code>, and <code>roadoi.</code> These packages make use of the APIs in their systems to allow users to execute specific queries and pull the structured data into R, where it can be reshaped, merged with other data, and analyzed. This session will be based on the workshop I provided at last year’s FSCI. The course will assume no experience with R; however, a thorough explanation of the R programming language will not be provided.</p>
 <p>The course will a mixture of pre-recorded videos and synchronous meeting for discussion and Q&amp;A sessions.</p>
 <p>Students will access IPNYB (Jupyter Notebooks) files containing the scripts for the workshop, created with <a href="https://mybinder.org/">binder</a>. The files will include executable code alongside descriptions of what the code is doing. Students can therefore run code that has already been written, but will also write and execute their own R scripts within the Jupyter Notebooks environment. Students will access these notebooks while watching the videos explaining the code.</p>
-<p>We will begin with a general orientation of the Jupyter Notebooks environment. We will then discuss R and provide a basic overview of how it works. This introduction will include reading data into R, installing packages, and some functions for cleaning and restructuring data. We will also discuss Crossref, ORCID, and Unpaywall, and the packages developed by the rOpenSci organization to access the API services of these organizations.</p>
-<p>We will then walk through <code>rcrossref</code>, <code>roadoi</code>, and <code>rorcid</code>.</p>
+<p>We will begin with a general orientation of the Jupyter Notebooks environment. We will then discuss R and provide a basic overview of how it works. This introduction will include reading data into R, installing packages, and some functions for cleaning and restructuring data. We will then discuss Crossref, ORCID, and Unpaywall, and the packages developed by the <a href="https://ropensci.org/">rOpenSci</a> organization to access the API services of these organizations, and walk through <code>rcrossref</code>, <code>roadoi</code>, and <code>rorcid</code>.</p>
 <ul>
 <li><code>rcrossref</code> interfaces with the CrossRef API, allowing users to pull article metadata based on ISSN, filter queries by publication date and license information, running queries by title and author, getting funder data, getting citation counts, and exporting to BibTeX, RIS, and CSV. This can be immensely powerful for collecting citation data, conducting literature reviews, creating bibliographies, and more.</li>
 <li><code>roadoi</code> interfaces with Unpaywall, allowing users to input a set of DOIs and return publication information along with potential locations of open access versions.</li>
@@ -452,14 +456,15 @@ div.tocify {
 </div>
 <div id="course-learning-objectives" class="section level1">
 <h1>Course Learning Objectives</h1>
-<p>A participant in this course will, at the end of the course, be able to: - Use R to complete a range of data tasks, including understanding R syntax and data types, installing and loading packages, reading data from files and APIs, and executing functions for tidying and analyzing data. - Use the rorcid package in R to extract data from ORCID profiles, including authenticating with the ORCID API, finding ORCID iDs by name/affiliation, getting author biographical information, and getting works associated with individuals. - Use the rcrossref and roadoi packages in R to extract data from the Crossref and Unpaywall database, including authenticating with the Crossref API, forming queries, getting publication information, getting data on articles, converting articles to BibTeX/RIS, getting citation data, and checking for open access versions.</p>
+<p>A participant in this course will, at the end of the course, be able to: - Use R to complete a range of data tasks, including understanding R syntax and data types, installing and loading packages, reading data from files and APIs, and executing functions for tidying and analyzing data. - Use the <code>rorcid</code> package in R to extract data from ORCID profiles, including authenticating with the ORCID API, finding ORCID iDs by name/affiliation, getting author biographical information, and getting works associated with individuals. - Use the <code>rcrossref</code> and <code>roadoi</code> packages in R to extract data from the Crossref and Unpaywall database, including authenticating with the Crossref API, forming queries, getting publication information, getting data on articles, converting articles to BibTeX/RIS, getting citation data, and checking for open access versions.</p>
 </div>
 <div id="course-topics" class="section level1">
 <h1>Course Topics</h1>
-<p>This course will cover these topics: - Introduction to R and RStudio - Introduction to rorcid - Introduction to rcrossref and roadoi</p>
+<p>This course will cover these topics: - Introduction to Binder and Jupyter Notebooks - Introduction to <code>rcrossref</code> and <code>roadoi</code> - Introduction to <code>rorcid</code></p>
 </div>
 <div id="course-schedule" class="section level1">
 <h1>Course Schedule</h1>
+<p>See the course OSF for Zoom links: <a href="https://osf.io/hd4re/" class="uri">https://osf.io/hd4re/</a></p>
 <div id="day-one-wednesday-august-5" class="section level2">
 <h2>DAY ONE: Wednesday, August 5</h2>
 <div id="live-zoom-sessions" class="section level3">
@@ -470,11 +475,12 @@ div.tocify {
 </ul>
 <p><strong>ALL TIMES PACIFIC</strong> <a href="https://www.thetimezoneconverter.com/">Convert time</a></p>
 </div>
-<div id="exercises-videos" class="section level3">
-<h3>Exercises &amp; Videos</h3>
+<div id="exercises" class="section level3">
+<h3>Exercises</h3>
 <p>Try to complete this by beginning of class, but it’s fine if you push it until after we meet. I’ll be discussing some of this during that session.</p>
-<p><strong>1. Using Jupyter Notebooks (<em>required</em>): 30 minutes</strong> * Launch the Using Jupyter Notebooks Jupyter Notebook at <a href="https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=using_jupyter_notebooks.ipynb"><img src="https://mybinder.org/badge_logo.svg" alt="Binder" /></a> * Watch the Using Jupyter Notebooks video tutorial at</p>
-<p><strong>2. Introduction to R (<em>optional</em>): 30 minutes</strong> * No Jupyter Notebook for this lesson * Skim the <a href="IntroductionToR.html">Introduction to R</a> webpage for information on what R is, how it applies to librarianship, what R Studio is, and some useful help resources. We will not be using R Studio in this class; instead, we will be working entirely with Jupyter Notebooks, but if you are going further in your R journey you will want to use R Studio.</p>
+<p><strong>1. Using Jupyter Notebooks: 30 minutes</strong> * This lesson is required. * Launch the Using Jupyter Notebooks Jupyter Notebook at <a href="https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=using_jupyter_notebooks.ipynb"><img src="https://mybinder.org/badge_logo.svg" alt="Binder" /></a> * Watch the Using Jupyter Notebooks video tutorial at <COMING SOON></p>
+<p><strong>2. Introduction to R: 30 minutes</strong> * This lesson is optional. * No Jupyter Notebook for this lesson * Skim the <a href="IntroductionToR.html">Introduction to R</a> webpage for information on what R is, how it applies to librarianship, what R Studio is, and some useful help resources. We will not be using R Studio in this class; instead, we will be working entirely with Jupyter Notebooks, but if you are going further in your R journey you will want to use R Studio.</p>
+<hr />
 </div>
 </div>
 <div id="day-two-monday-august-10" class="section level2">
@@ -482,16 +488,17 @@ div.tocify {
 <div id="live-zoom-sessions-1" class="section level3">
 <h3>Live Zoom Sessions</h3>
 <ul>
-<li>8-9AM: Activity session 1</li>
+<li>8-9AM: Activity session 1 -</li>
 <li>5-6PM: REPEAT Activity session 1</li>
 </ul>
 <p><strong>ALL TIMES PACIFIC</strong> <a href="https://www.thetimezoneconverter.com/">Convert time</a></p>
 </div>
-<div id="exercises-complete-by-812" class="section level3">
-<h3>Exercises (complete by 8/12)</h3>
-<p><strong>3. R Basics (<em>required</em>): 1 hour</strong> * Launch the R Basics Jupyter Notebook at <a href="https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=RBasics.ipynb"><img src="https://mybinder.org/badge_logo.svg" alt="Binder" /></a> * Watch the R Basics video tutorial at <COMING SOON> * Skim the <a href="RBasics.html">R Basics</a> webpage. Most of this content is covered in the R Basics Jupyter Notebook.</p>
-<p><strong>4. Data Exploration (<em>optional</em>): 1 hour</strong> * Launch the Data Exploration Jupyter Notebook at * No video for this lesson * Skim the <a href="DataExploration.html">Data Exploration</a> webpage for information on getting data into R, exploring and transforming data, particularly using <code>dplyr</code>. Some of these functions will be used in the <code>rcrossref</code> and <code>rorcid</code> tutorials, but they will be explained as we are running through them.</p>
-<p><strong>5. rcrossref &amp; roadoi (<em>required</em>): 1 hour</strong> * Launch the <code>rcrossref</code> &amp; <code>roadoi</code> Jupyter Notebook at <a href="https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=rcrossref.ipynb"><img src="https://mybinder.org/badge_logo.svg" alt="Binder" /></a> * Watch the <code>rcrossref</code> and <code>roadoi</code> video tutorial at <COMING SOON> * Skim the * <a href="rcrossref.html">rcrossref</a> webpage. Much of this content is identical to that on the Jupyter Notebook.</p>
+<div id="exercises-1" class="section level3">
+<h3>Exercises</h3>
+<p><strong>3. R Basics: 1 hour</strong> * This lesson is required. * Launch the R Basics Jupyter Notebook at <a href="https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=RBasics.ipynb"><img src="https://mybinder.org/badge_logo.svg" alt="Binder" /></a> * Watch the R Basics video tutorial at <COMING SOON> * Skim the <a href="RBasics.html">R Basics</a> webpage. Most of this content is covered in the R Basics Jupyter Notebook.</p>
+<p><strong>4. Data Exploration: 1 hour</strong> * This lesson is optional. * Launch the Data Exploration Jupyter Notebook at <a href="https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=DataExploration.ipynb"><img src="https://mybinder.org/badge_logo.svg" alt="Binder" /></a> * No video for this lesson * Skim the <a href="DataExploration.html">Data Exploration</a> webpage for information on getting data into R, exploring and transforming data, particularly using <code>dplyr</code>. Some of these functions will be used in the <code>rcrossref</code> and <code>rorcid</code> tutorials, but they will be explained as we are running through them.</p>
+<p><strong>5. Using <code>rcrossref</code> &amp; <code>roadoi</code>: 1 hour</strong> * This lesson is required. * Launch the <code>rcrossref</code> &amp; <code>roadoi</code> Jupyter Notebook at <a href="https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=rcrossref.ipynb"><img src="https://mybinder.org/badge_logo.svg" alt="Binder" /></a> * Watch the <code>rcrossref</code> and <code>roadoi</code> video tutorial at <COMING SOON> * Skim the * <a href="rcrossref.html">rcrossref</a> webpage. Much of this content is identical to that on the Jupyter Notebook.</p>
+<hr />
 </div>
 </div>
 <div id="day-three-wednesday-aug.12" class="section level2">
@@ -503,14 +510,17 @@ div.tocify {
 <li>5-6PM: REPEAT Activity session 2</li>
 </ul>
 <p><strong>ALL TIMES PACIFIC</strong> <a href="https://www.thetimezoneconverter.com/">Convert time</a></p>
-<p><strong>6. Exploring Data in Lists (<em>optional</em>): 1 hour</strong> * Skim the <a href="fsci2020/jennybc_lists_lesson.html">Exploring Data in Lists</a> webpage for a tutorial by Jenny Bryan on using <code>purrr</code> to explore and extract data from lists. Our API calls pull data into our session in nested lists, so this tutorial is helpful for managing that. * No Notebook or video for this lesson</p>
-<p><strong>8. <a href="fsci2020/rorcid.html">rorcid</a></strong> * Access the <code>rorcid</code> Jupyter Notebook at <a href="https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=rorcid.ipynb"><img src="https://mybinder.org/badge_logo.svg" alt="Binder" /></a> * Watch the <code>rorcid</code> video tutorial at <COMING SOON> * Skim the <a href="rorcid.html">rorcid</a> webpage. Much of this content is identical to that on the Jupyter Notebook.</p>
+</div>
+<div id="exercises-2" class="section level3">
+<h3>Exercises</h3>
+<p><strong>6. Exploring Data in Lists: 1 hour</strong> * This lesson is optional. * Skim the <a href="fsci2020/jennybc_lists_lesson.html">Exploring Data in Lists</a> webpage for a tutorial by Jenny Bryan on using <code>purrr</code> to explore and extract data from lists. Our API calls pull data into our session in nested lists, so this tutorial is helpful for managing that. * No Notebook or video for this lesson</p>
+<p><strong>8. Using <a href="fsci2020/rorcid.html">rorcid</a></strong> * This lesson is required. * Access the <code>rorcid</code> Jupyter Notebook at <a href="https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=rorcid.ipynb"><img src="https://mybinder.org/badge_logo.svg" alt="Binder" /></a> * Watch the <code>rorcid</code> video tutorial at <COMING SOON> * Skim the <a href="rorcid.html">rorcid</a> webpage. Much of this content is identical to that on the Jupyter Notebook.</p>
 </div>
 </div>
 </div>
 <div id="course-materials-and-supplies-required" class="section level1">
 <h1>Course Materials and Supplies Required</h1>
-<p>Students will need a computer with internet access.</p>
+<p>Students will need a computer with internet access, time, patience, and tenacity.</p>
 </div>
 <div id="other-resources" class="section level1">
 <h1>Other Resources</h1>
@@ -523,6 +533,29 @@ div.tocify {
 <li><a href="https://www.edureka.co/blog/wp-content/uploads/2018/10/Jupyter_Notebook_CheatSheet_Edureka.pdf">Jupyter Notebooks Cheat Sheet</a></li>
 <li><a href="https://github.com/rstudio/cheatsheets/">Complete list of RStudio cheatsheets</a></li>
 </ul>
+</div>
+<div id="package-citations" class="section level1">
+<h1>Package citations</h1>
+<p><code>Binder</code> Jupyter et al., “Binder 2.0 - Reproducible, Interactive, Sharable Environments for Science at Scale.” Proceedings of the 17th Python in Science Conference. 2018. <a href="https://doi.org/10.25080/Majora-4af1f417-011" class="uri">https://doi.org/10.25080/Majora-4af1f417-011</a></p>
+<p><code>dplyr</code> Hadley Wickham, Romain François, Lionel Henry and Kirill Müller (2020). dplyr: A Grammar of Data Manipulation. R package version 1.0.0. <a href="https://CRAN.R-project.org/package=dplyr" class="uri">https://CRAN.R-project.org/package=dplyr</a></p>
+<p><code>janitor</code> Sam Firke (2020). janitor: Simple Tools for Examining and Cleaning Dirty Data. R package version 2.0.1. <a href="https://CRAN.R-project.org/package=janitor" class="uri">https://CRAN.R-project.org/package=janitor</a></p>
+<p><code>jsonlite</code> Jeroen Ooms (2014). The jsonlite Package: A Practical and Consistent Mapping Between JSON Data and R Objects. arXiv:1403.2805 [stat.CO] URL <a href="https://arxiv.org/abs/1403.2805" class="uri">https://arxiv.org/abs/1403.2805</a>.</p>
+<p><code>Jupyter Notebooks</code> Kluyver, Thomas, Benjamin Ragan-Kelley, Fernando Pérez, Brian E. Granger, Matthias Bussonnier, Jonathan Frederic, Kyle Kelley et al. “Jupyter Notebooks-a publishing format for reproducible computational workflows.” In ELPUB, pp. 87-90. 2016. <a href="https://eprints.soton.ac.uk/403913/1/STAL9781614996491-0087.pdf" class="uri">https://eprints.soton.ac.uk/403913/1/STAL9781614996491-0087.pdf</a></p>
+<p><code>knitr</code> Yihui Xie (2020). knitr: A General-Purpose Package for Dynamic Report Generation in R. R package version 1.29.</p>
+<p>Yihui Xie (2015) Dynamic Documents with R and knitr. 2nd edition. Chapman and Hall/CRC. ISBN 978-1498716963</p>
+<p>Yihui Xie (2014) knitr: A Comprehensive Tool for Reproducible Research in R. In Victoria Stodden, Friedrich Leisch and Roger D. Peng, editors, Implementing Reproducible Computational Research. Chapman and Hall/CRC. ISBN 978-1466561595</p>
+<p><code>listviewer</code> Jos de Jong, Mac Gainer and Kent Russell (2019). listviewer: ‘htmlwidget’ for Interactive Views of R Lists. R package version 3.0.0. <a href="https://CRAN.R-project.org/package=listviewer" class="uri">https://CRAN.R-project.org/package=listviewer</a></p>
+<p><code>png</code> Simon Urbanek (2013). png: Read and write PNG images. R package version 0.1-7. <a href="https://CRAN.R-project.org/package=png" class="uri">https://CRAN.R-project.org/package=png</a></p>
+<p><code>purrr</code> Lionel Henry and Hadley Wickham (2020). purrr: Functional Programming Tools. R package version 0.3.4. <a href="https://CRAN.R-project.org/package=purrr" class="uri">https://CRAN.R-project.org/package=purrr</a></p>
+<p><code>R</code> R Core Team (2019). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL <a href="https://www.R-project.org/" class="uri">https://www.R-project.org/</a>.</p>
+<p><code>rcrossref</code> Scott Chamberlain, Hao Zhu, Najko Jahn, Carl Boettiger and Karthik Ram (2020). rcrossref: Client for Various ‘CrossRef’ ‘APIs’. R package version 1.0.0. <a href="https://CRAN.R-project.org/package=rcrossref" class="uri">https://CRAN.R-project.org/package=rcrossref</a></p>
+<p><code>repurrrsive</code> Jennifer Bryan (2019). repurrrsive: Examples of Recursive Lists and Nested or Split Data Frames. R package version 1.0.0. <a href="https://CRAN.R-project.org/package=repurrrsive" class="uri">https://CRAN.R-project.org/package=repurrrsive</a></p>
+<p><code>readr</code> Hadley Wickham, Jim Hester and Romain Francois (2018). readr: Read Rectangular Text Data. R package version 1.3.1. <a href="https://CRAN.R-project.org/package=readr" class="uri">https://CRAN.R-project.org/package=readr</a></p>
+<p><code>roadoi</code> Najko Jahn (2019). roadoi: Find Free Versions of Scholarly Publications via Unpaywall. R package version 0.6. <a href="https://CRAN.R-project.org/package=roadoi" class="uri">https://CRAN.R-project.org/package=roadoi</a></p>
+<p><code>rorcid</code> Scott Chamberlain (2020). rorcid: Interface to the ‘Orcid.org’ API. <a href="https://github.com/ropensci/rorcid" class="uri">https://github.com/ropensci/rorcid</a> (devel), <a href="https://docs.ropensci.org/rorcid" class="uri">https://docs.ropensci.org/rorcid</a> (docs).</p>
+<p><code>RStudio</code> RStudio Team (2020). RStudio: Integrated Development for R. RStudio, PBC, Boston, MA URL <a href="http://www.rstudio.com/" class="uri">http://www.rstudio.com/</a>.</p>
+<p><code>stringr</code> Hadley Wickham (2019). stringr: Simple, Consistent Wrappers for Common String Operations. R package version 1.4.0. <a href="https://CRAN.R-project.org/package=stringr" class="uri">https://CRAN.R-project.org/package=stringr</a></p>
+<p><code>tidyr</code> Hadley Wickham and Lionel Henry (2020). tidyr: Tidy Messy Data. R package version 1.1.0. <a href="https://CRAN.R-project.org/package=tidyr" class="uri">https://CRAN.R-project.org/package=tidyr</a></p>
 </div>
 
 

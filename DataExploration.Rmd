@@ -18,12 +18,17 @@ library(tidyverse)
 knitr::opts_chunk$set(echo = TRUE, cache = TRUE, eval=TRUE)
 ```
 
+# Licensing
+
 This walkthrough is distributed under a [Creative Commons Attribution 4.0 International (CC BY 4.0) License](https://creativecommons.org/licenses/by/4.0/).
 
 ```{r,fig.height=1,echo=FALSE}
 cc <- readPNG(file.path("./images/cc.png"))
 grid::grid.raster(cc)
 ```
+
+# Binder link to this notebook:
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=DataExploration.ipynb)
 
 # Getting data into R
 

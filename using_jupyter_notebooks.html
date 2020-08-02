@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Clarke Iakovakis" />
+
+
+<title>Using Jupyter Notebooks and Binder</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/spacelab.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 52px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 57px;
+  margin-top: -57px;
+}
+.section h2 {
+  padding-top: 57px;
+  margin-top: -57px;
+}
+.section h3 {
+  padding-top: 57px;
+  margin-top: -57px;
+}
+.section h4 {
+  padding-top: 57px;
+  margin-top: -57px;
+}
+.section h5 {
+  padding-top: 57px;
+  margin-top: -57px;
+}
+.section h6 {
+  padding-top: 57px;
+  margin-top: -57px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Clarke Iakovakis</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    FSCI 2020 W24 Session
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="fsci_syllabus.html">Course syllabus</a>
+    </li>
+    <li>
+      <a href="using_jupyter_notebooks.html">Jupyter Notebooks and Binder</a>
+    </li>
+    <li>
+      <a href="IntroductionToR.html">Introduction to R</a>
+    </li>
+    <li>
+      <a href="RBasics.html">R Basics</a>
+    </li>
+    <li>
+      <a href="DataExploration.html">Data Exploration</a>
+    </li>
+    <li>
+      <a href="jennybc_lists_lesson.html">Exploring Data in Lists</a>
+    </li>
+    <li>
+      <a href="rcrossref.html">rcrossref</a>
+    </li>
+    <li>
+      <a href="rorcid.html">rorcid</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Using Jupyter Notebooks and Binder</h1>
+<h4 class="author">Clarke Iakovakis</h4>
+
+</div>
+
+
+<div id="binder-link-to-this-notebook" class="section level1">
+<h1>Binder link to this notebook:</h1>
+<p><a href="https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=using_jupyter_notebooks.ipynb"><img src="https://mybinder.org/badge_logo.svg" alt="Binder" /></a></p>
+<p>This brief notebook provides an introduction to Jupyter Notebooks and Binder to prepare you for the course.</p>
+</div>
+<div id="licensing" class="section level1">
+<h1>Licensing</h1>
+<p>This walkthrough is distributed under a <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International (CC BY 4.0) License</a></p>
+</div>
+<div id="binder" class="section level1">
+<h1>Binder</h1>
+<p><a href="https://mybinder.readthedocs.io/">The Binder Project</a> is an open community that makes it possible to create sharable, interactive, reproducible environments that can be shared and used by many remote users. It is powered by <a href="https://github.com/jupyterhub/binderhub">BinderHub</a>, which is an open-source tool that deploys the Binder service in the cloud.</p>
+<p>We are using Binder to launch interactive Jupyter Notebooks. This will allow you to execute R code and use R packages that are installed and run remotely (in the cloud) rather than your local computer. This will help with various installation issues that go along with using R and R Studio. Furthermore, by interacting with R in these notebooks, you will be able to execute code that I have already written, and see explanations of it first hand. In addition, as described below, it allows text to be weaved with executable code.</p>
+<p>It is also possible to launch R Studio and Python environments using Binder, but we are not doing that for this class. See <a href="https://mybinder.readthedocs.io/en/latest/examples.html" class="uri">https://mybinder.readthedocs.io/en/latest/examples.html</a> for interesting Binder repositories from around the web.</p>
+<p>Each Jupyter Notebook we use in these sessions will include a <strong>launch binder</strong> badge like that at the top of this page. That will launch the specific Jupyter Notebook and allow you to run it. Please note that none of the changes you make will be saved. If you do make changes or notes, you will need to download the notebook to your own computer by clicking <strong>File &gt; Download as &gt; Notebook (.ipynb)</strong>.</p>
+</div>
+<div id="jupyter" class="section level1">
+<h1>Jupyter</h1>
+<div id="project-jupyter" class="section level2">
+<h2>Project Jupyter</h2>
+<p><a href="https://jupyter.org/about">Project Jupyter</a> is a non-profit, open-source project, born out of the <a href="https://ipython.org/">IPython Project</a> in 2014 as it evolved to support interactive data science and scientific computing across all programming languages. It is developed in the open on GitHub, through the consensus of the Jupyter community.</p>
+</div>
+<div id="jupyter-notebooks" class="section level2">
+<h2>Jupyter Notebooks</h2>
+<p>According to the <a href="https://jupyter-notebook.readthedocs.io/en/stable/examples/Notebook/What%20is%20the%20Jupyter%20Notebook.html">Jupyter help documentation</a>, the Jupyter Notebook is an interactive computing environment that enables users to author notebook documents that include: - Live code - Interactive widgets - Plots - Narrative text - Equations - Images - Video.</p>
+<p>Notebook documents contain the inputs and outputs of an interactive session as well as narrative text that accompanies the code but is not meant for execution. Rich output generated by running code, including HTML, images, video, and plots, is embedded in the notebook, which makes it a complete and self-contained record of a computation.</p>
+<p>Notebook files have a <code>.ipynb</code> extension.</p>
+<p>Jupyter Notebooks are often run in the <a href="https://docs.anaconda.com/anaconda/install/">Anaconda</a> software and served locally on your own computer. However, as described above, we are interacting with it in the cloud using Binder.</p>
+</div>
+<div id="kernels" class="section level2">
+<h2>Kernels</h2>
+<p>A <code>kernel</code> is a program that runs code in Jupyter Notebooks. For each notebook document that a user opens, the application starts a kernel that runs the code for that notebook. This particular Jupyter Notebook is running an <code>R</code> kernel, which allows us to write and execute R code.</p>
+<p>A number of other kernels are available for Jupyter Notebooks, including <code>Python</code>, <code>C++</code>, <code>SQL</code>, and <a href="https://github.com/jupyter/jupyter/wiki/Jupyter-kernels">many more</a>. You can try some of these without installing Anaconda by visiting the <a href="https://jupyter.org/try">Project Jupyter</a> website. You can see available kernels in the Jupyter Notebook by navigating to the menu at the top and selecting <strong>Kernel &gt; Change Kernel</strong>. See also below section on <strong>Session expiration</strong>.</p>
+</div>
+<div id="notebook-interface" class="section level2">
+<h2>Notebook Interface</h2>
+<p>When you create a new notebook document, you will be presented with the notebook name, a menu bar, a toolbar and an empty code cell.</p>
+<p><strong>Notebook name:</strong> The name displayed at the top of the page, next to the Jupyter logo, reflects the name of the <code>.ipynb</code> file.</p>
+<p><strong>Menu bar:</strong> The menu bar presents different options that may be used to manipulate the way the notebook functions.</p>
+<p><strong>Toolbar:</strong> The tool bar gives a quick way of performing the most-used operations within the notebook, by clicking on an icon.</p>
+<p><strong>Code cell:</strong> the default type of cell; read on for an explanation of cells.</p>
+</div>
+<div id="structure-of-a-notebook-document" class="section level2">
+<h2>Structure of a notebook document</h2>
+<p>The notebook consists of a sequence of cells. A cell is a text input field, and its contents can be executed by using <code>Shift-Enter</code>, or by clicking either the “Play” button the toolbar, or Cell, Run in the menu bar. The execution behavior of a cell is determined by the cell’s type. There are three types of cells: code cells, markdown cells, and raw cells. Every cell starts off being a code cell, but its type can be changed by using a drop-down on the toolbar (which will be “Code”, initially), or via keyboard shortcuts.</p>
+<div id="code-cells" class="section level3">
+<h3>Code cells</h3>
+<p>A code cell allows you to edit and write new code, with full syntax highlighting and tab completion. Since the kernel for our Notebook is R, all code cells are configured to run R code.</p>
+<p>When a code cell is executed, code that it contains is sent to the kernel associated with the notebook. The results that are returned from this computation are then displayed in the notebook as the cell’s output.</p>
+</div>
+<div id="markdown" class="section level3">
+<h3>Markdown</h3>
+<p>Jupyter uses the <a href="https://www.markdownguide.org/">Markdown</a> language for drafting text. I have already done this, so you don’t need to learn or know Markdown to understand this course. If you wish to learn more about using Markdown in Jupyter, see this <a href="https://nbviewer.jupyter.org/github/jupyter/notebook/blob/master/docs/source/examples/Notebook/Working%20With%20Markdown%20Cells.ipynb">Working with Markdown Cells example notebook</a></p>
+</div>
+</div>
+<div id="jupyter-input-modes" class="section level2">
+<h2>Jupyter Input Modes</h2>
+<p>Jupyter Notebooks have two different keyboard input modes:</p>
+<ul>
+<li><strong>Command Mode</strong> - Make changes on the Notebook level. Indicated by a grey cell border with a blue left margin. Press <code>Esc</code> to enter Command Mode.</li>
+<li><strong>Edit Mode</strong> - Make changes to an individual cell. Indicated by a green cell border. Press <code>Enter</code> to enter Edit Mode.</li>
+</ul>
+<p>A new cell will always start as a <strong>Code</strong> cell, where you can type in R code and execute it here in your Jupyter notebook. As mentioned, all code in this notebook is in R.</p>
+<p>Useful keyboard shortcurts when you are in Command Mode: * <strong>Enter</strong> to enter Edit Mode to edit the cell * <strong>B</strong> to create new cell below the current cell * <strong>A</strong> to create new cell above the current cell * <strong>Y</strong> to change a Markdown cell to Code * <strong>M</strong> to change a Code cell to Markdown * Press <strong>D</strong> twice to delete the cell</p>
+<p>Shortcuts when you are in Edit Mode: * <strong>Esc</strong> to enter Command Mode * <strong>Ctrl + Enter</strong> to Run cell and stay in the cell * <strong>Shift + Enter</strong> to Run cell and select the next cell * <strong>Alt (or option on Mac) + Enter</strong> to Run cell and insert a new cell below. * <strong>Ctrl (or Cmd on Mac) + Z</strong>: Undo</p>
+<hr />
+<p><strong>TRY IT YOURSELF</strong></p>
+<p>Select the below cell in Edit Mode by double clicking in it, or by clicking it on the margin and pressing <strong>Enter</strong>. It should have a green border. Notice that this is a <strong>Code</strong> cell. Press Shift + Enter to execute the code. This will print the output and select the next cell.</p>
+<p>Then, when you are in the next cell, press Ctrl + Enter. This will print the output and stay in the same cell.</p>
+<p>Then, press the down arrow on your keyboard to to to the next cell. Enter Edit Mode (green border) by pressing Enter. Press Alt (or option on Mac) + Enter. This will print the output and create a new cell.</p>
+<p>Then press the down arrow or select the new empty cell. Make sure you are in Command Mode (blue border). Press D twice to delete the new cell.</a></p>
+<pre class="r"><code># press Shift + Enter
+print(&quot;You just ran the cell and selected the next cell&quot;)</code></pre>
+<pre class="r"><code># press Ctrl + Enter
+print(&quot;You just ran this cell and the focus stayed here in this cell&quot;)</code></pre>
+<pre class="r"><code># press Alt (or option on Mac) + Enter
+print(&quot;You just ran the cell and inserted a new cell below it&quot;)</code></pre>
+<p>Notice the text in the above cells that starts with a hash <strong>#</strong> character. The hash indicates a <strong>comment</strong>. Anything following the hash symbol will not be evaluated.</p>
+<p>Congratulations! You not only executed code in Jupyter Notebooks, but you specifically executed R code. <code>print()</code> is a function in R that prints any output to the console. Notice that we put the content we wanted to print in quotation marks. This designates a <code>character</code> string. See more on this in the <a href="https://ciakovx.github.io/RBasics.html">RBasics</a> lesson.</p>
+</div>
+<div id="important-notes" class="section level2">
+<h2>Important Notes</h2>
+<div id="session-expiration" class="section level3">
+<h3>Session expiration</h3>
+<p>Binder is meant for interactive and ephemeral interactive coding, meaning that it is ideally suited for relatively short sessions. Binder will automatically shut down user sessions that have more than 10 minutes of inactivity (if you leave your window open, this will be counted as “activity”). If your session times out, first try selecting <strong>Kernel &gt; Reconnect</strong> in the above menu. If that doesn’t work, you’ll have to select <strong>Kernel &gt; Restart</strong> and go back and rerun any previously run code chunks.</p>
+</div>
+<div id="saving-changes" class="section level3">
+<h3>Saving changes</h3>
+<p>Because we are working in Binder, and Binder sessions are meant to be ephemeral, it is not possible for you to save any changes you make to your Jupyter Notebook. As stated above, if you do make changes or notes, you will need to download the notebook to your own computer by clicking <strong>File &gt; Download as &gt; Notebook (.ipynb)</strong>. The only way you will be able to run these is if you download software to your own computer, described below:</p>
+</div>
+</div>
+</div>
+<div id="downloading-software-on-your-own-computer-optional" class="section level1">
+<h1>Downloading software on your own computer (optional)</h1>
+<p>We are running everything in Binder during this class, so you don’t have to download anything. However, you do have the option of downloading Anaconda and running the Jupyter Notebooks on your own machine (so you can save changes and create your own Notebooks), or downloading R and R Studio and opening the <code>Rmd</code> (R Markdown) files. While this class is ongoing, I may not be able to provide full support for installation, but please follow up with me on the conclusion of the class if you have questions.</p>
+<div id="option-1-downloading-anaconda-to-open-ipynb-files" class="section level2">
+<h2>Option 1: Downloading Anaconda to open IPYNB files</h2>
+<p>This step will allow you to open and execute the IPYNB files essentially just as they looked in Binder.</p>
+<ol style="list-style-type: decimal">
+<li>Download and install Anaconda: <a href="https://docs.anaconda.com/anaconda/install/" class="uri">https://docs.anaconda.com/anaconda/install/</a></li>
+<li>Go to <a href="https://www.r-project.org/" class="uri">https://www.r-project.org/</a> to download R. Click on CRAN (Comprehensive R Archive Network) under Download, and scroll down to your country. Select the download link corresponding to the city that is geographically closest to you. Open the file and install.</li>
+<li>Install IR kernel:
+<ul>
+<li>On PC, search for <strong>Anaconda Prompt</strong> in your computer, right click, and run As Adminstrator. In the prompt, type <code>conda install -c r r-irkernel</code>. During the installation process, Anaconda might ask if you `want to proceed ([y]/n)?`` Just type ‘y’.</li>
+<li>On Mac, open terminal. Enter <code>conda config --add channels r</code> then <code>conda install --yes r-irkernel</code></li>
+</ul></li>
+<li>Following <a href="https://docs.anaconda.com/anaconda/navigator/tutorials/r-lang/">these instructions</a>, open Anaconda and select <strong>Environments</strong> to create an new environment. Click <strong>Create</strong>.</li>
+<li>In Name, type <strong>my_r_environment</strong>. Next to Packages, select <strong>Python 3.7</strong> and <strong>R</strong>. Select <strong>r</strong> from the dropdown menu. Click <strong>Create</strong>.</li>
+<li>Click the arrow next to <strong>my_r_environment</strong> and select <strong>Open with Jupyter Notebook</strong>. It will open in a web browser.</li>
+<li>You can download the IPYNB files directly from the GitHub repo that underlies the course website, at <a href="https://github.com/ciakovx/ciakovx.github.io" class="uri">https://github.com/ciakovx/ciakovx.github.io</a>. To download an individual IPYNB file, click on it in the repo, then look for the <strong>Raw</strong> button in the upper right corner of the window. Right click on <strong>Raw</strong> and choose <strong>File &gt; Save Link As</strong> (this language may vary by browser).</li>
+</ol>
+</div>
+<div id="option-2-downloading-r-and-r-studio-to-open-rmd-files." class="section level2">
+<h2>Option 2: Downloading R and R Studio to open Rmd files.</h2>
+<p>This step will allow you to open and execute the Rmd (R Markdown) files in the R Studio environment. While the contents of the files are largely the same, you will execute the code within R Studio rather than Jupyter Notebooks.</p>
+<ol style="list-style-type: decimal">
+<li>Go to <a href="https://www.r-project.org/" class="uri">https://www.r-project.org/</a> to download R. Click on CRAN (Comprehensive R Archive Network) under Download, and scroll down to your country. Select the download link corresponding to the city that is geographically closest to you. Open the file and install.</li>
+<li>Go to <a href="https://www.rstudio.com/products/RStudio/#Desktop" class="uri">https://www.rstudio.com/products/RStudio/#Desktop</a> to download the RStudio desktop software. Open the file and install.</li>
+<li>R Studio does not run IPYNB files. Instead, use the Rmd files in the GitHub repo that underlies the course website, at <a href="https://github.com/ciakovx/ciakovx.github.io" class="uri">https://github.com/ciakovx/ciakovx.github.io</a>. To download an individual Rmd file, click on it in the repo, then look for the <strong>Raw</strong> button in the upper right corner of the window. Right click on <strong>Raw</strong> and choose <strong>File &gt; Save Link As</strong> (this language may vary by browser).</li>
+</ol>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = false;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

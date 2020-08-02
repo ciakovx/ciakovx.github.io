@@ -4,7 +4,9 @@ title: "clarke_iakovakis"
 
 I am currently the Scholarly Services Librarian at Oklahoma State University. I graduated from the School of Information at the University of Texas in 2011 with an MS in Information Studies, and from Texas State University in 2006 with a BA in History. I previously worked at the University of Houston-Clear Lake and the University of Texas at Arlington. 
 
-FSCI 2019 files have been archived and are available at: https://github.com/ciakovx/ciakovx.github.io/tree/master/fsci2019. However, many of these scripts are updated for the FSCI 2020 course and are available at the menu above.
+Access the FSCI 2020 Course Syllabus at <https://ciakovx.github.io/fsci_syllabus.html>.
+
+FSCI 2019 files have been archived and are available at: <https://github.com/ciakovx/ciakovx.github.io/tree/master/fsci2019>. However, many of these scripts are updated for the FSCI 2020 course and are available here.
 
 ---
 
