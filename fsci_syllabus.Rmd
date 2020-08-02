@@ -22,12 +22,7 @@ The OSF home is at <https://osf.io/hd4re/>. Here you can find each day's compone
 Click the button below to launch the Binder for the entire repository:
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master)
 
-To view the course structure and exercises, see below Course Schedule:
-
-* [Day One](https://ciakovx.github.io/fsci_syllabus.html#DAY_ONE:_Wednesday,_August_5)
-* [Day Two](https://ciakovx.github.io/fsci_syllabus.html#DAY_TWO:_Monday,_August_10)
-* [Day Three](https://ciakovx.github.io/fsci_syllabus.html#DAY_THREE:_Wednesday,_Aug_12)
-
+To view the course structure and exercises, see below [Course Schedule](#course-schedule):
 
 # Course Information
 **Title:** Working with Scholarly Literature in R: Pulling, Wrangling, Cleaning, and Analyzing Structured Bibliographic Metadata
@@ -67,15 +62,17 @@ Students will need a computer with internet access. It will not be necessary to 
 
 # Course Learning Objectives
 A participant in this course will, at the end of the course, be able to:
-- Use R to complete a range of data tasks, including understanding R syntax and data types, installing and loading packages, reading data from files and APIs, and executing functions for tidying and  analyzing data.
-- Use the `rorcid` package in R to extract data from ORCID profiles, including authenticating with the ORCID API, finding ORCID iDs by name/affiliation, getting author biographical information, and getting works associated with individuals.
-- Use the `rcrossref` and `roadoi` packages in R to extract data from the Crossref and Unpaywall database, including authenticating with the Crossref API, forming queries, getting publication information, getting data on articles, converting articles to BibTeX/RIS, getting citation data, and checking for open access versions.
+
+* Use R to complete a range of data tasks, including understanding R syntax and data types, installing and loading packages, reading data from files and APIs, and executing functions for tidying and  analyzing data.
+* Use the `rorcid` package in R to extract data from ORCID profiles, including authenticating with the ORCID API, finding ORCID iDs by name/affiliation, getting author biographical information, and getting works associated with individuals.
+* Use the `rcrossref` and `roadoi` packages in R to extract data from the Crossref and Unpaywall database, including authenticating with the Crossref API, forming queries, getting publication information, getting data on articles, converting articles to BibTeX/RIS, getting citation data, and checking for open access versions.
 
 # Course Topics
 This course will cover these  topics:
-- Introduction to Binder and Jupyter Notebooks
-- Introduction to `rcrossref` and `roadoi`
-- Introduction to `rorcid`
+
+* Introduction to Binder and Jupyter Notebooks
+* Introduction to `rcrossref` and `roadoi`
+* Introduction to `rorcid`
 
 
 # Course Schedule
@@ -96,11 +93,13 @@ See the course OSF for Zoom links: <https://osf.io/hd4re/>
 Try to complete this by beginning of class, but it's fine if you push it until after we meet. I'll be discussing some of this during that session.
 
 **1. Using Jupyter Notebooks: 30 minutes**
+
 * This lesson is required.
 * Launch the Using Jupyter Notebooks Jupyter Notebook at [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=using_jupyter_notebooks.ipynb)
 * Watch the Using Jupyter Notebooks video tutorial at <COMING SOON>
 
 **2. Introduction to R: 30 minutes**
+
 * This lesson is optional.
 * No Jupyter Notebook for this lesson
 * Skim the [Introduction to R](IntroductionToR.html) webpage for information on what R is, how it applies to librarianship, what R Studio is, and some useful help resources. We will not be using R Studio in this class; instead, we will be working entirely with Jupyter Notebooks, but if you are going further in your R journey you will want to use R Studio.
@@ -119,18 +118,21 @@ Try to complete this by beginning of class, but it's fine if you push it until a
 ### Exercises
 
 **3. R Basics: 1 hour**
+
 * This lesson is required.
 * Launch the R Basics Jupyter Notebook at [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=RBasics.ipynb)
 * Watch the R Basics video tutorial at <COMING SOON>
 * Skim the [R Basics](RBasics.html) webpage. Most of this content is covered in the R Basics Jupyter Notebook.
 
 **4. Data Exploration: 1 hour**
+
 * This lesson is optional.
 * Launch the Data Exploration Jupyter Notebook at [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=DataExploration.ipynb)
 * No video for this lesson
 * Skim the [Data Exploration](DataExploration.html) webpage for information on getting data into R, exploring and transforming data, particularly using `dplyr`. Some of these functions will be used in the `rcrossref` and `rorcid` tutorials, but they will be explained as we are running through them.
 
 **5. Using `rcrossref` & `roadoi`: 1 hour**
+
 * This lesson is required.
 * Launch the `rcrossref` & `roadoi` Jupyter Notebook at [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=rcrossref.ipynb)
 * Watch the `rcrossref` and `roadoi` video tutorial at <COMING SOON>
@@ -150,11 +152,13 @@ Try to complete this by beginning of class, but it's fine if you push it until a
 ### Exercises
 
 **6. Exploring Data in Lists: 1 hour**
+
 * This lesson is optional.
 * Skim the [Exploring Data in Lists](fsci2020/jennybc_lists_lesson.html) webpage for a tutorial by Jenny Bryan on using `purrr` to explore and extract data from lists. Our API calls pull data into our session in nested lists, so this tutorial is helpful for managing that.
 * No Notebook or video for this lesson
 
 **8. Using [rorcid](fsci2020/rorcid.html)**
+
 * This lesson is required.
 * Access the `rorcid` Jupyter Notebook at [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=rorcid.ipynb)
 * Watch the `rorcid` video tutorial at <COMING SOON>
@@ -207,14 +211,6 @@ Kluyver, Thomas, Benjamin Ragan-Kelley, Fernando Pérez, Brian E. Granger,
 Yihui Xie (2020). knitr: A General-Purpose Package for Dynamic Report
   Generation in R. R package version 1.29.
 
-Yihui Xie (2015) Dynamic Documents with R and knitr. 2nd edition.
-  Chapman and Hall/CRC. ISBN 978-1498716963
-
-Yihui Xie (2014) knitr: A Comprehensive Tool for Reproducible Research
-  in R. In Victoria Stodden, Friedrich Leisch and Roger D. Peng,
-  editors, Implementing Reproducible Computational Research. Chapman and
-  Hall/CRC. ISBN 978-1466561595
-  
 `listviewer`
 Jos de Jong, Mac Gainer and Kent Russell (2019). listviewer:
   'htmlwidget' for Interactive Views of R Lists. R package version
