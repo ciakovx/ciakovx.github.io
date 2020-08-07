@@ -18,6 +18,8 @@ knitr::opts_chunk$set(cache = TRUE, eval = FALSE)
 # Binder link to this notebook:
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=using_jupyter_notebooks.ipynb)
 
+<https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=using_jupyter_notebooks.ipynb>
+
 
 This brief notebook provides an introduction to Jupyter Notebooks and Binder to prepare you for the course.
 

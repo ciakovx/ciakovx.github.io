@@ -30,6 +30,8 @@ grid::grid.raster(cc)
 # Binder link to this notebook:
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=DataExploration.ipynb)
 
+<https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=DataExploration.ipynb>
+
 # Getting data into R
 
 ## Ways to get data into R

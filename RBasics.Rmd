@@ -22,6 +22,8 @@ library(png)
 # Binder link to this notebook:
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=RBasics.ipynb)
 
+<https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=RBasics.ipynb>
+
 Please note the Binder link is condensed and modified for the Jupyter Notebooks environment, whereas this page is longer and pertains to the R Studio environment.
 
 # Introduction

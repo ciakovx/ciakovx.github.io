@@ -30,6 +30,8 @@ This walkthrough is distributed under a [https://creativecommons.org/licenses/by
 # Binder link to this notebook:
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=rcrossref.ipynb)
 
+<https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=rcrossref.ipynb>
+
 ## Setting up `rcrossref`
 
 First install and load `rcrossref` in R. Also install `usethis` in order to send your email to Crossref, as well as `tidyverse`, which is a package that contains many packages we'll use throughout.

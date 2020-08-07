@@ -26,6 +26,12 @@ cc <- readPNG(file.path("./images/cc bync.png"))
 grid::grid.raster(cc)
 ```
 
+## Binder link to this notebook:
+
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=jennybc_lists_lesson.ipynb)
+
+<https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=jennybc_lists_lesson.ipynb>
+
 ## Load packages
 
 Load purrr and repurrrsive, which contains recursive list examples.

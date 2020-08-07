@@ -22,6 +22,8 @@ The OSF home is at <https://osf.io/hd4re/>. Here you can find each day's compone
 Click the button below to launch the Binder for the entire repository:
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master)
 
+<https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master>
+
 To view the course structure and exercises, see below [Course Schedule](#course-schedule):
 
 # Course Information
@@ -111,14 +113,6 @@ Try to complete this by beginning of class, but it's fine if you push it until a
 * Skim the [R Basics](RBasics.html) webpage. Most of this content is covered in the R Basics Jupyter Notebook.
 * Watch the [R Basics video tutorial](https://osf.io/wrzpf/) (30 min.)
 
-**4. Data Exploration: 1 hour**
-
-* This lesson is required It will cover getting data into R, exploring and transforming data, particularly using `dplyr`. Some of these functions will be used in the `rcrossref` and `rorcid` tutorials, but they will be explained as we are running through them.
-* Launch the Data Exploration Jupyter Notebook at [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=DataExploration.ipynb)
-* Skim the [Data Exploration](DataExploration.html) webpage.  Most of this content is covered in the R Basics Jupyter Notebook. 
-* Watch the [Data Exploration video tutorial](https://osf.io/npk3e/) (1 hour).
-
-
 ---
 
 ## DAY TWO: Monday, August 10
@@ -132,12 +126,18 @@ Try to complete this by beginning of class, but it's fine if you push it until a
 
 ### Exercises
 
-**5. Using `rcrossref` & `roadoi`: 1.5 hours**
+**5. Exploring Data in Lists: 1 hour**
+* This lesson is optional, but highly recommended if you are planning on applying these lessons further. It is a tutorial on using `purrr` to explore and extract data from lists. Our API calls pull data into our session in nested lists, so this tutorial is helpful for managing that.
+* Launch the Exploring Data in Lists Jupyter Notebook at [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=jennybc_lists_lesson.ipynb)
+* Skim the [Exploring Data in Lists](fsci2020/jennybc_lists_lesson.html) webpage.
+* Watch the [Exploring Data in Lists video tutorial](https://osf.io/5n7bm/) (40 mins.)
+
+**6. Using `rcrossref` & `roadoi`: 1.5 hours**
 
 * This lesson is required. It will cover intro to Crossref, the Crossref API, and rcrossref, getting publication and article data by journal, keyword, and author. Constructing and filtering queries. Writing to CSV, BibTeX, and RIS. Using roadoi to query the Unpaywall API for open access availability. Getting URLs and downloading full text.
 * Launch the `rcrossref` & `roadoi` Jupyter Notebook at [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=rcrossref.ipynb)
-* Watch the `rcrossref` and `roadoi` video tutorial at <COMING SOON>
 * Skim the * [rcrossref](rcrossref.html) webpage. Much of this content is identical to that on the Jupyter Notebook.
+* Watch the [`rcrossref` and `roadoi` video tutorial](https://osf.io/nxajf/) (1.25 hrs).
 
 ---
 
