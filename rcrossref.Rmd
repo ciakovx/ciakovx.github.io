@@ -20,6 +20,7 @@ library(png)
 library(rcrossref)
 library(roadoi)
 library(listviewer)
+library(usethis)
 ```
 
 # Licensing
@@ -28,6 +29,31 @@ This walkthrough is distributed under a [https://creativecommons.org/licenses/by
 
 # Binder link to this notebook:
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=rcrossref.ipynb)
+
+## Setting up `rcrossref`
+
+First install and load `rcrossref` in R. Also install `usethis` in order to send your email to Crossref, as well as `tidyverse`, which is a package that contains many packages we'll use throughout.
+
+```{r install, eval=FALSE}
+install.packages("rcrossref")
+install.packages("usethis")
+install.packages("tidyverse")
+install.packages("listviewer")
+library(rcrossref)
+library(usethis)
+library(tidyverse)
+library(listviewer)
+```
+
+As described in the documentation, the Crossref team encourages requests with appropriate contact information, and will forward you to a dedicated API cluster for improved performance when you share your email with them. Learn more at <https://github.com/CrossRef/rest-api-doc#good-manners--more-reliable-service>. To do so, first open your R environment using the `edit_r_environ()` function from the `usethis` package.
+
+
+```{r editenviron, eval=FALSE}
+usethis::edit_r_environ()
+```
+
+A new window will open in R Studio. Type `crossref_email=name@example.com`, replacing the example with your own email address. Then press enter to create a new line, and leave it blank. Press Ctrl/Cmd + S to save the API key to your R environment and close the window. Your email address will now be shared with Crossref whenever you send them an API request. 
+
 
 # Crossref and `rcrossref`
 
@@ -771,54 +797,95 @@ We can print just the titles to quickly see how well they match with the titles 
 my_references_works_df$title
 ```
 
-Not bad! Looks like we got 6 out of 8, with problems on number 5 and 7. To see more about how to troubleshoot those two, go to https://ciakovx.github.io/rcrossref.html#getting_works_from_a_typed_citation_in_a_word_documenttext_file
+Not bad! Not bad! Looks like we got 6 out of 8, with problems on number 5 and 7. 
 
-## Writing publications to CSV
+Let's deal with 5 first. This was the result for "The Ascent of Open Access", which was a report by Digital Science posted to figshare, didn't come back. Even though this report does have a DOI (https://doi.org/10.6084/m9.figshare.7618751.v2) assigned via figshare, the `cr_works()` function searches only for Crossref DOIs. We should check to see if it came back in any of the 5 items we pulled. We do this by calling `pluck()` on the titles of the fifth item in the list:
 
-We will use the `write.csv()` function to write our data to disk as a CSV file. 
-
-```{r}
-# Use c() to create a vector of DOIs
-my_dois <- c("10.2139/ssrn.2697412", 
-                        "10.1016/j.joi.2016.08.002", 
-                        "10.1371/journal.pone.0020961", 
-                        "10.3389/fpsyg.2018.01487", 
-                        "10.1038/d41586-018-00104-7", 
-                        "10.12688/f1000research.8460.2", 
-                        "10.7551/mitpress/9286.001.0001")
-
-# pass the my_dois vector to cr_works()
-my_dois_works <- rcrossref::cr_works(dois = my_dois) %>%
-  pluck("data")
+```{r works3x2, eval=TRUE,cache=TRUE}
+my_references_works_list %>%
+  purrr::pluck(5, "title")
 ```
 
-Unfortunately, you cannot simply write the `plosone_publications` data frame to a CSV, due to the nested lists. It will throw an error: `"Error in stream_delim_(df, path, ...) : Don't know how to handle vector of type list."`
+Nope, unfortunately none of these are "The Ascent of Open Access", so we're out of luck. We can just throw this row out entirely using `slice()` from `dplyr`. We'll overwrite our existing `my_references_works_df` because we have no future use for it in this R session.
 
-I run through three solutions at https://ciakovx.github.io/rcrossref.html#writing_publications_to_disk
-
-Here, we will use solution 3: You can use `mutate()` from `dplyr` to coerce the list columns into character vectors with `as.character()`.
-
-First, identify the list vectors:
-
-```{r}
-# use map_chr to print the column types
-purrr::map_chr(my_dois_works, typeof)
+```{r works3xx, eval=TRUE,cache=TRUE}
+my_references_works_df <- my_references_works_df %>%
+  dplyr::slice(-5)
 ```
 
-For any variables that are type `list`, coerce those columns to character:
+For row 7, it's giving us the full citation for Peter Suber's book when we asked for the title only, so something is fishy. 
 
-```{r}
-# use mutate() to coerce list columns to character vectors
-my_dois_mutated <- my_dois_works %>%
+When we look at it more closely (we can call `View(my_references_works_df)`), we see the author of this item is not Peter Suber, but Rob Harle, and, checking the **type** column, it's a journal article, not a book. This is a book review published in the journal *Leonardo*, not Peter Suber's book. So let's go back to `my_references_works_list` and pull data from all 5 items that came back with the API call and see if Suber's book is in there somewhere:
+
+```{r works3x4, eval=TRUE,cache=TRUE}
+suber <- my_references_works_list %>%
+  purrr::pluck(7)
+suber
+```
+
+It looks like it is the second item, confirming by seeing the **author** is Peter Suber, the **publisher** is MIT Press, the **type** is book, and the **ISBN** is "9780262301732". 
+
+We do the following to correct it:
+
+* use `filter()` with the isbn to assign the correct row from `suber` to a variable called `suber_correct` 
+* remove the incorrect row with `slice` (double checking that it is the 6th row)
+* use `bind_rows()` to add the correct one to our `my_references_works_df` data frame. We can just overwrite the existing `my_references_works_df` again
+
+```{r works3x5, eval=TRUE,cache=TRUE}
+suber_correct <- suber %>%
+  dplyr::filter(isbn == "9780262301732")
+my_references_works_df <- my_references_works_df %>%
+  dplyr::slice(-6) %>%
+  bind_rows(suber_correct)
+```
+
+## Writing publications to disk
+
+We will use the `write_csv()` function from the `readr` package to write our data to disk. This package was loaded when you called `library(tidyverse)` at the beginning of the session.
+
+First we're going to create a vector that represents file path to where you want to save the file: 
+
+```{r writex, eval=FALSE}
+my_filepath <- "C:/EXAMPLE/crossref/data"
+```
+
+
+Unfortunately, you cannot simply write the `jah_jama_publications` data frame to a CSV, due to the nested lists. It will throw an error: `"Error in stream_delim_(df, path, ...) : Don't know how to handle vector of type list."`
+
+You have a few choices here:
+
+1. You can unnest one of the columns and leave `.drop` set to `TRUE`. This will add rows for all the values in the nested lists, and drop the additional nested lists. 
+
+```{r write, eval=FALSE}
+jah_jama_publications_auth <- jah_jama_publications %>% 
+  dplyr::filter(!purrr::map_lgl(author, is.null)) %>% 
+  tidyr::unnest(author, .drop = TRUE) %>% 
+  dplyr::bind_rows(jah_jama_publications %>% 
+                     dplyr::filter(map_lgl(author, is.null)) %>%
+                     dplyr::select(-author, -link))
+readr::write_csv(jah_jama_publications_auth, file.path(my_filepath, "jah_jama_publications_auth.csv"))
+```
+
+2. You can drop the nested lists altogether using a combination of `select_if()` from `dplyr` and `negate()` from `purrr` to drop all lists in the data frame. This only works if you don't need author or link.
+
+```{r write2, eval=FALSE}
+jah_jama_publications_short <- jah_jama_publications %>%
+  dplyr::select_if(purrr::negate(is.list))
+readr::write_csv(jah_jama_publications_author, file.path(my_filepath, "jah_jama_publications_short.csv"))
+```
+
+We go from 24 to 22 variables because it dropped **author** and **list**.
+
+3. You can use `mutate()` from `dplyr` to coerce the list columns into character vectors:
+
+```{r write3, eval=FALSE}
+jah_jama_publications_mutated <- jah_jama_publications %>%
   dplyr::mutate(author = as.character(author)) %>%
-  dplyr::mutate(assertion = as.character(assertion)) %>%
-  dplyr::mutate(link = as.character(link)) %>%
-  dplyr::mutate(license = as.character(license)) %>%
-  dplyr::mutate(reference = as.character(reference))
-write.csv(my_dois_mutated, "my_dois_mutated.csv")
+  dplyr::mutate(link = as.character(link))
+readr::write_csv(jah_jama_publications_mutated, file.path(my_filepath, "jah_jama_publications_mutated.csv"))
 ```
 
-Again, this is not an ideal solution, but if you need to move the data into CSV to view in Excel, it can do the trick.
+
 
 # Using `roadoi` to check for open access
 
