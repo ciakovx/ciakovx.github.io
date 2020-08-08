@@ -127,6 +127,7 @@ Try to complete this by beginning of class, but it's fine if you push it until a
 ### Exercises
 
 **5. Exploring Data in Lists: 1 hour**
+
 * This lesson is optional, but highly recommended if you are planning on applying these lessons further. It is a tutorial on using `purrr` to explore and extract data from lists. Our API calls pull data into our session in nested lists, so this tutorial is helpful for managing that.
 * Launch the Exploring Data in Lists Jupyter Notebook at [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=jennybc_lists_lesson.ipynb)
 * Skim the [Exploring Data in Lists](fsci2020/jennybc_lists_lesson.html) webpage.
@@ -152,13 +153,7 @@ Try to complete this by beginning of class, but it's fine if you push it until a
 
 ### Exercises
 
-**6. Exploring Data in Lists: 1 hour**
-
-* This lesson is optional.
-* Skim the [Exploring Data in Lists](fsci2020/jennybc_lists_lesson.html) webpage for a tutorial by Jenny Bryan on using `purrr` to explore and extract data from lists. Our API calls pull data into our session in nested lists, so this tutorial is helpful for managing that.
-* No Notebook or video for this lesson
-
-**8. Using `rorcid`**
+**7. Using `rorcid`**
 
 * This lesson is required. It will cover authenticating your ORCID key, finding ORCID iDs with names, affiliation, emails, keywords, works; getting and cleaning biographical information, and getting and cleaning employment information.
 * Access the `rorcid` Jupyter Notebook at [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=rorcid.ipynb)
