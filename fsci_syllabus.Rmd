@@ -157,7 +157,7 @@ Try to complete this by beginning of class, but it's fine if you push it until a
 
 * This lesson is required. It will cover authenticating your ORCID key, finding ORCID iDs with names, affiliation, emails, keywords, works; getting and cleaning biographical information, and getting and cleaning employment information.
 * Access the `rorcid` Jupyter Notebook at [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=rorcid.ipynb)
-* Watch the `rorcid` video tutorial at <COMING SOON>
+* Watch the [`rorcid` video tutorial](https://osf.io/8xcfv/)
 * Skim the [rorcid](rorcid.html) webpage. Much of this content is identical to that on the Jupyter Notebook.
 
 # Course Materials and Supplies Required  
