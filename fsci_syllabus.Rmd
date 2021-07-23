@@ -1,5 +1,5 @@
 ---
-title: "FSCI 2020: W24 Syllabus - Working with Scholarly Literature in R: Pulling, Wrangling, Cleaning, and Analyzing Structured Bibliographic Metadata."
+title: "FSCI 2021: W25 Syllabus - Working with Scholarly Literature in R: Pulling, Wrangling, Cleaning, and Analyzing Structured Bibliographic Metadata."
 author: "Clarke Iakovakis"
 output: 
   html_document:
@@ -13,11 +13,11 @@ output:
 
 # Intro
 
-Hello everyone. I'm looking forward to our session at [FSCI 2020](https://www.force11.org/fsci/2020) on ["W24 - Working with Scholarly Literature in R: Pulling, Wrangling, Cleaning, and Analyzing Structured Bibliographic Metadata."](https://www.force11.org/fsci/2020/fsci-2020-course-abstracts#W24) 
+Hello everyone. I'm looking forward to our session at [FSCI 2021](https://www.force11.org/fsci/2021) on ["W25 - Working with Scholarly Literature in R: Pulling, Wrangling, Cleaning, and Analyzing Structured Bibliographic Metadata."](https://www.force11.org/fsci/2021/course-list-abstracts#W25) 
 
 This entire course is distributed under a [Creative Commons Attribution 4.0 International (CC BY 4.0) License](https://creativecommons.org/licenses/by/4.0/).
 
-The OSF home is at <https://osf.io/hd4re/>. Here you can find each day's components laid out clearly, as well as links to the live Zoom sessions. While FSCI is in session, this link is only available to people enrolled in the class. The FSCI course Slack can be found at <https://fsci2020.slack.com/>--participants will already be added to the `w24_working_with_scholarly_literature_in_r` channel.
+The OSF home is at <https://osf.io/vpgbt/>. Here you can find each day's components laid out clearly, as well as links to the live Zoom sessions. While FSCI is in session, this link is only available to people enrolled in the class. The FSCI course Slack can be found at <https://fsci2021.slack.com/>--participants will already be added to the `w25_working_with_scholarly_literature_in_r` channel.
 
 Click the button below to launch the Binder for the entire repository:
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master)
@@ -80,85 +80,107 @@ This course will cover these  topics:
 # Course Schedule
 
 See the course OSF for Zoom links: <https://osf.io/hd4re/>
-
-## DAY ONE: Wednesday, August 5
-
-### Live Zoom Sessions 
-* 8-9AM: Introductory session
-* 5-6PM: REPEAT Introductory session
+Sched home: <https://sched.co/iON7>
 
 **ALL TIMES PACIFIC**
 [Convert time](https://www.thetimezoneconverter.com/)
+
+## DAY ONE: Wednesday, July 28
+
+### Live Zoom Sessions 
+* 9:00-10:00 AM: Session 1
+* 5:00-6:00 PM: REPEAT Session 1
 
 ### Exercises
 
 Try to complete this by beginning of class, but it's fine if you push it until after we meet. I'll be discussing some of this during that session.
 
-**1. Using Jupyter Notebooks: 30 minutes**
+**1. Using Binder & Jupyter Notebooks: 30 minutes (*required*)**
 
 * This lesson is required. It will cover the basics of what Binder is, what Jupyter Notebooks are, and how to use them.
 * Launch the Using Jupyter Notebooks Jupyter Notebook at [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=using_jupyter_notebooks.ipynb)
-* Watch the [Using Jupyter Notebooks video tutorial](https://osf.io/4mn7p/) (25 min.)
+* Watch the [Using Jupyter Notebooks video tutorial](https://www.youtube.com/watch?v=3EKe_4zU4B0) (25 min.)
 
-**2. Introduction to R: 30 minutes**
+![](https://www.youtube.com/watch?v=3EKe_4zU4B0){width="90%"}
+
+**2. Introduction to R: 30 minutes (*optional*)**
 
 * This lesson is optional. It will cover my background, what R is, considerations in adopting R, and some useful help resources.
-* No Jupyter Notebook for this lesson
+* No Jupyter Notebook or video tutorial for this lesson
 * Skim the [Introduction to R](IntroductionToR.html) webpage.
 
-**3. R Basics: 1 hour**
+**3. R Basics: 30 minutes (*required*)**
 
-* This lesson is required. It will cover getting data into R, exploring and transforming data, particularly using `dplyr`. Some of these functions will be used in the `rcrossref` and `rorcid` tutorials, but they will be explained as we are running through them.
+* This lesson is required. It will cover writing expressions, calling functions, creating and subsetting vectors, and working with data frames.
 * Launch the R Basics Jupyter Notebook at [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=RBasics.ipynb)
 * Skim the [R Basics](RBasics.html) webpage. Most of this content is covered in the R Basics Jupyter Notebook.
-* Watch the [R Basics video tutorial](https://osf.io/wrzpf/) (30 min.)
+* Watch the [R Basics video tutorial](https://www.youtube.com/watch?v=f1wkanaYhVA) (30 min.)
+
+![](https://www.youtube.com/watch?v=f1wkanaYhVA){width="90%"}
+
+**4. Data Exploration: 1 hour (*required*)**
+
+* This lesson is required. It will cover getting data into R, exploring and transforming data, particularly using `dplyr`. Some of these functions will be used in the `rcrossref` and `rorcid` tutorials, but they will be explained as we are running through them.
+* Launch the Data Exploration Jupyter Notebook at [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=DataExploration.ipynb)
+Skim the Data Exploration webpage at <https://ciakovx.github.io/DataExploration.html>. 
+* Watch the [Data Exploration video tutorial](https://youtu.be/O8q7fg1dFUU) (1 hour).
+@[youtube](https://youtu.be/O8q7fg1dFUU)
+
+![](https://youtu.be/O8q7fg1dFUU){width="90%"}
+
 
 ---
 
-## DAY TWO: Monday, August 10
-
-### Live Zoom Sessions 
-* 8-9AM: Activity session 1 - 
-* 5-6PM: REPEAT Activity session 1
+## DAY TWO: Monday, August 2
 
 **ALL TIMES PACIFIC**
 [Convert time](https://www.thetimezoneconverter.com/)
 
+### Live Zoom Sessions 
+* 9:00-10:00 AM: Session 2 
+* 5:00-6:00 PM: REPEAT Session 2
+
 ### Exercises
 
-**5. Exploring Data in Lists: 1 hour**
+**5. Exploring Data in Lists: 1 hour (*optional but recommended*)**
 
 * This lesson is optional, but highly recommended if you are planning on applying these lessons further. It is a tutorial on using `purrr` to explore and extract data from lists. Our API calls pull data into our session in nested lists, so this tutorial is helpful for managing that.
 * Launch the Exploring Data in Lists Jupyter Notebook at [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=jennybc_lists_lesson.ipynb)
 * Skim the [Exploring Data in Lists](fsci2020/jennybc_lists_lesson.html) webpage.
-* Watch the [Exploring Data in Lists video tutorial](https://osf.io/5n7bm/) (40 mins.)
+* Watch the [Exploring Data in Lists video tutorial](https://youtu.be/F57EorEYRMM) (40 mins.)
 
-**6. Using `rcrossref` & `roadoi`: 1.5 hours**
+![](https://youtu.be/F57EorEYRMM){width="90%"}
+
+**6. Using `rcrossref` & `roadoi`: 1.5 hours (*required*)**
 
 * This lesson is required. It will cover intro to Crossref, the Crossref API, and rcrossref, getting publication and article data by journal, keyword, and author. Constructing and filtering queries. Writing to CSV, BibTeX, and RIS. Using roadoi to query the Unpaywall API for open access availability. Getting URLs and downloading full text.
 * Launch the `rcrossref` & `roadoi` Jupyter Notebook at [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=rcrossref.ipynb)
 * Skim the * [rcrossref](rcrossref.html) webpage. Much of this content is identical to that on the Jupyter Notebook.
-* Watch the [`rcrossref` and `roadoi` video tutorial](https://osf.io/nxajf/) (1.25 hrs).
+* Watch the [`rcrossref` and `roadoi` video tutorial](https://youtu.be/dy-raTcj0no) (1.25 hrs).
+
+![](https://youtu.be/dy-raTcj0no){width="90%"}
 
 ---
 
-## DAY THREE: Wednesday, Aug. 12
+## DAY THREE: Wednesday, Aug. 4
 
 ### Live Zoom Sessions
-* 8-9AM: Activity session 2
-* 5-6PM: REPEAT Activity session 2
+* 9:00-10:00 AM: Session 3 
+* 5:00-6:00 PM: REPEAT Session 3
 
 **ALL TIMES PACIFIC**
 [Convert time](https://www.thetimezoneconverter.com/)
 
 ### Exercises
 
-**7. Using `rorcid`**
+**7. Using `rorcid`: 1 hour (*required*)**
 
 * This lesson is required. It will cover authenticating your ORCID key, finding ORCID iDs with names, affiliation, emails, keywords, works; getting and cleaning biographical information, and getting and cleaning employment information.
 * Access the `rorcid` Jupyter Notebook at [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=rorcid.ipynb)
-* Watch the [`rorcid` video tutorial](https://osf.io/8xcfv/)
+* Watch the [`rorcid` video tutorial](https://youtu.be/elxtFVGoUMI)
 * Skim the [rorcid](rorcid.html) webpage. Much of this content is identical to that on the Jupyter Notebook.
+
+![](https://youtu.be/elxtFVGoUMI){width="90%"}
 
 # Course Materials and Supplies Required  
 Students will need a computer with internet access, time, patience, and tenacity. No software downloads are required.

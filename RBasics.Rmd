@@ -28,7 +28,7 @@ Please note the Binder link is condensed and modified for the Jupyter Notebooks 
 
 # Introduction
 
-This guide accompanies the first day of instruction for our course at the 2020 FORCE11 Scholarly Communications Institute: ["W24 - Working with Scholarly Literature in R: Pulling, Wrangling, Cleaning, and Analyzing Structured Bibliographic Metadata."](https://www.force11.org/fsci/2020/fsci-2020-course-abstracts#W24). It covers basic nuts and bolts of using R.
+This guide accompanies the first day of instruction for our course at the 2021 FORCE11 Scholarly Communications Institute: ["W25 - Working with Scholarly Literature in R: Pulling, Wrangling, Cleaning, and Analyzing Structured Bibliographic Metadata."](https://www.force11.org/fsci/2021/course-list-abstracts#W25). It covers basic nuts and bolts of using R.
 
 
 This walkthrough is distributed under a [Creative Commons Attribution 4.0 International (CC BY 4.0) License](https://creativecommons.org/licenses/by/4.0/).

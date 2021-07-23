@@ -178,7 +178,7 @@ plosone_details$deposits_funders_current
 ---
 **TRY IT YOURSELF**
 
-1. Assign an ISSN for a well-known journal to a new variable in R. Name it whatever you like. You can use the [Scimago Journal Rank](https://www.scimagojr.com/journalrank.php) to look up the ISSN. If you need a couple examples, try [RUSA](https://www.scimagojr.com/journalsearch.php?q=16004&amp;tip=sid&amp;clean=0) or [Library Hi Tech](https://www.scimagojr.com/journalsearch.php?q=144908&amp;tip=sid&amp;clean=0). Make sure to put the ISSN in quotes to create a character vector.
+1. Assign an ISSN for a well-known journal to a new variable in R. Name it whatever you like. You can use the [Scimago Journal Rank](https://www.scimagojr.com/journalrank.php) to look up the ISSN. If you need a couple examples, try [RUSA](https://www.scimagojr.com/journalsearch.php?q=16004&tip=sid&clean=0) or [Library Hi Tech](https://www.scimagojr.com/journalsearch.php?q=144908&tip=sid&clean=0). Make sure to put the ISSN in quotes to create a character vector.
 2. Look up the journal details using `cr_journals`. Make sure to pass the argument `works = FALSE`.
 3. Print the data to your console by typing in the value name.
 
@@ -187,7 +187,6 @@ plosone_details$deposits_funders_current
 
 ```{r}
 # assign an ISSN to a value. Call the value what you want (e.g. plosone_issn)
-
 
 
 ```
@@ -202,8 +201,6 @@ plosone_details$deposits_funders_current
 
 ```{r}
 # print the journal details to the console by typing in the value name
-
-
 
 ```
 
@@ -512,10 +509,12 @@ jlsc_publications_auth %>%
 
 ```{r}
 # assign the C&RL ISSN 2150-6701
+
 ```
 
 ```{r}
 # use the query.author field query to search for articles written by Lisa Hinchliffe. 
+
 ```
 
 # Viewing the JSON file
