@@ -1,6 +1,6 @@
 ---
 title: "FSCI 2021: W25 Syllabus - Working with Scholarly Literature in R: Pulling, Wrangling, Cleaning, and Analyzing Structured Bibliographic Metadata."
-author: "Clarke Iakovakis"
+author: "Clarke Iakovakis, Kay Bjornen, Megan Macken"
 output: 
   html_document:
     df_print: paged
@@ -13,7 +13,7 @@ output:
 
 # Intro
 
-Hello everyone. I'm looking forward to our session at [FSCI 2021](https://www.force11.org/fsci/2021) on ["W25 - Working with Scholarly Literature in R: Pulling, Wrangling, Cleaning, and Analyzing Structured Bibliographic Metadata."](https://www.force11.org/fsci/2021/course-list-abstracts#W25) 
+Hello everyone. we are looking forward to our session at [FSCI 2021](https://www.force11.org/fsci/2021) on ["W25 - Working with Scholarly Literature in R: Pulling, Wrangling, Cleaning, and Analyzing Structured Bibliographic Metadata."](https://www.force11.org/fsci/2021/course-list-abstracts#W25) 
 
 This entire course is distributed under a [Creative Commons Attribution 4.0 International (CC BY 4.0) License](https://creativecommons.org/licenses/by/4.0/).
 
@@ -29,8 +29,10 @@ To view the course structure and exercises, see below [Course Schedule](#course-
 # Course Information
 **Title:** Working with Scholarly Literature in R: Pulling, Wrangling, Cleaning, and Analyzing Structured Bibliographic Metadata
 
-**Instructor:**
-Clarke Iakovakis, Scholarly Services Librarian, Oklahoma State University, <https://info.library.okstate.edu/clarke-iakovakis>
+**Instructors:**
+* Clarke Iakovakis, Scholarly Services Librarian, Oklahoma State University, <https://experts.okstate.edu/clarke.iakovakis>
+* Kay Bjornen, Research Data Initiatives Librarian, Oklahoma State University, <https://experts.okstate.edu/kay.bjornen>
+* Megan Macken, Digital Scholarship Librarian, Oklahoma State University, <https://experts.okstate.edu/megan.macken>
 
 **Course Website:** <https://ciakovx.github.io/fsci_syllabus.html>
 
@@ -79,7 +81,7 @@ This course will cover these  topics:
 
 # Course Schedule
 
-See the course OSF for Zoom links: <https://osf.io/hd4re/>
+See the course OSF for Zoom links: <https://osf.io/vpgbt>
 Sched home: <https://sched.co/iON7>
 
 **ALL TIMES PACIFIC**
