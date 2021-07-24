@@ -14,12 +14,22 @@
 
 <title>Exploring and Extracting Data in Lists</title>
 
+<script src="site_libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/spacelab.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
@@ -28,17 +38,21 @@
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
 <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
-<script src="site_libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="site_libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
 <link href="site_libs/jsoneditor-5.25.6/jsoneditor.min.css" rel="stylesheet" />
 <script src="site_libs/jsoneditor-5.25.6/jsoneditor.min.js"></script>
 <script src="site_libs/jsonedit-binding-3.0.0/jsonedit.js"></script>
 
-<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -51,32 +65,7 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
 
 <link rel="stylesheet" href="styles.css" type="text/css" />
 
@@ -87,10 +76,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -107,40 +92,13 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 52px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 57px;
-  margin-top: -57px;
-}
-.section h2 {
-  padding-top: 57px;
-  margin-top: -57px;
-}
-.section h3 {
-  padding-top: 57px;
-  margin-top: -57px;
-}
-.section h4 {
-  padding-top: 57px;
-  margin-top: -57px;
-}
-.section h5 {
-  padding-top: 57px;
-  margin-top: -57px;
-}
-.section h6 {
-  padding-top: 57px;
-  margin-top: -57px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -168,7 +126,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -180,7 +138,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -191,10 +149,23 @@ $(document).ready(function () {
   var menuAnchor = $('a[href="' + href + '"]');
 
   // mark it active
-  menuAnchor.parent().addClass('active');
+  menuAnchor.tab('show');
 
   // if it's got a parent navbar menu mark it active as well
   menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -206,7 +177,6 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -338,7 +308,7 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
+<div class="row">
 <div class="col-xs-12 col-sm-4 col-md-3">
 <div id="TOC" class="tocify">
 </div>
@@ -363,7 +333,7 @@ div.tocify {
       <ul class="nav navbar-nav">
         <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    FSCI 2020 W24 Session
+    FSCI 2021 W25 Session
      
     <span class="caret"></span>
   </a>
@@ -402,7 +372,7 @@ div.tocify {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -488,7 +458,7 @@ x[c(FALSE, TRUE)]
 <div id="listviewer-and-rstudios-object-explorer" class="section level3">
 <h3>listviewer and RStudio’s Object Explorer</h3>
 <p>The RStudio IDE (v1.1 and higher) offers an <a href="https://blog.rstudio.com/2017/08/22/rstudio-v1-1-preview-object-explorer/">Object Explorer</a> that provides interactive inspection and code generation tools for hierarchical objects, such as lists. You can invoke it via the GUI or in code as <code>View(YOUR_UGLY_LIST)</code>.</p>
-<p>However, that won’t help you expose list exploration in something like this website. I am using the <a href="https://CRAN.R-project.org/package=listviewer">listviewer</a> package to do this below. It allows you to expose list exploration in a rendered <code>.Rmd</code> document. To replicate this experience locally, call, e.g., <code>listviewer::jsonedit(got_chars, mode = &quot;view&quot;)</code>.</p>
+<p>However, that won’t help you expose list exploration in something like this website. I am using the <a href="https://CRAN.R-project.org/package=listviewer">listviewer</a> package to do this below. It allows you to expose list exploration in a rendered <code>.Rmd</code> document. To replicate this experience locally, call, e.g., <code>listviewer::jsonedit(got_chars, mode = "view")</code>.</p>
 <pre class="r"><code>library(listviewer)</code></pre>
 </div>
 </div>
@@ -657,7 +627,7 @@ sqrt(c(9, 16, 25))
 <ul>
 <li>provide “TEXT” to extract the element named “TEXT”
 <ul>
-<li>equivalent to <code>function(x) x[[&quot;TEXT&quot;]]</code></li>
+<li>equivalent to <code>function(x) x[["TEXT"]]</code></li>
 </ul></li>
 <li>provide <code>i</code> to extract the <code>i</code>-th element
 <ul>
@@ -770,625 +740,11 @@ str(x[18:19])
 <p>How can we “stack up” these results row-wise, i.e. one row per user and variables for “name”, “gender”, etc.? A data frame would be the perfect data structure for this information.</p>
 <p>This is what <code>map_dfr()</code> is for.</p>
 <pre class="r"><code>map_dfr(got_chars, extract, c(&quot;name&quot;, &quot;culture&quot;, &quot;gender&quot;, &quot;id&quot;, &quot;born&quot;, &quot;alive&quot;))</code></pre>
-<table>
-<thead>
-<tr>
-<th style="text-align:left;">
-name
-</th>
-<th style="text-align:left;">
-culture
-</th>
-<th style="text-align:left;">
-gender
-</th>
-<th style="text-align:right;">
-id
-</th>
-<th style="text-align:left;">
-born
-</th>
-<th style="text-align:left;">
-alive
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-Theon Greyjoy
-</td>
-<td style="text-align:left;">
-Ironborn
-</td>
-<td style="text-align:left;">
-Male
-</td>
-<td style="text-align:right;">
-1022
-</td>
-<td style="text-align:left;">
-In 278 AC or 279 AC, at Pyke
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Tyrion Lannister
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-Male
-</td>
-<td style="text-align:right;">
-1052
-</td>
-<td style="text-align:left;">
-In 273 AC, at Casterly Rock
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Victarion Greyjoy
-</td>
-<td style="text-align:left;">
-Ironborn
-</td>
-<td style="text-align:left;">
-Male
-</td>
-<td style="text-align:right;">
-1074
-</td>
-<td style="text-align:left;">
-In 268 AC or before, at Pyke
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Will
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-Male
-</td>
-<td style="text-align:right;">
-1109
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-FALSE
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Areo Hotah
-</td>
-<td style="text-align:left;">
-Norvoshi
-</td>
-<td style="text-align:left;">
-Male
-</td>
-<td style="text-align:right;">
-1166
-</td>
-<td style="text-align:left;">
-In 257 AC or before, at Norvos
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Chett
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-Male
-</td>
-<td style="text-align:right;">
-1267
-</td>
-<td style="text-align:left;">
-At Hag’s Mire
-</td>
-<td style="text-align:left;">
-FALSE
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Cressen
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-Male
-</td>
-<td style="text-align:right;">
-1295
-</td>
-<td style="text-align:left;">
-In 219 AC or 220 AC
-</td>
-<td style="text-align:left;">
-FALSE
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Arianne Martell
-</td>
-<td style="text-align:left;">
-Dornish
-</td>
-<td style="text-align:left;">
-Female
-</td>
-<td style="text-align:right;">
-130
-</td>
-<td style="text-align:left;">
-In 276 AC, at Sunspear
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Daenerys Targaryen
-</td>
-<td style="text-align:left;">
-Valyrian
-</td>
-<td style="text-align:left;">
-Female
-</td>
-<td style="text-align:right;">
-1303
-</td>
-<td style="text-align:left;">
-In 284 AC, at Dragonstone
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Davos Seaworth
-</td>
-<td style="text-align:left;">
-Westeros
-</td>
-<td style="text-align:left;">
-Male
-</td>
-<td style="text-align:right;">
-1319
-</td>
-<td style="text-align:left;">
-In 260 AC or before, at King’s Landing
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Arya Stark
-</td>
-<td style="text-align:left;">
-Northmen
-</td>
-<td style="text-align:left;">
-Female
-</td>
-<td style="text-align:right;">
-148
-</td>
-<td style="text-align:left;">
-In 289 AC, at Winterfell
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Arys Oakheart
-</td>
-<td style="text-align:left;">
-Reach
-</td>
-<td style="text-align:left;">
-Male
-</td>
-<td style="text-align:right;">
-149
-</td>
-<td style="text-align:left;">
-At Old Oak
-</td>
-<td style="text-align:left;">
-FALSE
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Asha Greyjoy
-</td>
-<td style="text-align:left;">
-Ironborn
-</td>
-<td style="text-align:left;">
-Female
-</td>
-<td style="text-align:right;">
-150
-</td>
-<td style="text-align:left;">
-In 275 AC or 276 AC, at Pyke
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Barristan Selmy
-</td>
-<td style="text-align:left;">
-Westeros
-</td>
-<td style="text-align:left;">
-Male
-</td>
-<td style="text-align:right;">
-168
-</td>
-<td style="text-align:left;">
-In 237 AC
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Varamyr
-</td>
-<td style="text-align:left;">
-Free Folk
-</td>
-<td style="text-align:left;">
-Male
-</td>
-<td style="text-align:right;">
-2066
-</td>
-<td style="text-align:left;">
-At a village Beyond the Wall
-</td>
-<td style="text-align:left;">
-FALSE
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Brandon Stark
-</td>
-<td style="text-align:left;">
-Northmen
-</td>
-<td style="text-align:left;">
-Male
-</td>
-<td style="text-align:right;">
-208
-</td>
-<td style="text-align:left;">
-In 290 AC, at Winterfell
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Brienne of Tarth
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-Female
-</td>
-<td style="text-align:right;">
-216
-</td>
-<td style="text-align:left;">
-In 280 AC
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Catelyn Stark
-</td>
-<td style="text-align:left;">
-Rivermen
-</td>
-<td style="text-align:left;">
-Female
-</td>
-<td style="text-align:right;">
-232
-</td>
-<td style="text-align:left;">
-In 264 AC, at Riverrun
-</td>
-<td style="text-align:left;">
-FALSE
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Cersei Lannister
-</td>
-<td style="text-align:left;">
-Westerman
-</td>
-<td style="text-align:left;">
-Female
-</td>
-<td style="text-align:right;">
-238
-</td>
-<td style="text-align:left;">
-In 266 AC, at Casterly Rock
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Eddard Stark
-</td>
-<td style="text-align:left;">
-Northmen
-</td>
-<td style="text-align:left;">
-Male
-</td>
-<td style="text-align:right;">
-339
-</td>
-<td style="text-align:left;">
-In 263 AC, at Winterfell
-</td>
-<td style="text-align:left;">
-FALSE
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Jaime Lannister
-</td>
-<td style="text-align:left;">
-Westerlands
-</td>
-<td style="text-align:left;">
-Male
-</td>
-<td style="text-align:right;">
-529
-</td>
-<td style="text-align:left;">
-In 266 AC, at Casterly Rock
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Jon Connington
-</td>
-<td style="text-align:left;">
-Stormlands
-</td>
-<td style="text-align:left;">
-Male
-</td>
-<td style="text-align:right;">
-576
-</td>
-<td style="text-align:left;">
-In or between 263 AC and 265 AC
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Jon Snow
-</td>
-<td style="text-align:left;">
-Northmen
-</td>
-<td style="text-align:left;">
-Male
-</td>
-<td style="text-align:right;">
-583
-</td>
-<td style="text-align:left;">
-In 283 AC
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Aeron Greyjoy
-</td>
-<td style="text-align:left;">
-Ironborn
-</td>
-<td style="text-align:left;">
-Male
-</td>
-<td style="text-align:right;">
-60
-</td>
-<td style="text-align:left;">
-In or between 269 AC and 273 AC, at Pyke
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Kevan Lannister
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-Male
-</td>
-<td style="text-align:right;">
-605
-</td>
-<td style="text-align:left;">
-In 244 AC
-</td>
-<td style="text-align:left;">
-FALSE
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Melisandre
-</td>
-<td style="text-align:left;">
-Asshai
-</td>
-<td style="text-align:left;">
-Female
-</td>
-<td style="text-align:right;">
-743
-</td>
-<td style="text-align:left;">
-At Unknown
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Merrett Frey
-</td>
-<td style="text-align:left;">
-Rivermen
-</td>
-<td style="text-align:left;">
-Male
-</td>
-<td style="text-align:right;">
-751
-</td>
-<td style="text-align:left;">
-In 262 AC
-</td>
-<td style="text-align:left;">
-FALSE
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Quentyn Martell
-</td>
-<td style="text-align:left;">
-Dornish
-</td>
-<td style="text-align:left;">
-Male
-</td>
-<td style="text-align:right;">
-844
-</td>
-<td style="text-align:left;">
-In 281 AC, at Sunspear, Dorne
-</td>
-<td style="text-align:left;">
-FALSE
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Samwell Tarly
-</td>
-<td style="text-align:left;">
-Andal
-</td>
-<td style="text-align:left;">
-Male
-</td>
-<td style="text-align:right;">
-954
-</td>
-<td style="text-align:left;">
-In 283 AC, at Horn Hill
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Sansa Stark
-</td>
-<td style="text-align:left;">
-Northmen
-</td>
-<td style="text-align:left;">
-Female
-</td>
-<td style="text-align:right;">
-957
-</td>
-<td style="text-align:left;">
-In 286 AC, at Winterfell
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-</tr>
-</tbody>
-</table>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["culture"],"name":[2],"type":["chr"],"align":["left"]},{"label":["gender"],"name":[3],"type":["chr"],"align":["left"]},{"label":["id"],"name":[4],"type":["int"],"align":["right"]},{"label":["born"],"name":[5],"type":["chr"],"align":["left"]},{"label":["alive"],"name":[6],"type":["lgl"],"align":["right"]}],"data":[{"1":"Theon Greyjoy","2":"Ironborn","3":"Male","4":"1022","5":"In 278 AC or 279 AC, at Pyke","6":"TRUE"},{"1":"Tyrion Lannister","2":"","3":"Male","4":"1052","5":"In 273 AC, at Casterly Rock","6":"TRUE"},{"1":"Victarion Greyjoy","2":"Ironborn","3":"Male","4":"1074","5":"In 268 AC or before, at Pyke","6":"TRUE"},{"1":"Will","2":"","3":"Male","4":"1109","5":"","6":"FALSE"},{"1":"Areo Hotah","2":"Norvoshi","3":"Male","4":"1166","5":"In 257 AC or before, at Norvos","6":"TRUE"},{"1":"Chett","2":"","3":"Male","4":"1267","5":"At Hag's Mire","6":"FALSE"},{"1":"Cressen","2":"","3":"Male","4":"1295","5":"In 219 AC or 220 AC","6":"FALSE"},{"1":"Arianne Martell","2":"Dornish","3":"Female","4":"130","5":"In 276 AC, at Sunspear","6":"TRUE"},{"1":"Daenerys Targaryen","2":"Valyrian","3":"Female","4":"1303","5":"In 284 AC, at Dragonstone","6":"TRUE"},{"1":"Davos Seaworth","2":"Westeros","3":"Male","4":"1319","5":"In 260 AC or before, at King's Landing","6":"TRUE"},{"1":"Arya Stark","2":"Northmen","3":"Female","4":"148","5":"In 289 AC, at Winterfell","6":"TRUE"},{"1":"Arys Oakheart","2":"Reach","3":"Male","4":"149","5":"At Old Oak","6":"FALSE"},{"1":"Asha Greyjoy","2":"Ironborn","3":"Female","4":"150","5":"In 275 AC or 276 AC, at Pyke","6":"TRUE"},{"1":"Barristan Selmy","2":"Westeros","3":"Male","4":"168","5":"In 237 AC","6":"TRUE"},{"1":"Varamyr","2":"Free Folk","3":"Male","4":"2066","5":"At a village Beyond the Wall","6":"FALSE"},{"1":"Brandon Stark","2":"Northmen","3":"Male","4":"208","5":"In 290 AC, at Winterfell","6":"TRUE"},{"1":"Brienne of Tarth","2":"","3":"Female","4":"216","5":"In 280 AC","6":"TRUE"},{"1":"Catelyn Stark","2":"Rivermen","3":"Female","4":"232","5":"In 264 AC, at Riverrun","6":"FALSE"},{"1":"Cersei Lannister","2":"Westerman","3":"Female","4":"238","5":"In 266 AC, at Casterly Rock","6":"TRUE"},{"1":"Eddard Stark","2":"Northmen","3":"Male","4":"339","5":"In 263 AC, at Winterfell","6":"FALSE"},{"1":"Jaime Lannister","2":"Westerlands","3":"Male","4":"529","5":"In 266 AC, at Casterly Rock","6":"TRUE"},{"1":"Jon Connington","2":"Stormlands","3":"Male","4":"576","5":"In or between 263 AC and 265 AC","6":"TRUE"},{"1":"Jon Snow","2":"Northmen","3":"Male","4":"583","5":"In 283 AC","6":"TRUE"},{"1":"Aeron Greyjoy","2":"Ironborn","3":"Male","4":"60","5":"In or between 269 AC and 273 AC, at Pyke","6":"TRUE"},{"1":"Kevan Lannister","2":"","3":"Male","4":"605","5":"In 244 AC","6":"FALSE"},{"1":"Melisandre","2":"Asshai","3":"Female","4":"743","5":"At Unknown","6":"TRUE"},{"1":"Merrett Frey","2":"Rivermen","3":"Male","4":"751","5":"In 262 AC","6":"FALSE"},{"1":"Quentyn Martell","2":"Dornish","3":"Male","4":"844","5":"In 281 AC, at Sunspear, Dorne","6":"FALSE"},{"1":"Samwell Tarly","2":"Andal","3":"Male","4":"954","5":"In 283 AC, at Horn Hill","6":"TRUE"},{"1":"Sansa Stark","2":"Northmen","3":"Female","4":"957","5":"In 286 AC, at Winterfell","6":"TRUE"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
 <p>Finally! A data frame! Hallelujah!</p>
 <p>Notice how the variables have been automatically type converted. It’s a beautiful thing. Until it’s not. When programming, it is safer, but more cumbersome, to explicitly specify type and build your data frame the usual way.</p>
 <pre class="r"><code>library(tibble)
@@ -1402,625 +758,11 @@ got_chars %&gt;% {
       alive = map_lgl(., &quot;alive&quot;)
   )
 }</code></pre>
-<table>
-<thead>
-<tr>
-<th style="text-align:left;">
-name
-</th>
-<th style="text-align:left;">
-culture
-</th>
-<th style="text-align:left;">
-gender
-</th>
-<th style="text-align:right;">
-id
-</th>
-<th style="text-align:left;">
-born
-</th>
-<th style="text-align:left;">
-alive
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-Theon Greyjoy
-</td>
-<td style="text-align:left;">
-Ironborn
-</td>
-<td style="text-align:left;">
-Male
-</td>
-<td style="text-align:right;">
-1022
-</td>
-<td style="text-align:left;">
-In 278 AC or 279 AC, at Pyke
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Tyrion Lannister
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-Male
-</td>
-<td style="text-align:right;">
-1052
-</td>
-<td style="text-align:left;">
-In 273 AC, at Casterly Rock
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Victarion Greyjoy
-</td>
-<td style="text-align:left;">
-Ironborn
-</td>
-<td style="text-align:left;">
-Male
-</td>
-<td style="text-align:right;">
-1074
-</td>
-<td style="text-align:left;">
-In 268 AC or before, at Pyke
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Will
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-Male
-</td>
-<td style="text-align:right;">
-1109
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-FALSE
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Areo Hotah
-</td>
-<td style="text-align:left;">
-Norvoshi
-</td>
-<td style="text-align:left;">
-Male
-</td>
-<td style="text-align:right;">
-1166
-</td>
-<td style="text-align:left;">
-In 257 AC or before, at Norvos
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Chett
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-Male
-</td>
-<td style="text-align:right;">
-1267
-</td>
-<td style="text-align:left;">
-At Hag’s Mire
-</td>
-<td style="text-align:left;">
-FALSE
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Cressen
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-Male
-</td>
-<td style="text-align:right;">
-1295
-</td>
-<td style="text-align:left;">
-In 219 AC or 220 AC
-</td>
-<td style="text-align:left;">
-FALSE
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Arianne Martell
-</td>
-<td style="text-align:left;">
-Dornish
-</td>
-<td style="text-align:left;">
-Female
-</td>
-<td style="text-align:right;">
-130
-</td>
-<td style="text-align:left;">
-In 276 AC, at Sunspear
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Daenerys Targaryen
-</td>
-<td style="text-align:left;">
-Valyrian
-</td>
-<td style="text-align:left;">
-Female
-</td>
-<td style="text-align:right;">
-1303
-</td>
-<td style="text-align:left;">
-In 284 AC, at Dragonstone
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Davos Seaworth
-</td>
-<td style="text-align:left;">
-Westeros
-</td>
-<td style="text-align:left;">
-Male
-</td>
-<td style="text-align:right;">
-1319
-</td>
-<td style="text-align:left;">
-In 260 AC or before, at King’s Landing
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Arya Stark
-</td>
-<td style="text-align:left;">
-Northmen
-</td>
-<td style="text-align:left;">
-Female
-</td>
-<td style="text-align:right;">
-148
-</td>
-<td style="text-align:left;">
-In 289 AC, at Winterfell
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Arys Oakheart
-</td>
-<td style="text-align:left;">
-Reach
-</td>
-<td style="text-align:left;">
-Male
-</td>
-<td style="text-align:right;">
-149
-</td>
-<td style="text-align:left;">
-At Old Oak
-</td>
-<td style="text-align:left;">
-FALSE
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Asha Greyjoy
-</td>
-<td style="text-align:left;">
-Ironborn
-</td>
-<td style="text-align:left;">
-Female
-</td>
-<td style="text-align:right;">
-150
-</td>
-<td style="text-align:left;">
-In 275 AC or 276 AC, at Pyke
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Barristan Selmy
-</td>
-<td style="text-align:left;">
-Westeros
-</td>
-<td style="text-align:left;">
-Male
-</td>
-<td style="text-align:right;">
-168
-</td>
-<td style="text-align:left;">
-In 237 AC
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Varamyr
-</td>
-<td style="text-align:left;">
-Free Folk
-</td>
-<td style="text-align:left;">
-Male
-</td>
-<td style="text-align:right;">
-2066
-</td>
-<td style="text-align:left;">
-At a village Beyond the Wall
-</td>
-<td style="text-align:left;">
-FALSE
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Brandon Stark
-</td>
-<td style="text-align:left;">
-Northmen
-</td>
-<td style="text-align:left;">
-Male
-</td>
-<td style="text-align:right;">
-208
-</td>
-<td style="text-align:left;">
-In 290 AC, at Winterfell
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Brienne of Tarth
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-Female
-</td>
-<td style="text-align:right;">
-216
-</td>
-<td style="text-align:left;">
-In 280 AC
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Catelyn Stark
-</td>
-<td style="text-align:left;">
-Rivermen
-</td>
-<td style="text-align:left;">
-Female
-</td>
-<td style="text-align:right;">
-232
-</td>
-<td style="text-align:left;">
-In 264 AC, at Riverrun
-</td>
-<td style="text-align:left;">
-FALSE
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Cersei Lannister
-</td>
-<td style="text-align:left;">
-Westerman
-</td>
-<td style="text-align:left;">
-Female
-</td>
-<td style="text-align:right;">
-238
-</td>
-<td style="text-align:left;">
-In 266 AC, at Casterly Rock
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Eddard Stark
-</td>
-<td style="text-align:left;">
-Northmen
-</td>
-<td style="text-align:left;">
-Male
-</td>
-<td style="text-align:right;">
-339
-</td>
-<td style="text-align:left;">
-In 263 AC, at Winterfell
-</td>
-<td style="text-align:left;">
-FALSE
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Jaime Lannister
-</td>
-<td style="text-align:left;">
-Westerlands
-</td>
-<td style="text-align:left;">
-Male
-</td>
-<td style="text-align:right;">
-529
-</td>
-<td style="text-align:left;">
-In 266 AC, at Casterly Rock
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Jon Connington
-</td>
-<td style="text-align:left;">
-Stormlands
-</td>
-<td style="text-align:left;">
-Male
-</td>
-<td style="text-align:right;">
-576
-</td>
-<td style="text-align:left;">
-In or between 263 AC and 265 AC
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Jon Snow
-</td>
-<td style="text-align:left;">
-Northmen
-</td>
-<td style="text-align:left;">
-Male
-</td>
-<td style="text-align:right;">
-583
-</td>
-<td style="text-align:left;">
-In 283 AC
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Aeron Greyjoy
-</td>
-<td style="text-align:left;">
-Ironborn
-</td>
-<td style="text-align:left;">
-Male
-</td>
-<td style="text-align:right;">
-60
-</td>
-<td style="text-align:left;">
-In or between 269 AC and 273 AC, at Pyke
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Kevan Lannister
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-Male
-</td>
-<td style="text-align:right;">
-605
-</td>
-<td style="text-align:left;">
-In 244 AC
-</td>
-<td style="text-align:left;">
-FALSE
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Melisandre
-</td>
-<td style="text-align:left;">
-Asshai
-</td>
-<td style="text-align:left;">
-Female
-</td>
-<td style="text-align:right;">
-743
-</td>
-<td style="text-align:left;">
-At Unknown
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Merrett Frey
-</td>
-<td style="text-align:left;">
-Rivermen
-</td>
-<td style="text-align:left;">
-Male
-</td>
-<td style="text-align:right;">
-751
-</td>
-<td style="text-align:left;">
-In 262 AC
-</td>
-<td style="text-align:left;">
-FALSE
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Quentyn Martell
-</td>
-<td style="text-align:left;">
-Dornish
-</td>
-<td style="text-align:left;">
-Male
-</td>
-<td style="text-align:right;">
-844
-</td>
-<td style="text-align:left;">
-In 281 AC, at Sunspear, Dorne
-</td>
-<td style="text-align:left;">
-FALSE
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Samwell Tarly
-</td>
-<td style="text-align:left;">
-Andal
-</td>
-<td style="text-align:left;">
-Male
-</td>
-<td style="text-align:right;">
-954
-</td>
-<td style="text-align:left;">
-In 283 AC, at Horn Hill
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Sansa Stark
-</td>
-<td style="text-align:left;">
-Northmen
-</td>
-<td style="text-align:left;">
-Female
-</td>
-<td style="text-align:right;">
-957
-</td>
-<td style="text-align:left;">
-In 286 AC, at Winterfell
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-</tr>
-</tbody>
-</table>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["culture"],"name":[2],"type":["chr"],"align":["left"]},{"label":["gender"],"name":[3],"type":["chr"],"align":["left"]},{"label":["id"],"name":[4],"type":["int"],"align":["right"]},{"label":["born"],"name":[5],"type":["chr"],"align":["left"]},{"label":["alive"],"name":[6],"type":["lgl"],"align":["right"]}],"data":[{"1":"Theon Greyjoy","2":"Ironborn","3":"Male","4":"1022","5":"In 278 AC or 279 AC, at Pyke","6":"TRUE"},{"1":"Tyrion Lannister","2":"","3":"Male","4":"1052","5":"In 273 AC, at Casterly Rock","6":"TRUE"},{"1":"Victarion Greyjoy","2":"Ironborn","3":"Male","4":"1074","5":"In 268 AC or before, at Pyke","6":"TRUE"},{"1":"Will","2":"","3":"Male","4":"1109","5":"","6":"FALSE"},{"1":"Areo Hotah","2":"Norvoshi","3":"Male","4":"1166","5":"In 257 AC or before, at Norvos","6":"TRUE"},{"1":"Chett","2":"","3":"Male","4":"1267","5":"At Hag's Mire","6":"FALSE"},{"1":"Cressen","2":"","3":"Male","4":"1295","5":"In 219 AC or 220 AC","6":"FALSE"},{"1":"Arianne Martell","2":"Dornish","3":"Female","4":"130","5":"In 276 AC, at Sunspear","6":"TRUE"},{"1":"Daenerys Targaryen","2":"Valyrian","3":"Female","4":"1303","5":"In 284 AC, at Dragonstone","6":"TRUE"},{"1":"Davos Seaworth","2":"Westeros","3":"Male","4":"1319","5":"In 260 AC or before, at King's Landing","6":"TRUE"},{"1":"Arya Stark","2":"Northmen","3":"Female","4":"148","5":"In 289 AC, at Winterfell","6":"TRUE"},{"1":"Arys Oakheart","2":"Reach","3":"Male","4":"149","5":"At Old Oak","6":"FALSE"},{"1":"Asha Greyjoy","2":"Ironborn","3":"Female","4":"150","5":"In 275 AC or 276 AC, at Pyke","6":"TRUE"},{"1":"Barristan Selmy","2":"Westeros","3":"Male","4":"168","5":"In 237 AC","6":"TRUE"},{"1":"Varamyr","2":"Free Folk","3":"Male","4":"2066","5":"At a village Beyond the Wall","6":"FALSE"},{"1":"Brandon Stark","2":"Northmen","3":"Male","4":"208","5":"In 290 AC, at Winterfell","6":"TRUE"},{"1":"Brienne of Tarth","2":"","3":"Female","4":"216","5":"In 280 AC","6":"TRUE"},{"1":"Catelyn Stark","2":"Rivermen","3":"Female","4":"232","5":"In 264 AC, at Riverrun","6":"FALSE"},{"1":"Cersei Lannister","2":"Westerman","3":"Female","4":"238","5":"In 266 AC, at Casterly Rock","6":"TRUE"},{"1":"Eddard Stark","2":"Northmen","3":"Male","4":"339","5":"In 263 AC, at Winterfell","6":"FALSE"},{"1":"Jaime Lannister","2":"Westerlands","3":"Male","4":"529","5":"In 266 AC, at Casterly Rock","6":"TRUE"},{"1":"Jon Connington","2":"Stormlands","3":"Male","4":"576","5":"In or between 263 AC and 265 AC","6":"TRUE"},{"1":"Jon Snow","2":"Northmen","3":"Male","4":"583","5":"In 283 AC","6":"TRUE"},{"1":"Aeron Greyjoy","2":"Ironborn","3":"Male","4":"60","5":"In or between 269 AC and 273 AC, at Pyke","6":"TRUE"},{"1":"Kevan Lannister","2":"","3":"Male","4":"605","5":"In 244 AC","6":"FALSE"},{"1":"Melisandre","2":"Asshai","3":"Female","4":"743","5":"At Unknown","6":"TRUE"},{"1":"Merrett Frey","2":"Rivermen","3":"Male","4":"751","5":"In 262 AC","6":"FALSE"},{"1":"Quentyn Martell","2":"Dornish","3":"Male","4":"844","5":"In 281 AC, at Sunspear, Dorne","6":"FALSE"},{"1":"Samwell Tarly","2":"Andal","3":"Male","4":"954","5":"In 283 AC, at Horn Hill","6":"TRUE"},{"1":"Sansa Stark","2":"Northmen","3":"Female","4":"957","5":"In 286 AC, at Winterfell","6":"TRUE"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
 <p><em>Syntax notes: The dot <code>.</code> above is the placeholder for the primary input: <code>got_chars</code> in this case. The curly braces <code>{}</code> surrounding the <code>tibble()</code> call prevent <code>got_chars</code> from being passed in as the first argument of <code>tibble()</code>.</em></p>
 <div id="exercises-4" class="section level4">
 <h4>Exercises</h4>
@@ -2042,7 +784,7 @@ TRUE
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -2060,7 +802,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>
@@ -2069,6 +811,9 @@ $(document).ready(function () {
 
 <script>
 $(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
 
     // move toc-ignore selectors from section div to header
     $('div.section.toc-ignore')

@@ -3,7 +3,7 @@ output_dir: "."
 navbar:
   title: "Clarke Iakovakis"
   left:
-    - text: "FSCI 2020 W24 Session"
+    - text: "FSCI 2021 W25 Session"
       menu:
         - text: "Course syllabus"
           href: fsci_syllabus.html

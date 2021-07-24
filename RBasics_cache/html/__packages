@@ -14,3 +14,5 @@ kableExtra
 janitor
 rorcid
 repurrrsive
+listviewer
+magrittr

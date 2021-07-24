@@ -1,9 +1,6 @@
 base
 png
-tinytex
 knitr
-printr
-xtable
 tidyverse
 ggplot2
 tibble

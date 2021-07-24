@@ -14,12 +14,22 @@
 
 <title>Introduction to R</title>
 
+<script src="site_libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/spacelab.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
@@ -29,12 +39,16 @@
 <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
 <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 
-<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -47,32 +61,7 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
 
 <link rel="stylesheet" href="styles.css" type="text/css" />
 
@@ -83,10 +72,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -103,40 +88,13 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 52px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 57px;
-  margin-top: -57px;
-}
-.section h2 {
-  padding-top: 57px;
-  margin-top: -57px;
-}
-.section h3 {
-  padding-top: 57px;
-  margin-top: -57px;
-}
-.section h4 {
-  padding-top: 57px;
-  margin-top: -57px;
-}
-.section h5 {
-  padding-top: 57px;
-  margin-top: -57px;
-}
-.section h6 {
-  padding-top: 57px;
-  margin-top: -57px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -164,7 +122,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -176,7 +134,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -187,10 +145,23 @@ $(document).ready(function () {
   var menuAnchor = $('a[href="' + href + '"]');
 
   // mark it active
-  menuAnchor.parent().addClass('active');
+  menuAnchor.tab('show');
 
   // if it's got a parent navbar menu mark it active as well
   menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -202,7 +173,6 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -334,7 +304,7 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
+<div class="row">
 <div class="col-xs-12 col-sm-4 col-md-3">
 <div id="TOC" class="tocify">
 </div>
@@ -359,7 +329,7 @@ div.tocify {
       <ul class="nav navbar-nav">
         <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    FSCI 2020 W24 Session
+    FSCI 2021 W25 Session
      
     <span class="caret"></span>
   </a>
@@ -398,7 +368,7 @@ div.tocify {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -410,7 +380,7 @@ div.tocify {
 
 <div id="introduction" class="section level1">
 <h1>Introduction</h1>
-<p>This guide accompanies the first day of instruction for our course at the 2020 FORCE11 Scholarly Communications Institute: <a href="https://www.force11.org/fsci/2020/fsci-2020-course-abstracts#W24">“W24 - Working with Scholarly Literature in R: Pulling, Wrangling, Cleaning, and Analyzing Structured Bibliographic Metadata.”</a>. It covers the essentials of what R is.</p>
+<p>This guide accompanies the first day of instruction for our course at the 2021 FORCE11 Scholarly Communications Institute: <a href="https://www.force11.org/fsci/2021/course-list-abstracts#W25">“W25 - Working with Scholarly Literature in R: Pulling, Wrangling, Cleaning, and Analyzing Structured Bibliographic Metadata.”</a>. It covers the essentials of what R is.</p>
 <p>This walkthrough is distributed under a <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International (CC BY 4.0) License</a>.</p>
 <p><img src="IntroductionToR_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
 <div id="about-me" class="section level2">
@@ -538,7 +508,7 @@ The New Tool Scale
 <ul>
 <li><p><strong>Environment:</strong> This will display the objects that you’ve read into what is called the “global environment.” When you read a file into R, or manually create an R object, it enters into the computer’s working memory. When we manipulate or run operations on that data, it isn’t actually written to a file until we tell it to. It is kept here in the environment.</p>
 <p>The environment pane will also include any objects you have defined. For example, if you type <code>y &lt;- 5</code> into the console, you will now see <code>y</code> defined as a value in your environment.</p>
-<p>You can list all objects in the environment by typing <code>ls()</code> in the console and pressing Enter on your keyboard. You can clear all objects in the environment by clicking the broom icon to the right of the words “Import Dataset.”&quot; Clear individual objects by using the <code>rm</code> function; for example: <code>rm(y)</code> will delete the <code>y</code> object from your environment.</p></li>
+<p>You can list all objects in the environment by typing <code>ls()</code> in the console and pressing Enter on your keyboard. You can clear all objects in the environment by clicking the broom icon to the right of the words “Import Dataset.”" Clear individual objects by using the <code>rm</code> function; for example: <code>rm(y)</code> will delete the <code>y</code> object from your environment.</p></li>
 </ul>
 <pre class="r"><code># create object y
 y &lt;- 5
@@ -678,12 +648,12 @@ vignette(&quot;dplyr&quot;)</code></pre>
 <div id="learning-r" class="section level2">
 <h2>Learning R</h2>
 <ol style="list-style-type: decimal">
-<li><p><code>swirl</code> is a package you can install in R to learn about R and data science interactively. Just type <code>install.packages(&quot;swirl&quot;)</code> into your R console, load the package by typing <code>library(&quot;swirl&quot;)</code>, and then type <code>swirl()</code>. Read more at <a href="http://swirlstats.com/" class="uri">http://swirlstats.com/</a>.</p></li>
+<li><p><code>swirl</code> is a package you can install in R to learn about R and data science interactively. Just type <code>install.packages("swirl")</code> into your R console, load the package by typing <code>library("swirl")</code>, and then type <code>swirl()</code>. Read more at <a href="http://swirlstats.com/" class="uri">http://swirlstats.com/</a>.</p></li>
 <li><p><a href="http://tryr.codeschool.com/">Try R</a> is a browser-based interactive tutorial developed by Code School.</p></li>
 <li><p>Anthony Damico’s <a href="https://www.youtube.com/playlist?list=PLcgz5kNZFCkzSyBG3H-rUaPHoBXgijHfC">twotorials</a> are a series of 2 minute videos demonstrating several basic tasks in R.</p></li>
 <li><p><a href="http://www.cookbook-r.com/">Cookbook for R</a> by Winston Change provides solutions to common tasks and problems in analyzing data</p></li>
 <li><p>If you’re up for a challenge, try the free <a href="https://www.coursera.org/learn/r-programming">R Programming MOOC in Coursera</a> by Roger Peng.</p></li>
-<li>Books:</li>
+<li><p>Books:</p></li>
 </ol>
 <ul>
 <li><a href="http://r4ds.had.co.nz/">R For Data Science</a> by Garrett Grolemund &amp; Hadley Wickham [free]</li>
@@ -694,7 +664,7 @@ vignette(&quot;dplyr&quot;)</code></pre>
 </div>
 <div id="data" class="section level2">
 <h2>Data</h2>
-<p>If you need some data to play with, type <code>data()</code> in the console for a list of data sets. To load a dataset, type it like this: <code>data(mtcars)</code>. Type <code>help(mtcars)</code> to learn more about it. You can then perform operations, e.g.</p>
+<p>If you need some data to play with, type <code>data()</code> in the console for a list of data sets. To load a dataset, type it like this: <code>data(mtcars)</code>. Type <code>help(mtcars)</code> to learn more about it. You can then perform operations, e.g. </p>
 <pre class="r"><code>head(mtcars)
 nrow(mtcars)
 mean(mtcars$mpg)
@@ -732,11 +702,11 @@ sixCylinder &lt;- mtcars[mtcars$cyl == 6, ]</code></pre>
 <div class="footnotes">
 <hr />
 <ol>
-<li id="fn1"><p>Ross Ihaka &amp; Robert Gentleman, “R: A Language for Data Analysis and Graphics,” <em>Journal of Computational and Graphical Statistics</em> 5, no. 3 (1996): 299-314. <a href="https://www.jstor.org/stable/1390807" class="uri">https://www.jstor.org/stable/1390807</a><a href="#fnref1" class="footnote-back">↩</a></p></li>
-<li id="fn2"><p>Bradley C. Boehmke, Data Wrangling with R (Switzerland: Springer, 2016).<a href="#fnref2" class="footnote-back">↩</a></p></li>
-<li id="fn3"><p>Bronwyn H. Hall &amp; Beethika Khan, “Adoption of New Technology,” <em>National Bureau of Economic Research Working Paper Series</em> no. 9730 (2003). <a href="https://www.nber.org/papers/w9730" class="uri">https://www.nber.org/papers/w9730</a><a href="#fnref3" class="footnote-back">↩</a></p></li>
-<li id="fn4"><p>See, for instance, Lynda Kellam &amp; Kristi Thompson, <em>Databrarianship</em> (Chicago: ACRL, 2016); Jake Carlson, <em>Data Information Literacy</em> (Indiana: Purdue University Press, 2015); Tony Hey &amp; Jessie Hey, “E-Science and Its Implications for the Library Community,” <em>Library Hi Tech</em> 24, no. 4 (2006): 515-28; and Lynda Kellam &amp; Katharin Peter, <em>Numeric Data Services &amp; Sources for the General Reference Librarian</em> (Oxford: Chandos, 2011). Chistine Borgman’s <em>Big Data, Little Data, No Data</em> (Cambridge: MIT Press, 2015) is an excellent overview of the ways that digital data has transformed scholarship.<a href="#fnref4" class="footnote-back">↩</a></p></li>
-<li id="fn5"><p>There are other IDEs such as <a href="https://mran.microsoft.com/open">Microsoft R Open</a> and <a href="https://notepad-plus-plus.org/">Notepad ++</a>. Experiment with one that is right for you.<a href="#fnref5" class="footnote-back">↩</a></p></li>
+<li id="fn1"><p>Ross Ihaka &amp; Robert Gentleman, “R: A Language for Data Analysis and Graphics,” <em>Journal of Computational and Graphical Statistics</em> 5, no. 3 (1996): 299-314. <a href="https://www.jstor.org/stable/1390807" class="uri">https://www.jstor.org/stable/1390807</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>Bradley C. Boehmke, Data Wrangling with R (Switzerland: Springer, 2016).<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>Bronwyn H. Hall &amp; Beethika Khan, “Adoption of New Technology,” <em>National Bureau of Economic Research Working Paper Series</em> no. 9730 (2003). <a href="https://www.nber.org/papers/w9730" class="uri">https://www.nber.org/papers/w9730</a><a href="#fnref3" class="footnote-back">↩︎</a></p></li>
+<li id="fn4"><p>See, for instance, Lynda Kellam &amp; Kristi Thompson, <em>Databrarianship</em> (Chicago: ACRL, 2016); Jake Carlson, <em>Data Information Literacy</em> (Indiana: Purdue University Press, 2015); Tony Hey &amp; Jessie Hey, “E-Science and Its Implications for the Library Community,” <em>Library Hi Tech</em> 24, no. 4 (2006): 515-28; and Lynda Kellam &amp; Katharin Peter, <em>Numeric Data Services &amp; Sources for the General Reference Librarian</em> (Oxford: Chandos, 2011). Chistine Borgman’s <em>Big Data, Little Data, No Data</em> (Cambridge: MIT Press, 2015) is an excellent overview of the ways that digital data has transformed scholarship.<a href="#fnref4" class="footnote-back">↩︎</a></p></li>
+<li id="fn5"><p>There are other IDEs such as <a href="https://mran.microsoft.com/open">Microsoft R Open</a> and <a href="https://notepad-plus-plus.org/">Notepad ++</a>. Experiment with one that is right for you.<a href="#fnref5" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
 
@@ -751,7 +721,7 @@ sixCylinder &lt;- mtcars[mtcars$cyl == 6, ]</code></pre>
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -769,7 +739,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>
@@ -778,6 +748,9 @@ $(document).ready(function () {
 
 <script>
 $(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
 
     // move toc-ignore selectors from section div to header
     $('div.section.toc-ignore')

@@ -9,17 +9,27 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Clarke Iakovakis" />
+<meta name="author" content="Clarke Iakovakis, Kay Bjornen, Megan Macken" />
 
 
-<title>FSCI 2020: W24 Syllabus - Working with Scholarly Literature in R: Pulling, Wrangling, Cleaning, and Analyzing Structured Bibliographic Metadata.</title>
+<title>FSCI 2021: W25 Syllabus - Working with Scholarly Literature in R: Pulling, Wrangling, Cleaning, and Analyzing Structured Bibliographic Metadata.</title>
 
+<script src="site_libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/spacelab.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
@@ -29,12 +39,16 @@
 <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
 <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 
-<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -47,32 +61,7 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
 
 <link rel="stylesheet" href="styles.css" type="text/css" />
 
@@ -83,10 +72,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -103,40 +88,13 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 52px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 57px;
-  margin-top: -57px;
-}
-.section h2 {
-  padding-top: 57px;
-  margin-top: -57px;
-}
-.section h3 {
-  padding-top: 57px;
-  margin-top: -57px;
-}
-.section h4 {
-  padding-top: 57px;
-  margin-top: -57px;
-}
-.section h5 {
-  padding-top: 57px;
-  margin-top: -57px;
-}
-.section h6 {
-  padding-top: 57px;
-  margin-top: -57px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -164,7 +122,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -176,7 +134,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -187,10 +145,23 @@ $(document).ready(function () {
   var menuAnchor = $('a[href="' + href + '"]');
 
   // mark it active
-  menuAnchor.parent().addClass('active');
+  menuAnchor.tab('show');
 
   // if it's got a parent navbar menu mark it active as well
   menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -202,7 +173,6 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -334,7 +304,7 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
+<div class="row">
 <div class="col-xs-12 col-sm-4 col-md-3">
 <div id="TOC" class="tocify">
 </div>
@@ -359,7 +329,7 @@ div.tocify {
       <ul class="nav navbar-nav">
         <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    FSCI 2020 W24 Session
+    FSCI 2021 W25 Session
      
     <span class="caret"></span>
   </a>
@@ -398,21 +368,21 @@ div.tocify {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
-<h1 class="title toc-ignore">FSCI 2020: W24 Syllabus - Working with Scholarly Literature in R: Pulling, Wrangling, Cleaning, and Analyzing Structured Bibliographic Metadata.</h1>
-<h4 class="author">Clarke Iakovakis</h4>
+<h1 class="title toc-ignore">FSCI 2021: W25 Syllabus - Working with Scholarly Literature in R: Pulling, Wrangling, Cleaning, and Analyzing Structured Bibliographic Metadata.</h1>
+<h4 class="author">Clarke Iakovakis, Kay Bjornen, Megan Macken</h4>
 
 </div>
 
 
 <div id="intro" class="section level1">
 <h1>Intro</h1>
-<p>Hello everyone. I’m looking forward to our session at <a href="https://www.force11.org/fsci/2020">FSCI 2020</a> on <a href="https://www.force11.org/fsci/2020/fsci-2020-course-abstracts#W24">“W24 - Working with Scholarly Literature in R: Pulling, Wrangling, Cleaning, and Analyzing Structured Bibliographic Metadata.”</a></p>
+<p>Hello everyone. we are looking forward to our session at <a href="https://www.force11.org/fsci/2021">FSCI 2021</a> on <a href="https://www.force11.org/fsci/2021/course-list-abstracts#W25">“W25 - Working with Scholarly Literature in R: Pulling, Wrangling, Cleaning, and Analyzing Structured Bibliographic Metadata.”</a></p>
 <p>This entire course is distributed under a <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International (CC BY 4.0) License</a>.</p>
-<p>The OSF home is at <a href="https://osf.io/hd4re/" class="uri">https://osf.io/hd4re/</a>. Here you can find each day’s components laid out clearly, as well as links to the live Zoom sessions. While FSCI is in session, this link is only available to people enrolled in the class. The FSCI course Slack can be found at <a href="https://fsci2020.slack.com/" class="uri">https://fsci2020.slack.com/</a>–participants will already be added to the <code>w24_working_with_scholarly_literature_in_r</code> channel.</p>
+<p>The OSF home is at <a href="https://osf.io/vpgbt/" class="uri">https://osf.io/vpgbt/</a>. Here you can find each day’s components laid out clearly, as well as links to the live Zoom sessions. While FSCI is in session, this link is only available to people enrolled in the class. The FSCI course Slack can be found at <a href="https://fsci2021.slack.com/" class="uri">https://fsci2021.slack.com/</a>–participants will already be added to the <code>w25_working_with_scholarly_literature_in_r</code> channel.</p>
 <p>Click the button below to launch the Binder for the entire repository: <a href="https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master"><img src="https://mybinder.org/badge_logo.svg" alt="Binder" /></a></p>
 <p><a href="https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master" class="uri">https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master</a></p>
 <p>To view the course structure and exercises, see below <a href="#course-schedule">Course Schedule</a>:</p>
@@ -420,7 +390,7 @@ div.tocify {
 <div id="course-information" class="section level1">
 <h1>Course Information</h1>
 <p><strong>Title:</strong> Working with Scholarly Literature in R: Pulling, Wrangling, Cleaning, and Analyzing Structured Bibliographic Metadata</p>
-<p><strong>Instructor:</strong> Clarke Iakovakis, Scholarly Services Librarian, Oklahoma State University, <a href="https://info.library.okstate.edu/clarke-iakovakis" class="uri">https://info.library.okstate.edu/clarke-iakovakis</a></p>
+<p><strong>Instructors:</strong> * Clarke Iakovakis, Scholarly Services Librarian, Oklahoma State University, <a href="https://experts.okstate.edu/clarke.iakovakis" class="uri">https://experts.okstate.edu/clarke.iakovakis</a> * Kay Bjornen, Research Data Initiatives Librarian, Oklahoma State University, <a href="https://experts.okstate.edu/kay.bjornen" class="uri">https://experts.okstate.edu/kay.bjornen</a> * Megan Macken, Digital Scholarship Librarian, Oklahoma State University, <a href="https://experts.okstate.edu/megan.macken" class="uri">https://experts.okstate.edu/megan.macken</a></p>
 <p><strong>Course Website:</strong> <a href="https://ciakovx.github.io/fsci_syllabus.html" class="uri">https://ciakovx.github.io/fsci_syllabus.html</a></p>
 <p><strong>Acknowledgments:</strong> Acknowledgements for this course go to the organizations and developers who have created the APIs we have used and made them open–namely Crossref, Orcid, and Unpaywall; those who have created the software, packages and tools we are using–namely the R Core Team, the RStudio Team, Hadley Wickham, Karthik Ram, Najko Jahn, Scott Chamberlain, rOpenSci, Yihui Xie, Garrett Grolemund, Linus Torvalds, Scott Chacon, Ben Straub, Git, GitHub, The Binder Project, Project Jupyter, and see also the <a href="#package-citations">package citations</a>; and finally those who have created enormously helpful resources for learning and teaching R–namely Roger Peng, Jeff Leek, Coursera, the Carpentries, Lisa Federer, Paul Oldham, Brad Boehmke, Edwin de Jonge and Mark van der Loo. I have benefitted from many, many more have dedicated their time, labor, and effort that I have overlooked. It is only due to the generosity and dedication of these people and organizations I am able to put this class together.</p>
 </div>
@@ -470,90 +440,102 @@ div.tocify {
 </div>
 <div id="course-schedule" class="section level1">
 <h1>Course Schedule</h1>
-<p>See the course OSF for Zoom links: <a href="https://osf.io/hd4re/" class="uri">https://osf.io/hd4re/</a></p>
-<div id="day-one-wednesday-august-5" class="section level2">
-<h2>DAY ONE: Wednesday, August 5</h2>
+<p>See the course OSF for Zoom links: <a href="https://osf.io/vpgbt" class="uri">https://osf.io/vpgbt</a> Sched home: <a href="https://sched.co/iON7" class="uri">https://sched.co/iON7</a></p>
+<p><strong>ALL TIMES PACIFIC</strong> <a href="https://www.thetimezoneconverter.com/">Convert time</a></p>
+<div id="day-one-wednesday-july-28" class="section level2">
+<h2>DAY ONE: Wednesday, July 28</h2>
 <div id="live-zoom-sessions" class="section level3">
 <h3>Live Zoom Sessions</h3>
 <ul>
-<li>8-9AM: Introductory session</li>
-<li>5-6PM: REPEAT Introductory session</li>
+<li>9:00-10:00 AM: Session 1</li>
+<li>5:00-6:00 PM: REPEAT Session 1</li>
 </ul>
-<p><strong>ALL TIMES PACIFIC</strong> <a href="https://www.thetimezoneconverter.com/">Convert time</a></p>
 </div>
 <div id="exercises" class="section level3">
 <h3>Exercises</h3>
 <p>Try to complete this by beginning of class, but it’s fine if you push it until after we meet. I’ll be discussing some of this during that session.</p>
-<p><strong>1. Using Jupyter Notebooks: 30 minutes</strong></p>
+<p><strong>1. Using Binder &amp; Jupyter Notebooks: 30 minutes (<em>required</em>)</strong></p>
 <ul>
 <li>This lesson is required. It will cover the basics of what Binder is, what Jupyter Notebooks are, and how to use them.</li>
 <li>Launch the Using Jupyter Notebooks Jupyter Notebook at <a href="https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=using_jupyter_notebooks.ipynb"><img src="https://mybinder.org/badge_logo.svg" alt="Binder" /></a></li>
-<li>Watch the <a href="https://osf.io/4mn7p/">Using Jupyter Notebooks video tutorial</a> (25 min.)</li>
+<li>Watch the <a href="https://www.youtube.com/watch?v=3EKe_4zU4B0">Using Jupyter Notebooks video tutorial</a> (25 min.)</li>
 </ul>
-<p><strong>2. Introduction to R: 30 minutes</strong></p>
+<p><img src="https://www.youtube.com/watch?v=3EKe_4zU4B0" style="width:90.0%" /></p>
+<p><strong>2. Introduction to R: 30 minutes (<em>optional</em>)</strong></p>
 <ul>
 <li>This lesson is optional. It will cover my background, what R is, considerations in adopting R, and some useful help resources.</li>
-<li>No Jupyter Notebook for this lesson</li>
+<li>No Jupyter Notebook or video tutorial for this lesson</li>
 <li>Skim the <a href="IntroductionToR.html">Introduction to R</a> webpage.</li>
 </ul>
-<p><strong>3. R Basics: 1 hour</strong></p>
+<p><strong>3. R Basics: 30 minutes (<em>required</em>)</strong></p>
 <ul>
-<li>This lesson is required. It will cover getting data into R, exploring and transforming data, particularly using <code>dplyr</code>. Some of these functions will be used in the <code>rcrossref</code> and <code>rorcid</code> tutorials, but they will be explained as we are running through them.</li>
+<li>This lesson is required. It will cover writing expressions, calling functions, creating and subsetting vectors, and working with data frames.</li>
 <li>Launch the R Basics Jupyter Notebook at <a href="https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=RBasics.ipynb"><img src="https://mybinder.org/badge_logo.svg" alt="Binder" /></a></li>
 <li>Skim the <a href="RBasics.html">R Basics</a> webpage. Most of this content is covered in the R Basics Jupyter Notebook.</li>
-<li>Watch the <a href="https://osf.io/wrzpf/">R Basics video tutorial</a> (30 min.)</li>
+<li>Watch the <a href="https://www.youtube.com/watch?v=f1wkanaYhVA">R Basics video tutorial</a> (30 min.)</li>
 </ul>
+<p><img src="https://www.youtube.com/watch?v=f1wkanaYhVA" style="width:90.0%" /></p>
+<p><strong>4. Data Exploration: 1 hour (<em>required</em>)</strong></p>
+<ul>
+<li>This lesson is required. It will cover getting data into R, exploring and transforming data, particularly using <code>dplyr</code>. Some of these functions will be used in the <code>rcrossref</code> and <code>rorcid</code> tutorials, but they will be explained as we are running through them.</li>
+<li>Launch the Data Exploration Jupyter Notebook at <a href="https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=DataExploration.ipynb"><img src="https://mybinder.org/badge_logo.svg" alt="Binder" /></a> Skim the Data Exploration webpage at <a href="https://ciakovx.github.io/DataExploration.html" class="uri">https://ciakovx.github.io/DataExploration.html</a>.</li>
+<li>Watch the <a href="https://youtu.be/O8q7fg1dFUU">Data Exploration video tutorial</a> (1 hour). @<a href="https://youtu.be/O8q7fg1dFUU">youtube</a></li>
+</ul>
+<p><img src="https://youtu.be/O8q7fg1dFUU" style="width:90.0%" /></p>
 <hr />
 </div>
 </div>
-<div id="day-two-monday-august-10" class="section level2">
-<h2>DAY TWO: Monday, August 10</h2>
+<div id="day-two-monday-august-2" class="section level2">
+<h2>DAY TWO: Monday, August 2</h2>
+<p><strong>ALL TIMES PACIFIC</strong> <a href="https://www.thetimezoneconverter.com/">Convert time</a></p>
 <div id="live-zoom-sessions-1" class="section level3">
 <h3>Live Zoom Sessions</h3>
 <ul>
-<li>8-9AM: Activity session 1 -</li>
-<li>5-6PM: REPEAT Activity session 1</li>
+<li>9:00-10:00 AM: Session 2</li>
+<li>5:00-6:00 PM: REPEAT Session 2</li>
 </ul>
-<p><strong>ALL TIMES PACIFIC</strong> <a href="https://www.thetimezoneconverter.com/">Convert time</a></p>
 </div>
 <div id="exercises-1" class="section level3">
 <h3>Exercises</h3>
-<p><strong>5. Exploring Data in Lists: 1 hour</strong></p>
+<p><strong>5. Exploring Data in Lists: 1 hour (<em>optional but recommended</em>)</strong></p>
 <ul>
 <li>This lesson is optional, but highly recommended if you are planning on applying these lessons further. It is a tutorial on using <code>purrr</code> to explore and extract data from lists. Our API calls pull data into our session in nested lists, so this tutorial is helpful for managing that.</li>
 <li>Launch the Exploring Data in Lists Jupyter Notebook at <a href="https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=jennybc_lists_lesson.ipynb"><img src="https://mybinder.org/badge_logo.svg" alt="Binder" /></a></li>
 <li>Skim the <a href="fsci2020/jennybc_lists_lesson.html">Exploring Data in Lists</a> webpage.</li>
-<li>Watch the <a href="https://osf.io/5n7bm/">Exploring Data in Lists video tutorial</a> (40 mins.)</li>
+<li>Watch the <a href="https://youtu.be/F57EorEYRMM">Exploring Data in Lists video tutorial</a> (40 mins.)</li>
 </ul>
-<p><strong>6. Using <code>rcrossref</code> &amp; <code>roadoi</code>: 1.5 hours</strong></p>
+<p><img src="https://youtu.be/F57EorEYRMM" style="width:90.0%" /></p>
+<p><strong>6. Using <code>rcrossref</code> &amp; <code>roadoi</code>: 1.5 hours (<em>required</em>)</strong></p>
 <ul>
 <li>This lesson is required. It will cover intro to Crossref, the Crossref API, and rcrossref, getting publication and article data by journal, keyword, and author. Constructing and filtering queries. Writing to CSV, BibTeX, and RIS. Using roadoi to query the Unpaywall API for open access availability. Getting URLs and downloading full text.</li>
 <li>Launch the <code>rcrossref</code> &amp; <code>roadoi</code> Jupyter Notebook at <a href="https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=rcrossref.ipynb"><img src="https://mybinder.org/badge_logo.svg" alt="Binder" /></a></li>
 <li>Skim the * <a href="rcrossref.html">rcrossref</a> webpage. Much of this content is identical to that on the Jupyter Notebook.</li>
-<li>Watch the <a href="https://osf.io/nxajf/"><code>rcrossref</code> and <code>roadoi</code> video tutorial</a> (1.25 hrs).</li>
+<li>Watch the <a href="https://youtu.be/dy-raTcj0no"><code>rcrossref</code> and <code>roadoi</code> video tutorial</a> (1.25 hrs).</li>
 </ul>
+<p><img src="https://youtu.be/dy-raTcj0no" style="width:90.0%" /></p>
 <hr />
 </div>
 </div>
-<div id="day-three-wednesday-aug.12" class="section level2">
-<h2>DAY THREE: Wednesday, Aug. 12</h2>
+<div id="day-three-wednesday-aug.-4" class="section level2">
+<h2>DAY THREE: Wednesday, Aug. 4</h2>
 <div id="live-zoom-sessions-2" class="section level3">
 <h3>Live Zoom Sessions</h3>
 <ul>
-<li>8-9AM: Activity session 2</li>
-<li>5-6PM: REPEAT Activity session 2</li>
+<li>9:00-10:00 AM: Session 3</li>
+<li>5:00-6:00 PM: REPEAT Session 3</li>
 </ul>
 <p><strong>ALL TIMES PACIFIC</strong> <a href="https://www.thetimezoneconverter.com/">Convert time</a></p>
 </div>
 <div id="exercises-2" class="section level3">
 <h3>Exercises</h3>
-<p><strong>7. Using <code>rorcid</code></strong></p>
+<p><strong>7. Using <code>rorcid</code>: 1 hour (<em>required</em>)</strong></p>
 <ul>
 <li>This lesson is required. It will cover authenticating your ORCID key, finding ORCID iDs with names, affiliation, emails, keywords, works; getting and cleaning biographical information, and getting and cleaning employment information.</li>
 <li>Access the <code>rorcid</code> Jupyter Notebook at <a href="https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=rorcid.ipynb"><img src="https://mybinder.org/badge_logo.svg" alt="Binder" /></a></li>
-<li>Watch the <a href="https://osf.io/8xcfv/"><code>rorcid</code> video tutorial</a></li>
+<li>Watch the <a href="https://youtu.be/elxtFVGoUMI"><code>rorcid</code> video tutorial</a></li>
 <li>Skim the <a href="rorcid.html">rorcid</a> webpage. Much of this content is identical to that on the Jupyter Notebook.</li>
 </ul>
+<p><img src="https://youtu.be/elxtFVGoUMI" style="width:90.0%" /></p>
 </div>
 </div>
 </div>
@@ -582,7 +564,7 @@ div.tocify {
 <p><code>httr</code> Hadley Wickham (2020). httr: Tools for Working with URLs and HTTP. R package version 1.4.2. <a href="https://CRAN.R-project.org/package=httr" class="uri">https://CRAN.R-project.org/package=httr</a></p>
 <p><code>janitor</code> Sam Firke (2020). janitor: Simple Tools for Examining and Cleaning Dirty Data. R package version 2.0.1. <a href="https://CRAN.R-project.org/package=janitor" class="uri">https://CRAN.R-project.org/package=janitor</a></p>
 <p><code>jsonlite</code> Jeroen Ooms (2014). The jsonlite Package: A Practical and Consistent Mapping Between JSON Data and R Objects. arXiv:1403.2805 [stat.CO] URL <a href="https://arxiv.org/abs/1403.2805" class="uri">https://arxiv.org/abs/1403.2805</a>.</p>
-<p><code>Jupyter Notebooks</code> Kluyver, Thomas, Benjamin Ragan-Kelley, Fernando Pérez, Brian E. Granger, Matthias Bussonnier, Jonathan Frederic, Kyle Kelley et al. “Jupyter Notebooks-a publishing format for reproducible computational workflows.” In ELPUB, pp. 87-90. 2016. <a href="https://eprints.soton.ac.uk/403913/1/STAL9781614996491-0087.pdf" class="uri">https://eprints.soton.ac.uk/403913/1/STAL9781614996491-0087.pdf</a></p>
+<p><code>Jupyter Notebooks</code> Kluyver, Thomas, Benjamin Ragan-Kelley, Fernando Pérez, Brian E. Granger, Matthias Bussonnier, Jonathan Frederic, Kyle Kelley et al.  “Jupyter Notebooks-a publishing format for reproducible computational workflows.” In ELPUB, pp. 87-90. 2016. <a href="https://eprints.soton.ac.uk/403913/1/STAL9781614996491-0087.pdf" class="uri">https://eprints.soton.ac.uk/403913/1/STAL9781614996491-0087.pdf</a></p>
 <p><code>kableExtra</code> Hao Zhu (2019). kableExtra: Construct Complex Table with ‘kable’ and Pipe Syntax. R package version 1.1.0. <a href="https://CRAN.R-project.org/package=kableExtra" class="uri">https://CRAN.R-project.org/package=kableExtra</a></p>
 <p><code>knitr</code> Yihui Xie (2020). knitr: A General-Purpose Package for Dynamic Report Generation in R. R package version 1.29.</p>
 <p><code>listviewer</code> Jos de Jong, Mac Gainer and Kent Russell (2019). listviewer: ‘htmlwidget’ for Interactive Views of R Lists. R package version 3.0.0. <a href="https://CRAN.R-project.org/package=listviewer" class="uri">https://CRAN.R-project.org/package=listviewer</a></p>
@@ -615,7 +597,7 @@ div.tocify {
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -633,7 +615,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>
@@ -642,6 +624,9 @@ $(document).ready(function () {
 
 <script>
 $(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
 
     // move toc-ignore selectors from section div to header
     $('div.section.toc-ignore')

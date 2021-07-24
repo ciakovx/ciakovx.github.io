@@ -14,7 +14,8 @@ kableExtra
 janitor
 rorcid
 repurrrsive
-prettydoc
 listviewer
+magrittr
 rcrossref
 roadoi
+usethis

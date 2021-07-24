@@ -14,12 +14,22 @@
 
 <title>R Basics</title>
 
+<script src="site_libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/spacelab.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
@@ -29,12 +39,16 @@
 <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
 <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 
-<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -47,32 +61,7 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
 
 <link rel="stylesheet" href="styles.css" type="text/css" />
 
@@ -83,10 +72,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -103,40 +88,13 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 52px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 57px;
-  margin-top: -57px;
-}
-.section h2 {
-  padding-top: 57px;
-  margin-top: -57px;
-}
-.section h3 {
-  padding-top: 57px;
-  margin-top: -57px;
-}
-.section h4 {
-  padding-top: 57px;
-  margin-top: -57px;
-}
-.section h5 {
-  padding-top: 57px;
-  margin-top: -57px;
-}
-.section h6 {
-  padding-top: 57px;
-  margin-top: -57px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -164,7 +122,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -176,7 +134,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -187,10 +145,23 @@ $(document).ready(function () {
   var menuAnchor = $('a[href="' + href + '"]');
 
   // mark it active
-  menuAnchor.parent().addClass('active');
+  menuAnchor.tab('show');
 
   // if it's got a parent navbar menu mark it active as well
   menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -202,7 +173,6 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -334,7 +304,7 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
+<div class="row">
 <div class="col-xs-12 col-sm-4 col-md-3">
 <div id="TOC" class="tocify">
 </div>
@@ -359,7 +329,7 @@ div.tocify {
       <ul class="nav navbar-nav">
         <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    FSCI 2020 W24 Session
+    FSCI 2021 W25 Session
      
     <span class="caret"></span>
   </a>
@@ -398,7 +368,7 @@ div.tocify {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -416,7 +386,7 @@ div.tocify {
 </div>
 <div id="introduction" class="section level1">
 <h1>Introduction</h1>
-<p>This guide accompanies the first day of instruction for our course at the 2020 FORCE11 Scholarly Communications Institute: <a href="https://www.force11.org/fsci/2020/fsci-2020-course-abstracts#W24">“W24 - Working with Scholarly Literature in R: Pulling, Wrangling, Cleaning, and Analyzing Structured Bibliographic Metadata.”</a>. It covers basic nuts and bolts of using R.</p>
+<p>This guide accompanies the first day of instruction for our course at the 2021 FORCE11 Scholarly Communications Institute: <a href="https://www.force11.org/fsci/2021/course-list-abstracts#W25">“W25 - Working with Scholarly Literature in R: Pulling, Wrangling, Cleaning, and Analyzing Structured Bibliographic Metadata.”</a>. It covers basic nuts and bolts of using R.</p>
 <p>This walkthrough is distributed under a <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International (CC BY 4.0) License</a>.</p>
 <p><img src="RBasics_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
 </div>
@@ -429,7 +399,7 @@ div.tocify {
 <p>You can perform all kinds of mathematical operations using R, but we will not be covering that in our session today.</p>
 <div id="assigning-values" class="section level2">
 <h2>Assigning values</h2>
-<p>The first operator you’re going to come across is the assignment operator. This is the angle bracket (AKA the “less than”&quot; symbol): <code>&lt;</code>, which you’ll get by pressing <strong>Shift + comma</strong> and the hyphen <code>-</code> which is located next to the zero key. There is no space between them, and it is designed to look like a left pointing arrow <code>&lt;-</code>.</p>
+<p>The first operator you’re going to come across is the assignment operator. This is the angle bracket (AKA the “less than”" symbol): <code>&lt;</code>, which you’ll get by pressing <strong>Shift + comma</strong> and the hyphen <code>-</code> which is located next to the zero key. There is no space between them, and it is designed to look like a left pointing arrow <code>&lt;-</code>.</p>
 <pre class="r"><code># assign 5 to y by typing this in the console and pressing Enter
 y &lt;- 5</code></pre>
 <p>Here I am creating a symbol called <code>y</code> and I’m <em>assigning</em> it the numeric value 5. Some R users would say “y <em>gets</em> 5.” Lowercase <code>y</code>, is now a <em>numeric vector</em> with one element. Or you could say <code>y</code> is a numeric vector, and the first element is the number 5. When you assign something to a symbol, nothing happens in the console, but in the Environment pane in the upper right, you will notice a new object, y.</p>
@@ -465,7 +435,7 @@ y + 20
 <ul>
 <li><strong>Do not use names of functions that already exist in R:</strong> The assignment operator assigns a value to a symbol. We can pretty much pick any symbol, or name, for that variable, as long as it is not already a function in R. For example, you wouldn’t want to name a variable <code>sum</code> because if you might end up in a confusing situation writing <code>sum(sum)</code></li>
 <li><strong>R is case sensitive</strong>: It is important to note that R is <em>case sensitive.</em> If you try evaluating a capital <code>Y</code>, you will be told <code>Error in eval(expr, envir, enclos): object 'Y' not found</code>.</li>
-<li><strong>No blank spaces or symbols other than underscores</strong>: R users get around this in a couple of ways, either through capitalization (e.g. <code>myData</code>) or underscores (e.g. <code>my_data</code>).</li>
+<li><strong>No blank spaces or symbols other than underscores</strong>: R users get around this in a couple of ways, either through capitalization (e.g. <code>myData</code>) or underscores (e.g. <code>my_data</code>).</li>
 <li><strong>Do not begin with numbers or symbols</strong>: Try to evaluate <code>1z &lt;- 4</code> or <code>%z &lt;- 4</code> and read the error message.</li>
 <li><strong>Be descriptive, but make your variable names short</strong>: It’s good practice to be descriptive with your variable names. If you’re loading in a lot of data, choosing <code>myData</code> or <code>x</code> as a name may not be as helpful as, say, <code>ebookUsage</code>. Finally, keep your variable names short, since you will likely be typing them in frequently.</li>
 </ul>
@@ -835,7 +805,7 @@ summary(ebooks$checkouts)
 <li>Manually construct three vectors: <code>stateName</code>, <code>division</code>, and <code>area</code>.
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["stateName"],"name":[1],"type":["chr"],"align":["left"]},{"label":["division"],"name":[2],"type":["fctr"],"align":["left"]},{"label":["area"],"name":[3],"type":["int"],"align":["right"]}],"data":[{"1":"Alaska","2":"Pacific","3":"590000"},{"1":"Arizona","2":"Mountain","3":"120000"},{"1":"California","2":"Pacific","3":"160000"},{"1":"Colorado","2":"Mountain","3":"110000"},{"1":"Montana","2":"Mountain","3":"150000"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["stateName"],"name":[1],"type":["chr"],"align":["left"]},{"label":["division"],"name":[2],"type":["fct"],"align":["left"]},{"label":["area"],"name":[3],"type":["int"],"align":["right"]}],"data":[{"1":"Alaska","2":"Pacific","3":"590000"},{"1":"Arizona","2":"Mountain","3":"120000"},{"1":"California","2":"Pacific","3":"160000"},{"1":"Colorado","2":"Mountain","3":"110000"},{"1":"Montana","2":"Mountain","3":"150000"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div></li>
 <li>Use <code>data.frame()</code> to create a data frame of these three vectors. Assign it to <code>myStates</code>. Remember to set <code>stringsAsFactors</code> to <code>FALSE</code></li>
@@ -856,7 +826,7 @@ summary(ebooks$checkouts)
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -874,7 +844,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>
@@ -883,6 +853,9 @@ $(document).ready(function () {
 
 <script>
 $(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
 
     // move toc-ignore selectors from section div to header
     $('div.section.toc-ignore')
