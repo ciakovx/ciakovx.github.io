@@ -693,6 +693,22 @@ clarke_employment_data <- clarke_employment %>%
                 employment_summary_last_modified_date_value = anytime::anydate(employment_summary_last_modified_date_value/1000))
 ```
 
+The column names are pretty messy here.
+
+```{r employmentq1, eval=TRUE, cache=TRUE}
+names(clarke_employment_data)
+```
+
+We'll clean them up a bit by using the `str_replace()` function from `stringr`. You can think of this as analogous to Find + Replace in word processing. We take the `names()` of the data, and replace each of the phrases with nothing (i.e. the set of empty quotes).
+
+```{r employmentq2, eval=TRUE, cache=TRUE}
+names(clarke_employment_data) <- names(clarke_employment_data) %>%
+  stringr::str_replace(., "employment_summary_", "") %>%
+  stringr::str_replace(., "source_source_", "") %>%
+  stringr::str_replace(., "organization_disambiguated_", "")
+names(clarke_employment_data)
+```
+
 If you take a look at the data, you will see that there is no variable indicating whether these are current or past institutions of employment. In fact, the only way to check if the institution is a place of current employment is if the `employment_summary_end_date_year_value` is `NA`. Keep in mind that start and end dates are not required fields, and we can't be certain that people are updating their profiles. However, we can get a data frame of only those items meeting this criteria by using the `filter()` function from `dplyr`:
 
 ```{r employment2, eval=TRUE, cache=TRUE}
@@ -710,7 +726,7 @@ Because `orcid_employments()` is vectorized, we can feed it multiple ORCID iDs a
 I'll grab a random assortment of OSU ORCID iDs from the previous section. Recall that these were pulled based on the detection of OSU data in either Ringgold, email, or affiliation names across all fields. We will issue the initial API call with `orcid_employments()`, then put it into a data frame with the same function we used above.
 
 ```{r employment3, eval=TRUE, cache=TRUE}
-my_osu_orcid_ids <- c("0000-0003-0599-2785", "0000-0002-8771-0368", "0000-0003-2863-6724", "0000-0001-6810-5560", "0000-0003-1935-9729", "0000-0002-9088-2312", "0000-0001-9792-7870", "0000-0003-3959-6916", "0000-0002-2621-5320", "0000-0001-9103-3040")
+my_osu_orcid_ids <- c("0000-0002-6160-9587", "0000-0001-8330-8251", "0000-0003-2863-6724", "0000-0001-6810-5560", "0000-0003-1935-9729", "0000-0002-9088-2312", "0000-0001-9792-7870", "0000-0003-3959-6916", "0000-0002-2621-5320", "0000-0001-9103-3040")
 my_osu_employment <- rorcid::orcid_employments(my_osu_orcid_ids)
 my_osu_employment_data <- my_osu_employment %>%
   purrr::map(., purrr::pluck, "affiliation-group", "summaries") %>% 
@@ -722,32 +738,103 @@ my_osu_employment_data <- my_osu_employment %>%
 my_osu_employment_data
 ```
 
-First, let's rename some of the long names by removing some of the words. We'll do this using the `str_replace` function from `stringr`. You can think of this as analogous to Find + Replace in word processing. We take the `names()` of the data, and replace each of the phrases with nothing (i.e. the set of empty quotes).
+Clean up the names.
 
-```{r employment4, eval=TRUE, cache=TRUE}
-names(my_osu_employment_data)
+```{r employmentq3, eval=TRUE, cache=TRUE}
 names(my_osu_employment_data) <- names(my_osu_employment_data) %>%
   stringr::str_replace(., "employment_summary_", "") %>%
   stringr::str_replace(., "source_source_", "") %>%
   stringr::str_replace(., "organization_disambiguated_", "")
-names(my_osu_employment_data)
 ```
 
-Note that this may have multiple entries per person because it gathered their entire employment history. Now let's take a look at how many of these have Oklahoma State listed in their organization name:
+Note that this may have multiple entries per person because it gathered their entire employment history. Now let's take a look at the unique organizations in this dataset:
 
-```{r employment5, eval=TRUE, cache=TRUE}
-my_osu_employment_data_OSU <- my_osu_employment_data %>%
-  dplyr::filter(organization_name == "Oklahoma State University Stillwater")
-my_osu_employment_data_OSU
+```{r employmentq4, eval=TRUE, cache=TRUE}
+my_osu_organizations <- my_osu_employment_data %>%
+  group_by(organization_name) %>%
+  count() %>%
+  arrange(desc(n))
+my_osu_organizations
 ```
 
-Out of this set of 10 iDs, only 4 have OSU listed in their employment. The others may have achieved their degree from OSU, or done some service with OSU. Now, out of those 4, let's see how many are listed as current employees, as indicated with an `NA` in their `end_date_year_value`.
+Out of this set of 10 iDs, only 3 have Oklahoma State University Stillwater listed in their employment, and one has Oklahoma State University, and another has Oklahoma State University - Tulsa. The others may have achieved their degree from OSU, or done some service with OSU.
 
-```{r employment5x, eval=TRUE, cache=TRUE}
-my_osu_employment_data_OSU_current <- my_osu_employment_data_OSU %>%
+We can make this a bit more manageable by filtering to include only those institutions that include the word "Oklahoma."
+
+```{r employmentq5, eval=TRUE, cache=TRUE}
+my_osu_organizations_filtered <- my_osu_organizations %>%
+  filter(str_detect(organization_name, "Oklahoma"))
+my_osu_organizations_filtered
+```
+
+Then, out of those, we can decide which ones we want to keep. For instance, we may not want Oklahoma State University - Tulsa.
+
+```{r employmentq6, eval=TRUE, cache=TRUE}
+my_osu_employment_data_filtered <- my_osu_employment_data %>%
+  dplyr::filter(organization_name == "Oklahoma State University Stillwater"
+                | organization_name == "Oklahoma State University")
+my_osu_employment_data_filtered
+```
+
+Then, out of those, let's see how many are listed as current employees, as indicated with an `NA` in their `end_date_year_value`.
+
+```{r employmentq7, eval=TRUE, cache=TRUE}
+my_osu_employment_data_filtered_current <- my_osu_employment_data_filtered %>%
   dplyr::filter(is.na(end_date_year_value))
-my_osu_employment_data_OSU_current
+my_osu_employment_data_filtered_current
 ```
+
+It looks like the third row was removed because they have 1997 in their employment end date, and therefore are no longer employed by OSU.
+
+Note that this will give you employment records ONLY. In other words, each row represents a single employment record for an individual. The `name_value` variable refers specifically to the name of the person or system that wrote the record, **NOT the name of the individual**. To get that, you must first get all the unique ORCID iDs from the dataset.
+
+Problem is, there is actually no distinct value identifying the orcid ID of the person. The `orcid_path` value corresponds to the path of the person who added the employment record (which is usually, but not always the same). Therefore you have to strip out the ORCID iD from the 'path' variable first and put it in it's own value and use it. We do this using str_sub from the stringr package. While we are at it, we can select and reorder the columns we want to keep.
+
+```{r employmentq8, eval=TRUE, cache=TRUE}
+osu_current_employment_all <- my_osu_employment_data_filtered_current %>%
+  mutate(orcid_identifier = str_sub(path, 2, 20)) %>%
+  select(orcid_identifier, organization_name, organization_address_city,
+         organization_address_region, organization_address_country,
+         organization_disambiguated_organization_identifier, organization_disambiguation_source, department_name, role_title, url,
+         display_index, visibility, created_date_value,
+         start_date_year_value, start_date_month_value, start_date_day_value,
+         end_date_year_value, end_date_month_value, end_date_day_value)
+osu_current_employment_all
+```
+
+If we want to take the next step to join this with biographical information, we create a new vector unique_orcids that includes only `unique()` ORCID iDs from our filtered dataset and remove NA values with `na.omit()`.  
+
+```{r employmentq9, eval=TRUE, cache=TRUE}
+osu_unique_orcids <- unique(osu_current_employment_all$orcid_identifier) %>%
+  na.omit(.)    
+osu_unique_orcids
+```
+
+Use `orcid_person()` as above, and construct our `tibble()`:
+
+```{r employmentq10, eval=TRUE, cache=TRUE}
+my_osu_orcid_person <- rorcid::orcid_person(osu_unique_orcids)
+my_osu_orcid_person_data <- my_osu_orcid_person %>% {
+  dplyr::tibble(
+    created_date = purrr::map_chr(., purrr::pluck, "name", "created-date", "value", .default=NA_character_),
+    given_name = purrr::map_chr(., purrr::pluck, "name", "given-names", "value", .default=NA_character_),
+    family_name = purrr::map_chr(., purrr::pluck, "name", "family-name", "value", .default=NA_character_),
+    orcid_identifier_path = purrr::map_chr(., purrr::pluck, "name", "path", .default = NA_character_))
+} %>%
+  dplyr::mutate(created_date = anytime::anydate(as.double(created_date)/1000))
+my_osu_orcid_person_data
+```
+
+Now we can use `left_join()` from `dplyr` to join this biographical data back to the employment data. It will include a single line of data for individual's employment records
+
+```{r employmentq11, eval=TRUE, cache=TRUE}
+osu_orcid_person_employment_join <- my_osu_orcid_person_data %>%
+  left_join(osu_current_employment_all, by = c("orcid_identifier_path" = "orcid_identifier"))
+osu_orcid_person_employment_join
+```
+
+Then you can write that to a CSV. 
+
 
 # Getting Works with `rorcid::works()` and `rorcid::orcid_works()`
 
