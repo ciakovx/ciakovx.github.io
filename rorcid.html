@@ -388,6 +388,11 @@ div.tocify {
 <h1>Binder link to this notebook:</h1>
 <p><a href="https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=rorcid.ipynb"><img src="https://mybinder.org/badge_logo.svg" alt="Binder" /></a></p>
 <p><a href="https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=rorcid.ipynb" class="uri">https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=rorcid.ipynb</a></p>
+<p>Download a script for these files at:</p>
+<ul>
+<li><a href="https://osf.io/kj72e">rorcid.R</a></li>
+<li><a href="https://osf.io/f5uke">rorcid_employments</a></li>
+</ul>
 </div>
 <div id="rorcid" class="section level1">
 <h1><code>rorcid</code></h1>
@@ -843,7 +848,7 @@ carberry_person &lt;- rorcid::orcid_person(carberry_orcid)</code></pre>
 <p>This is not an easy or straightforward process. I provide below one strategy to get some of the relevant data, using <code>map</code> functions from the <code>purrr</code> package and building a <code>tibble</code> (the <code>tidyverse</code>’s more efficient data frame) piece by piece.</p>
 <pre class="r"><code>carberry_data &lt;- carberry_person %&gt;% {
     dplyr::tibble(
-      created_date = purrr::map_dbl(., purrr::pluck, &quot;name&quot;, &quot;created-date&quot;, &quot;value&quot;, .default=NA_character_),
+      created_date = purrr::map_dbl(., purrr::pluck, &quot;name&quot;, &quot;created-date&quot;, &quot;value&quot;, .default=NA_integer_),
       given_name = purrr::map_chr(., purrr::pluck, &quot;name&quot;, &quot;given-names&quot;, &quot;value&quot;, .default=NA_character_),
       family_name = purrr::map_chr(., purrr::pluck, &quot;name&quot;, &quot;family-name&quot;, &quot;value&quot;, .default=NA_character_),
       credit_name = purrr::map_chr(., purrr::pluck, &quot;name&quot;, &quot;credit-name&quot;, &quot;value&quot;, .default=NA_character_),
@@ -978,7 +983,7 @@ listviewer::jsonedit(my_orcid_person, mode = &quot;view&quot;)</code></pre>
 <p>We see that we are given a list of 2, each containing the person data. We can put this into a data frame using the same code as above.</p>
 <pre class="r"><code>my_orcid_person_data &lt;- my_orcid_person %&gt;% {
     dplyr::tibble(
-      created_date = purrr::map_dbl(., purrr::pluck, &quot;name&quot;, &quot;created-date&quot;, &quot;value&quot;, .default=NA_character_),
+      created_date = purrr::map_dbl(., purrr::pluck, &quot;name&quot;, &quot;created-date&quot;, &quot;value&quot;, .default=NA_integer_),
       given_name = purrr::map_chr(., purrr::pluck, &quot;name&quot;, &quot;given-names&quot;, &quot;value&quot;, .default=NA_character_),
       family_name = purrr::map_chr(., purrr::pluck, &quot;name&quot;, &quot;family-name&quot;, &quot;value&quot;, .default=NA_character_),
       credit_name = purrr::map_chr(., purrr::pluck, &quot;name&quot;, &quot;credit-name&quot;, &quot;value&quot;, .default=NA_character_),
@@ -1039,7 +1044,7 @@ orcid_query</code></pre>
 my_orcid_person &lt;- rorcid::orcid_person(my_orcids)
 my_orcid_person_data &lt;- my_orcid_person %&gt;% {
     dplyr::tibble(
-      created_date = purrr::map_dbl(., purrr::pluck, &quot;name&quot;, &quot;created-date&quot;, &quot;value&quot;, .default=NA_character_),
+      created_date = purrr::map_dbl(., purrr::pluck, &quot;name&quot;, &quot;created-date&quot;, &quot;value&quot;, .default=NA_integer_),
       given_name = purrr::map_chr(., purrr::pluck, &quot;name&quot;, &quot;given-names&quot;, &quot;value&quot;, .default=NA_character_),
       family_name = purrr::map_chr(., purrr::pluck, &quot;name&quot;, &quot;family-name&quot;, &quot;value&quot;, .default=NA_character_),
       credit_name = purrr::map_chr(., purrr::pluck, &quot;name&quot;, &quot;credit-name&quot;, &quot;value&quot;, .default=NA_character_),

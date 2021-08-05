@@ -26,6 +26,11 @@ library(png)
 
 <https://mybinder.org/v2/gh/ciakovx/ciakovx.github.io/master?filepath=rorcid.ipynb>
 
+Download a script for these files at:
+
+* [rorcid.R](https://osf.io/kj72e)
+* [rorcid_employments](https://osf.io/f5uke)
+
 # `rorcid`
 
 `rorcid` is a package developed by [Scott Chamberlain](https://scottchamberlain.info/), co-founder of [rOpenSci](https://ropensci.org/), to serve as an interface to the ORCID API. 
@@ -393,7 +398,7 @@ This is not an easy or straightforward process. I provide below one strategy to 
 ```{r person3, eval=TRUE, cache=TRUE}
 carberry_data <- carberry_person %>% {
     dplyr::tibble(
-      created_date = purrr::map_dbl(., purrr::pluck, "name", "created-date", "value", .default=NA_character_),
+      created_date = purrr::map_dbl(., purrr::pluck, "name", "created-date", "value", .default=NA_integer_),
       given_name = purrr::map_chr(., purrr::pluck, "name", "given-names", "value", .default=NA_character_),
       family_name = purrr::map_chr(., purrr::pluck, "name", "family-name", "value", .default=NA_character_),
       credit_name = purrr::map_chr(., purrr::pluck, "name", "credit-name", "value", .default=NA_character_),
@@ -554,7 +559,7 @@ We see that we are given a list of 2, each containing the person data. We can pu
 ```{r multiple2, eval=TRUE,cache=TRUE}
 my_orcid_person_data <- my_orcid_person %>% {
     dplyr::tibble(
-      created_date = purrr::map_dbl(., purrr::pluck, "name", "created-date", "value", .default=NA_character_),
+      created_date = purrr::map_dbl(., purrr::pluck, "name", "created-date", "value", .default=NA_integer_),
       given_name = purrr::map_chr(., purrr::pluck, "name", "given-names", "value", .default=NA_character_),
       family_name = purrr::map_chr(., purrr::pluck, "name", "family-name", "value", .default=NA_character_),
       credit_name = purrr::map_chr(., purrr::pluck, "name", "credit-name", "value", .default=NA_character_),
@@ -618,7 +623,7 @@ my_orcids <- my_orcids_df$orcid_identifier_path
 my_orcid_person <- rorcid::orcid_person(my_orcids)
 my_orcid_person_data <- my_orcid_person %>% {
     dplyr::tibble(
-      created_date = purrr::map_dbl(., purrr::pluck, "name", "created-date", "value", .default=NA_character_),
+      created_date = purrr::map_dbl(., purrr::pluck, "name", "created-date", "value", .default=NA_integer_),
       given_name = purrr::map_chr(., purrr::pluck, "name", "given-names", "value", .default=NA_character_),
       family_name = purrr::map_chr(., purrr::pluck, "name", "family-name", "value", .default=NA_character_),
       credit_name = purrr::map_chr(., purrr::pluck, "name", "credit-name", "value", .default=NA_character_),

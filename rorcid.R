@@ -197,7 +197,7 @@ names(carberry_person[[1]])
 
 carberry_data <- carberry_person %>% {
     dplyr::tibble(
-      created_date = purrr::map_dbl(., purrr::pluck, "name", "created-date", "value", .default=NA_character_),
+      created_date = purrr::map_dbl(., purrr::pluck, "name", "created-date", "value", .default=NA_integer_),
       given_name = purrr::map_chr(., purrr::pluck, "name", "given-names", "value", .default=NA_character_),
       family_name = purrr::map_chr(., purrr::pluck, "name", "family-name", "value", .default=NA_character_),
       credit_name = purrr::map_chr(., purrr::pluck, "name", "credit-name", "value", .default=NA_character_),
@@ -252,7 +252,8 @@ carberry_keywords$keywords
 
 
 carberry_list_columns <- map_lgl(carberry_data, is_list)
-                                                   names(carberry_data)[carberry_list_columns]
+
+names(carberry_data)[carberry_list_columns]
 
 
 
